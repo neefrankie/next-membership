@@ -1,0 +1,38 @@
+{
+  "name": "next-membership",
+  "version": "0.0.1",
+  "description": "subscription",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "rm -rf dist/* .tmp/*",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neefrankie/next-membership.git"
+  },
+  "author": "weiguo.ni",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neefrankie/next-membership/issues"
+  },
+  "homepage": "https://github.com/neefrankie/next-membership#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.8",
+    "fs-jetpack": "^0.13.1",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-changed": "^2.0.0",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^6.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.4.1",
+    "nunjucks": "^3.0.0",
+    "postcss-cssnext": "^2.10.0",
+    "rollup": "^0.41.6",
+    "rollup-plugin-buble": "^0.15.0"
+  }
+}
