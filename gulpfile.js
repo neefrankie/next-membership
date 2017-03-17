@@ -1,6 +1,6 @@
 const fs = require('fs-jetpack')
 const path = require('path')
-
+const loadJsonFile = require('load-json-file');
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
 const cssnext = require('postcss-cssnext');
@@ -35,12 +35,16 @@ gulp.task('dev', () => {
 });
 
 gulp.task('build-page', () => {
-  return render('index.html')
+  return loadJsonFile('./views/data.json')
+    .then(data => {
+      return render('index.html', {products: data});
+    })
     .then(html => {
       return fs.writeAsync('.tmp/index.html', html);
     })
     .then(() => {
       browserSync.reload('*.html');
+      return Promise.resolve();
     })
     .catch(err => {
       console.log(err);
@@ -91,6 +95,7 @@ gulp.task('scripts', () => {
   })
   .then(() => {
     browserSync.reload();
+    return Promise.resolve();
   })
   .catch(err => {
     console.log(err);
@@ -107,7 +112,7 @@ gulp.task('serve', gulp.parallel('build-page', 'styles', 'scripts', () => {
     }
   });
 
-  gulp.watch(['views/*.html'], 
+  gulp.watch(['views/*.{html,json}'], 
     gulp.parallel('build-page')
   );
 

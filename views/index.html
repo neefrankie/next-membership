@@ -1,4 +1,22 @@
 {% extends "base.html" %}
 {% block body%}
+  <p>请选择您的订阅方式。已经是会员，请<a href="#">点击这里</a></p>
+  {% for product in products %}
+  <div>
+    <h2>{{product.title}}</h2>
+    <div>
+      <img src="{{member.image}}" alt="">
+    </div>
+    <ul>
+      {% for benefit in product.benefits %}
+      <li>{{benefit}}</li>
+      {% endfor %}
+    </ul>
+    <div>
+      <p>{{product.teaser}} {{product.price}}/年</p>
+      <a href="#">现在订阅</a>
+    </div>
+  </div>
 
+  {% endfor %}
 {% endblock %}
