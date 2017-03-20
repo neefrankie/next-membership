@@ -6,25 +6,22 @@
       <p>请选择您的订阅方式。已经是会员，请<a href="#">点击这里</a></p>
     </div>
     
-    <div class="o-grid-row">
+    <div class="o-grid-row" data-flex-container>
       {% for product in products %}
-      <div class="o-member-container" data-o-grid-colspan="12 S6 L4">
-        <div class="o-member o-member__{{product.type}}">
-          <h2 class="o-member__title">{{product.title}}</h2>
-          <div class="o-member__subscribe">
-            <p>{{product.teaser}} {{product.price}}/年</p>
-            <a href="#">现在订阅</a>
-          </div>
-          <div>
-            <img src="{{product.image}}" alt="" width="100%">
-          </div>
-          <ul class="o-member__benefits">
-            {% for benefit in product.benefits %}
-            <li>{{benefit}}</li>
-            {% endfor %}
-          </ul>
-          
+      <div class="o-member o-member__{{product.type}}" data-flex-item>
+        <h2 class="o-member__title">{{product.title}}</h2>
+        <div class="o-member__subscribe">
+          <p>{{product.teaser}} {{product.price}}/年</p>
+          <a href="#">现在订阅</a>
+        </div> 
+        <div>
+          <img src="{{product.image}}" alt="" width="100%">
         </div>
+        <ul class="o-member__benefits">
+          {% for benefit in product.benefits %}
+          <li>{{benefit}}</li>
+          {% endfor %}
+        </ul>         
       </div>
       {% endfor %}
     </div>
