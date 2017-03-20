@@ -71,7 +71,8 @@ gulp.task('styles', function styles() {
       })
     ]))
     .pipe($.sourcemaps.write('./'))
-    .pipe(gulp.dest(DEST));
+    .pipe(gulp.dest(DEST))
+    .pipe(browserSync.stream());
 });
 
 gulp.task('scripts', () => {
@@ -86,7 +87,6 @@ gulp.task('scripts', () => {
     // Cache for later use
     cache = bundle;
 
-    // Or only use this
     return bundle.write({
       dest: '.tmp/scripts/main.js',
       format: 'iife',

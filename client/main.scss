@@ -1,0 +1,100 @@
+@import "o-colors/main";
+@import "o-grid/main";
+
+$grid-background: #f8ebda;
+$grid-highlight: #eadecd;
+$teal-1: #26747a;
+
+body {
+	@include oColorsFor(page);
+  margin: 0;
+  padding: 0;
+}
+
+
+.o-grid-container {
+  @include oGridContainer;
+  border: 1px solid green;
+}
+
+.o-grid-row {
+  // @include oGridRow;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.o-member__heading {
+  margin-top: 2em;
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    text-decoration: none;
+    color: $teal-1;
+  }
+}
+.o-member-container {
+  width: 25%;
+  box-sizing: border-box;
+  border: 1px solid red;
+  // @include oGridColspan(12);
+
+  // @include oGridRespondTo(S) {
+
+  // }
+  // @include oGridRespondTo(L) {
+
+  // }
+}
+
+.o-member {
+  background-color: $grid-background;
+  // margin: 1em 0;
+  &__title {
+    text-align: center;
+    margin: 0;
+    padding: 1em 0;
+  }
+  &__subscribe {
+    text-align: center;
+    a {
+      display: inline-block;
+      padding: 8px 18px;
+      border: 1px solid $teal-1;
+      box-sizing: border-box;
+      text-decoration: none;
+      color: $teal-1;
+      background-color: transparent;
+    }
+    p {
+      margin: 0;
+      padding: 1em 0;
+      color: $teal-1;
+    }
+  }
+  &__benefits {
+    list-style: none;
+    margin: 0;
+    padding:0 0 1em 0;
+
+    li {
+      background-image: url("https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:tick?tint=26747a&format=svg&source=ftchinese");
+      background-repeat: no-repeat;
+      background-position: left top;
+      background-size: 1.5em;
+      padding-left: 1.5em;
+      margin: 0.5em 1em;
+    }
+  }
+}
+
+.o-member__standard {
+  background-color: $grid-highlight;
+  .o-member__subscribe a {
+    background-color: $teal-1;
+    border-color: $teal-1;
+    color: #fff;
+  }
+}
