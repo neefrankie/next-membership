@@ -1,6 +1,8 @@
-const fs = require('fs-jetpack')
-const path = require('path')
+const pify = require('pify');
+const fs = require('fs-jetpack');
+const path = require('path');
 const loadJsonFile = require('load-json-file');
+const inline = pify(require('inline-source'));
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
 const cssnext = require('postcss-cssnext');
@@ -13,17 +15,7 @@ nunjucks.configure('views', {
   noCache: true,
   watch: false
 });
-function render(view, context) {
-  return new Promise(function(resolve, reject) {
-    nunjucks.render(view, context, function(err, result) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(result);
-      }
-    });
-  });
-}
+const render = pify(nunjucks.render);
 
 process.env.NODE_ENV = "development"
 gulp.task('prod', () => {
@@ -38,6 +30,16 @@ gulp.task('build-page', () => {
   return loadJsonFile('./views/data.json')
     .then(data => {
       return render('index.html', {products: data});
+    })
+    .then(html => {
+// If `production`, inline css and js      
+      if (process.env.NODE_ENV === 'production') {
+        return inline(html, {
+          compress: true,
+          rootpath: path.resolve(process.cwd(), '.tmp')
+        });
+      }    
+      return html;
     })
     .then(html => {
       return fs.writeAsync('.tmp/index.html', html);
@@ -76,7 +78,6 @@ gulp.task('styles', function styles() {
 });
 
 gulp.task('scripts', () => {
-  
   return rollup({
     entry: 'client/main.js',
     plugins: [
@@ -124,3 +125,5 @@ gulp.task('serve', gulp.parallel('build-page', 'styles', 'scripts', () => {
     gulp.parallel('scripts')
   );
 }));
+
+gulp.task('build', gulp.series('prod', 'styles', 'scripts', 'build-page', 'dev'));
