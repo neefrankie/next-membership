@@ -127,3 +127,20 @@ gulp.task('serve', gulp.parallel('build-page', 'styles', 'scripts', () => {
 }));
 
 gulp.task('build', gulp.series('prod', 'styles', 'scripts', 'build-page', 'dev'));
+
+const destDir = 'dev_www/frontend/tpl/next/html';
+
+gulp.task('copy:test', () => {
+  return gulp.src('.tmp/index.html')
+    .pipe($.rename('membership.html'))
+    .pipe(gulp.dest(`../testing/${destDir}`));
+});
+
+gulp.task('copy:prod', () => {
+  return gulp.src('.tmp/index.html')
+    .pipe($.rename('membership.html'))
+    .pipe(gulp.dest('../${destDir}'));  
+});
+
+gulp.task('deploy:test', gulp.series('build', 'copy:test'));
+gulp.task('deploy', gulp.series('build', 'copy:prod'));
