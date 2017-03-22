@@ -27,9 +27,15 @@ gulp.task('dev', () => {
 });
 
 gulp.task('build-page', () => {
+  const env = {
+    isProduction: process.env.NODE_ENV === 'production'
+  };
   return loadJsonFile('./views/data.json')
     .then(data => {
-      return render('index.html', {products: data});
+      return render('index.html', {
+        products: data,
+        env
+      });
     })
     .then(html => {
 // If `production`, inline css and js      
@@ -131,15 +137,21 @@ gulp.task('build', gulp.series('prod', 'styles', 'scripts', 'build-page', 'dev')
 const destDir = 'dev_www/frontend/tpl/next/html';
 
 gulp.task('copy:test', () => {
-  return gulp.src('.tmp/index.html')
+  const src = path.resolve(__dirname, '.tmp/index.html')
+  const dest = path.resolve(__dirname, `../testing/${destDir}`);
+  console.log(`Copy index.html to ${dest}`);
+  return gulp.src(src)
     .pipe($.rename('membership.html'))
-    .pipe(gulp.dest(`../testing/${destDir}`));
+    .pipe(gulp.dest());
 });
 
 gulp.task('copy:prod', () => {
-  return gulp.src('.tmp/index.html')
+  const src = path.resolve(__dirname, '.tmp/index.html');
+  const dest = path.resolve(__dirname, `../${destDir}`);
+  console.log(`Copy index.html to ${dest}`);
+  return gulp.src(src)
     .pipe($.rename('membership.html'))
-    .pipe(gulp.dest('../${destDir}'));  
+    .pipe(gulp.dest(dest));  
 });
 
 gulp.task('deploy:test', gulp.series('build', 'copy:test'));

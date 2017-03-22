@@ -22,6 +22,12 @@ body {
   }
 }
 
+.is-member {
+  .o-member__login {
+    display: none;
+  }
+}
+
 .o-grid-container {
   @include oGridContainer;
 }
