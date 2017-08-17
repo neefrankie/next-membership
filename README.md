@@ -1,3 +1,3 @@
 # next-membership
 
-Paied memebers
+Paid memebers
