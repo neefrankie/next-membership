@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "rm -rf dist/* .tmp/*",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "postinstall": "bower install"
   },
   "repository": {
     "type": "git",
@@ -37,5 +38,8 @@
     "postcss-cssnext": "^2.10.0",
     "rollup": "^0.41.6",
     "rollup-plugin-buble": "^0.15.0"
+  },
+  "dependencies": {
+    "bower": "^1.8.2"
   }
 }
