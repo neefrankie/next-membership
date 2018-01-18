@@ -8,9 +8,12 @@ const $ = require('gulp-load-plugins')();
 const cssnext = require('postcss-cssnext');
 const browserSync = require('browser-sync').create();
 const rollup = require('rollup').rollup;
+const nodeResolve = require('rollup-plugin-node-resolve');
 let cache;
 const buble = require('rollup-plugin-buble');
+const babel = require('rollup-plugin-babel');
 const nunjucks = require('nunjucks');
+const del = require('del');
 nunjucks.configure('views', {
   noCache: true,
   watch: false
@@ -61,8 +64,7 @@ gulp.task('build-page', () => {
 
 gulp.task('styles', function styles() {
   const DEST = '.tmp/styles';
-
-  return gulp.src('client/main.scss')
+return gulp.src(['client/styles/*.scss'])
     .pipe($.changed(DEST))
     .pipe($.plumber())
     .pipe($.sourcemaps.init({loadMaps:true}))
@@ -83,31 +85,88 @@ gulp.task('styles', function styles() {
     .pipe(browserSync.stream());
 });
 
-gulp.task('scripts', () => {
-  return rollup({
-    entry: 'client/main.js',
-    plugins: [
-      buble()
-    ],
-    cache: cache
-  }).then(function(bundle) {
-    // Cache for later use
-    cache = bundle;
-
-    return bundle.write({
-      dest: '.tmp/scripts/main.js',
-      format: 'iife',
-      sourceMap: true
-    });
-  })
-  .then(() => {
-    browserSync.reload();
-    return Promise.resolve();
-  })
-  .catch(err => {
-    console.log(err);
-  });
+gulp.task('jshint', function () {
+  // return gulp.src('client/main.js')
+  return gulp.src('client/scripts/**/*.js')
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('jshint-stylish'))
+    .pipe($.jshint.reporter('fail'));
 });
+
+
+gulp.task('scripts', async () => {
+  async function rollupOneJs() {
+    try {
+      const bundle = await rollup({
+        input:'client/scripts/main.js',
+        plugins:[
+          babel({//这里需要配置文件.babelrc
+            exclude:'node_modules/**'
+          }),
+          nodeResolve({
+            jsnext:true,
+          })
+        ]
+      }) ;
+      await bundle.write({//返回promise，以便下一步then()
+          file: '.tmp/scripts/main.js',
+          format: 'iife',
+          sourcemap: true
+      });
+    }catch (err) {
+      console.log(err);
+    };
+  } 
+  rollupOneJs()
+  browserSync.reload();
+});
+
+// gulp.task('script2', () => {
+//   return gulp.src('client/scripts/**/*.js')
+//     .pipe($.plumber())  //自动处理全部错误信息防止因为错误而导致 watch 不正常工作
+//     .pipe($.sourcemaps.init({loadMaps:true})) 
+//     .pipe($.babel())
+//     .pipe($.sourcemaps.write('./'))
+//     .pipe(gulp.dest('.tmp/scripts'))
+//     .pipe(browserSync.reload({stream: true}));
+// });
+// gulp.task('scripts1', () => {
+//   return rollup({
+//     input: 'client/scripts/subscribe.js',   
+//     // input:'client/main.js',    //entry改成input
+//     plugins: [
+//       babel({//这里需要配置文件.babelrc
+//           exclude:'node_modules/**'
+//       }),
+//       // buble()
+//       nodeResolve({
+//         jsnext:true,
+//       })
+//     ]
+//     // cache: cache   //先注释看有什么问题？
+//   }).then(function(bundle) {
+//     // Cache for later use
+//     // cache = bundle;
+
+//     return bundle.write({
+//       dest: '.tmp/scripts/sub.js',
+//       format: 'iife',
+//       sourceMap: true
+//     });
+//   })
+//   .then(() => {
+//     browserSync.reload();
+//     return Promise.resolve();
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
+// });
+
+gulp.task('clean', function() {
+  return del(['.tmp/**']);
+});
+
 
 gulp.task('serve', gulp.parallel('build-page', 'styles', 'scripts', () => {
   browserSync.init({
