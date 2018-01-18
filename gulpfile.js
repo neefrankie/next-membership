@@ -120,16 +120,18 @@ gulp.task('scripts', async () => {
   rollupOneJs()
   browserSync.reload();
 });
-
-// gulp.task('script2', () => {
-//   return gulp.src('client/scripts/**/*.js')
-//     .pipe($.plumber())  //自动处理全部错误信息防止因为错误而导致 watch 不正常工作
-//     .pipe($.sourcemaps.init({loadMaps:true})) 
-//     .pipe($.babel())
-//     .pipe($.sourcemaps.write('./'))
-//     .pipe(gulp.dest('.tmp/scripts'))
-//     .pipe(browserSync.reload({stream: true}));
-// });
+// 2中方式
+gulp.task('script2', () => {
+  return gulp.src('client/scripts/**/*.js')
+    .pipe($.plumber())  //自动处理全部错误信息防止因为错误而导致 watch 不正常工作
+    .pipe($.sourcemaps.init({loadMaps:true})) 
+    .pipe($.babel())
+    // `{ presets: [{option: value}] }`
+    // [['presetName', {option: value}]] }
+    .pipe($.sourcemaps.write('./'))
+    .pipe(gulp.dest('.tmp/scripts'))
+    .pipe(browserSync.reload({stream: true}));
+});
 // gulp.task('scripts1', () => {
 //   return rollup({
 //     input: 'client/scripts/subscribe.js',   
