@@ -1,6 +1,6 @@
 (function () {
 'use strict';
 
-var a=3;
+const a=3;
 
 }());
