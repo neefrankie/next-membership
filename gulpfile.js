@@ -16,7 +16,11 @@ const nunjucks = require('nunjucks');
 const del = require('del');
 nunjucks.configure('views', {
   noCache: true,
-  watch: false
+  watch: false,
+  tags: {
+    commentStart: '<#',
+    commentEnd: '#>'
+  }
 });
 const render = pify(nunjucks.render);
 
@@ -95,12 +99,12 @@ gulp.task('jshint', function () {
 
 
 gulp.task('scripts', async () => {
-  async function rollupOneJs() {
+  async function rollupJs() {
     try {
       const bundle = await rollup({
-        input:'client/scripts/main.js',
+        input:'client/main.js',
         plugins:[
-          babel({//这里需要配置文件.babelrc
+          babel({
             exclude:'node_modules/**'
           }),
           nodeResolve({
@@ -117,7 +121,7 @@ gulp.task('scripts', async () => {
       console.log(err);
     };
   } 
-  rollupOneJs()
+  rollupJs()
   browserSync.reload();
 });
 // 2中方式
@@ -126,44 +130,37 @@ gulp.task('script2', () => {
     .pipe($.plumber())  //自动处理全部错误信息防止因为错误而导致 watch 不正常工作
     .pipe($.sourcemaps.init({loadMaps:true})) 
     .pipe($.babel())
-    // `{ presets: [{option: value}] }`
-    // [['presetName', {option: value}]] }
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest('.tmp/scripts'))
     .pipe(browserSync.reload({stream: true}));
 });
-// gulp.task('scripts1', () => {
-//   return rollup({
-//     input: 'client/scripts/subscribe.js',   
-//     // input:'client/main.js',    //entry改成input
-//     plugins: [
-//       babel({//这里需要配置文件.babelrc
-//           exclude:'node_modules/**'
-//       }),
-//       // buble()
-//       nodeResolve({
-//         jsnext:true,
-//       })
-//     ]
-//     // cache: cache   //先注释看有什么问题？
-//   }).then(function(bundle) {
-//     // Cache for later use
-//     // cache = bundle;
+gulp.task('scripts1', () => {
+  return rollup({  
+    input:[babelpolyfill,'client/main.js'],    //entry改成input
+    plugins: [
+      babel({//这里需要配置文件.babelrc
+          exclude:'node_modules/**'
+      })
+    ],
+    cache: cache   //先注释看有什么问题？
+  }).then(function(bundle) {
+    // Cache for later use
+    cache = bundle;
 
-//     return bundle.write({
-//       dest: '.tmp/scripts/sub.js',
-//       format: 'iife',
-//       sourceMap: true
-//     });
-//   })
-//   .then(() => {
-//     browserSync.reload();
-//     return Promise.resolve();
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });
-// });
+    return bundle.write({
+      dest: '.tmp/main.js',
+      format: 'iife',
+      sourceMap: true
+    });
+  })
+  .then(() => {
+    browserSync.reload();
+    return Promise.resolve();
+  })
+  .catch(err => {
+    console.log(err);
+  });
+});
 
 gulp.task('clean', function() {
   return del(['.tmp/**']);
@@ -217,3 +214,9 @@ gulp.task('copy:prod', () => {
 
 gulp.task('deploy:test', gulp.series('build', 'copy:test'));
 gulp.task('deploy', gulp.series('build', 'copy:prod'));
+
+gulp.task('copy:subsp', () => {
+  const dest = 'dev_www/frontend/tpl/subscription';
+  return gulp.src(['.tmp/**/*'])
+    .pipe(gulp.dest(`../${dest}`))
+});
