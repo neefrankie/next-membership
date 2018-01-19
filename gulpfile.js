@@ -102,7 +102,7 @@ gulp.task('scripts', async () => {
   async function rollupJs() {
     try {
       const bundle = await rollup({
-        input:'client/main.js',
+        input:'client/scripts/main.js',
         plugins:[
           babel({
             exclude:'node_modules/**'
