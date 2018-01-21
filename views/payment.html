@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html class="core">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>支付页</title>
+    <meta http-equiv="Content-Language" content="zh-CN"/>
+    <meta content="<%$p.meta.description%>" name="description"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="apple-touch-icon-precomposed" href="http://static.ftchinese.com/img/ipad_icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link inline rel="stylesheet" type="text/css" href="styles/main.css">
+     {% if env.isProduction %}
+        <script>
+            (function(src) {
+                if (cutsTheMustard) {
+                    var o = document.createElement('script');
+                    o.async = o.defer = true;
+                    o.src = src;
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(o, s);
+                }
+            }('https://cdn.polyfill.io/v2/polyfill.min.js'));
+        </script>
+        <script type="text/javascript"><%include file="next/scripts/key.js"%></script>
+        <%include file="next/partials/head.html"%>
+
+        {% endif %}
+ </head>
+ <body>
+     <div>
+         <div>欢迎订阅FT会员服务</div>
+         <div><span>商品名称：</span><span>FT会员</span></div>
+         <div>
+             <span>支付方式：</span>
+             <label class="mode"><input name="pay" type="radio" value="" /><img src="https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:tick?tint=26747a&format=svg&source=ftchinese" style="width: 1.5em"/>支付宝 </label>
+             <label><input name="pay" type="radio" value="" /><img src="https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:tick?tint=26747a&format=svg&source=ftchinese" style="width: 1.5em"/>微信支付 </label> 
+        </div>
+         <div><label>支付金额 ￥198/年</label><button>确定支付</button></div>
+     </div>
+
+ </body>
+ </html>
