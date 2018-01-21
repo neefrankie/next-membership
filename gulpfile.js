@@ -51,8 +51,9 @@ gulp.task('build-page', () => {
     }))
   })
   .then(() => {
+    console.log('inline--'+process.env.NODE_ENV)
       browserSync.reload('*.html');
-      return Promise.resolve();
+      // return Promise.resolve();
     })
     .catch(err => {
       console.log(err);
@@ -69,7 +70,7 @@ gulp.task('build-page', () => {
     // dataPath不为空loadJsonFile读取不会报错，否则会报错,并且报错后环境为development，可以把页面数据集中在一个json文件中
       return loadJsonFile(dataPath)
       .then(data => {
-        console.log('inline--'+process.env.NODE_ENV)
+        
         if (name ==='index'){
           return render(template, {
             products: data.index,
