@@ -3,84 +3,168 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>会员订阅 - FT中文网</title>
+	<title>APP - FT中文网</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta name="copyright" content="FT中文网">
-	<meta name="robots" content="index,follow">
-	<meta name="author" content=""> 
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 	<meta property="og:locale" content="zh-Hans">
 	<meta property="og:site_name" content="FT中文网">
-    <link inline rel="stylesheet" type="text/css" href="styles/main.css">
 
-</script>
+<style>
+  .container{
+    margin: 0px auto;
+	  max-width: 414px;
+  }
+  .hint{
+    float: right;
+    margin-right:10px; 
+    margin-top:10px;
+    
+  }
+  .clearFloat{
+    clear: both;
+  }
+  .hint img{
+    height: 27px;
+  }
+      
+  .action-container{
+    text-align: center;
+    margin-top: 80px;
+  }
+  .action-container img{
+    width: 200px;
+    margin:0px 0px 50px; 
+  }
+  .openAction{
+    width: 250px;
+    letter-spacing: 3px;
+    font-size: 1.1em;
+  }
+  #openApplication{
+    background-color: #0d7680;
+    margin-bottom: 30px;
+    height: 46px;
+    color: white;
+    /*border: 0.5px solid #0d7680;*/
+  }
+  #nowDownload{
+    background-color: #cce2e4;
+    height: 45px;
+    border:0.5px solid #0d7680;
+    color: #0d7680;
+  }
+  .nowSub{
+    overflow: hidden;
+  }
+  .nowSub div{
+    float: left;
+  }
+ #triangle-right {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-left: 10px solid red;
+    border-bottom: 10px solid transparent;
+    position:absolute;
+    top:10px;
+    margin-left:3px; 
+    right: 10px;
+}
+    /*position: absolute;
+    top: 25%;
+    right: 35%;*/
+        /*height: 40px;
+    line-height: 40px;
+    text-align: center;
+    position: relative;*/
+    .subscribe-lock-container{
+      margin-top: 50px;
+      background: linear-gradient(rgba(250,234,221,0),rgba(250,234,221,1));
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      width: 100%;
+      height: 200px;
+    }
+    .lock-content{
+      width: 80%;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .subscribeBtn{
+      margin: 20px 0px;
+      letter-spacing: 3px;
+      height: 40px;
+      line-height: 40px;
+      width: 150px;
+      background-color: #0d7680;
+      color:white;
+    }
+    .sub-container span{
+      color: #0d7680;
+    }
+</style>
 
 
 
 
 </head>
 <body>
-
-
-
-  
-  <div id="site-content" class="o-grid-container">
-    <div class="o-member__heading">
-      <p>请选择您的订阅方式。<span class="o-member__login">已经是会员，请<a href="http://user.ftchinese.com/login" onclick="event.preventDefault(); showOverlay('overlay-login')">点击这里</a></span></p>
+  <div class="container">
+    <div class="hint">
+        <img src="http://i.ftimg.net/picture/4/000075454_piclink.jpg"/>
+        
     </div>
-    
-    <div class="o-grid-row" data-flex-container>
-      
-      <div class="o-member o-member__premium" data-flex-item>
-        <h2 class="o-member__title">高端会员</h2>
-        <div class="o-member__subscribe">
-          <p> CN¥1,298.00/年</p>
-          <a href="#">现在订阅</a>
-        </div> 
-        <div>
-          <img src="http://i.ftimg.net/picture/6/000068886_piclink.jpg" alt="" width="100%">
-        </div>
-        <ul class="o-member__benefits">
-          
-          <li>阅读FT中文网所有独家内容</li>
-          
-          <li>收听英文文章音频</li>
-           
-        </ul>         
+    <div class="clearFloat"></div>
+    <div  class="action-container">   
+      <div >
+        <img src="http://i.ftimg.net/picture/3/000075453_piclink.jpg"/>
       </div>
-      
-
-      <div class="o-member o-member__trial" data-flex-item>
-        <h2 class="o-member__title">试用会员</h2>
-        <div class="o-member__subscribe">
-          <p>现在加入，即享会员4周畅读，只需 CN¥1.00/年</p>
-          <a href="#">现在订阅</a>
-        </div> 
-        <div>
-          <img src="http://i.ftimg.net/picture/6/000068886_piclink.jpg" alt="" width="100%">
-        </div>
-        <ul class="o-member__benefits">
-          
-          <li>《FT编辑精选》，每周不可错过的独家必读内容</li>
-          
-          <li>获得两张价值3999元的FT中文网年会名票</li>
-          
-          <li>阅读FT中文网所有独家内容</li>
-          
-          <li>收听英文文章音频</li>
-          
-        </ul>         
-      </div>
-      
+      <button id="openApplication" class="openAction">
+        打开应用
+      </button>
+      <button id="nowDownload" class="openAction">
+        立即下载
+      </button>
+      <!--<div>
+        <input type="button" id="openApplication" class="openAction"value="打开应用"/>
+      </div>-->
+      <!--<div>
+        <input type="button" id="nowDownload" class="openAction"value="立即下载"/>
+      </div>-->
     </div>
   </div>
+  
+    
+<div class="subscribe-lock-container">
+    <div class="lock-content">
+      <div>购买会员服务，阅读FT独家内容</div>
+      <button class="subscribeBtn">立即订阅▶︎</button>
+      <div>已经购买过？<span>登录</span></div>
+    </div>
+</div>    
+
+  
+    
+
+ 
+<!--<div id="triangle-right">11</div>-->
+  
+  <script type="text/javascript">
+    var openApplication = document.getElementById('openApplication');
+    var nowDownload = document.getElementById('nowDownload');
+    openApplication.onclick = function(){
+      window.open('ftchinese://story/001075928'); 
+    }
+    nowDownload.onclick = function(){
+      window.open('http://www.ftchinese.com/openinapp.html');   
+    }
 
 
+  </script>
 
-
-
-<script inline type="text/javascript" src="scripts/main.js"></script>
 
 </body>
 </html>
