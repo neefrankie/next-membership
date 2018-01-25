@@ -1,221 +1,48 @@
-@import "o-colors/main";
-@import "o-grid/main";
-
-$grid-background: white;
-$grid-highlight: white;
-$teal-1: #26747a;
-
-body {
-	
-  margin: 0;
-  padding: 0;
-  font-family: "Helvetica Neue","Verdana","Arial","Hiragino Sans GB","WenQuanYi Micro Hei","Heiti SC",STHeiti,"Microsoft Yahei",SimSun,sans-serif;
-  font-size: 16px;
-  margin: 0 auto;
-  display: block;
-  background: #FFF1E0 none repeat scroll 0 0;
-  div {
-    text-align: left;
-    line-height: 140%;
-  }
-  .block-container {
-    margin-bottom: 15px;
-  }
-  .has-side .content-container {
-    float: left;
-    width: 100%;
-  }
-  .has-side .block-inner {
-    padding-right: 30px;
-    position: relative;
-}
-.has-side .block-inner {
-    padding-right: 30px;
-    position: relative;
-}
-
-.block-inner {
-      max-width: 1260px;
-      padding: 0 15px;
-      margin: auto;
-  }
-}
-// .o-member__heading {
-//   margin-top: 2em;
-//   p {
-//     margin: 0;
-//     padding: 0;
-//   }
-//   a {
-//     text-decoration: none;
-//     color: $teal-1;
-//   }
-// }
-
-// .is-member {
-//   .o-member__login {
-//     display: none;
-//   }
-// }
-
-// .o-grid-container {
-//   @include oGridContainer;
-// }
-
-// .o-grid-row {
-//   @include oGridRow;
-// }
-
-// .o-member {
-//   @include oGridColspan(12);
-//   @include oGridRespondTo(S) {
-//     @include oGridColspan(6);
-//   }
-//   @include oGridRespondTo(L) {
-//     @include oGridColspan(4);
-//   }
-
-//   @each $layout-name in map-keys($o-grid-gutters) {
-//     @if $layout-name == 'default' {
-//       margin-bottom: oGridGutter();
-//     } @else {
-//       @include oGridRespondTo($layout-name) {
-//         margin-bottom: oGridGutter($layout-name);
-//       }
-//     }
-//   }
-
-//   &:after {
-//     content: '';
-//     display: block;
-//     position: absolute;
-//     top: 0;
-//     bottom: 0;
-
-//     right: 0;
-//     background-color: $grid-background;
-//     z-index: -1;
-//     @each $layout-name in map-keys($o-grid-gutters) {
-//       @if $layout-name == 'default' {
-//         left: oGridGutter();
-//       } @else {
-//         @include oGridRespondTo($layout-name) {
-//           left: oGridGutter($layout-name);
-//         }
-//       }
-//     }    
-//   }
-//   &__title {
-//     text-align: center;
-//     margin: 0;
-//     padding: 1em 0;
-//   }
-//   &__subscribe {
-//     text-align: center;
-//     a {
-//       display: inline-block;
-//       padding: 8px 18px;
-//       border: 1px solid $teal-1;
-//       box-sizing: border-box;
-//       text-decoration: none;
-//       color: $teal-1;
-//       background-color: transparent;
-//     }
-//     p {
-//       margin: 0;
-//       padding: 1em 0;
-//       color: $teal-1;
-//     }
-//   }
-//   &__benefits {
-//     list-style: none;
-//     margin: 0;
-//     padding:0 0 1em 0;
-
-//     li {
-//       background-image: url("https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:tick?tint=26747a&format=svg&source=ftchinese");
-//       background-repeat: no-repeat;
-//       background-position: left top;
-//       background-size: 1.5em;
-//       padding-left: 1.5em;
-//       margin: 0.5em 1em;
-//     }
-//   }
-// }
-
-// .o-member__standard {
-//   &:after {
-//     background-color: $grid-highlight;
-//   }
-//   .o-member__subscribe a {
-//     background-color: $teal-1;
-//     border-color: $teal-1;
-//     color: #fff;
-//   }
-// }
-
-// .welcome-guide {
-
-//   margin: auto;
-//   padding: 0 60px;
-//   .words{
-//     width: 60%;
-//     float:left;
-//   }
-//   .show-image {
-//     float:right;
-//   }
-//   .clear-class {
-//     clear:both;
-//   }
-  
-// }
-
-// .mode {
-//   img{
-//     background-image: url("https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:tick?tint=26747a&format=svg&source=ftchinese");
-//       background-repeat: no-repeat;
-//       background-position: left top;
-//       background-size: 1.5em;
-//   }
-// }
-
-// #preview-overlay {
-//     position: relative;
-//     overflow: visible;
-// }
-
-// .o-overlay-shadow {
-//     position: fixed;
-//     z-index: 1;
-//     opacity: 1;
-//     transition: opacity .3s ease-in-out;
-//     background: rgba(0,0,0,.7);
-//     height: 150%;
-//     width: 100%;
-//     top: 0;
-//     left: 0;
-// }
-// #preview-box { 
-//   right:40%;
-//   top:280px;
-//   bottom: auto;
-//   width: 300px;
-//   overflow: visible;
-//   position: absolute;
-//   z-index: 60000;
-//   font-family:宋体;
-//   font-size:20px;
-//   line-height:35px;
-//   opacity: 1;
-//   background: #F5F5F5;
-//  }
-
-
-
 $text-color: white;
 $text-highlight: #f2e0d0;
 $text-background: #26747a;
+
+// *{
+//   margin:0;
+//   padding:0;
+//   box-sizing:border-box
+// }
+// body{
+//   font-family:Helvetica Neue,Verdana,Arial,Hiragino Sans GB,WenQuanYi Micro Hei,Heiti SC,STHeiti,Microsoft Yahei,SimSun,sans-serif;
+//   font-size:16px;
+//   margin:0 auto;
+//   display:block;
+//   background:#fff1e0 none repeat scroll 0 0
+// }
+// div{
+//   text-align:left;
+//   line-height:140%
+// }
+// img{
+//     border:medium none;
+//     max-width:100%
+// }
+// a{
+//   color:#27757b;
+//   text-decoration:none
+// }
+// a:active,a:hover{
+//   color:#333
+// }
+// a.highlight{
+//   color:#9e2f50
+// }
+// li,ul{
+//   list-style-position:outside;
+//   list-style-type:none;
+//   margin:0;
+//   padding:0
+// }
+// .clearfloat{
+//   clear:both
+// }
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:Helvetica Neue,Verdana,Arial,Hiragino Sans GB,WenQuanYi Micro Hei,Heiti SC,STHeiti,Microsoft Yahei,SimSun,sans-serif;font-size:16px;margin:0 auto;display:block;background:#fff1e0 none repeat scroll 0 0}div{text-align:left;line-height:140%}img{border:medium none;max-width:100%}a{color:#27757b;text-decoration:none}a:active,a:hover{color:#333}a.highlight{color:#9e2f50}li,ul{list-style-position:outside;list-style-type:none;margin:0;padding:0}.clearfloat{clear:both}.blue-link{color:#2e6e9e}.blue-link:active,.blue-link:hover{color:#333}.hide{display:none}.audio-placeholder{height:44px}.audio-sticky .audio-container{position:fixed;top:44px;width:100%;height:44px;left:0;right:0;background-color:#333;border:0;z-index:3}audio{width:100%}button{display:inline-block;box-sizing:border-box;vertical-align:middle;margin:0;outline:0;text-align:center;text-decoration:none;font-weight:600;border-radius:3px;cursor:pointer;transition:background-color .3s,color .15s ease-out,border-color .15s ease-out;-moz-appearance:none;-webkit-appearance:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-clip:padding-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;background-size:16px;min-height:26px;min-width:26px;padding:0 8px;font-size:14px;line-height:26px;color:#27757b;background-color:hsla(0,0%,100%,.4);border:1px solid rgba(39,117,123,.15)}button:active,button:hover{background-color:rgba(39,117,123,.08);border-color:rgba(39,117,123,.3)}button.myft-follow{position:relative;padding-left:28px;margin:0 0 0 15px}button.myft-follow:before{display:inline-block;width:12px;height:12px;background-repeat:no-repeat;background-size:contain;background-position:50%;background-color:transparent;content:" ";left:8px;margin:-6px 4px 0 0;position:absolute;top:50%}button.myft-follow.plus:before{background-image:url(http://static.ftchinese.com/images/plus.svg);background-image:url(http://static.ftchinese.com/images/png/plus.png)\9}button.myft-follow.tick:before{background-image:url(http://static.ftchinese.com/images/tick-thin.svg);background-image:url(http://static.ftchinese.com/images/png/tick-thin.png)\9}
+
 
 @mixin subscription-XL {
 .welcome-guide {
