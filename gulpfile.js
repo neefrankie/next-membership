@@ -173,7 +173,7 @@ gulp.task('serve', gulp.parallel('build-page', 'styles', 'scripts', () => {
   browserSync.init({
     server: {
       baseDir: ['.tmp'],
-      index: 'index.html',
+      index: 'subscribe.html',
       routes: {
         '/bower_components': 'bower_components'
       }

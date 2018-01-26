@@ -6,19 +6,11 @@
             "template": "index.html"
         },
         {
-            "name": "payment",
-            "data": "views/data/data.json",
-            "template": "payment.html"
-        },
-        {
             "name": "subscribe",
-            "data":"views/data/data.json",
-            "template": "subscribe.html"
-        },
-        {
-            "name": "story",
             "data": "views/data/data.json",
-            "template": "story.html"
+            "template": "subscribe.html"
         }
+ 
+       
      ]
 }
