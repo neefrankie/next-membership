@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html class="no-js core" data-next-app="front-page">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>会员订阅 - FT中文网</title>
+  <meta http-equiv="Content-Language" content="zh-CN"/>
+  <meta content="会员订阅" name="description"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="apple-touch-icon-precomposed" href="http://static.ftchinese.com/img/ipad_icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script   src="http://static.ftchinese.com/js/jquery-1.10.2.min.js?0"></script>
+
+  <style type="text/css">
+  .OpenGuide-toolTip::after {
+    position: absolute;
+    -webkit-transform: rotateZ(45deg);
+    transform: rotateZ(45deg);
+    right: 16px;
+    top: -5px;
+    display: block;
+    width: 12px;
+    height: 12px;
+    box-shadow: -2px -2px 18px -2px rgba(26,26,26,.1);
+    border-radius: 3px;
+    content: "";
+    background-color:#fff;
+    /*background: #0084ff;*/
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+.OpenGuide-toolTip {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 12px;
+    margin-right: 12px;
+    padding: 13px;
+    border-radius: 8px;
+    border: 1px solid #000;
+    /*background-color: #0084ff;*/
+    background-color:#fff;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    color: #000;
+    box-shadow: 0 5px 20px 0 rgba(26,26,26,.1);
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    -webkit-transform: scale3d(.1,.1,.1);
+    transform: scale3d(.1,.1,.1);
+    -webkit-transform-origin: right top;
+    transform-origin: right top;
+    opacity: 0;
+}
+.OpenGuide-toolTip--active {
+    
+    opacity: 1;
+    -webkit-transform: scale3d(1,1,1);
+    transform: scale3d(1,1,1);
+}
+.demo {
+  position: relative;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 10px 20px 10px;
+  border-color: transparent transparent red transparent;
+}
+.demo::before {
+  position: absolute;
+  content: '';
+  top: 1px;
+  left: -9.5px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 9.5px 19px 9.5px;
+  border-color: transparent transparent #ffffff transparent;
+}
+/*.tag{ width:300px; height:100px; border:5px solid #09F; position:relative;}
+.tag em{display:block; border-width:20px; position:absolute; bottom:-40px; left:100px;border-style:solid dashed dashed; border-color:#09F transparent transparent;font-size:0; line-height:0;}*/
+.tag{ 
+    margin-top:100px;
+    width:300px; 
+    height:40px; 
+    line-height: 40px; 
+    position:relative; 
+    background-color:#FFF;
+    border-radius: 20px;
+    border: 1px solid #000;
+    background-color:#fff;
+    font-size: 0.8em;
+    text-align: center;
+}
+.tag em{display:block; border-width:20px; position:absolute; bottom:-40px; left:100px;border-style:solid dashed dashed; border-color:#09F transparent transparent;font-size:0; line-height:0;}
+.tag span{display:block; border-width:20px; position:absolute; bottom:-33px; left:100px;border-style:solid dashed dashed; border-color:#FFF transparent transparent;font-size:0; line-height:0;}
+.triangle-up {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 12px solid #000;
+    position: absolute;
+    right: 23px;
+    top: -12px;
+}
+.triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 11px solid white;
+    position: absolute;
+    right: 24px;
+    top: -11px;
+}
+</style>
+</head>
+
+<body>
+<!--<div class="OpenGuide-toolTip OpenGuide-toolTip--active" id="guideTip">
+    若已安装知乎，点击右上角使用<span id="guideTipText"> Safari </span>
+打开
+</div>-->
+<!--<div class="demo"></div>
+<div class="tag">
+      <em></em> 
+       <span></span>  
+      CSS气泡框实现
+</div>-->
+<div class="tag">
+      <!--<em></em> -->
+      若已安装FT中文网，点击右上角使用Safari打开
+      <div class="triangle-up"></div>
+      <div class="triangle-down"></div>
+</div>
+
+<script type="text/javascript">
+  
+</script>
+
+
+</body>
+</html>

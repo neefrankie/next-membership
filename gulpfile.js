@@ -173,7 +173,7 @@ gulp.task('serve', gulp.parallel('build-page', 'styles', 'scripts', () => {
   browserSync.init({
     server: {
       baseDir: ['.tmp'],
-      index: 'subscribe.html',
+      index: 'subscription.html',
       routes: {
         '/bower_components': 'bower_components'
       }
@@ -221,5 +221,11 @@ gulp.task('deploy', gulp.series('build', 'copy:prod'));
 gulp.task('copy:subsp', () => {
   const dest = 'dev_www/frontend/tpl/subscription';
   return gulp.src(['.tmp/**/*'])
+    .pipe(gulp.dest(`../${dest}`))
+});
+
+gulp.task('copy:subscribe', () => {
+  const dest = 'ftac';
+  return gulp.src(['.tmp/subscription.html'])
     .pipe(gulp.dest(`../${dest}`))
 });

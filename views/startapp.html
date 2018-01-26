@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FT中文网</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="copyright" content="FT中文网">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta property="og:locale" content="zh-Hans">
+    <meta property="og:site_name" content="FT中文网">
+
+    <style>
+        .container {
+            margin: 0px auto;
+            max-width: 414px;
+        }
+
+        .hint {
+            float: right;
+            /*margin-right: 1%;*/
+            margin-top: 3px;
+
+        }
+
+        .clearFloat {
+            clear: both;
+        }
+
+        .hint img {
+            height: 27px;
+        }
+
+        .action-container {
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .action-container img {
+            width: 200px;
+            margin: 0px 0px 50px;
+        }
+
+        .openAction {
+            width: 250px;
+            letter-spacing: 3px;
+            font-size: 1.1em;
+        }
+
+        #openApplication {
+            background-color: #0d7680;
+            margin-bottom: 30px;
+            height: 46px;
+            color: white;
+            /*border: 0.5px solid #0d7680;*/
+        }
+
+        #nowDownload {
+            background-color: #cce2e4;
+            height: 45px;
+            border: 0.5px solid #0d7680;
+            color: #0d7680;
+        }
+        .hint-text{ 
+   
+            width:350px; 
+            height:40px; 
+            line-height: 40px; 
+            position:relative; 
+            background-color:#FFF;
+            border-radius: 20px;
+            border: 1px solid #0d7680;
+            background-color:#fff;
+            font-size: 1.0em;
+            text-align: center;
+        }
+        .triangle-down {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 12px solid #0d7680;
+            position: absolute;
+            right: 23px;
+            top: -12px;
+        }
+        .triangle-up {
+            width: 0;
+            height: 0;
+            border-left: 9px solid transparent;
+            border-right: 9px solid transparent;
+            border-bottom: 11px solid white;
+            position: absolute;
+            right: 24px;
+            top: -11px;
+        }
+    </style>
+
+    <script>
+        // Mark:判断是什么浏览器和什么设备，仅仅微信提醒用safari打开，其它都不用
+        function getDeviceType() {
+            var uaString = navigator.userAgent || navigator.vendor || '';
+            var deviceType = 'PC';
+            if (/iPad/i.test(uaString)) {
+                deviceType = 'iPadWeb';
+            } else if (/OS [0-9]+\_/i.test(uaString) && (/iPhone/i.test(uaString) || /iPod/i.test(uaString))) {
+                deviceType = 'iPhoneWeb';
+            } else if (/Android|micromessenger/i.test(uaString) ) {
+                deviceType = 'androidWeb';
+            }
+            return deviceType;
+        }
+        function getBrowserType(){
+            var name = navigator.appName;
+            console.log(name);
+            var OsObject = "";   
+            if(navigator.userAgent.indexOf("MSIE")>0) {   
+                return "MSIE";   
+            }   
+            if(isFirefox=navigator.userAgent.indexOf("Firefox")>0){   
+                return "Firefox";   
+            }   
+            if(isSafari=navigator.userAgent.indexOf("Safari")>0) {   
+                return "Safari";   
+            }    
+            if(isCamino=navigator.userAgent.indexOf("Camino")>0){   
+                return "Camino";   
+            }   
+            if(isMozilla=navigator.userAgent.indexOf("Gecko/")>0){   
+                return "Gecko";   
+            } 
+            if (userAgent.indexOf("Chrome") > -1){
+                return "Chrome";
+            }  
+        }
+        var browser = getBrowserType();
+        console.log(browser);
+        function isQQ(){
+            var ua = navigator.userAgent;
+            if (/mqqbrowser|qzone|qqbrowser/i.test(ua)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function isWeiXin() {
+            var ua = window.navigator.userAgent.toLowerCase();
+            if (/micromessenger/.test(ua)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        var parameter = window.location.search.substr(1);
+        var paraArr = parameter.split("=");
+        var storyId = paraArr[1];
+        var iosUrl = 'ftchinese://';
+        if( (storyId !== '' )||(storyId !== undefined) ) {
+            iosUrl = 'ftchinese://story/' + storyId;
+        }
+        //Mark: 如果不是微信，下载了app，直接跳转到iosUrl
+         // 如果启动app，关闭此页面，可以试一试。我觉得不用判断微信，只要打开app就能判断跳转
+        //  仅仅判断微信不打开，如果不是微信就可以跳转打开
+        // if (!isWeiXin()) {
+        //     window.location = iosUrl;
+        // }
+        if (!isWeiXin()) {
+            window.location = iosUrl;
+            var installState = null;
+            try {
+                installState = window.open(iosUrl);
+            } catch(e) {
+                
+            }
+            if(installState) {
+                window.close();
+            } 
+        }
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="hint" id="hint">
+            <div class="hint-text">
+                若已安装FT中文网，点击右上角使用Safari打开
+                <div class="triangle-down"></div>
+                <div class="triangle-up"></div>
+            </div>
+            <!--<img src="http://static.ftchinese.com/img/open-safari-hint.jpg" alt />-->
+        </div>
+        <div class="clearFloat"></div>
+        <div class="action-container">
+            <div>
+                <img src="http://static.ftchinese.com/img/download-hint-log.jpg" alt />
+            </div>
+            <button id="openApplication" class="openAction">
+            打开应用
+            </button>
+            <button id="nowDownload" class="openAction">
+            立即下载
+            </button>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        if( (storyId !== '' )||(storyId !== undefined) ) {
+            iosUrl = 'ftchinese://story/' + storyId;
+        }
+
+       var openApplication = document.getElementById('openApplication');
+        openApplication.onclick = function() {
+            window.open(iosUrl);
+        };
+
+        var nowDownload = document.getElementById('nowDownload');
+        nowDownload.onclick = function() {
+            window.open('/openinapp.html?id=' + storyId);         
+        };
+
+        var hint = document.getElementById('hint');
+        var deviceType = getDeviceType()
+        if (isWeiXin()&&(deviceType === 'iPadWeb'|| deviceType === 'iPhoneWeb'||deviceType === 'androidWeb')){
+            hint.style.display = "block";
+        }else{
+            hint.style.display = "none";
+        }
+         // if (isWeiXin() && (/\(iphone/.test(ua) || /\(ipad/.test(ua) || /\(ipod/.test(ua))) {
+        //     hint.style.display = "block";
+        // } else {
+        //     hint.style.display = "none";
+        // }         
+        document.addEventListener("touchmove", function(event) {
+            if (event.cancelable) {
+                if (!event.defaultPrevented) {
+                    event.preventDefault();
+                }
+            }
+        }, false);
+    </script>
+</body>
+</html>

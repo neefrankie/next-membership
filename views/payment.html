@@ -12,15 +12,23 @@
      <link rel="preconnect" href="http://static.ftchinese.com" />
      <link rel="preconnect" href="http://i.ftimg.net" />
 
-     <script   src="http://static.ftchinese.com/js/jquery-1.10.2.min.js?0"></script>
+      <script   src="http://static.ftchinese.com/js/jquery-1.10.2.min.js?0"></script>
 
-     <link rel="stylesheet" href="/styles/main.css">
+   
+
+      <link rel="stylesheet" href="styles/main.css">
+
+
+
+
 
 </head>
 <body>
 
 
-
+<div class="block-container has-side story-page">
+  <div class="block-inner">
+<div class="content-container centerClass">
 
 <div class="welcome-guide">
   <div class="words">
@@ -36,57 +44,59 @@
 <div id="payment-page">
 </div>
 
-<div id="site-content" class="o-grid-container">
-  <div class="o-member__heading">
-    <p>请选择您的订阅方式。<span class="o-member__login">已经是会员，请<a href="http://user.ftchinese.com/login" >点击这里</a></span></p>
-  </div>
+  <div id="site-content" class="o-grid-container">
+    <div class="o-member__heading">
+      <p>请选择您的订阅方式。<span class="o-member__login">已经是会员，请<a href="http://user.ftchinese.com/login" >点击这里</a></span></p>
+    </div>
 
 
-  
-  <div class="o-grid-row" >
     
-    <div class="o-member o-member__premium" >
-      <h2 class="o-member__title">会员</h2>
-      <div class="o-member__border"></div>
-      <ul class="o-member__benefits">
-        
-        <li>阅读FT中文网所有独家内容</li>
-        
-        <li>收听英文文章音频</li>
-        
-      </ul> 
-      <div class="o-member__subscribe">
-        
-        <button id="openSub" class="openSub">立即订阅</button>
-        <p> CN¥198.00/年*</p>
-      </div>         
+    <div class="o-grid-row" >
+      
+      <div class="o-member o-member__premium" >
+        <h2 class="o-member__title">会员</h2>
+        <div class="o-member__border"></div>
+        <ul class="o-member__benefits">
+          
+          <li>阅读FT中文网所有独家内容</li>
+          
+          <li>收听英文文章音频</li>
+          
+        </ul> 
+        <div class="o-member__subscribe">
+          
+          <button id="openSub" class="openSub">立即订阅</button>
+          <p> CN¥198.00/年*</p>
+        </div>         
+      </div>
+      
+      <div class="o-member o-member__standard" >
+        <h2 class="o-member__title">高端会员</h2>
+        <div class="o-member__border"></div>
+        <ul class="o-member__benefits">
+          
+          <li>《FT编辑精选》，每周不可错过的独家必读内容</li>
+          
+          <li>获得两张价值3999元的FT中文网年会门票</li>
+          
+          <li>阅读FT中文网所有独家内容</li>
+          
+          <li>收听英文文章音频</li>
+          
+        </ul> 
+        <div class="o-member__subscribe">
+          
+          <button id="openSub" class="openSub">立即订阅</button>
+          <p>CN¥1,998.00/年</p>
+          <!--<input type="button" id="openSub" class="openSub"value="立即订阅"/>-->
+        </div>         
+      </div>
+      
     </div>
-    
-    <div class="o-member o-member__standard" >
-      <h2 class="o-member__title">高端会员</h2>
-      <div class="o-member__border"></div>
-      <ul class="o-member__benefits">
-        
-        <li>《FT编辑精选》，每周不可错过的独家必读内容</li>
-        
-        <li>获得两张价值3999元的FT中文网年会门票</li>
-        
-        <li>阅读FT中文网所有独家内容</li>
-        
-        <li>收听英文文章音频</li>
-        
-      </ul> 
-      <div class="o-member__subscribe">
-        
-        <button id="openSub" class="openSub">立即订阅</button>
-        <p>CN¥1,998.00/年</p>
-        <!--<input type="button" id="openSub" class="openSub"value="立即订阅"/>-->
-      </div>         
-    </div>
-    
   </div>
 </div>
-
+</div>
+</div>
 
 <script type="text/javascript">
   var aLi = document.querySelectorAll('.openSub');
@@ -115,6 +125,7 @@
   });
 
 </script>
+
 
 
 </body>
