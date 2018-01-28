@@ -10,7 +10,6 @@
   <link rel="apple-touch-icon-precomposed" href="http://static.ftchinese.com/img/ipad_icon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script   src="http://static.ftchinese.com/js/jquery-1.10.2.min.js?0"></script>
-  <!--<link rel="stylesheet" href="/styles/main.css">-->
 
   <link inline rel="stylesheet" type="text/css" href="styles/main.css">
   
@@ -41,7 +40,7 @@
   <div class="o-grid-row" >
     
     <div class="o-member o-member__premium" >
-      <h2 class="o-member__title">会员</h2>
+      <h2 class="o-member__title">普通会员</h2>
       <div class="o-member__border"></div>
       <ul class="o-member__benefits">
         
@@ -52,8 +51,9 @@
       </ul> 
       <div class="o-member__subscribe">
         
-        <button id="openSub" class="openSub">立即订阅</button>
-        <p> CN¥198.00/年*</p>
+        <button  class="openSub">立即订阅</button>
+        <p> CN¥198.00/年</p>
+        <input type="text" value="198.00/年" hidden id="regular-member">
       </div>         
     </div>
     
@@ -73,9 +73,9 @@
       </ul> 
       <div class="o-member__subscribe">
         
-        <button id="openSub" class="openSub">立即订阅</button>
+        <button class="openSub">立即订阅</button>
         <p>CN¥1,998.00/年</p>
-        <!--<input type="button" id="openSub" class="openSub"value="立即订阅"/>-->
+        <input type="text" value="1,998.00/年" hidden id="premium-member">
       </div>         
     </div>
     
@@ -88,24 +88,51 @@
 
   var paymentPage = document.getElementById('payment-page');
   var paymentShadow = document.getElementById('payment-shadow');
-
+  var price = '';
+  var memberType = "";
   var handler = function(event){
-
-      var previewHTML = '<div id="payment-shadow" class="o-overlay-shadow fadeIn"></div><div id="payment-box" class="rightanswer show o-overlay__arrow-top fadeInRight"><div class="payment-title">欢迎订阅FT会员服务</div><div class="payment-way"><div class="payment-name"><span>商品名称：</span><span class="payment-type"><strong>FT会员</strong></span></div><div class="payment-method"><span>支付方式：</span><label class="mode"><input name="pay" type="radio" value="" /><img src="http://static.ftchinese.com/img/pay-ali.jpg" /> </label><label><input name="pay" type="radio" value="" /><img src="http://static.ftchinese.com/img/pay-wxpay.jpg" /></label></div></div><div class="pay-action"><label>支付金额 ￥198/年</label><button  class="to-pay" id="to-pay">确定支付</button></div></div>';
+      var childNodes = this.parentNode.children;
+      price = childNodes[2].value;
+      console.log(childNodes)
+      var parentsNode = this.parentNode.parentNode.children;
+      memberType = parentsNode[0].innerHTML;
+      console.log(parentsNode)
+  
+      var previewHTML = '<div id="payment-shadow" class="o-overlay-shadow fadeIn"></div><div id="payment-box" class="rightanswer show o-overlay__arrow-top fadeInRight"><div class="payment-title">欢迎订阅FT会员服务</div><div class="payment-way"><div class="payment-name"><span>会员类型：</span><span class="payment-type"><strong>'+memberType+'</strong></span></div><div class="payment-method"><span>支付方式：</span><label class="mode"><input name="pay" type="radio" value="ali" /><img src="http://static.ftchinese.com/img/pay-ali.jpg" /> </label><label><input name="pay" type="radio" value="wxpay" /><img src="http://static.ftchinese.com/img/pay-wxpay.jpg" /></label></div></div><div class="pay-action"><label>支付金额 '+price+'</label><button  class="to-pay" id="to-pay">确定支付</button></div></div>';
       paymentPage.innerHTML = previewHTML;
   };
+  
+  for (let i = 0; i < aLi.length; i++) {
 
-  for (var i = 0; i < aLi.length; i++) {
-      if (window.addEventListener){
-          aLi[i].addEventListener("click",handler,false);
-      }else if (window.attachEvent){
-          aLi[i].attachEvent("onclick",handler);
-      }
+    if (window.addEventListener){
+        aLi[i].addEventListener("click",handler,false);
+    }else if (window.attachEvent){
+        aLi[i].attachEvent("onclick",handler);
+    }
+
   }
-
+  var payWay = '';
+  var pays = document.getElementsByName('pay');
   $('body').on('click', '#to-pay', function () {
+    for(let j = 0; j < pays.length; j++){
+        if(pays[j].checked == true){
+            payWay = pays[j].value;
+        }
+    }
+    // console.log(payWay);
+    //满足2个条件：1.支付方式  2.会员类型
+    if (memberType==="高端会员" && payWay==="ali") {
+        window.open('http://premium.ftacademy.cn/index.php/pay?offerId=8d5e7e72f12067991186cdf3cb7d5d9d')
+    }
+    if (memberType==="普通会员" && payWay==="ali") {
+        window.open('http://premium.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b')
+    }
+    $('#payment-page').empty();
+  });
+  $('body').on('click', '#payment-shadow', function () {
       $('#payment-page').empty();
   });
+  
 
 </script>
 
