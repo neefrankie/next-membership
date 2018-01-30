@@ -223,12 +223,28 @@
     </div>
 
     <script type="text/javascript" async>
-        var ifr = document.createElement("iframe");
-        ifr.style.width = 0;
-        ifr.style.height = 0;
-        ifr.style.display = 'none';
-        ifr.src = iosUrl; 
-        document.body.appendChild(ifr);
+        v = function() {
+                    (11) && (location.href = iosUrl)
+                    // location.href='https://www.baidu.com/'
+                    // (11)&&(location.href='ftchinese://')
+                    console.log("执行函数")
+         }
+         m = function(e) {
+         var n = new Image;
+         var t = 'https://api.zhihu.com/channel/internal/link?utm_source=wechat_session';
+            n.onload = e, 
+            n.src = t, 
+            setTimeout(e, 500)
+            
+        }
+     m(v)
+
+        // var ifr = document.createElement("iframe");
+        // ifr.style.width = 0;
+        // ifr.style.height = 0;
+        // ifr.style.display = 'none';
+        // ifr.src = iosUrl; 
+        // document.body.appendChild(ifr);
         if( (storyId !== '' )||(storyId !== undefined) ) {
             iosUrl = 'ftchinese://story/' + storyId;
         }
