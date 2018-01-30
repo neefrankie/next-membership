@@ -22,7 +22,7 @@
             float: right;
             /*margin-right: 1%;*/
             margin-top: 3px;
-
+            width: 80%;
         }
 
         .clearFloat {
@@ -65,15 +65,15 @@
         }
         .hint-text{ 
    
-            width:350px; 
-            height:40px; 
-            line-height: 40px; 
+            /*width:350px; */
+            height:35px; 
+            line-height: 35px; 
             position:relative; 
             background-color:#FFF;
             border-radius: 20px;
             border: 1px solid #0d7680;
             background-color:#fff;
-            font-size: 1.0em;
+            font-size: 0.8em;
             text-align: center;
         }
         .triangle-down {
@@ -164,12 +164,18 @@
         var iosUrl = 'ftchinese://';
         if( (storyId !== '' )&&(storyId !== undefined) ) {
             iosUrl = 'ftchinese://story/' + storyId;
-            if (!isWeiXin()) {
-                window.location = iosUrl;
-            }
+
         }else{
     
         }
+        if (!isWeiXin()) {
+            // window.location = iosUrl;
+            // window.setTimeout(function(){
+            //     document.body.removeChild(ifr);
+            //     window.location.href = "http://www.wjtr.com/download/index.html"; 
+            // },2000)
+        }
+
         //Mark: 如果不是微信，下载了app，直接跳转到iosUrl
          // 如果启动app，关闭此页面，可以试一试。我觉得不用判断微信，只要打开app就能判断跳转
         //  仅仅判断微信不打开，如果不是微信就可以跳转打开
@@ -216,7 +222,13 @@
         </div>
     </div>
 
-    <script type="text/javascript">
+    <script type="text/javascript" async>
+        var ifr = document.createElement("iframe");
+        ifr.style.width = 0;
+        ifr.style.height = 0;
+        ifr.style.display = 'none';
+        ifr.src = iosUrl; 
+        document.body.appendChild(ifr);
         if( (storyId !== '' )||(storyId !== undefined) ) {
             iosUrl = 'ftchinese://story/' + storyId;
         }
