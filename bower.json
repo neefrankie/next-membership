@@ -3,7 +3,7 @@
   "description": "subscription",
   "main": "index.js",
   "authors": [
-    "weiguo.ni"
+    "huiyun.he"
   ],
   "license": "MIT",
   "homepage": "https://github.com/neefrankie/next-membership",
@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "o-grid": "^4.3.1",
-    "o-colors": "^3.6.0"
+    "o-colors": "^3.6.0",
+    "jquery": "~2.1.1"
   }
 }

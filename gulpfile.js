@@ -168,6 +168,13 @@ gulp.task('clean', function() {
   return del(['.tmp/**']);
 });
 
+gulp.task('jshint', function () {
+  return gulp.src('client/scripts/**/*.js')
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('jshint-stylish'))
+    .pipe($.jshint.reporter('fail'));
+});
+
 
 gulp.task('serve', gulp.parallel('build-page', 'styles', 'scripts', () => {
   browserSync.init({
