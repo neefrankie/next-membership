@@ -64,6 +64,8 @@ var toPayAction = function(event){
  
     }
     paymentPage.innerHTML = '';
+    memberType = '';
+    payWay = '';
     
 };
 var closePayment = function(event){

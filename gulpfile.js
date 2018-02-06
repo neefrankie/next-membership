@@ -204,14 +204,6 @@ gulp.task('build', gulp.series('prod', 'styles', 'scripts', 'build-page', 'dev')
 
 const destDir = 'dev_www/frontend/tpl/next/html';
 
-gulp.task('copy:test', () => {
-  const src = path.resolve(__dirname, '.tmp/index.html')
-  const dest = path.resolve(__dirname, `../testing/${destDir}`);
-  console.log(`Copy index.html to ${dest}`);
-  return gulp.src(src)
-    .pipe($.rename('membership.html'))
-    .pipe(gulp.dest());
-});
 
 gulp.task('copy:prod', () => {
   const src = path.resolve(__dirname, '.tmp/index.html');
@@ -222,16 +214,12 @@ gulp.task('copy:prod', () => {
     .pipe(gulp.dest(dest));  
 });
 
-gulp.task('deploy:test', gulp.series('build', 'copy:test'));
+
 gulp.task('deploy', gulp.series('build', 'copy:prod'));
 
-gulp.task('copy:subsp', () => {
-  const dest = 'dev_www/frontend/tpl/subscription';
-  return gulp.src(['.tmp/**/*'])
-    .pipe(gulp.dest(`../${dest}`))
-});
 
-gulp.task('copy:subscribe', () => {
+
+gulp.task('copy', () => {
   const dest = 'ftac';
   return gulp.src(['.tmp/subscription.html'])
     .pipe(gulp.dest(`../${dest}`))
