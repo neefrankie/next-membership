@@ -35,8 +35,14 @@ var openPayment = function(event){
 
     toPay = document.getElementById('to-pay');
     paymentShadow = document.getElementById('payment-shadow');
-    EventObject.addHandler(toPay,"click",toPayAction);
+    // EventObject.addHandler(toPay,"click",toPayAction);
     EventObject.addHandler(paymentShadow,"click",closePayment);
+    if (typeof window.ftjavacriptapp !== 'undefined') {
+        ftjavacriptapp.payzfb( 'com.ft.ftchinese.mobile.subscription.premium', '0.01' , 'mzq' , '高端会员');
+        // <a'+getBuyCode(productID, productPrice, gUserId, productName)+'>
+    }else{
+        EventObject.addHandler(toPay,"click",toPayAction);
+    }
 };
 
 for (let i = 0; i < aLi.length; i++) {
@@ -51,6 +57,7 @@ var toPayAction = function(event){
             payWay = pays[j].value;
         }
     }
+ 
     //满足2个条件：1.支付方式  2.会员类型
     if (memberType==='高端会员' && payWay==='ali') {
         window.open('http://premium.ftacademy.cn/index.php/pay?offerId=8d5e7e72f12067991186cdf3cb7d5d9d');
@@ -61,8 +68,10 @@ var toPayAction = function(event){
     }else if (memberType==='普通会员' && payWay==='wxpay') {
         window.open('#');
     }else{
- 
+
     }
+  
+
     paymentPage.innerHTML = '';
     memberType = '';
     payWay = '';
