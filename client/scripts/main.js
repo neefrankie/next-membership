@@ -35,14 +35,10 @@ var openPayment = function(event){
 
     toPay = document.getElementById('to-pay');
     paymentShadow = document.getElementById('payment-shadow');
-    // EventObject.addHandler(toPay,"click",toPayAction);
     EventObject.addHandler(paymentShadow,"click",closePayment);
-    if (typeof window.ftjavacriptapp !== 'undefined') {
-        ftjavacriptapp.payzfb( 'com.ft.ftchinese.mobile.subscription.premium', '0.01' , 'mzq' , '高端会员');
-        // <a'+getBuyCode(productID, productPrice, gUserId, productName)+'>
-    }else{
-        EventObject.addHandler(toPay,"click",toPayAction);
-    }
+    EventObject.addHandler(toPay,"click",toPayAction);
+// 取消事件代码
+    document.getElementById("button1").onclick = function(){};
 };
 
 for (let i = 0; i < aLi.length; i++) {
