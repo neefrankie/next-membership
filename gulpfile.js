@@ -163,9 +163,20 @@ gulp.task('scripts', async () => {
   browserSync.reload();
 });
 
+gulp.task('comJs', () => {
+  return gulp.src('.tmp/scripts/*.js')
+    .pipe($.uglify())
+    .pipe(gulp.dest('.tmp/scripts/'));
+});
+gulp.task('comCss', () => {
+  return gulp.src('.tmp/styles/*.css')
+    .pipe($.cssnano())
+    .pipe(gulp.dest('.tmp/styles/'));
+});
 
-gulp.task('clean', function() {
-  return del(['.tmp/**']);
+
+gulp.task('clean', () => {
+  return del(['.tmp/**','.dest/**']);
 });
 
 gulp.task('jshint', function () {
@@ -200,7 +211,7 @@ gulp.task('serve', gulp.parallel('build-page', 'styles', 'scripts', () => {
   );
 }));
 
-gulp.task('build', gulp.series('prod', 'styles', 'scripts', 'build-page', 'dev'));
+gulp.task('build', gulp.series('prod','clean','styles', 'scripts', 'build-page','comJs','comCss', 'dev'));
 
 const destDir = 'dev_www/frontend/tpl/next/html';
 

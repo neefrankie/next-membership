@@ -21,7 +21,7 @@ var EventObject = {
 
 var toPay = '';
 var paymentShadow = '';
-var aLi = document.querySelectorAll('.openSub');
+// var aLi = document.querySelectorAll('.openSub');
 var paymentPage = document.getElementById('payment-page');
 var price = '';
 var memberType = '';
@@ -37,13 +37,16 @@ var openPayment = function(event){
     paymentShadow = document.getElementById('payment-shadow');
     EventObject.addHandler(paymentShadow,"click",closePayment);
     EventObject.addHandler(toPay,"click",toPayAction);
-// 取消事件代码
-    document.getElementById("button1").onclick = function(){};
 };
 
-for (let i = 0; i < aLi.length; i++) {
-    EventObject.addHandler(aLi[i],"click",openPayment);
-}
+// for (let i = 0; i < aLi.length; i++) {   
+//     var para = location.search;
+//     if(para){
+//         EventObject.addHandler(aLi[i],"click",function(){return false;});
+//     } else{
+//         EventObject.addHandler(aLi[i],"click",openPayment);
+//     }
+// }
 var payWay = '';
 var pays = document.getElementsByName('pay');
 
@@ -76,4 +79,37 @@ var toPayAction = function(event){
 var closePayment = function(event){
     paymentPage.innerHTML = '';
 };
+
+function updateUI(){
+    var premiumBtn = document.getElementById('premium-btn');
+    var standardBtn = document.getElementById('standard-btn');
+    var paraArr = parseUrlSearch()
+    if (paraArr.includes('premium=1')&&paraArr.includes('standard=0')){
+        console.log(paraArr);
+        premiumBtn.innerText = '已订阅';
+        standardBtn.innerText = '现在升级';
+        EventObject.addHandler(premiumBtn,"click",function(){return false;});
+        EventObject.addHandler(standardBtn,"click",openPayment);
+    }else if (paraArr.includes('standard=1')){
+        premiumBtn.innerText = '已订阅';
+        standardBtn.innerText = '已订阅';
+        EventObject.addHandler(premiumBtn,"click",function(){return false;});
+        EventObject.addHandler(standardBtn,"click",function(){return false;});
+    }else{
+        premiumBtn.innerText = '立即订阅';
+        standardBtn.innerText = '立即订阅';
+        EventObject.addHandler(premiumBtn,"click",openPayment);
+        EventObject.addHandler(standardBtn,"click",openPayment);
+    }
+}
+updateUI();
+
+function parseUrlSearch(){
+    var para = location.search.substring(1);
+    var paraArr = para.split('&');
+    return paraArr;
+}
+
+
+
 
