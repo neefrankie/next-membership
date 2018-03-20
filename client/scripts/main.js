@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 var EventObject = {
     addHandler:function(element,type,handler){
         if (element.addEventListener){
@@ -17,7 +18,7 @@ var EventObject = {
             element["on"+type] = null;
         }
     }
-}
+};
 
 var toPay = '';
 var paymentShadow = '';
@@ -83,7 +84,7 @@ var closePayment = function(event){
 function updateUI(){
     var premiumBtn = document.getElementById('premium-btn');
     var standardBtn = document.getElementById('standard-btn');
-    var paraArr = parseUrlSearch()
+    var paraArr = parseUrlSearch();
     if (paraArr.includes('premium=1')&&paraArr.includes('standard=0')){
         console.log(paraArr);
         premiumBtn.innerText = '已订阅';
