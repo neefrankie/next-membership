@@ -11,65 +11,109 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
      <link rel="preconnect" href="http://static.ftchinese.com" />
      <link rel="preconnect" href="http://i.ftimg.net" />
-
-      <link rel="stylesheet" href="styles/main.css">
       <style type="text/css">
-      .headline{
-          font-size: 1.3em;
-      }
-    .iap-intruction,.iap-info{
-     margin: 1em !important;
-}
-      .hint-headline{
-            font-size: 1.1em;
-            color: #000;
-            font-weight: bold;
-            margin: 15px 0 5px;
-        }
-        .hint-content{
-            font-size: 1.0em; 
-        }
-        .more-service{
-            
-        }
-        .policy{
-                border-bottom:solid #ded5d5 0.5px;
-                padding: 5px 0px;
-                
-            }
-       .policy span{
-               float:right;
-           }
+          body{
+              background-color: #FFF1E5;
+          }
+          #main
+          {
+            width:100%;
+            display:flex;
+            text-align: center;
+          }
 
+          #main div
+          {
+            flex:1;
+          }
+
+          .column-container{
+             border-width:1px 1px 1px 0px;
+             border-style:solid;
+             border-color:black;
+             background-color: #1a757f;
+             color: #fff;
+
+          }
+
+          .column{
+            padding: 5px 0px; 
+            font-size: 1.2em;
+          }
+
+           #row-content
+          {
+            width:100%;
+            height:40px;
+            line-height: 40px;
+            border:0px 0px 1px solid black;
+            display:flex;
+            text-align: center;
+            background-color: #FFF1E5;
+
+          }
+          #row-content div
+          {
+            flex:1;
+          }
+          .column-content{
+             border-width:0px 1px 1px 0px;
+             border-style:solid;
+             border-color:black;
+
+          }
+          .border-class{
+            border-left: 1px solid black;
+          }
       </style>
 
 </head>
 <body>
-<div class="iap-vip-container">
-   <div class="iap-info">
-          <div><label>会员类型：</label><span>普通会员</span></div>
-          <div><label>温馨提示：</label><span>您可以阅读到2019-05-02<span></div>
-   </div>
 
-    <div class="iap-intruction">
+<div id="main">
+  <div   class = "column-container border-class">
+    <div  class = "column">会员邮箱</div>
+  </div>
 
+  <div  class = "column-container">
+    <div   class = "column">会员类型</div>
+  </div>  
 
-        <div class="headline">订阅说明与注意事项</div>
-        
-        <div class="hint-headline">订阅价格与周期</div>
-        <div class="hint-content">您可以在应用内订阅《FT中文网会员》和《FT中文网高端会员》两种服务。《FT中文网会员》每年订阅价格为 198元（$28.99），订阅后您可以解锁阅读FT中文网每日新增的两篇独家文章内容，以及解锁双语文章的英语语音服务。《FT中文网高端会员》每年订阅价格为 1998元（$294.99），订阅后您可以解锁《FT中文网会员》提供的所有服务，再加上每周的《编辑精选》周刊。
-        </div>
+  <div class = "column-container">
+    <div   class = "column">截止时间</div>
+  </div>
 
-        <div class="more-service">
-            <div class="hint-headline">更多服务与信息</div>
-            <div class="policy"><a href="http://www.ftchinese.com/m/corp/privacy-policy.html?ad=no">隐私申明</a></div>
-            <div class="policy"><a href="http://www.ftchinese.com/m/corp/service.html?ad=no">用户协议</a></div>
-            <div class="policy"><a href="http://www.ftchinese.com/m/corp/faq.html?ad=no">反馈</a></div>
-        </div>
-    </div>
+  <div  class = "column-container">
+    <div   class = "column">支付方式</div>
+  </div>
+
+  <div  class = "column-container">
+    <div   class = "column">状态</div>
+  </div>
+
+  <div  class = "column-container">
+    <div   class = "column">操作</div>
+  </div>
 
 </div>
 
+<div id="row-content">
+    <div class = "column-content border-class">123@163.com</div>
+    <div class = "column-content">微信</div>
+    <div class = "column-content">普通会员</div>
+    <div class = "column-content">2019.3.10</div>
+    <div class = "column-content">正常</div>
+    <div class = "column-content">点击</div>
+</div>
+
+<div id="row-content">
+    <div  class = "column-content border-class">123@163.com</div>
+    <div  class = "column-content">微信</div>
+    <div  class = "column-content">普通会员</div>
+    <div  class = "column-content">2019.3.10</div>
+    <div  class = "column-content">正常</div>
+    <div  class = "column-content">点击</div>
+</div>
 
 
 
