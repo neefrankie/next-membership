@@ -112,5 +112,16 @@ function parseUrlSearch(){
 }
 
 
-
+function setCookie(){
+    // check referrer
+    var referer = document.referrer;
+    document.cookie = 'R = ' + referer ;
+    // check ccode
+    var para = location.search.substring(1);
+    var paraArr = para.split('&');
+    if (paraArr.length>0){
+        document.cookie = 'ccode = ' + paraArr[0] ;
+    }
+}
+setCookie();
 
