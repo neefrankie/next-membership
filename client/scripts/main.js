@@ -1,4 +1,23 @@
 /*jshint esversion: 6 */
+// Mark:判断是什么浏览器和什么设备，仅仅微信提醒用safari打开，其它都不用
+
+function isWeiXin() {
+    var ua = window.navigator.userAgent.toLowerCase();
+    if (/micromessenger/.test(ua)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+var hint = document.getElementById('hint');
+
+if (isWeiXin()){
+    hint.style.display = "block";
+}else{
+    hint.style.display = "none";
+}
+
+
 var EventObject = {
     addHandler:function(element,type,handler){
         if (element.addEventListener){
@@ -85,23 +104,29 @@ function updateUI(){
     var premiumBtn = document.getElementById('premium-btn');
     var standardBtn = document.getElementById('standard-btn');
     var paraArr = parseUrlSearch();
-    if (paraArr.includes('premium=1')&&paraArr.includes('standard=0')){
-        console.log(paraArr);
-        premiumBtn.innerText = '已订阅';
-        standardBtn.innerText = '现在升级';
-        EventObject.addHandler(premiumBtn,"click",function(){return false;});
-        EventObject.addHandler(standardBtn,"click",openPayment);
-    }else if (paraArr.includes('standard=1')){
-        premiumBtn.innerText = '已订阅';
-        standardBtn.innerText = '已订阅';
+    if (isWeiXin()){
         EventObject.addHandler(premiumBtn,"click",function(){return false;});
         EventObject.addHandler(standardBtn,"click",function(){return false;});
     }else{
-        premiumBtn.innerText = '立即订阅';
-        standardBtn.innerText = '立即订阅';
-        EventObject.addHandler(premiumBtn,"click",openPayment);
-        EventObject.addHandler(standardBtn,"click",openPayment);
+        if (paraArr.includes('premium=1')&&paraArr.includes('standard=0')){
+            console.log(paraArr);
+            premiumBtn.innerText = '已订阅';
+            standardBtn.innerText = '现在升级';
+            EventObject.addHandler(premiumBtn,"click",function(){return false;});
+            EventObject.addHandler(standardBtn,"click",openPayment);
+        }else if (paraArr.includes('standard=1')){
+            premiumBtn.innerText = '已订阅';
+            standardBtn.innerText = '已订阅';
+            EventObject.addHandler(premiumBtn,"click",function(){return false;});
+            EventObject.addHandler(standardBtn,"click",function(){return false;});
+        }else{
+            premiumBtn.innerText = '立即订阅';
+            standardBtn.innerText = '立即订阅';
+            EventObject.addHandler(premiumBtn,"click",openPayment);
+            EventObject.addHandler(standardBtn,"click",openPayment);
+        }
     }
+
 }
 updateUI();
 
@@ -115,11 +140,19 @@ function parseUrlSearch(){
 function setCookie(){
     // check referrer
     var referer = document.referrer;
-    document.cookie = 'R = ' + referer ;
+    if (referer!==''){
+        document.cookie = 'R = ' + referer ;
+    }
+    
     // check ccode
+    // var para = location.search.substring(1);
+    // var paraArr = para.split('&');
+    // if (paraArr.length>0){
+    //     document.cookie = 'ccode = ' + paraArr[0] ;
+    // }
     var para = location.search.substring(1);
-    var paraArr = para.split('&');
-    if (paraArr.length>0){
+    var pattern = /ccode/g;
+    if(pattern.test(para)){
         document.cookie = 'ccode = ' + paraArr[0] ;
     }
 }
