@@ -7,7 +7,7 @@ $red: #9E2F50;
 
 @import "o-colors/main";
 @import "o-grid/main";
-@import "grid.scss";
+
 * {
 	margin:0;
 	padding:0;
@@ -301,8 +301,8 @@ $n: 4;
         margin-left: -20px;
       }
       #pay-ali,#pay-wxpay{
-        width:50px;
-        height:10px;
+        width:45px;
+        height:9px;
       }
       img{
         margin: 0 5px;
@@ -605,7 +605,7 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
 }
 .section-header {
     background-color: #fcd6af;
-    height: 198px;
+    height: 100px;
     display: table;
     width: 100%;
     text-align: center;
@@ -627,30 +627,56 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
     margin: 0;
     line-height: 1;
 }
+
+.o-tab_content{
+  // width: 80%;
+  // margin:0 auto;
+}
+.toggle{
+  // background-color: #fff1e5;
+}
 .o-expander {
     background: #fdf8f2;
     border-bottom: 1px solid #cec6b9;
+    // height: 80px;
+    margin: 10px 0px;
 }
 
-.o-expander__toggle i {
-    float: right;
-    width: 28px;
-    height: 28px;
-    -webkit-animation: arrowRotateDown 0.25s ease-in;
-    animation: arrowRotateDown 0.25s ease-in;
-    right: 10px;
-    top: 15px;
-    position: absolute;
-    padding: 0;
-    background-position: center center!important;
+@keyframes arrowRotateDown
+{
+  from {transform:rotate(0deg);}
+  to {transform:rotate(180deg);}
 }
-.o-expander__toggle i {
 
-    background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-down?source=o-icons&tint=%23000000,%23000000&format=svg);
-    // background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-down?source=o-icons&tint=%23000000,%23000000&format=png&width=15) \9;
-    width: 15px;
-    height: 15px;
-    display: inline-block;
+@-webkit-keyframes arrowRotateDown {
+    0% {
+      transform:rotate(0deg);
+    }
+    100% {
+      transform:rotate(180deg);
+    }
+}
+@keyframes arrowRotateUp
+{
+  from {transform:rotate(180deg);}
+  to {transform:rotate(0deg);}
+}
+
+@-webkit-keyframes arrowRotateUp {
+    0% {
+      transform:rotate(180deg);
+    }
+    100% {
+      transform:rotate(0deg);
+    }
+}
+
+.o-expander__toggle i{
+   float: right;
+   width: 28px;
+   height: 28px;
+   background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-down?source=o-icons&tint=%23000000,%23000000&format=svg);
+  //  display: inline-block;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 50%;
@@ -658,4 +684,48 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
     vertical-align: baseline;
     padding: 0 3px;
     vertical-align: middle;
+   
+    // right: 10px;
+    // top: 15px;
+    // position: absolute;
+    // padding: 0;
+    // background-position: center center!important;
+}
+// .o-expander__toggle[aria-expanded="false"] i {
+//     -webkit-animation: arrowRotateDown 0.25s 1 ease-in;
+//     animation: arrowRotateDown 0.25s  1 ease-in;
+// }
+// .o-expander__toggle[aria-expanded="true"] i {
+//     -webkit-animation: arrowRotateUp 0.25s ease-out;
+//     animation: arrowRotateUp 0.25s ease-out;
+// }
+// .o-expander__toggle i:hover {
+//     -webkit-animation: arrowRotateDown 0.25s 1 ease-in;
+//     animation: arrowRotateDown 0.25s  1 ease-in;
+// }
+// .o-expander__toggle i {
+    // background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-down?source=o-icons&tint=%23000000,%23000000&format=svg);
+    // background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-down?source=o-icons&tint=%23000000,%23000000&format=png&width=15) \9;
+    // width: 15px;
+    // height: 15px;
+    // display: inline-block;
+    // background-repeat: no-repeat;
+    // background-size: contain;
+    // background-position: 50%;
+    // background-color: transparent;
+    // vertical-align: baseline;
+    // padding: 0 3px;
+    // vertical-align: middle;
+// }
+.o-expander__content {
+    padding: 0;
+    background: #fff1e5;
+    overflow: hidden;
+    display: block!important;
+}
+.o-section{
+  padding:0 20px;
+  .o-expander{
+    padding:0 20px;
+  }
 }
