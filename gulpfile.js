@@ -192,6 +192,7 @@ gulp.task('serve', gulp.parallel('build-page', 'styles', 'scripts', () => {
     server: {
       baseDir: ['.tmp'],
       index: 'subscription.html',
+      directory: true,
       routes: {
         '/bower_components': 'bower_components'
       }

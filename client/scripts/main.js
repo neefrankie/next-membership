@@ -1,6 +1,33 @@
 /*jshint esversion: 6 */
-// Mark:判断是什么浏览器和什么设备，仅仅微信提醒用safari打开，其它都不用
 
+const GetCookie = (name) => {
+    var start = document.cookie.indexOf(name+'='),
+        len = start+name.length+1,
+        end = document.cookie.indexOf(';',len);
+    if ((!start) && (name !== document.cookie.substring(0,name.length))) {return null;}
+    if (start === -1) {return null;}
+    if (end === -1) {end = document.cookie.length; }
+    return decodeURIComponent(document.cookie.substring(len,end));
+};
+// const SetCookie = (name, value , sec , path , domain) => {
+//     var argv = SetCookie.arguments,
+//         argc = SetCookie.arguments.length,
+//         expires = new Date(),
+//         secure = (argc > 5) ? argv[5] : false;
+//     path = (argc > 3) ? argv[3] : null;
+//     domain = (argc > 4) ? argv[4] : null;
+//    if(sec === null || sec === '') {sec = 600 * (24 * 60 * 60 * 1000);}
+//     else {sec = 1000*sec;}
+//     expires.setTime (expires.getTime() + sec);
+//     document.cookie = name + '=' + escape (value) +((expires === null) ? '' : ('; expires=' + expires.toGMTString())) +((path === null) ? '/' : ('; path=' + path)) +((domain === null) ? '' : ('; domain=' + domain)) +((secure === true) ? '; secure' : '');  
+// };
+
+const DeleteCookie = (name) => {
+    var exp = new Date(),cval = GetCookie (name);
+    exp.setTime (exp.getTime() - 1);
+    document.cookie = name + '=' + cval + '; expires=' + exp.toGMTString();
+};
+// Mark:判断是什么浏览器和什么设备，仅仅微信提醒用safari打开，其它都不用
 function isWeiXin() {
     var ua = window.navigator.userAgent.toLowerCase();
     if (/micromessenger/.test(ua)) {
@@ -9,9 +36,18 @@ function isWeiXin() {
         return false;
     }
 }
-var hint = document.getElementById('hint');
+
+
+let hint = document.getElementById('hint');
+let hintWord = document.getElementById('hint-word');
 
 if (isWeiXin()){
+    var uaString = navigator.userAgent || navigator.vendor || '';
+    if(/Android/i.test(uaString)){
+        hintWord.innerHTML = '请点击右上角，使用手机浏览器打开';
+    }else{
+        hintWord.innerHTML = '请点击右上角，使用Safari打开';
+    }
     hint.style.display = "block";
 }else{
     hint.style.display = "none";
@@ -99,31 +135,33 @@ var toPayAction = function(event){
 var closePayment = function(event){
     paymentPage.innerHTML = '';
 };
-
+// standard=0（非会员，默认premium=0）
+// standard=1（已经是标准会员，默认premium=0）
+// premium=1（已经是高端会员，默认standard=1）
 function updateUI(){
     var premiumBtn = document.getElementById('premium-btn');
     var standardBtn = document.getElementById('standard-btn');
     var paraArr = parseUrlSearch();
     if (isWeiXin()){
-        EventObject.addHandler(premiumBtn,"click",function(){return false;});
         EventObject.addHandler(standardBtn,"click",function(){return false;});
+        EventObject.addHandler(premiumBtn,"click",function(){return false;});
     }else{
-        if (paraArr.includes('premium=1')&&paraArr.includes('standard=0')){
+        if (paraArr.includes('premium=0')&&paraArr.includes('standard=1')){
             console.log(paraArr);
-            premiumBtn.innerText = '已订阅';
-            standardBtn.innerText = '现在升级';
-            EventObject.addHandler(premiumBtn,"click",function(){return false;});
-            EventObject.addHandler(standardBtn,"click",openPayment);
-        }else if (paraArr.includes('standard=1')){
-            premiumBtn.innerText = '已订阅';
             standardBtn.innerText = '已订阅';
-            EventObject.addHandler(premiumBtn,"click",function(){return false;});
+            premiumBtn.innerText = '现在升级';
             EventObject.addHandler(standardBtn,"click",function(){return false;});
-        }else{
-            premiumBtn.innerText = '立即订阅';
-            standardBtn.innerText = '立即订阅';
             EventObject.addHandler(premiumBtn,"click",openPayment);
+        }else if (paraArr.includes('standard=1')&&paraArr.includes('premium=1')){
+            standardBtn.innerText = '已订阅';
+            premiumBtn.innerText = '已订阅';
+            EventObject.addHandler(standardBtn,"click",function(){return false;});
+            EventObject.addHandler(premiumBtn,"click",function(){return false;});
+        }else{  
+            standardBtn.innerText = '立即订阅';
+            premiumBtn.innerText = '立即订阅';   
             EventObject.addHandler(standardBtn,"click",openPayment);
+            EventObject.addHandler(premiumBtn,"click",openPayment);
         }
     }
 
@@ -137,24 +175,41 @@ function parseUrlSearch(){
 }
 
 
-function setCookie(){
-    // check referrer
-    var referer = document.referrer;
+
+
+
+const postUE = () => {
+    let cookieVal = {
+        uCookieVal : GetCookie('U'),
+        eCookieVal : GetCookie('E')
+    }
+    let xhrpw = new XMLHttpRequest();
+    xhrpw.open('post','/index.php/jsapi/paywall');
+    xhrpw.onreadystatechange = function() {
+        if (xhrpw.readyState==4 && xhrpw.status==200){
+            var data = xhrpw.responseText;
+            // var dataObj = JSON.parse(data); 
+        } else {
+            console.log('fail to post');
+        }
+    };
+    xhrpw.send(cookieVal);
+}
+
+const setCookieVal = () => {
+    // Mark:check referrer
+    let referer = document.referrer;
     if (referer!==''){
         document.cookie = 'R = ' + referer ;
+        // SetCookie('R', referer , false , null , null)
     }
-    
-    // check ccode
-    // var para = location.search.substring(1);
-    // var paraArr = para.split('&');
-    // if (paraArr.length>0){
-    //     document.cookie = 'ccode = ' + paraArr[0] ;
-    // }
+    // Mark:check ccode
     var para = location.search.substring(1);
     var pattern = /ccode/g;
     if(pattern.test(para)){
         document.cookie = 'ccode = ' + paraArr[0] ;
+        // SetCookie('ccode', paraArr[0] , false , null , null)
     }
-}
-setCookie();
-
+};
+setCookieVal();
+postUE();

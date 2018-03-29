@@ -1,12 +1,11 @@
 {
   "name": "next-membership",
   "description": "subscription",
-  "main": "index.js",
   "authors": [
     "huiyun.he"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/neefrankie/next-membership",
+  "homepage": "https://github.com/sunhannie/next-membership",
   "private": true,
   "ignore": [
     "**/.*",
@@ -16,8 +15,8 @@
     "tests"
   ],
   "dependencies": {
-    "o-grid": "^4.3.1",
-    "o-colors": "^3.6.0",
-    "jquery": "~2.1.1"
+    "o-grid": "^4.3.8",
+    "o-colors": "^3.6.0"
+
   }
 }
