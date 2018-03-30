@@ -61,10 +61,12 @@
         </ul> 
         <div class="o-member__subscribe">
           
-          <button id="openSub" class="openSub">立即订阅</button>
-          <p> CN¥198.00/年*</p>
-          
-        </div>         
+          <button  class="openSub" id="standard-btn">立即订阅</button>
+          <p> CN¥198.00/年</p>
+          <!-- <button  class="openSub" id="standard-btn"><%$standardButton%></button>
+          <p><%$standardPrice%></p> -->
+          <input type="text" value="¥198.00/年" hidden id="regular-member">
+        </div>          
       </div>
       
       <div class="o-member o-member__standard" >
@@ -82,10 +84,11 @@
           
         </ul> 
         <div class="o-member__subscribe">
-          
-          <button id="openSub" class="openSub">立即订阅</button>
+          <button class="openSub" id="premium-btn">立即订阅</button>
           <p>CN¥1,998.00/年</p>
-          <!--<input type="button" id="openSub" class="openSub"value="立即订阅"/>-->
+         <!--  <button class="openSub" id="premium-btn"><%$premiumButton%></button>
+          <p><%$premiumPrice%></p> -->
+          <input type="text" value="¥1,998.00/年" hidden>
         </div>         
       </div>
       

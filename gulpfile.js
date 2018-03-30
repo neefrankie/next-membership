@@ -236,3 +236,10 @@ gulp.task('copy', () => {
   return gulp.src(['.tmp/subscription.html'])
     .pipe(gulp.dest(`../${dest}`))
 });
+
+gulp.task('copy1', () => {
+  const dest = 'ftac/codeigniter/application/views';
+  return gulp.src(['.tmp/subscription.html'])
+    .pipe(gulp.dest(`../${dest}`))
+});
+

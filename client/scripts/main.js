@@ -76,12 +76,6 @@ var EventObject = {
 };
 
 const setCookieVal = () => {
-    // Mark:check referrer
-    let referer = document.referrer;
-    if (referer!==''){
-        document.cookie = 'R = ' + referer ;
-        // SetCookie('R', referer , false , null , null)
-    }
     // Mark:check ccode
     var para = location.search.substring(1);
     var pattern = /ccode/g;
@@ -133,12 +127,12 @@ var toPayAction = function(event){
     //满足2个条件：1.支付方式  2.会员类型
     if (memberType==='高端会员' && payWay==='ali') {
         window.open('http://www.ftacademy.cn/index.php/pay?offerId=8d5e7e72f12067991186cdf3cb7d5d9d','_self');
-    }else if (memberType==='标准会员' && payWay==='ali','_self') {
-        window.open('http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b');
+    }else if (memberType==='标准会员' && payWay==='ali') {
+        window.open('http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b','_self');
     }else if (memberType==='高端会员' && payWay==='wxpay') {
-        window.open('#');
+        window.open('#','_self');
     }else if (memberType==='标准会员' && payWay==='wxpay') {
-        window.open('#');
+        window.open('#','_self');
     }else{
 
     }
@@ -168,7 +162,7 @@ const postUE = () => {
             dataObj = JSON.parse(data);
             updateUI(dataObj);
         } else {
-            // console.log('fail to post');
+            
         }
     };
     xhrpw.send(JSON.stringify(cookieVal));
@@ -177,11 +171,9 @@ const postUE = () => {
  if (window.location.hostname === 'localhost' || window.location.hostname.indexOf('192.168') === 0 || window.location.hostname.indexOf('10.113') === 0 || window.location.hostname.indexOf('127.0') === 0) {
         var paraArr = parseUrlSearch();//(2) ["premium=0", "standard=1"]
         for(let j=0;j<paraArr.length;j++){
-            // paraArr[j].split('=');
+            var arr = paraArr[j].split('=');
+            dataObj[arr[0]]=Number(arr[1]);
         }
-        var dataObj1=JSON.stringify(paraArr); //["premium=0","standard=1"]
-        dataObj = JSON.parse(dataObj1); //(2) ["premium=0", "standard=1"]
-        console.log(paraArr);  
         updateUI(dataObj);
 }else{
     postUE();
@@ -189,10 +181,10 @@ const postUE = () => {
 
 
 function updateUI(dataObj){
-    
+     
     var premiumBtn = document.getElementById('premium-btn');
     var standardBtn = document.getElementById('standard-btn');
-    var paraArr = parseUrlSearch();
+    // var paraArr = parseUrlSearch();
     
     if (isWeiXin()){
         EventObject.addHandler(standardBtn,"click",function(){return false;});
