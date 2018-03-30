@@ -126,6 +126,7 @@ $n: 4;
 }
 .o-member-container{
     width:70%;
+
     .o-member{
       width:40%;
       height:400px;
@@ -355,6 +356,8 @@ $n: 4;
   margin:0 auto;
   .o-member__heading{
       padding: 10px 0;
+      font-size: 20px;
+      font-weight: bold;
       p{
         margin: 15px 0;
       }
@@ -362,6 +365,7 @@ $n: 4;
         color:$text-background; 
       }
   }
+
   .o-member{
 
     box-sizing: border-box;

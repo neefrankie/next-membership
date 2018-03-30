@@ -104,6 +104,11 @@ var openPayment = function(event){
     paymentShadow = document.getElementById('payment-shadow');
     EventObject.addHandler(paymentShadow,"click",closePayment);
     EventObject.addHandler(toPay,"click",toPayAction);
+    var attribute = this.getAttribute('id');
+    console.log(attribute);
+
+    ga('send', 'event','subscription click',attribute);
+ 
 };
 
 
@@ -140,7 +145,7 @@ var closePayment = function(event){
     paymentPage.innerHTML = '';
 };
 let dataObj = {};
-let isReqSuccess = false;
+// let isReqSuccess = false;
 const postUE = () => {
     let cookieVal = {
         uCookieVal : GetCookie('U'),
@@ -151,7 +156,7 @@ const postUE = () => {
     xhrpw.open('post','/index.php/jsapi/paywall');
     xhrpw.onreadystatechange = function() {
         if (xhrpw.readyState==4 && xhrpw.status==200){
-            isReqSuccess = true;
+            // isReqSuccess = true;
             var data = xhrpw.responseText;
             dataObj = JSON.parse(data);
             updateUI(dataObj);
@@ -219,43 +224,49 @@ function parseUrlSearch(){
     postUE();
 }
 
-// function fn2 () {
-//   return new Promise((resolve, reject) => {
-//     if (!isReqSuccess) {
-//       postUE();
-//       resolve(isReqSuccess);
-//     }else{
-//       reject(isReqSuccess);
-//     }
-//     console.log('Function 2');
-    
-//   });
-// }
 
-// function fn3 () {
-//   if (isReqSuccess){
-//     console.log('success');
-//   }else{
-//     setTimeout(function( ) {
-//       postUE();
-//       console.log('fail request');
-//     }, 5000); 
-//     console.log('Function 3');
-//   }
 
-// }
 
-// fn2().then((isReqSuccess) => { fn3(); });
-
-// function startFn(){
+// function postUEPro(isReqSuccess){
 //     return new Promise((resolve, reject) => {
-//        var isReqSuccess = false;
-//        postUE();
-//        resolve(isReqSuccess);
-//     }
+        
+//         let cookieVal = {
+//             uCookieVal : GetCookie('U'),
+//             eCookieVal : GetCookie('E')
+//         }
+        
+//         let xhrpw = new XMLHttpRequest();
+//         xhrpw.open('post','/index.php/jsapi/paywall');
+//         xhrpw.onreadystatechange = function() {
+//             if (xhrpw.status==200){
+//                 isReqSuccess = true;
+//                 resolve(isReqSuccess);
+//                 var data = xhrpw.responseText;
+//                 dataObj = JSON.parse(data);
+//                 updateUI(dataObj);
+//                 console.log('success request');
+//             } else {
+//                 console.log('fail request');
+//             }
+//         };
+//         xhrpw.send(JSON.stringify(cookieVal));
+
+//     });
 // }
 
-// startFn();
+
+// postUEPro(false).then(function(isReqSuccess){
+//     if (isReqSuccess){
+//         console.log('success');
+//     }else{
+//         console.log('fail');
+//         postUEPro(isReqSuccess);
+//     }
+    
+// })
+
+
+
 /**
  * 问题区域
  */
