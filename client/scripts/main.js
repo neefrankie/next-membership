@@ -106,14 +106,7 @@ var openPayment = function(event){
     EventObject.addHandler(toPay,"click",toPayAction);
 };
 
-// for (let i = 0; i < aLi.length; i++) {   
-//     var para = location.search;
-//     if(para){
-//         EventObject.addHandler(aLi[i],"click",function(){return false;});
-//     } else{
-//         EventObject.addHandler(aLi[i],"click",openPayment);
-//     }
-// }
+
 var payWay = '';
 var pays = document.getElementsByName('pay');
 
