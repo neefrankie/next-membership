@@ -140,7 +140,7 @@ var closePayment = function(event){
     paymentPage.innerHTML = '';
 };
 let dataObj = {};
-
+let isReqSuccess = false;
 const postUE = () => {
     let cookieVal = {
         uCookieVal : GetCookie('U'),
@@ -151,6 +151,7 @@ const postUE = () => {
     xhrpw.open('post','/index.php/jsapi/paywall');
     xhrpw.onreadystatechange = function() {
         if (xhrpw.readyState==4 && xhrpw.status==200){
+            isReqSuccess = true;
             var data = xhrpw.responseText;
             dataObj = JSON.parse(data);
             updateUI(dataObj);
@@ -161,22 +162,14 @@ const postUE = () => {
     xhrpw.send(JSON.stringify(cookieVal));
 }
 
- if (window.location.hostname === 'localhost' || window.location.hostname.indexOf('192.168') === 0 || window.location.hostname.indexOf('10.113') === 0 || window.location.hostname.indexOf('127.0') === 0) {
-        var paraArr = parseUrlSearch();//(2) ["premium=0", "standard=1"]
-        for(let j=0;j<paraArr.length;j++){
-            var arr = paraArr[j].split('=');
-            dataObj[arr[0]]=Number(arr[1]);
-        }
-        updateUI(dataObj);
-}else{
-    postUE();
-}
 
+
+
+var premiumBtn = document.getElementById('premium-btn');
+var standardBtn = document.getElementById('standard-btn');
 
 function updateUI(dataObj){
      
-    var premiumBtn = document.getElementById('premium-btn');
-    var standardBtn = document.getElementById('standard-btn');
     // var paraArr = parseUrlSearch();
     
     if (isWeiXin()){
@@ -215,13 +208,54 @@ function parseUrlSearch(){
     return paraArr;
 }
 
+ if (window.location.hostname === 'localhost' || window.location.hostname.indexOf('192.168') === 0 || window.location.hostname.indexOf('10.113') === 0 || window.location.hostname.indexOf('127.0') === 0) {
+        var paraArr = parseUrlSearch();//(2) ["premium=0", "standard=1"]
+        for(let j=0;j<paraArr.length;j++){
+            var arr = paraArr[j].split('=');
+            dataObj[arr[0]]=Number(arr[1]);
+        }
+        updateUI(dataObj);
+}else{
+    postUE();
+}
 
+// function fn2 () {
+//   return new Promise((resolve, reject) => {
+//     if (!isReqSuccess) {
+//       postUE();
+//       resolve(isReqSuccess);
+//     }else{
+//       reject(isReqSuccess);
+//     }
+//     console.log('Function 2');
+    
+//   });
+// }
 
+// function fn3 () {
+//   if (isReqSuccess){
+//     console.log('success');
+//   }else{
+//     setTimeout(function( ) {
+//       postUE();
+//       console.log('fail request');
+//     }, 5000); 
+//     console.log('Function 3');
+//   }
 
+// }
 
+// fn2().then((isReqSuccess) => { fn3(); });
 
+// function startFn(){
+//     return new Promise((resolve, reject) => {
+//        var isReqSuccess = false;
+//        postUE();
+//        resolve(isReqSuccess);
+//     }
+// }
 
-
+// startFn();
 /**
  * 问题区域
  */
