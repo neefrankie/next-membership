@@ -64,6 +64,23 @@
  {% endfor %}
  </div>
 
+  <div class="tabContent" id= "tabContent3">
+  {% for tabContent in tabContents3 %}
+  <div class="o-expander" id="o-expander">
+      <div class="toggle" aria-expanded="false">
+          <a class="o-expander__toggle" aria-controls="o-expander__one">{{tabContent.question}}<i></i>
+          </a>
+      </div>
+
+      <div class="o-expander__content"  aria-hidden="true">
+          <div class="o-content">
+              <p class="o-content_body">{{tabContent.answer}}</p>
+          </div>
+      </div>
+    </div>
+ {% endfor %}
+ </div>
+ 
   {% endblock %}
 
   </div>  
