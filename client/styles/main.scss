@@ -7,7 +7,7 @@ $red: #9E2F50;
 
 @import "o-colors/main";
 @import "o-grid/main";
-
+// @import "grid.scss";
 * {
 	margin:0;
 	padding:0;
@@ -597,16 +597,70 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
 }
 
 // 问题处样式
-.o-tabs {
-    border-bottom: 0!important;
+
+@media (max-width: 690px){
+  .o-tabs{
+    display: none;
+  }
+  .o-tab-forms{
+    display: block;
+    height: 60px;
+    width: 100%;
+    background-color: white;
+    select {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: 400;
+      border: 1px solid #cec6b9;
+    }
+    option {
+      font-weight: normal;
+      display: block;
+      white-space: pre;
+      min-height: 1.2em;
+      padding: 0px 2px 1px;
+    }
+  }
+
 }
-.o-tabs li {
-    width: 33.333%;
-    border-color: #cec6b9!important;
-    border-bottom: 0 solid transparent!important;
-    border-bottom-width: 0px!important;
-    border-top: 0!important;
-    // position: relative;
+@media (min-width: 690px){
+  .o-tabs{
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 0!important;
+    display: flex;
+    justify-content: space-between;
+  }
+  .o-tab-forms{
+    display: none;
+  }
+}
+.o-tabs-container{
+  padding: 0 20px;
+  background-color: $text-highlight;
+  .o-tabs{
+
+    li{
+      width: 33.333%;
+      border-color: #cec6b9!important;
+      border-width: 1px;
+      border: solid 1px red;
+      text-align: center;
+      // border-bottom: 0 solid transparent!important;
+      // border-bottom-width: 0px!important;
+      // border-top: 0!important;
+    }
+  }
+  // .o-tab-forms{
+  //   display: none;
+  // }
+}
+.tabContent{
+  display: none;
+}
+#tabContent1{
+  display: block;
 }
 .section-header {
     background-color: #fcd6af;
@@ -638,6 +692,8 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
   // margin:0 auto;
 }
 .toggle{
+    height: 30px;
+    line-height: 30px;
   // background-color: #fff1e5;
 }
 .o-expander {
@@ -696,18 +752,18 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
     // padding: 0;
     // background-position: center center!important;
 }
-// .o-expander__toggle[aria-expanded="false"] i {
+.o-expander__content{
+  max-height:0px;
+}
+// .o-expander__content[aria-expanded="false"] i {
 //     -webkit-animation: arrowRotateDown 0.25s 1 ease-in;
 //     animation: arrowRotateDown 0.25s  1 ease-in;
 // }
-// .o-expander__toggle[aria-expanded="true"] i {
+// .o-expander__content[aria-expanded="true"] i {
 //     -webkit-animation: arrowRotateUp 0.25s ease-out;
 //     animation: arrowRotateUp 0.25s ease-out;
 // }
-// .o-expander__toggle i:hover {
-//     -webkit-animation: arrowRotateDown 0.25s 1 ease-in;
-//     animation: arrowRotateDown 0.25s  1 ease-in;
-// }
+
 // .o-expander__toggle i {
     // background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-down?source=o-icons&tint=%23000000,%23000000&format=svg);
     // background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-down?source=o-icons&tint=%23000000,%23000000&format=png&width=15) \9;
@@ -729,7 +785,7 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
     display: block!important;
 }
 .o-section{
-  padding:0 20px;
+  padding:0 0px;
   .o-expander{
     padding:0 20px;
   }

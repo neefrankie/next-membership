@@ -168,7 +168,7 @@ const postUE = () => {
                 setTimeout(function() {
                     postUE(); 
                 }, 500); 
-                console.log('fali'+i);
+                // console.log('fali'+i);
             }
         };
         xhrpw.send(JSON.stringify(cookieVal));
@@ -224,7 +224,7 @@ function parseUrlSearch(){
             var arr = paraArr[j].split('=');
             dataObj[arr[0]]=Number(arr[1]);
         }
-        postUE();
+        // postUE();
         updateUI(dataObj);
 }else{
     postUE();
@@ -243,140 +243,83 @@ function isEmptyObj(dataObj){
 }
 
 
-
-// function postUEPro(isReqSuccess){
-//     return new Promise((resolve, reject) => {
-        
-//         let cookieVal = {
-//             uCookieVal : GetCookie('U'),
-//             eCookieVal : GetCookie('E')
-//         }
-        
-//         let xhrpw = new XMLHttpRequest();
-//         xhrpw.open('post','/index.php/jsapi/paywall');
-//         xhrpw.onreadystatechange = function() {
-//             if (xhrpw.status==200){
-//                 isReqSuccess = true;
-//                 resolve(isReqSuccess);
-//                 var data = xhrpw.responseText;
-//                 dataObj = JSON.parse(data);
-//                 updateUI(dataObj);
-//                 console.log('success request');
-//             } else {
-//                 console.log('fail request');
-//             }
-//         };
-//         xhrpw.send(JSON.stringify(cookieVal));
-
-//     });
-// }
-
-
-// postUEPro(false).then(function(isReqSuccess){
-//     if (isReqSuccess){
-//         console.log('success');
-//     }else{
-//         console.log('fail');
-//         postUEPro(isReqSuccess);
-//     }
-    
-// })
-
-
-
 /**
  * 问题区域
+ * 思路：
+ * 1.从json中读取数据，当点击更新当前问题，显示当前问题，目前需要解决是需要获取当前元素
+ * 2.tab就直接放在一个div中，当点击哪个div显示里面的内容，这个容易
  */
 
-// var expanders = document.querySelectorAll('.o-expander');
-// for (let i = 0; i < expanders.length; i++) { 
-//     let ariaExpanded = expanders[i].getAttribute('aria-expanded');
-//     let ariaHidden = expanders[i].getAttribute('aria-hidden');
-//     var firstChild = expanders[i].children[0];
+let expanders = document.querySelectorAll('.o-expander');
+
+let expandToggle = function(event){
+        let ariaExpanded= this.getAttribute('aria-expanded');
+        let ii = this.children[0].children[0];
+
+        let nextSbl = this.parentNode.children[1];
+        let ariaHidden = nextSbl.getAttribute('aria-hidden');
+        // console.log(ii); 
+        if (ii){
+            if (ariaExpanded == 'false'){
+                this.setAttribute('aria-expanded','true'); 
+                ii.style.animation = "arrowRotateDown 0.25s 1 forwards ease-in";
+            }else{
+                this.setAttribute('aria-expanded','false');
+                ii.style.animation = "arrowRotateUp 0.25s forwards ease-out";
+            }
+        }
+
+        // 为什么不能用nextSibling，是不支持么
+        if (nextSbl){
+            if (ariaHidden == 'true'){
+                console.log('bbb'+ii); 
+                // nextSbl.style.color = "#ff0000";
+                nextSbl.setAttribute('aria-hidden','false'); 
+                nextSbl.style.maxHeight = '615px';
+                nextSbl.style.transition = "max-height 0.25s ease";
+                // nextSbl.style.display = 'none';
+            }else{
+                console.log(nextSbl);
+                // nextSbl.style.color = "blue";
+                nextSbl.setAttribute('aria-hidden','true');
+                nextSbl.style.maxHeight = '0px';
+                nextSbl.style.transition = "max-height 0.25s ease";
+                // nextSbl.style.display = 'block';
+
+            }
+        }
+
+
+};
+for (let i = 0,len=expanders.length; i < len; i++) { 
+    var firstChild = expanders[i].children[0];
+    // 不点击也会触发运行expandToggle函数，这是为什么?因为不能写成expandToggle（）
+    EventObject.addHandler(firstChild,"click", expandToggle);  
+}
+
+// Mark:点击切换内容
+let tabContentLabel = document.querySelectorAll('.tabContent-label');
+var tabContentContainer = document.getElementById('tabContentContainer');
+let tabSwitch = function(event){
+    let id = this.getAttribute('id').replace('-label','');
+    var tabContentLabel = document.getElementById(id);
     
-//     EventObject.addHandler(firstChild,"click", expandToggle(ariaExpanded,ariaHidden));
+    let idd = ''
+    for(let i = 1; i <= 3; i++){
+        idd = 'tabContent'+i;
+        if(id==idd){
+            document.getElementById(idd).style.display = 'block';
+        }else{
+            document.getElementById(idd).style.display = 'none';
+        }
 
-    
-// }
+    }
 
-// function expandToggle(ariaExpanded,ariaHidden){ 
-    
-    // let bbb = this.children[0].children[0];
-            // let bb = this.children[0].children[0];
-        // console.log(bb); 
-        // if (ariaExpanded==='false'){
-        //     this.parentNode.setAttribute('aria-expanded','true'); 
-        //     bb.style.animation = "arrowRotateDown 0.25s 1 forwards ease-in";
-        // }else{
-        //     this.parentNode.setAttribute('aria-expanded','false');
-        //     bb.style.animation = "arrowRotateUp 0.25s forwards ease-out";
-        // }
+};
 
-        // let nextSbl = this.nextSibling;
-        // if (ariaHidden==='false'){
-        //     console.log('ff'+aa);
-        //     nextSbl.setAttribute('aria-hidden','true'); 
-        //     nextSbl.style.maxHeight = '615px';
-        //     nextSbl.style.transition = "max-height 0.25s ease";
-        // }else{
-        //     nextSbl.setAttribute('aria-hidden','false');
-        //     nextSbl.style.maxHeight = '0px';
-        //     nextSbl.style.transition = "max-height 0.25s ease";
-
-        // }
-
-// }
-
-// var toggleTags = document.querySelectorAll('.toggle');
-// var expanderContents = document.querySelectorAll('.o-expander__content');
-// for (let i = 0; i < toggleTags.length; i++) {   
-//     EventObject.addHandler(toggleTags[i],"click",expanderToggle);
-// }
-// function expanderToggle(){  
-//     let aa = this.children[0].getAttribute('aria-expanded');
-//     console.log('expanderToggle'+aa);
-//     let bb = this.children[0].children[0].children[0];
-//     // console.log('bb:'+bb.innerHTML);
-//     if (aa==='false'){
-//         console.log('ff'+aa);
-//         this.children[0].setAttribute('aria-expanded','true'); 
-//         bb.style.animation = "arrowRotateDown 0.25s 1 forwards ease-in";
-//     }else{
-//         this.children[0].setAttribute('aria-expanded','false');
-//         bb.style.animation = "arrowRotateUp 0.25s forwards ease-out";
-//     }
-// }
-
-
-// for (let i = 0; i < expanderContents.length; i++) {   
-//     EventObject.addHandler(expanderContents[i],"click",expanderContent);
-// }
-// function expanderContent(){  
-//     let aa = this.getAttribute('aria-hidden');
-//     console.log('expanderContent:--'+aa);
-//     if (aa==='false'){
-//         console.log('ff'+aa);
-//         this.setAttribute('aria-hidden','true'); 
-//         this.style.maxHeight = '615px';
-//         this.style.transition = "max-height 0.25s ease";
-//     }else{
-//         this.setAttribute('aria-hidden','false');
-//         this.style.maxHeight = '0px';
-//         this.style.transition = "max-height 0.25s ease";
-
-//     }
-// }
+for (let i = 0; i <= 2; i++) { 
+    EventObject.addHandler(tabContentLabel[i],"click",tabSwitch);  
+}
 
 
 
-//     max-height: 615px;
-//     -webkit-transition: max-height 0.25s ease,border-top 0.10s ease;
-//     transition: max-height 0.25s ease,border-top 0.10s 
-//    border-top: 1px solid #cec6b9;
-
-//    transition: property duration timing-function delay;
-
-//      max-height: 0;
-//     -webkit-transition: max-height 0.25s ease,border-top 0.75s ease;
-//     transition: max-height 0.25s ease,border-top 0.75s ease;
-//     border-top: 1px solid transparent;
