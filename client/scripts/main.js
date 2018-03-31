@@ -145,29 +145,36 @@ var closePayment = function(event){
     paymentPage.innerHTML = '';
 };
 let dataObj = {};
-// let isReqSuccess = false;
+let isReqSuccess = false;
+let i = 0;
 const postUE = () => {
-    let cookieVal = {
-        uCookieVal : GetCookie('U'),
-        eCookieVal : GetCookie('E')
-    }
-    
-    let xhrpw = new XMLHttpRequest();
-    xhrpw.open('post','/index.php/jsapi/paywall');
-    xhrpw.onreadystatechange = function() {
-        if (xhrpw.readyState==4 && xhrpw.status==200){
-            // isReqSuccess = true;
-            var data = xhrpw.responseText;
-            dataObj = JSON.parse(data);
-            updateUI(dataObj);
-        } else {
-            
+    if(!isReqSuccess && i<3){
+        let cookieVal = {
+            uCookieVal : GetCookie('U'),
+            eCookieVal : GetCookie('E')
         }
-    };
-    xhrpw.send(JSON.stringify(cookieVal));
+        let xhrpw = new XMLHttpRequest();
+        xhrpw.open('post','/index.php/jsapi/paywall');
+        xhrpw.onload = function() {
+            if (xhrpw.status==200){               
+                var data = xhrpw.responseText;
+                dataObj = JSON.parse(data);
+                isReqSuccess = true;
+                updateUI(dataObj);
+                console.log('success'+i);
+            } else {
+                isReqSuccess = false;
+                i++;
+                setTimeout(function() {
+                    postUE(); 
+                }, 500); 
+                console.log('fali'+i);
+            }
+        };
+        xhrpw.send(JSON.stringify(cookieVal));
+    }
+
 }
-
-
 
 
 var premiumBtn = document.getElementById('premium-btn');
@@ -175,8 +182,6 @@ var standardBtn = document.getElementById('standard-btn');
 
 function updateUI(dataObj){
      
-    // var paraArr = parseUrlSearch();
-    
     if (isWeiXin()){
         EventObject.addHandler(standardBtn,"click",function(){return false;});
         EventObject.addHandler(premiumBtn,"click",function(){return false;});
@@ -219,11 +224,23 @@ function parseUrlSearch(){
             var arr = paraArr[j].split('=');
             dataObj[arr[0]]=Number(arr[1]);
         }
+        postUE();
         updateUI(dataObj);
 }else{
     postUE();
+    if (isEmptyObj(dataObj)){
+        updateUI(dataObj);
+    }
 }
 
+function isEmptyObj(dataObj){
+     var arr = Object.keys(dataObj);    
+     if (arr.length > 0){
+        return false;
+     }else{
+        return true;
+     }
+}
 
 
 
