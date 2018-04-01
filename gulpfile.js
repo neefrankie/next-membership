@@ -143,6 +143,7 @@ gulp.task('styles', function styles() {
     .pipe(browserSync.stream());
 });
 
+
 gulp.task('jshint', function () {
   // return gulp.src('client/main.js')
   return gulp.src('client/scripts/**/*.js')

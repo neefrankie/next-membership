@@ -1,42 +1,8 @@
 /*jshint esversion: 6 */
 
-const GetCookie = (name) => {
-    var start = document.cookie.indexOf(name+'='),
-        len = start+name.length+1,
-        end = document.cookie.indexOf(';',len);
-    if ((!start) && (name !== document.cookie.substring(0,name.length))) {return null;}
-    if (start === -1) {return null;}
-    if (end === -1) {end = document.cookie.length; }
-    return decodeURIComponent(document.cookie.substring(len,end));
-};
-// const SetCookie = (name, value , sec , path , domain) => {
-//     var argv = SetCookie.arguments,
-//         argc = SetCookie.arguments.length,
-//         expires = new Date(),
-//         secure = (argc > 5) ? argv[5] : false;
-//     path = (argc > 3) ? argv[3] : null;
-//     domain = (argc > 4) ? argv[4] : null;
-//    if(sec === null || sec === '') {sec = 600 * (24 * 60 * 60 * 1000);}
-//     else {sec = 1000*sec;}
-//     expires.setTime (expires.getTime() + sec);
-//     document.cookie = name + '=' + escape (value) +((expires === null) ? '' : ('; expires=' + expires.toGMTString())) +((path === null) ? '/' : ('; path=' + path)) +((domain === null) ? '' : ('; domain=' + domain)) +((secure === true) ? '; secure' : '');  
-// };
+import {EventObject,GetCookie,DeleteCookie,isWeiXin,parseUrlSearch,isEmptyObj} from './subscribe_api.js';
 
-const DeleteCookie = (name) => {
-    var exp = new Date(),cval = GetCookie (name);
-    exp.setTime (exp.getTime() - 1);
-    document.cookie = name + '=' + cval + '; expires=' + exp.toGMTString();
-};
 // Mark:判断是什么浏览器和什么设备，仅仅微信提醒用safari打开，其它都不用
-function isWeiXin() {
-    var ua = window.navigator.userAgent.toLowerCase();
-    if (/micromessenger/.test(ua)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 
 let hint = document.getElementById('hint');
 let hintWord = document.getElementById('hint-word');
@@ -54,26 +20,7 @@ if (isWeiXin()){
 }
 
 
-var EventObject = {
-    addHandler:function(element,type,handler){
-        if (element.addEventListener){
-            element.addEventListener(type,handler,false);
-        }else if (element.attachEvent){
-            element.attachEvent("on"+type,handler);
-        }else{
-            element["on"+type] = handler;
-        }
-    },
-    removeHandler:function(element,type,handler){
-        if (element.removeEventListener){
-            element.removeEventListener(type,handler,false);
-        }else if (element.attachEvent){
-            element.detachEvent("on"+type,handler);
-        }else{
-            element["on"+type] = null;
-        }
-    }
-};
+
 
 const setCookieVal = () => {
     // Mark:check ccode
@@ -212,11 +159,11 @@ function updateUI(dataObj){
 }
 
 
-function parseUrlSearch(){
-    var para = location.search.substring(1);
-    var paraArr = para.split('&');
-    return paraArr;
-}
+// function parseUrlSearch(){
+//     var para = location.search.substring(1);
+//     var paraArr = para.split('&');
+//     return paraArr;
+// }
 
  if (window.location.hostname === 'localhost' || window.location.hostname.indexOf('192.168') === 0 || window.location.hostname.indexOf('10.113') === 0 || window.location.hostname.indexOf('127.0') === 0) {
         var paraArr = parseUrlSearch();//(2) ["premium=0", "standard=1"]
@@ -233,14 +180,7 @@ function parseUrlSearch(){
     }
 }
 
-function isEmptyObj(dataObj){
-     var arr = Object.keys(dataObj);    
-     if (arr.length > 0){
-        return false;
-     }else{
-        return true;
-     }
-}
+
 
 
 /**
