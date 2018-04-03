@@ -1,9 +1,9 @@
 
-@import "o-grid/main";
+// @import "o-grid/main";
 
-.o-grid-container {
-  @include oGridContainer;
-}
+// .o-grid-container {
+//   @include oGridContainer;
+// }
 
 $defaultPink: #FFF1E0;
 $borderColor: #cec6b9;
@@ -631,7 +631,7 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
     line-height: 50px;
     border-bottom: 0!important;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
   }
   .o-tab-forms{
     display: none;
@@ -647,10 +647,12 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
       border-color: #cec6b9!important;
       border-width: 1px;
       border: solid 1px red;
+      border-top: 0!important;
       text-align: center;
-      // border-bottom: 0 solid transparent!important;
-      // border-bottom-width: 0px!important;
-      // border-top: 0!important;
+    }
+    .tabContent1-label{
+      border-bottom: 0 solid transparent!important;
+      border-bottom-width: 0px!important;
     }
   }
   // .o-tab-forms{
@@ -664,13 +666,15 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
   display: block;
 }
 .section-header {
-    background-color: #fcd6af;
+    background-color: #fdf8f2;
     height: 100px;
     display: table;
     width: 100%;
     text-align: center;
     border-top: 1px solid #cec6b9;
     border-bottom: 1px solid #cec6b9;
+    width: 70%;
+    margin: 0 auto;
 }
 .section-header__text {
     display: table-cell;
@@ -687,15 +691,24 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
     margin: 0;
     line-height: 1;
 }
+.section{
+  background: #fdf8f2;
+  width: 70%;
+  margin: 0 auto;
+}
 
 .o-tab_content{
   // width: 80%;
   // margin:0 auto;
 }
 .toggle{
-    height: 30px;
-    line-height: 30px;
+    // height: 30px;
+    // line-height: 30px;
   // background-color: #fff1e5;
+    a{
+        padding: 18px 0;
+        display: block;
+    }
 }
 .o-expander {
     background: #fdf8f2;

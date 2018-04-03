@@ -242,28 +242,37 @@ for (let i = 0,len=expanders.length; i < len; i++) {
 }
 
 // Mark:点击切换内容
-let tabContentLabel = document.querySelectorAll('.tabContent-label');
-var tabContentContainer = document.getElementById('tabContentContainer');
-let tabSwitch = function(event){
-    let id = this.getAttribute('id').replace('-label','');
-    var tabContentLabel = document.getElementById(id);
-    
-    let idd = ''
-    for(let i = 1; i <= 3; i++){
-        idd = 'tabContent'+i;
-        if(id==idd){
-            document.getElementById(idd).style.display = 'block';
-        }else{
-            document.getElementById(idd).style.display = 'none';
+function clickTab(){
+    let tabContentLabel = document.querySelectorAll('.tabContent-label');
+    var tabContentContainer = document.getElementById('tabContentContainer');
+    let tabSwitch = function(event){
+        let id = this.getAttribute('id').replace('-label','');
+        var tabContentLabel = document.getElementById(id);
+        
+        
+        let idd = ''
+        // let tclId = ''
+        // let index = 0;
+        for(let i = 1; i <= 3; i++){
+            idd = 'tabContent'+i;
+            // tclId = 'tabContent'+i+'-label';
+            if(id==idd){
+                document.getElementById(idd).style.display = 'block';
+                // this.style.borderBottom = "0 solid #fdf8f2";
+            }else{
+                document.getElementById(idd).style.display = 'none';
+                // document.getElementById(tclId).style.borderBottom = "1 solid #fdf8f2";
+                console.log('borderBottom');
+            }
+
         }
 
+    };
+
+    for (let i = 0; i <= 2; i++) { 
+        EventObject.addHandler(tabContentLabel[i],"click",tabSwitch);  
     }
-
-};
-
-for (let i = 0; i <= 2; i++) { 
-    EventObject.addHandler(tabContentLabel[i],"click",tabSwitch);  
 }
 
-
+clickTab()
 

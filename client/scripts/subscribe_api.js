@@ -3,7 +3,7 @@
 // testIm();
 // testExport();
 
-import testIm from '../api/event.js';
+// import testIm from '../api/event.js';
 
 
 var EventObject = {
