@@ -1,10 +1,11 @@
 
-function testIm(){
-    console.log('test');
-}
-function testExport(){
-    console.log('test export');
-}
+// import {testIm,testExport} from '../api/event1.js';
+// testIm();
+// testExport();
+
+import testIm from '../api/event.js';
+
+
 var EventObject = {
     addHandler:function(element,type,handler){
         if (element.addEventListener){

@@ -1,6 +1,8 @@
 /*jshint esversion: 6 */
 
+
 import {EventObject,GetCookie,DeleteCookie,isWeiXin,parseUrlSearch,isEmptyObj} from './subscribe_api.js';
+
 
 // Mark:判断是什么浏览器和什么设备，仅仅微信提醒用safari打开，其它都不用
 
@@ -126,6 +128,8 @@ const postUE = () => {
 
 var premiumBtn = document.getElementById('premium-btn');
 var standardBtn = document.getElementById('standard-btn');
+var premiumPrice = document.getElementById('premium_price');
+
 
 function updateUI(dataObj){
      
