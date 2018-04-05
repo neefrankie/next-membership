@@ -1,0 +1,133 @@
+.header-container {
+    background-color: #333;
+    color: #fff;
+    height: 57px
+}
+
+.header-inner {
+    height: 57px;
+    padding: 0 30px;
+    position: relative;
+    max-width: 1260px;
+    margin: auto
+}
+
+.header-inner a {
+    color: #fff
+}
+
+.header-side {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    margin: auto;
+    font-size: 14px
+}
+
+.header-side a {
+    color: #fff;
+    height: 100%;
+    line-height: 57px;
+    cursor: pointer
+}
+
+.header-side a:active,
+.header-side a:hover {
+    text-decoration: underline
+}
+
+.header-left {
+    left: 30px;
+    width: 120px
+}
+
+.header-right {
+    right: 30px;
+    text-align: right
+}
+
+.header-right a {
+    display: inline-block;
+    padding: 0 5px;
+    position: relative;
+    border-width: 0
+}
+
+.header-right a.more:before {
+    content: " ";
+    position: absolute;
+    width: 2px;
+    height: 14px;
+    top: 50%;
+    left: -3px;
+    margin-top: -7px;
+    background-color: #fdf8f2
+}
+
+.header-right a.last {
+    padding-right: 0
+}
+
+
+@media only screen and (max-width:490px) {
+    .header-side {
+    display: none
+    }
+    .header-container {
+        height: 44px
+    }
+    .header-inner {
+    position: fixed;
+    top: 0;
+    height: 44px;
+    z-index: 999999999;
+    width: 100%;
+    background-color: #333
+    }
+
+}
+
+
+
+// @media (max-width:61.24em) {
+//     .header-container {
+//     display: none
+//     }
+// }
+.header-title {
+    display: block;
+    text-align: center;
+    margin: auto;
+    height: 57px;
+    line-height: 57px;
+    font-size: 32px;
+    width: 336px;
+    max-width: 100%
+}
+
+.header-brand figure {
+    width: 80px;
+    height: 57px;
+    position: relative
+}
+
+.header-brand figure img {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto 0
+}
+
+@media only screen and (max-width:490px) {
+    .header-title {
+    height: 44px;
+    line-height: 44px
+    }
+}
+
+
+  

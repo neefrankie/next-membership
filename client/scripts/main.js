@@ -242,31 +242,36 @@ for (let i = 0,len=expanders.length; i < len; i++) {
 }
 
 // Mark:点击切换内容
+/* 思路：
+1.获取需要被点击的相同class，点击哪个更改哪个样式，并更新相应界面
+2.应该循环出index，相同的一种处理，其它一种处理
+*/
 function clickTab(){
     let tabContentLabel = document.querySelectorAll('.tabContent-label');
-    var tabContentContainer = document.getElementById('tabContentContainer');
+    let tabContentContainer = document.getElementById('tabContentContainer');
+    let selectedIndex = 0;
     let tabSwitch = function(event){
-        let id = this.getAttribute('id').replace('-label','');
-        var tabContentLabel = document.getElementById(id);
+        let id = this.getAttribute('id');
+        let cutId = id.replace('-label','');
         
-        
-        let idd = ''
-        // let tclId = ''
-        // let index = 0;
+        let answerId = '';
+        let canSelectedId = '';
+        // tabContenti为answer的id
         for(let i = 1; i <= 3; i++){
-            idd = 'tabContent'+i;
-            // tclId = 'tabContent'+i+'-label';
-            if(id==idd){
-                document.getElementById(idd).style.display = 'block';
-                // this.style.borderBottom = "0 solid #fdf8f2";
+            answerId = 'tabContent'+i;
+            canSelectedId = 'tabContent'+i+'-label';
+            if(cutId ==answerId){
+                selectedIndex = i;
+                document.getElementById(answerId).style.display = 'block';
+                this.setAttribute('aria-selected','true');
+                // console.log('borderBottom');
             }else{
-                document.getElementById(idd).style.display = 'none';
-                // document.getElementById(tclId).style.borderBottom = "1 solid #fdf8f2";
-                console.log('borderBottom');
+                document.getElementById(answerId).style.display = 'none';
+                document.getElementById(canSelectedId).setAttribute('aria-selected','false');
             }
 
         }
-
+        // console.log('selectedIndex:'+selectedIndex);
     };
 
     for (let i = 0; i <= 2; i++) { 
@@ -276,3 +281,23 @@ function clickTab(){
 
 clickTab()
 
+function clickTabForm(){
+
+    let tabSelect = document.getElementById('o-tab__select');
+    let tabSwitch = function(event){
+        var optionValue = tabSelect.value;
+        let answerId = '';
+        for(let i = 1; i <= 3; i++){
+            answerId = 'tabContent'+i;
+            if(optionValue == answerId){
+                document.getElementById(answerId).style.display = 'block';
+            }else{
+                document.getElementById(answerId).style.display = 'none';
+            }
+        }
+    };
+
+    EventObject.addHandler(tabSelect,"change",tabSwitch); 
+}
+
+clickTabForm();

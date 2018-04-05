@@ -1,0 +1,113 @@
+
+<header class="section-header">
+     <div class="section-header__text">
+   <h2>Frequently Asked Question</h2>
+ </div>
+</header>
+<section class="o-section">
+  <div class="o-tabs-container">
+      <ul id="faq_tabs" data-o-component="o-tabs" class="o-tabs" role="tablist">
+        <li role="tab" aria-selected="true" id="tabContent1-label" class="tabContent-label" >
+          <a href="#tabContent1">订阅问题</a>
+        </li>
+        <li role="tab" aria-selected="false" id="tabContent2-label" class="tabContent-label">
+          <a href="#tabContent2">支付问题</a>
+        </li>
+        <li role="tab" aria-selected="false" id="tabContent3-label" class="tabContent-label">
+          <a href="#tabContent3">其它</a>
+        </li>
+      </ul>
+      <div class="o-tab-forms">
+        <select id="o-tab__select" class="o-tab__select">
+          <option data-tabindex="0" value="tabContent1" selected="">订阅问题</option>
+          <option data-tabindex="1" value="tabContent2">支付问题</option>
+          <option data-tabindex="2" value="tabContent3">其它</option>
+        </select>
+      </div>
+  </div>
+
+
+<div  id= "tabContentContainer">
+
+    {% block body%}
+<div class="tabContent" id= "tabContent1">
+  {% for tabContent in tabContents1 %}
+  <div class="o-expander" id="o-expander">
+      <div class="toggle" aria-expanded="false">
+          <a class="o-expander__toggle" aria-controls="o-expander__one">{{tabContent.question}}<i></i>
+          </a><span></span>
+      </div>
+
+      <div class="o-expander__content"  aria-hidden="true">
+          <div class = "o-content_wrap">
+            <div class="o-content">
+                {% for answer in tabContent.answers %}
+                    <p class="o-content_body">{{answer}}</p>
+                {% endfor %}
+            </div>
+            <div class="o-qas_feedback">
+                    <p class="o-qas_body"><span><strong>Did this answer your question?</strong></span><button class="o-buttons o-buttons--small">Yes</button><button class="o-buttons o-buttons--small">No</button><span style="display:none;" class="yes_msg_phone">Thank you for your feedback</span></p>
+            </div>
+          </div>
+      </div>
+    </div>
+ {% endfor %}
+ </div>
+
+<div class="tabContent" id= "tabContent2">
+  {% for tabContent in tabContents2 %}
+  <div class="o-expander" id="o-expander">
+      <div class="toggle" aria-expanded="false">
+          <a class="o-expander__toggle" aria-controls="o-expander__one">{{tabContent.question}}<i></i>
+          </a>
+      </div>
+
+      <div class="o-expander__content"  aria-hidden="true">
+          <div class = "o-content_wrap">
+            <div class="o-content">
+                {% for answer in tabContent.answers %}
+                    <p class="o-content_body">{{answer}}</p>
+                {% endfor %}
+                <!--<p class="o-content_body">{{tabContent.answer}}</p>-->
+            </div>
+            <div class="o-qas_feedback">
+                    <p class="o-qas_body"><span><strong>Did this answer your question?</strong></span><button class="o-buttons o-buttons--small">Yes</button><button class="o-buttons o-buttons--small">No</button><span style="display:none;" class="yes_msg_phone">Thank you for your feedback</span></p>
+            </div>
+          </div>
+      </div>
+    </div>
+ {% endfor %}
+ </div>
+
+  <div class="tabContent" id= "tabContent3">
+  {% for tabContent in tabContents3 %}
+  <div class="o-expander" id="o-expander">
+      <div class="toggle" aria-expanded="false">
+          <a class="o-expander__toggle" aria-controls="o-expander__one">{{tabContent.question}}<i></i>
+          </a>
+      </div>
+
+      <div class="o-expander__content"  aria-hidden="true">
+          <div class = "o-content_wrap">
+            <div class="o-content">
+                {% for answer in tabContent.answers %}
+                    <p class="o-content_body">{{answer}}</p>
+                {% endfor %}
+                <!--<p class="o-content_body">{{tabContent.answer}}</p>-->
+            </div>
+            <div class="o-qas_feedback">
+                    <p class="o-qas_body"><span><strong>Did this answer your question?</strong></span><button class="o-buttons o-buttons--small">Yes</button><button class="o-buttons o-buttons--small">No</button><span style="display:none;" class="yes_msg_phone">Thank you for your feedback</span></p>
+            </div>
+          </div>
+      </div>
+    </div>
+ {% endfor %}
+ </div>
+ 
+  {% endblock %}
+
+  </div>  
+</section>
+
+
+
