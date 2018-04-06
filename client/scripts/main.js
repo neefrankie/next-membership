@@ -54,9 +54,9 @@ var openPayment = function(event){
     EventObject.addHandler(paymentShadow,"click",closePayment);
     EventObject.addHandler(toPay,"click",toPayAction);
     var attribute = this.getAttribute('id');
-    console.log(attribute);
 
-    ga('send', 'event','subscription click',attribute);
+    ga('send','event','web member subscribe','openPayment',attribute);
+    // ga('send', 'event','subscription click',attribute);
  
 };
 
@@ -70,7 +70,7 @@ var toPayAction = function(event){
             payWay = pays[j].value;
         }
     }
- 
+    
     //满足2个条件：1.支付方式  2.会员类型
     if (memberType==='高端会员' && payWay==='ali') {
         window.open('http://www.ftacademy.cn/index.php/pay?offerId=8d5e7e72f12067991186cdf3cb7d5d9d','_self');
@@ -80,10 +80,8 @@ var toPayAction = function(event){
         window.open('#','_self');
     }else if (memberType==='标准会员' && payWay==='wxpay') {
         window.open('#','_self');
-    }else{
-
     }
-  
+    ga('send','event','web member subscribe','toPay',memberType+' '+payWay);
 
     paymentPage.innerHTML = '';
     memberType = '';
