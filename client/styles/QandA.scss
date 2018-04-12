@@ -3,7 +3,7 @@ $text-highlight: #f2e0d0;
 $qa-background: #fdf8f2;
 $qa-border: #cec6b9;
 $tab-padding-wide: 40px;
-$tab-content-padding-wide: 50px;
+$tab-content-padding-wide: 90px;
 $tab-padding-narrow: 20px;
 $tab-content-padding-narrow: 20px;
 $tabs-container-background: #FFF1E5;
@@ -73,14 +73,15 @@ $qa-img-background: #33302e;
 @media (min-width: 690px){
   .o-tabs-container{
     border-bottom: solid 1px $qa-border;
-    padding: 0 $tab-padding-wide;
+    padding: 0 10%;
+    // padding: 0 $tab-padding-wide;
   }
   .o-expander{
       .toggle{
         padding: 0 $tab-content-padding-wide;
       } 
       .o-expander__toggle i{
-        right: 40px;
+        right: 90px;
       }
    }
   // .section-header {
@@ -101,8 +102,11 @@ $qa-img-background: #33302e;
 // fff1e6  fff1e6
 .o-tabs-container{
   // padding: 0 $tab-padding-wide;
+  width: 100%;
+  margin: 0 auto;
   background-color: $tabs-container-background;
   .o-tabs{
+      margin: 0px $tab-content-padding-wide;
 
     li{
       width: 33.333%;
@@ -197,6 +201,8 @@ $qa-img-background: #33302e;
       text-decoration: none;
       // margin: 10px 0px;
       .toggle{
+        width: 80%;
+        margin: 0 auto;
         clear: both;
         position: relative;
         a{
@@ -212,7 +218,9 @@ $qa-img-background: #33302e;
         display: block!important;
         max-height:0px;
         .o-content_wrap{
-          padding: 20px 0px;
+          width: 80%;
+          margin: 0 auto;
+          padding: 20px 60px;
           .o-content{
                 padding: 0px 0px 10px;
                 .o-content_body{

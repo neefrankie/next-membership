@@ -159,12 +159,13 @@ function updateUI(dataObj){
 
 }
 
+window.onunload = function closeWindow(){
+    DeleteCookie('U');
+    DeleteCookie('E');
+    DeleteCookie('R');
+}
 
-// function parseUrlSearch(){
-//     var para = location.search.substring(1);
-//     var paraArr = para.split('&');
-//     return paraArr;
-// }
+
 
  if (window.location.hostname === 'localhost' || window.location.hostname.indexOf('192.168') === 0 || window.location.hostname.indexOf('10.113') === 0 || window.location.hostname.indexOf('127.0') === 0) {
         var paraArr = parseUrlSearch();//(2) ["premium=0", "standard=1"]
