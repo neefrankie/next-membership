@@ -37,7 +37,6 @@ setCookieVal();
 
 var toPay = '';
 var paymentShadow = '';
-// var aLi = document.querySelectorAll('.openSub');
 var paymentPage = document.getElementById('payment-page');
 var price = '';
 var memberType = '';
@@ -185,6 +184,7 @@ function updateUI(dataObj){
 
 
 
+
 /**
  * 问题区域
  * 思路：
@@ -193,14 +193,12 @@ function updateUI(dataObj){
  */
 
 let expanders = document.querySelectorAll('.o-expander');
-
 let expandToggle = function(event){
         let ariaExpanded= this.getAttribute('aria-expanded');
         let ii = this.children[0].children[0];
 
         let nextSbl = this.parentNode.children[1];
         let ariaHidden = nextSbl.getAttribute('aria-hidden');
-        // console.log(ii); 
         if (ii){
             if (ariaExpanded == 'false'){
                 this.setAttribute('aria-expanded','true'); 
@@ -211,22 +209,17 @@ let expandToggle = function(event){
             }
         }
 
-        // 为什么不能用nextSibling，是不支持么
         if (nextSbl){
             if (ariaHidden == 'true'){
                 console.log('bbb'+ii); 
-                // nextSbl.style.color = "#ff0000";
                 nextSbl.setAttribute('aria-hidden','false'); 
                 nextSbl.style.maxHeight = '615px';
                 nextSbl.style.transition = "max-height 0.25s ease";
-                // nextSbl.style.display = 'none';
             }else{
                 console.log(nextSbl);
-                // nextSbl.style.color = "blue";
                 nextSbl.setAttribute('aria-hidden','true');
                 nextSbl.style.maxHeight = '0px';
                 nextSbl.style.transition = "max-height 0.25s ease";
-                // nextSbl.style.display = 'block';
 
             }
         }
@@ -235,15 +228,10 @@ let expandToggle = function(event){
 };
 for (let i = 0,len=expanders.length; i < len; i++) { 
     var firstChild = expanders[i].children[0];
-    // 不点击也会触发运行expandToggle函数，这是为什么?因为不能写成expandToggle（）
     EventObject.addHandler(firstChild,"click", expandToggle);  
 }
 
-// Mark:点击切换内容
-/* 思路：
-1.获取需要被点击的相同class，点击哪个更改哪个样式，并更新相应界面
-2.应该循环出index，相同的一种处理，其它一种处理
-*/
+
 function clickTab(){
     let tabContentLabel = document.querySelectorAll('.tabContent-label');
     let tabContentContainer = document.getElementById('tabContentContainer');
@@ -254,7 +242,6 @@ function clickTab(){
         
         let answerId = '';
         let canSelectedId = '';
-        // tabContenti为answer的id
         for(let i = 1; i <= 3; i++){
             answerId = 'tabContent'+i;
             canSelectedId = 'tabContent'+i+'-label';
@@ -262,14 +249,12 @@ function clickTab(){
                 selectedIndex = i;
                 document.getElementById(answerId).style.display = 'block';
                 this.setAttribute('aria-selected','true');
-                // console.log('borderBottom');
             }else{
                 document.getElementById(answerId).style.display = 'none';
                 document.getElementById(canSelectedId).setAttribute('aria-selected','false');
             }
 
         }
-        // console.log('selectedIndex:'+selectedIndex);
     };
 
     for (let i = 0; i <= 2; i++) { 

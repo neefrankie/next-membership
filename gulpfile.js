@@ -84,6 +84,14 @@ gulp.task('build-page', () => {
             tabContents3: data.tabContent3,
             env
           });
+        }else if (name ==='subscriptionTest'){
+          return render(template, {
+            products: data.index,
+            tabContents1: data.tabContent1,
+            tabContents2: data.tabContent2,
+            tabContents3: data.tabContent3,
+            env
+          });
         }else if (name ==='question'){
           return render(template, {
             products: data.index,

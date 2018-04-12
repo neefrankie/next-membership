@@ -15,6 +15,11 @@
             "name": "question",
             "data": "views/data/data.json",
             "template": "question.html"
+        },
+        {
+            "name": "subscriptionTest",
+            "data": "views/data/data.json",
+            "template": "subscriptionTest.html"
         }
  
        
