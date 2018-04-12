@@ -23,17 +23,14 @@ $text-background: #26747a;
 
     .o-member{
       width:40%;
-      // width:43%;
       height:400px;
       float:left;
     }
     .o-member__premium{
       margin: 0 9% 0 1%;
-      // margin: 0 4% 0 3%;
     }
     .o-member__standard{
        margin: 0 1% 0% 9%;
-      // margin: 0 3% 0% 4%;
     }
   }
   #payment-box { 
@@ -81,7 +78,13 @@ $text-background: #26747a;
       width:45%;
       height:400px;
       float:left;
-      margin:0 2.5%;
+      // margin:0 2.5%;
+    }
+    .o-member__standard{
+       margin: 0 1% 0% 4%;
+    }
+    .o-member__premium{
+      margin: 0 4% 0 1%;
     }
   }
   #payment-box { 
@@ -106,11 +109,10 @@ $text-background: #26747a;
    width:80%;
   }
   .welcome-guide {
-    padding: 0 30px;
+    padding: 0 20px;
     .words{
       font-size:10px; 
       width: 60%;
-      // float:left;
       padding-top: 10px;
     }
     .show-image {
@@ -126,8 +128,15 @@ $text-background: #26747a;
       width:45%;
       height:450px;
       float:left;
-      margin:0 2.5%;
+      // margin:0 2.5%;
     }
+    .o-member__standard{
+       margin: 0 1% 0% 4%;
+    }
+    .o-member__premium{
+      margin: 0 4% 0 1%;
+    }
+
   }
   #payment-box { 
     top:180px;

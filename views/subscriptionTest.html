@@ -27,7 +27,7 @@
   </script>
 <!-- End Google Analytics -->
 
-  <script src='https://www.google-analytics.com/analytics.js'></script>
+
 
   <link inline rel="stylesheet" type="text/css" href="styles/main.css">
   
@@ -49,8 +49,8 @@
   <div class="welcome-guide width-cls">
     <div class="show-image"></div>
     <div class="words">
-      <div class="first"><strong>欢迎进入FT中文网会员专属服务频道</strong></div>
-      <div class="second">本频道是为更好服务FT中文网会员朋友们而设立的，是FT中文网与会员朋友之间沟通与交流的平台。在这里您将了解到FT中文网为会员提供的最新专属服务。</div>
+      <div class="first"><strong>FT中文网会员订阅服务，欢迎您！</strong></div>
+      <div class="second">希望全球视野的FT中文网，能够引发你的思考，与你一道从更高的山顶观察世界，见他人之未见！</div>
     </div>
     <div class="clear-class"></div>
   </div>
@@ -128,7 +128,24 @@
 <script inline src="scripts/main.js"></script>
 
 <script>
-var a2428tf="ftstatlog",a2428pu="",a2428pf="ftstatlog",a2428su=window.location,a2428sf=document.referrer,a2428of="",a2428op="",a2428ops=1,a2428ot=1,a2428d=new Date,a2428color="";a2428color="Netscape"==navigator.appName?screen.pixelDepth:screen.colorDepth,"undefined"==typeof FTStoryid&&(FTStoryid="");var lainframe=null;"undefined"==typeof FTAdch&&(FTAdch="");try{a2428tf=top.document.referrer}catch(e){}try{a2428pu=window.parent.location}catch(e){}try{a2428pf=window.parent.document.referrer}catch(e){}try{a2428ops=document.cookie.match(new RegExp("(^| )FTSTAT_ok_pages=([^;]*)(;|$)")),a2428ops=null==a2428ops?1:parseInt(unescape(a2428ops[2]))+1;var a2428oe=new Date;a2428oe.setTime(a2428oe.getTime()+3600000),document.cookie="FTSTAT_ok_pages="+a2428ops+";path=/;expires="+a2428oe.toGMTString()+";domain=.ftchinese.com",a2428ot=document.cookie.match(new RegExp("(^| )FTSTAT_ok_times=([^;]*)(;|$)")),null==a2428ot?a2428ot=1:(a2428ot=parseInt(unescape(a2428ot[2])),a2428ot=1==a2428ops?a2428ot+1:a2428ot),a2428oe.setTime(a2428oe.getTime()+31536000000),document.cookie="FTSTAT_ok_times="+a2428ot+";path=/;expires="+a2428oe.toGMTString()+";domain=.ftchinese.com"}catch(e){}a2428of=a2428sf,"ftstatlog"!==a2428pf&&(a2428of=a2428pf),"ftstatlog"!==a2428tf&&(a2428of=a2428tf),a2428op=a2428pu;try{}catch(e){a2428op=a2428su}var logurl="http://www2.ftchinese.com/log/new_log.php?id="+FTStoryid+"&adch="+escape(FTAdch)+"&tpages="+a2428ops+"&ttimes="+a2428ot+"&tzone="+(0-a2428d.getTimezoneOffset()/60)+"&tcolor="+a2428color+"&sSize="+screen.width+","+screen.height+"&refer="+escape(a2428of)+"&vpage="+escape(a2428op),unique=function(){var e=(new Date).getTime()+"-",o=0;return function(){return e+o++}}(),imgLog=function(e){var o=window.imgLogData||(window.imgLogData={}),a=new Image,t=unique();a.onload=a.onerror=function(){a.onload=a.onerror=null,a=null,delete o[t]},a.src=e+"&_uid="+t};imgLog(logurl);
+    var today = new Date();
+    var y = today.getFullYear();
+    var m = zeroFix(today.getMonth() + 1);
+    var d = zeroFix(today.getDate());
+
+    function zeroFix(n) {
+        return (n < 10) ? '0' + n : n;
+    }
+
+    if (window.gAutoStart === undefined) {
+        (function(d, s, u, j, x) {
+            j = d.createElement(s),
+                x = d.getElementsByTagName(s)[0];
+            j.async = true;
+            j.src = u;
+            x.parentNode.insertBefore(j, x)
+        })(document, 'script', 'http://static.ftchinese.com/js/log.js?' + y + m + d);
+    }
 </script>
 
 

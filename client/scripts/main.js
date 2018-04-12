@@ -54,9 +54,9 @@ var openPayment = function(event){
     EventObject.addHandler(toPay,"click",toPayAction);
     var attribute = this.getAttribute('id');
 
-    ga('send','event','web member subscribe','openPayment',attribute);
-    // ga('send', 'event','subscription click',attribute);
- 
+    var rCookie = GetCookie('R');
+    var referUrl = decodeURIComponent(rCookie);
+    ga('send','event','web member subscribe','openPayment','referUrl:'+referUrl+'product:' + attribute);
 };
 
 
@@ -80,7 +80,11 @@ var toPayAction = function(event){
     }else if (memberType==='标准会员' && payWay==='wxpay') {
         window.open('#','_self');
     }
-    ga('send','event','web member subscribe','toPay',memberType+' '+payWay);
+    
+    var rCookie = GetCookie('R');
+    var referUrl = decodeURIComponent(rCookie);
+
+    ga('send','event','web member subscribe','toPay','referUrl:'+referUrl+'product:' + memberType+'payWay:'+payWay);
 
     paymentPage.innerHTML = '';
     memberType = '';
@@ -167,6 +171,7 @@ window.onunload = function closeWindow(){
 
 
 
+
  if (window.location.hostname === 'localhost' || window.location.hostname.indexOf('192.168') === 0 || window.location.hostname.indexOf('10.113') === 0 || window.location.hostname.indexOf('127.0') === 0) {
         var paraArr = parseUrlSearch();//(2) ["premium=0", "standard=1"]
         for(let j=0;j<paraArr.length;j++){
@@ -214,7 +219,7 @@ let expandToggle = function(event){
             if (ariaHidden == 'true'){
                 console.log('bbb'+ii); 
                 nextSbl.setAttribute('aria-hidden','false'); 
-                nextSbl.style.maxHeight = '615px';
+                nextSbl.style.maxHeight = '715px';
                 nextSbl.style.transition = "max-height 0.25s ease";
             }else{
                 console.log(nextSbl);
