@@ -52,6 +52,15 @@ var openPayment = function(event){
     paymentShadow = document.getElementById('payment-shadow');
     EventObject.addHandler(paymentShadow,"click",closePayment);
     EventObject.addHandler(toPay,"click",toPayAction);
+
+    
+    var winheight = window.innerHeight;
+    var paymentBox = document.getElementById('payment-box');
+    var eleHeight = paymentBox.offsetHeight;
+    var top = (winheight - eleHeight)/2
+    paymentBox.style.top = top + "px";
+
+
     var attribute = this.getAttribute('id');
 
     var rCookie = GetCookie('R');
@@ -59,7 +68,27 @@ var openPayment = function(event){
     ga('send','event','web member subscribe','openPayment','referUrl:'+referUrl+'product:' + attribute);
 };
 
+function getDeviceType() {
+    var uaString = navigator.userAgent || navigator.vendor || '';
+    var deviceType = 'PC';
+    if (/iPad/i.test(uaString)) {
+        deviceType = 'iPad';
+    } else if (/OS [0-9]+\_/i.test(uaString) && (/iPhone/i.test(uaString) || /iPod/i.test(uaString))) {
+        deviceType = 'iPhone';
+    } else if (/Android|micromessenger/i.test(uaString) ) {
+        deviceType = 'android';
+    }
+    return deviceType;
+}
 
+function isMobile(){
+    let deviceType = getDeviceType();
+    if (deviceType=='PC'){
+        return false;
+    }else{
+        return true;
+    }
+}
 var payWay = '';
 var pays = document.getElementsByName('pay');
 
@@ -70,15 +99,25 @@ var toPayAction = function(event){
         }
     }
     
+
     //满足2个条件：1.支付方式  2.会员类型
     if (memberType==='高端会员' && payWay==='ali') {
-        window.open('http://www.ftacademy.cn/index.php/pay?offerId=8d5e7e72f12067991186cdf3cb7d5d9d','_self');
+        window.open('http://www.ftacademy.cn/index.php/pay?offerId=8d5e7e72f12067991186cdf3cb7d5d9d&platform=1','_self');
     }else if (memberType==='标准会员' && payWay==='ali') {
-        window.open('http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b','_self');
+        window.open('http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=1','_self');
     }else if (memberType==='高端会员' && payWay==='wxpay') {
-        window.open('#','_self');
+        if(isMobile()){
+            window.open('http://www.ftacademy.cn/index.php/pay?offerId=8d5e7e72f12067991186cdf3cb7d5d9d&platform=2','_self');
+        }else{
+
+        }
     }else if (memberType==='标准会员' && payWay==='wxpay') {
-        window.open('#','_self');
+        if(isMobile()){
+            window.open('http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=2','_self');
+        }else{
+
+        }
+        
     }
     
     var rCookie = GetCookie('R');
@@ -118,7 +157,6 @@ const postUE = () => {
                 setTimeout(function() {
                     postUE(); 
                 }, 500); 
-                // console.log('fali'+i);
             }
         };
         xhrpw.send(JSON.stringify(cookieVal));

@@ -34,7 +34,7 @@ $text-background: #26747a;
     }
   }
   #payment-box { 
-    top:40px;
+    top:90px;
     right:35%;
     width: 30%;
     .payment-method{
@@ -199,8 +199,8 @@ $text-background: #26747a;
 @mixin subscription-SM {
   #payment-box { 
     top:120px;
-    right:10%;
-    width: 80%;
+    right:5%;
+    width: 90%;
     .payment-method{
       .wxpay-mode{
         margin-left: -20px;
@@ -371,8 +371,9 @@ $text-background: #26747a;
     left: 0;
 
 }
-#payment-box { 
-  position: absolute;
+#payment-box {
+  // position: absolute; 
+  position: fixed;
   bottom: auto;
   
   overflow: visible;
