@@ -502,3 +502,20 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
     right: 24px;
     top: -11px;
 }
+
+
+#wxImg {
+  margin-top: 20px;
+  background-image:url(http://www.ftacademy.cn/wxpay/native.php?standard);
+  background-repeat:no-repeat;
+  background-size: contain;
+  height: 200px;
+  width: 100%;
+  background-position: center;
+}
+
+.wxScanHint{
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+}

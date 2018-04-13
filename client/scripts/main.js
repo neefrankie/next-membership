@@ -45,7 +45,7 @@ var openPayment = function(event){
     price = childNodes[2].value;
     var parentsNode = this.parentNode.parentNode.children;
     memberType = parentsNode[0].innerHTML;
-    var previewHTML = '<div id="payment-shadow" class="o-overlay-shadow fadeIn"></div><div id="payment-box" class="rightanswer show o-overlay__arrow-top fadeInRight"><div class="payment-title">欢迎订阅FT会员服务</div><div class="payment-way"><div class="payment-name"><span>会员类型：</span><span class="payment-type"><strong>'+memberType+'</strong></span></div><div class="payment-method"><span>支付方式：</span><label class="mode"><input name="pay" type="radio" value="ali" checked /><span id="pay-ali"></span> </label><label class="wxpay-mode" style="display:none;"><input name="pay" type="radio" value="wxpay" /><span id="pay-wxpay"></span></label></div></div><div class="pay-action"><label>支付金额 '+price+'</label><button  class="to-pay" id="to-pay">确定支付</button></div></div>';
+    var previewHTML = '<div id="payment-shadow" class="o-overlay-shadow fadeIn"></div><div id="payment-box" class="rightanswer show o-overlay__arrow-top fadeInRight"><div class="payment-title">欢迎订阅FT会员服务</div><div class="payment-way"><div class="payment-name"><span>会员类型：</span><span class="payment-type"><strong>'+memberType+'</strong></span></div><div class="payment-method"><span>支付方式：</span><label class="mode"><input name="pay" type="radio" value="ali" checked /><span id="pay-ali"></span> </label><label class="wxpay-mode" style="display:none"><input name="pay" type="radio" value="wxpay" /><span id="pay-wxpay"></span></label></div></div><div class="pay-action"><label>支付金额 '+price+'</label><button  class="to-pay" id="to-pay">确定支付</button></div></div>';
     paymentPage.innerHTML = previewHTML;
 
     toPay = document.getElementById('to-pay');
@@ -109,27 +109,36 @@ var toPayAction = function(event){
         if(isMobile()){
             window.open('http://www.ftacademy.cn/index.php/pay?offerId=8d5e7e72f12067991186cdf3cb7d5d9d&platform=2','_self');
         }else{
-
+            openWXCode();
         }
     }else if (memberType==='标准会员' && payWay==='wxpay') {
         if(isMobile()){
             window.open('http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=2','_self');
         }else{
-
+            openWXCode();
         }
         
     }
+    // 没有r跳回到首页，有r跳到r指定的链接；有alert
     
     var rCookie = GetCookie('R');
     var referUrl = decodeURIComponent(rCookie);
 
     ga('send','event','web member subscribe','toPay','referUrl:'+referUrl+'product:' + memberType+'payWay:'+payWay);
 
-    paymentPage.innerHTML = '';
+    // paymentPage.innerHTML = '';
     memberType = '';
     payWay = '';
     
 };
+// 打开微信
+var openWXCode = function(){
+    console.log('weixinzhifu')
+    var paymentBox = document.getElementById('payment-box');
+    var wxImg = '<div id="wxImg"></div><div class="wxScanHint">微信扫码支付</div>'
+    paymentBox.innerHTML = wxImg;
+}; 
+
 var closePayment = function(event){
     paymentPage.innerHTML = '';
 };
