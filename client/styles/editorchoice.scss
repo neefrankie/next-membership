@@ -1,0 +1,396 @@
+$defaultPadding: 14px;
+$buttonEdge: 10px;
+
+//headers and footers
+$headerHeight: 44px;
+$closeButtonHeight: 36px;
+$buttonHeight: 28px;
+$closeButtonBG: #9d9793;
+$logoHeight: 26px;
+$headerBG: #333;
+$statusBarHeight: 20px;
+$navOn: #27757b;
+
+ul.navigation li,
+.navList li {
+    &.hide {
+        display: none;
+    }
+}
+
+.iap-container,
+.iap-rail,
+.iap-button {
+    .progresscontainer {
+        position: absolute;
+        top: 5px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 1px;
+    }
+    .progressbg {
+        height: 1px;
+    }
+}
+
+.download-status {
+    position: absolute;
+    bottom: 0;
+    left: 90px;
+    font-size: 12px;
+    line-height: 1em;
+}
+
+.iap-rail {
+    .progresscontainer {
+        top: -5px;
+    }
+    .download-status {
+        top: 0;
+        left: 0;
+        line-height: 16px;
+        height: 16px;
+        margin: auto;
+        color: #777;
+        width: 50%;
+        text-align: center;
+    }
+}
+
+.iap-button {
+    // position: absolute;
+    // left:0;
+    // right: 0;
+    width: 100%;
+    height: 0;
+    text-align: right;
+    clear: both;
+    position: relative;
+    overflow: visible;
+    button {
+        background-color: #26747a;
+        color: white;
+        position: absolute;
+        right: 0;
+        bottom: 0px;
+        margin-bottom: 10px;
+        &.iap-move-left {
+            right: 60px;
+        }
+    }
+}
+
+.iap-only {
+    display: none;
+    &.header-side {
+        width: auto;
+        bottom: 0;
+        width: 50px + $buttonEdge;
+        .floatright {
+            position: absolute;
+            margin: auto;
+            height: $buttonHeight;
+            top: 0;
+            bottom: 0;
+            right: $buttonEdge;
+        }
+    }
+}
+
+
+.channel-iap, .story-iap {
+	.iap-only {
+		display: block;
+	}
+	.section {
+		display: none;
+	}
+}
+.channelview.channel-iap, .storyview.story-iap {
+	#fullbodycontainer {
+		.channelOnly.right {
+			display: none;
+		}
+	}
+}
+
+.story-iap {
+    #storyview {
+        .storymore,
+        #columnintro,
+        .storyTag,
+        .readerCommentTitle,
+        .allcomments,
+        #logincomment,
+        #nologincomment,
+        .banner {
+            display: none!important;
+        }
+        .storytitle {
+            margin-top: 14px;
+        }
+    }
+}
+
+#iap-rail {
+    display: none;
+    z-index: 9999;
+    .iap-only {
+        display: inline-block;
+    }
+    button {
+        width: 50%;
+        height: 100%;
+        //border-width: 0;
+        max-width: none;
+        color: white;
+        font-size: 19px;
+        background-color: #26747a;
+        &.iap-highlight {
+            background-color: #f6801a;
+        }
+        &.iap-warning {
+            background-color: #9E2F50;
+        }
+        &.full-width {
+            width: 100%;
+        }
+        &.quarter-width {
+            width: 25%;
+        }
+    }
+}
+
+.story-iap {
+    #contentRail, &.storyview #fullbodycontainer #audio-button-top-right.storyOnly{
+        display: none;
+    }
+    #iap-rail {
+        display: block;
+    }
+
+}
+
+// MARK: - CSS Ruls for Membership subscription
+$teal-1: #26747a;
+$black: #000000;
+$pink-light:#ffffff;
+$pink-dark: #eadecd;
+.iap-member {
+    background-color: $pink-light;
+    margin: 1em 1em !important;
+    .headline {
+        text-align: center;
+    }
+    .iap-benefits li {
+        padding-left: 1.5em;
+        margin: 0.5em 1em;
+    }
+
+    .iap-button {
+        text-align: center;
+        height: auto;
+        padding: 1em 0 0;
+        .iap-teaser {
+            color: $black;
+            text-align: center;
+           
+        }
+        button {
+            position: static;
+            padding: 0.5em 1em;
+            width: 80%;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+    }
+
+}
+.channel-iap{
+    .headline{
+        font-size: 1.3em;
+    }
+    .iap-intruction{
+        margin: 1em !important;
+        .hint-headline{
+            font-size: 1.1em;
+            color: #000;
+            font-weight: bold;
+            margin: 15px 0 5px;
+        }
+        .hint-content{
+            font-size: 1.0em; 
+        }
+        .more-service{
+            .policy{
+                border-bottom:solid #ded5d5 0.5px;
+                padding: 5px 0px;
+                span{
+                    float:right;
+                }
+            }
+        }
+    }
+    .container{
+        max-width: 550px;
+        margin: 0 auto;
+    }
+}
+
+
+@media only screen and (min-width: 700px) {
+    .channel-iap {
+        .layout-a_region-3 .inner {
+            border-right: 0;
+        }
+        .layout-a_region-4 {
+            display: none;
+        }
+    }
+    
+}
+@mixin locked{
+    display: inline-block;
+        &:after {
+            content: " ";
+            display: inline-block;
+            width: 26px;
+            height: .8em;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="#555555" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>');
+            background-position: 100%;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+    }
+}
+@mixin unlocked {
+    display: inline-block;
+    &:after {
+        content: " ";
+        display: inline-block;
+        width: 26px;
+        height: .8em;
+        background-image: url('data:image/svg+xml;utf8,<svg fill="#27757b" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z"/></svg>');
+        background-position: 100%;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+}
+@media only screen and (max-width: 1024px) {
+    .oneStory {
+        .narrow-locked {
+            @include locked
+        }
+        .narrow-unlocked {
+            @include unlocked
+        }
+        .wide-locked {display: none;}
+        .wide-unlocked {display: none;}
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .oneStory {
+        .wide-locked {
+                @include locked
+            }
+        }
+        .wide-unlocked {
+            @include unlocked
+        }
+        .narrow-locked {display: none;}
+        .narrow-unlocked {display: none;}
+
+}
+.iap-hint{
+    .settingbox{
+        border-radius: 15px;
+    }
+    .overlay-header{
+        background-color: #ffffff;
+        padding: 15px 0px 10px; 
+        
+        div{
+            text-align: center;
+            font-size: 13px;
+            color: black;
+        }
+        .iap-fail{
+            font-size: 18px;
+        }
+        .iap-connect{
+            margin: 2px 0px 15px;
+        }
+        #iap-know{
+            font-size: 18px;
+            color: #6581da;
+            padding: 12px 0px 0px;
+            margin-top: 5px;
+            border-top:solid 0.2px #dacaca;
+        }
+    }
+    
+    
+    
+}
+
+
+.iap-vip-container {
+    margin: 10px 10px;
+    .title {
+        font-size: 1.3em;
+        font-weight: 700;
+        margin-bottom: 5px;   
+    }
+    .info-container label {
+        font-weight: 700;
+    }
+
+}
+
+
+.subscribe-lock-container{
+	position: relative;
+	background: #faeadd;	  
+	left: 0px;
+	width: 100%;
+	height: 280px;
+	margin: 10px 0 20px;
+}
+.lock-block{
+		position: absolute;
+		width: 100%;
+		top: 25%;
+		height: 50%;
+	}
+.lock-content{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 5px;
+    
+}
+   .lock-content a{
+      color: #26747a;
+    }
+	.lock-download-hint{
+		padding: 10px 0px 0px;
+	}
+    .subscribe-btn{
+	  position: absolute;
+	  bottom: 10px;
+      text-align: center;
+      width: 100%;
+      color:white;
+    
+    }
+    .subscribe-btn  span{
+		color: white;
+		background-color: #0d7680;
+		display: inline-block;
+		letter-spacing: 3px;
+		height: 30px;
+		line-height: 30px;
+		width: 150px;
+		text-align: center;
+		font-size: 14px;
+		border-radius: 1px;
+        
+	}
