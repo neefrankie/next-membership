@@ -53,9 +53,13 @@ var openPayment = function(event){
     var top = (winheight - eleHeight)/2
     paymentBox.style.top = top + "px";
 
-    var rCookie = GetCookie('R');
-    var referUrl = decodeURIComponent(rCookie);
-    ga('send','event','web member subscribe','openPayment','referUrl:'+referUrl+'product:' + attribute);
+    // var rCookie = GetCookie('R');
+    // var referUrl = decodeURIComponent(rCookie);
+
+    var SELabel = GetCookie('SELabel');
+    
+    var eventAction = 'Buy: ' + attribute;
+    ga('send','event','Android Privileges', eventAction, SELabel);
 };
 
 function getDeviceType() {
@@ -102,10 +106,12 @@ var toPayAction = function(event){
     }
     // 没有r跳回到首页，有r跳到r指定的链接；有alert
     
-    var rCookie = GetCookie('R');
-    var referUrl = decodeURIComponent(rCookie);
+    // var rCookie = GetCookie('R');
+    // var referUrl = decodeURIComponent(rCookie);
 
-    ga('send','event','web member subscribe','toPay','referUrl:'+referUrl+'product:' + memberType+'payWay:'+payWay);
+    var SELabel = GetCookie('SELabel');
+    var eventAction = 'Buy way: ' + memberType;
+    ga('send','event','Android Privileges', eventAction, SELabel);
 
     // paymentPage.innerHTML = '';
     memberType = '';
@@ -314,3 +320,6 @@ function clickTabForm(){
 }
 
 clickTabForm();
+
+
+

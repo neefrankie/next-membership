@@ -27,6 +27,9 @@
   </script>
 <!-- End Google Analytics -->
 
+  <script>
+    var referUrl = document.referrer;
+  </script>
 
 
   <link inline rel="stylesheet" type="text/css" href="styles/main.css">
@@ -34,6 +37,7 @@
 </head>
 
 <body>
+
   {% include "header.html" %}
   <div class = "container">
 
@@ -139,6 +143,8 @@
             x.parentNode.insertBefore(j, x)
         })(document, 'script', 'http://static.ftchinese.com/js/log.js?' + y + m + d);
     }
+
+
 </script>
 
 
