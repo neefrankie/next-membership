@@ -4,26 +4,6 @@
 import {EventObject,GetCookie,DeleteCookie,isWeiXin,parseUrlSearch,isEmptyObj} from './subscribe_api.js';
 
 
-// Mark:判断是什么浏览器和什么设备，仅仅微信提醒用safari打开，其它都不用
-
-let hint = document.getElementById('hint');
-let hintWord = document.getElementById('hint-word');
-
-if (isWeiXin()){
-    var uaString = navigator.userAgent || navigator.vendor || '';
-    if(/Android/i.test(uaString)){
-        hintWord.innerHTML = '请点击右上角，使用手机浏览器打开';
-    }else{
-        hintWord.innerHTML = '请点击右上角，使用Safari打开';
-    }
-    hint.style.display = "block";
-}else{
-    hint.style.display = "none";
-}
-
-
-
-
 const setCookieVal = () => {
     // Mark:check ccode
     var para = location.search.substring(1);
@@ -41,27 +21,37 @@ var paymentPage = document.getElementById('payment-page');
 var price = '';
 var memberType = '';
 var openPayment = function(event){
+    var attribute = this.getAttribute('id');
+    console.log(event.target);
     var childNodes = this.parentNode.children;
     price = childNodes[2].value;
     var parentsNode = this.parentNode.parentNode.children;
     memberType = parentsNode[0].innerHTML;
-    var previewHTML = '<div id="payment-shadow" class="o-overlay-shadow fadeIn"></div><div id="payment-box" class="rightanswer show o-overlay__arrow-top fadeInRight"><div class="payment-title">欢迎订阅FT会员服务</div><div class="payment-way"><div class="payment-name"><span>会员类型：</span><span class="payment-type"><strong>'+memberType+'</strong></span></div><div class="payment-method"><span>支付方式：</span><label class="mode"><input name="pay" type="radio" value="ali" checked /><span id="pay-ali"></span> </label><label class="wxpay-mode" style="display:none"><input name="pay" type="radio" value="wxpay" /><span id="pay-wxpay"></span></label></div></div><div class="pay-action"><label>支付金额 '+price+'</label><button  class="to-pay" id="to-pay">确定支付</button></div></div>';
-    paymentPage.innerHTML = previewHTML;
 
-    toPay = document.getElementById('to-pay');
-    paymentShadow = document.getElementById('payment-shadow');
-    EventObject.addHandler(paymentShadow,"click",closePayment);
-    EventObject.addHandler(toPay,"click",toPayAction);
 
-    
+    if(isWeiXin()){
+        if(attribute==='standard-btn'){
+            window.location='http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=2';
+        }else if(attribute==='premium-btn'){
+            window.location='http://www.ftacademy.cn/index.php/pay?offerId=8d5e7e72f12067991186cdf3cb7d5d9d&platform=2';
+        }
+    }else{
+
+        var previewHTML = '<div id="payment-shadow" class="o-overlay-shadow fadeIn"></div><div id="payment-box" class="rightanswer show o-overlay__arrow-top fadeInRight"><div class="payment-title">欢迎订阅FT会员服务</div><div class="payment-way"><div class="payment-name"><span>会员类型：</span><span class="payment-type"><strong>'+memberType+'</strong></span></div><div class="payment-method"><span>支付方式：</span><label class="mode"><input name="pay" type="radio" value="ali" checked /><span id="pay-ali"></span> </label><label class="wxpay-mode" style="display:inline-block"><input name="pay" type="radio" value="wxpay" /><span id="pay-wxpay"></span></label></div></div><div class="pay-action"><label>支付金额 '+price+'</label><button  class="to-pay" id="to-pay">确定支付</button></div></div>';
+        paymentPage.innerHTML = previewHTML;
+
+        toPay = document.getElementById('to-pay');
+        paymentShadow = document.getElementById('payment-shadow');
+        EventObject.addHandler(paymentShadow,"click",closePayment);
+        EventObject.addHandler(toPay,"click",toPayAction);
+
+    } 
+
     var winheight = window.innerHeight;
     var paymentBox = document.getElementById('payment-box');
     var eleHeight = paymentBox.offsetHeight;
     var top = (winheight - eleHeight)/2
     paymentBox.style.top = top + "px";
-
-
-    var attribute = this.getAttribute('id');
 
     var rCookie = GetCookie('R');
     var referUrl = decodeURIComponent(rCookie);
@@ -106,18 +96,9 @@ var toPayAction = function(event){
     }else if (memberType==='标准会员' && payWay==='ali') {
         window.open('http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=1','_self');
     }else if (memberType==='高端会员' && payWay==='wxpay') {
-        if(isMobile()){
-            window.open('http://www.ftacademy.cn/index.php/pay?offerId=8d5e7e72f12067991186cdf3cb7d5d9d&platform=2','_self');
-        }else{
-            openWXCode();
-        }
+        window.open('http://www.ftacademy.cn/index.php/pay?offerId=8d5e7e72f12067991186cdf3cb7d5d9d&platform=2','_blank');
     }else if (memberType==='标准会员' && payWay==='wxpay') {
-        if(isMobile()){
-            window.open('http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=2','_self');
-        }else{
-            openWXCode();
-        }
-        
+        window.open('http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=2','_blank');   
     }
     // 没有r跳回到首页，有r跳到r指定的链接；有alert
     
@@ -133,7 +114,6 @@ var toPayAction = function(event){
 };
 // 打开微信
 var openWXCode = function(){
-    console.log('weixinzhifu')
     var paymentBox = document.getElementById('payment-box');
     var wxImg = '<div id="wxImg"></div><div class="wxScanHint">微信扫码支付</div>'
     paymentBox.innerHTML = wxImg;
@@ -159,7 +139,7 @@ const postUE = () => {
                 dataObj = JSON.parse(data);
                 isReqSuccess = true;
                 updateUI(dataObj);
-                console.log('success'+i);
+                // console.log('success'+i);
             } else {
                 isReqSuccess = false;
                 i++;
@@ -180,11 +160,11 @@ var premiumPrice = document.getElementById('premium_price');
 
 
 function updateUI(dataObj){
-     
-    if (isWeiXin()){
-        EventObject.addHandler(standardBtn,"click",function(){return false;});
-        EventObject.addHandler(premiumBtn,"click",function(){return false;});
-    }else{
+
+    // if (isWeiXin()){
+    //     EventObject.addHandler(standardBtn,"click",function(){return false;});
+    //     EventObject.addHandler(premiumBtn,"click",function(){return false;});
+    // }else{
         if ((dataObj.standard === 1 && dataObj.premium === 0)){
         // if (paraArr.includes('premium=0')&&paraArr.includes('standard=1')){
 
@@ -194,7 +174,6 @@ function updateUI(dataObj){
             EventObject.addHandler(premiumBtn,"click",openPayment);
            
         }else if (dataObj.standard === 1 && dataObj.premium === 1){
-        // }else if (paraArr.includes('standard=1')&&paraArr.includes('premium=1')){
             standardBtn.innerText = '已订阅';
             premiumBtn.innerText = '已订阅';
             EventObject.addHandler(standardBtn,"click",function(){return false;});
@@ -206,7 +185,7 @@ function updateUI(dataObj){
             EventObject.addHandler(premiumBtn,"click",openPayment);
         }
         
-    }
+    // }
 
 }
 
@@ -219,7 +198,7 @@ window.onunload = function closeWindow(){
 
 
 
- if (window.location.hostname === 'localhost' || window.location.hostname.indexOf('192.168') === 0 || window.location.hostname.indexOf('10.113') === 0 || window.location.hostname.indexOf('127.0') === 0) {
+if (window.location.hostname === 'localhost' || window.location.hostname.indexOf('192.168') === 0 || window.location.hostname.indexOf('10.113') === 0 || window.location.hostname.indexOf('127.0') === 0) {
         var paraArr = parseUrlSearch();//(2) ["premium=0", "standard=1"]
         for(let j=0;j<paraArr.length;j++){
             var arr = paraArr[j].split('=');
@@ -233,8 +212,6 @@ window.onunload = function closeWindow(){
         updateUI(dataObj);
     }
 }
-
-
 
 
 
