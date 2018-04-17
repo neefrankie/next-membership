@@ -22,12 +22,11 @@ var price = '';
 var memberType = '';
 var openPayment = function(event){
     var attribute = this.getAttribute('id');
-    console.log(event.target);
     var childNodes = this.parentNode.children;
     price = childNodes[2].value;
     var parentsNode = this.parentNode.parentNode.children;
     memberType = parentsNode[0].innerHTML;
-
+    var newAttribute = '';
 
     if(isWeiXin()){
         if(attribute==='standard-btn'){
@@ -56,10 +55,17 @@ var openPayment = function(event){
     // var rCookie = GetCookie('R');
     // var referUrl = decodeURIComponent(rCookie);
 
+    if(attribute==='standard-btn'){
+        newAttribute = 'Standard';
+    }else if(attribute==='premium-btn'){
+        newAttribute = 'Premium';
+    }
+
     var SELabel = GetCookie('SELabel');
     
-    var eventAction = 'Buy: ' + attribute;
-    ga('send','event','Android Privileges', eventAction, SELabel);
+
+    var eventAction = 'Buy: ' + newAttribute;
+    ga('send','event','Web Privileges', eventAction, SELabel);
 };
 
 function getDeviceType() {
@@ -93,6 +99,7 @@ var toPayAction = function(event){
         }
     }
     
+    var newmemberType = (memberType==='高端会员') ? 'Premium' : 'Standard';
 
     //满足2个条件：1.支付方式  2.会员类型
     if (memberType==='高端会员' && payWay==='ali') {
@@ -108,10 +115,11 @@ var toPayAction = function(event){
     
     // var rCookie = GetCookie('R');
     // var referUrl = decodeURIComponent(rCookie);
+    
 
     var SELabel = GetCookie('SELabel');
-    var eventAction = 'Buy way: ' + memberType;
-    ga('send','event','Android Privileges', eventAction, SELabel);
+    var eventAction = 'Buy way: ' + newmemberType;
+    ga('send','event','Web Privileges', eventAction, SELabel);
 
     // paymentPage.innerHTML = '';
     memberType = '';
@@ -246,13 +254,11 @@ let expandToggle = function(event){
         }
 
         if (nextSbl){
-            if (ariaHidden == 'true'){
-                console.log('bbb'+ii); 
+            if (ariaHidden == 'true'){       
                 nextSbl.setAttribute('aria-hidden','false'); 
                 nextSbl.style.maxHeight = '715px';
                 nextSbl.style.transition = "max-height 0.25s ease";
             }else{
-                console.log(nextSbl);
                 nextSbl.setAttribute('aria-hidden','true');
                 nextSbl.style.maxHeight = '0px';
                 nextSbl.style.transition = "max-height 0.25s ease";
