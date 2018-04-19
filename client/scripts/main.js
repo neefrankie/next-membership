@@ -118,7 +118,7 @@ var toPayAction = function(event){
     
 
     var SELabel = GetCookie('SELabel');
-    var eventAction = 'Buy way: ' + newmemberType;
+    var eventAction = 'Buy way: ' + payWay;
     ga('send','event','Web Privileges', eventAction, SELabel);
 
     // paymentPage.innerHTML = '';
@@ -188,6 +188,7 @@ function updateUI(dataObj){
             EventObject.addHandler(premiumBtn,"click",openPayment);
            
         }else if (dataObj.standard === 1 && dataObj.premium === 1){
+            console.log('已订阅');
             standardBtn.innerText = '已订阅';
             premiumBtn.innerText = '已订阅';
             EventObject.addHandler(standardBtn,"click",function(){return false;});
