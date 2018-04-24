@@ -25,6 +25,16 @@
             "name": "editorchoice",
             "data": "views/data/data.json",
             "template": "editorchoice.html"
+        },
+        {
+            "name": "subscribesuccess",
+            "data": "views/data/data.json",
+            "template": "subscribesuccess.html"
+        },
+        {
+            "name": "subscribefail",
+            "data": "views/data/data.json",
+            "template": "subscribefail.html"
         }
  
        
