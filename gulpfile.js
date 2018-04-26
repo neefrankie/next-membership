@@ -268,3 +268,9 @@ gulp.task('copy1', () => {
     .pipe(gulp.dest(`../${dest}`))
 });
 
+gulp.task('copyT', () => {
+  const dest = 'ftac';
+  return gulp.src(['.tmp/subscriptionTest.html'])
+    .pipe(gulp.dest(`../${dest}`))
+});
+

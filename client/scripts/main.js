@@ -3,6 +3,9 @@
 
 import {EventObject,GetCookie,DeleteCookie,isWeiXin,parseUrlSearch,isEmptyObj} from './subscribe_api.js';
 
+let dataObj = {};
+let isStandard = false;
+let isPremium = false;
 
 const setCookieVal = () => {
     // Mark:check ccode
@@ -21,12 +24,22 @@ var paymentPage = document.getElementById('payment-page');
 var price = '';
 var memberType = '';
 var openPayment = function(event){
+    
+
     var attribute = this.getAttribute('id');
     var childNodes = this.parentNode.children;
     price = childNodes[2].value;
     var parentsNode = this.parentNode.parentNode.children;
     memberType = parentsNode[0].innerHTML;
     var newAttribute = '';
+
+    if (isPremium){
+        return;
+    }else if(isStandard){
+        if(attribute==='standard-btn'){
+            return;
+        }
+    }
 
     if(isWeiXin()){
         if(attribute==='standard-btn'){
@@ -136,7 +149,7 @@ var openWXCode = function(){
 var closePayment = function(event){
     paymentPage.innerHTML = '';
 };
-let dataObj = {};
+
 let isReqSuccess = false;
 let i = 0;
 const postUE = () => {
@@ -175,33 +188,29 @@ var premiumPrice = document.getElementById('premium_price');
 
 function updateUI(dataObj){
 
-    // if (isWeiXin()){
-    //     EventObject.addHandler(standardBtn,"click",function(){return false;});
-    //     EventObject.addHandler(premiumBtn,"click",function(){return false;});
-    // }else{
-        if ((dataObj.standard === 1 && dataObj.premium === 0)){
-        // if (paraArr.includes('premium=0')&&paraArr.includes('standard=1')){
-
-            standardBtn.innerText = '已订阅';
-            premiumBtn.innerText = '现在升级';
-            EventObject.addHandler(standardBtn,"click",function(){return false;});
-            EventObject.addHandler(premiumBtn,"click",openPayment);
-           
-        }else if (dataObj.standard === 1 && dataObj.premium === 1){
-            console.log('已订阅');
-            standardBtn.innerText = '已订阅';
-            premiumBtn.innerText = '已订阅';
-            EventObject.addHandler(standardBtn,"click",function(){return false;});
-            EventObject.addHandler(premiumBtn,"click",function(){return false;});
-        }else{  
-            standardBtn.innerText = '立即订阅';
-            premiumBtn.innerText = '立即订阅';   
-            EventObject.addHandler(standardBtn,"click",openPayment);
-            EventObject.addHandler(premiumBtn,"click",openPayment);
-        }
+    if ((dataObj.standard === 1 && dataObj.premium === 0)){
+        isStandard = true;
+        standardBtn.innerText = '已订阅';
+        premiumBtn.innerText = '现在升级';
+        // EventObject.addHandler(standardBtn,"click",function(){return false;});
+        EventObject.addHandler(premiumBtn,"click",openPayment);
         
-    // }
-
+    }else if (dataObj.standard === 1 && dataObj.premium === 1){
+        isPremium = true;
+        console.log('已订阅');
+        standardBtn.innerText = '已订阅';
+        premiumBtn.innerText = '已订阅';
+        // EventObject.addHandler(standardBtn,"click",function(){return false;});
+        // EventObject.addHandler(premiumBtn,"click",function(){return false;});
+    }else{  
+        isStandard = false;
+        isPremium = false;
+        standardBtn.innerText = '立即订阅';
+        premiumBtn.innerText = '立即订阅';   
+        EventObject.addHandler(standardBtn,"click",openPayment);
+        EventObject.addHandler(premiumBtn,"click",openPayment);
+    }
+        
 }
 
 window.onunload = function closeWindow(){
