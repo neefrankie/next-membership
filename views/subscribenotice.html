@@ -53,7 +53,7 @@
         }
     }
     var SELabel = GetCookie('SELabel')||'';
-    ga('send','event','Web Privileges', 'Buy Success:'+eventAction, SELabel);
+    ga('send','event','Web Privileges', 'Buy Notice:'+eventAction, SELabel);
 
     function returnTo(){
         var rCookie = GetCookie('R')||'';
@@ -92,7 +92,7 @@
   </HEADER>
 
   <div class = "notice-container">
-    <div class="hint-word"><span class="hint-img"></span><span class="hint-content">恭喜您，订阅成功！</span></div>
+    <div class="hint-word"><span class="hint-img"></span><span class="hint-content" id="hint-content"></span></div>
     <div  class="return-btn"><button onclick="returnTo()">返回</button></div>
   </div>
 
@@ -123,8 +123,23 @@
 
 </script>
 
+<script>
+    function getNoticeValue(){
+        var noticeValue = '';
+        var paraArr = parseUrlSearch();
+        if (paraArr && paraArr.length>0){
+            var arr = paraArr[0].split('=');
+            noticeValue = arr[1];
+        }
+        var hintContent = document.querySelector('.hint-content');
+        if(noticeValue){
+            hintContent.innerHTML = noticeValue;
+        }
+        
+    }
+    getNoticeValue();
 
-
+</script>
 
 </body>
 </html>
