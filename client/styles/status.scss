@@ -1,0 +1,43 @@
+    .success-container{
+        text-align: center;
+        position: absolute;
+        top: 40%;
+        width: 100%;
+        font-size: 1.5em;
+    }
+
+    .fail-container{
+        text-align: center;
+        position: absolute;
+        top: 40%;
+        width: 100%;
+        font-size: 1.5em;
+    }
+
+    .hint-word{
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+    .hint-img{
+        width: 40px;
+        height: 30px;
+        display: inline-block;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M760 380.4l-61.6-61.6-263.2 263.1-109.6-109.5L264 534l171.2 171.2L760 380.4z"/></svg>');
+
+        background-repeat: no-repeat;
+        background-position: left top;
+    }
+
+    .return-btn{
+        text-align: center;
+        padding: 30px 0px;
+        button{
+            background-color: #26747a;
+            color: white; 
+            letter-spacing: 3px;
+            height: 30px;
+            width: 110px;
+            padding: 0px 20px;
+        }
+    }

@@ -54,26 +54,22 @@
     
     var SELabel = GetCookie('SELabel')||'';
     ga('send','event','Web Privileges', 'Buy Fail:'+eventAction, SELabel);
+
+    function returnTo(){
+        var referUrl = document.referrer;
+        window.open(referUrl,'_self');
+    }
 </script>
 <link inline rel="stylesheet" type="text/css" href="styles/base.css">
 <link inline rel="stylesheet" type="text/css" href="styles/header.css">
-<style>
-    .fail-container{
-        text-align: center;
-        position: absolute;
-        top: 50%;
-        width: 100%;
-        font-size: 2em;
-    }
-
-</style>
+<link inline rel="stylesheet" type="text/css" href="styles/status.css">
 
 
 </head>
 
 <body>
 
-<header class="header-container">
+<!--<header class="header-container">
 <div class="header-inner">
 <div class="header-title">FT中文网</div>
 <div class="header-side header-left">
@@ -81,10 +77,23 @@
 </div>
 
 </div>
-</header>
+</header>-->
+
+  <HEADER class="header-container">
+    <DIV class="header-inner">
+      <DIV class="header-title">FT中文网</DIV>
+      <DIV class="header-side header-left" style="display: none;">
+        <DIV class="header-brand">
+          <FIGURE class="loading" data-url="http://static.ftchinese.com/images/masthead36.png"></FIGURE>
+        </DIV>
+      </DIV>
+
+    </DIV>
+  </HEADER>
 
   <div class = "fail-container">
-    订阅失败，请重新订阅！
+    <div class="hint-word"><span class="hint-content">订阅失败，请返回重新订阅！</span></div>
+    <div  class="return-btn"><button onclick="returnTo()">返回</button></div>
   </div>
 
 
