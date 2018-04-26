@@ -23,7 +23,7 @@ var paymentShadow = '';
 var paymentPage = document.getElementById('payment-page');
 var price = '';
 var memberType = '';
-var userId = '';
+
 var openPayment = function(event){
 
     var attribute = this.getAttribute('id');
