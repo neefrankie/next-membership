@@ -23,8 +23,8 @@ var paymentShadow = '';
 var paymentPage = document.getElementById('payment-page');
 var price = '';
 var memberType = '';
+var userId = '';
 var openPayment = function(event){
-    
 
     var attribute = this.getAttribute('id');
     var childNodes = this.parentNode.children;
@@ -75,10 +75,9 @@ var openPayment = function(event){
     }
 
     var SELabel = GetCookie('SELabel');
-    
-
     var eventAction = 'Buy: ' + newAttribute;
     ga('send','event','Web Privileges', eventAction, SELabel);
+
 };
 
 function getDeviceType() {
@@ -166,7 +165,6 @@ const postUE = () => {
                 dataObj = JSON.parse(data);
                 isReqSuccess = true;
                 updateUI(dataObj);
-                // console.log('success'+i);
             } else {
                 isReqSuccess = false;
                 i++;
