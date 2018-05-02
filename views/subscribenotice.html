@@ -40,6 +40,7 @@
 
     function parseUrlSearch(){
         var para = location.search.substring(1);
+        para = decodeURIComponent(para);
         var paraArr = para.split('&');
         return paraArr;
     }
@@ -47,13 +48,15 @@
     var eventAction = '';
     var paraArr = parseUrlSearch();
     if (paraArr && paraArr.length>0){
-        for(let j=0;j<paraArr.length;j++){
-            var arr = paraArr[j].split('=');
-            eventAction += arr[1] + ' ';
-        }
+        // for(let j=0;j<paraArr.length;j++){
+            var arr = paraArr[0].split('=');
+            eventAction = arr[1] ;
+        // }
     }
+
+    // console.log('eventAction:'+eventAction);
     var SELabel = GetCookie('SELabel')||'';
-    ga('send','event','Web Privileges', 'Buy Notice:'+eventAction, SELabel);
+    ga('send','event','Web Privileges', 'Buy Success:'+eventAction, SELabel);
 
     function returnTo(){
         var rCookie = GetCookie('R')||'';
@@ -65,6 +68,10 @@
         }
         
     }
+
+
+
+
 </script>
 
 <link inline rel="stylesheet" type="text/css" href="styles/base.css">
@@ -75,9 +82,7 @@
 
 </head>
 
-<body>
-
-
+<body onload="time()">
 
   <HEADER class="header-container">
     <DIV class="header-inner">
@@ -92,6 +97,7 @@
   </HEADER>
 
   <div class = "notice-container">
+    <div class="hint-word hint-time"><span class="time" id="time">5</span>秒跳转</div>
     <div class="hint-word"><span class="hint-img"></span><span class="hint-content" id="hint-content"></span></div>
     <div  class="return-btn"><button onclick="returnTo()">返回</button></div>
   </div>
@@ -124,12 +130,23 @@
 </script>
 
 <script>
+    // Mark: 获取Notice值
     function getNoticeValue(){
         var noticeValue = '';
         var paraArr = parseUrlSearch();
         if (paraArr && paraArr.length>0){
-            var arr = paraArr[0].split('=');
-            noticeValue = arr[1];
+          var arr = '';
+            if (!!paraArr[1]){
+               arr = paraArr[1].split('=');
+               if(arr[1]){
+                 noticeValue = arr[1];
+               }else{
+                 noticeValue = '请求中';
+               }
+               
+            }else{
+              noticeValue = '请求中';
+            }
         }
         var hintContent = document.querySelector('.hint-content');
         if(noticeValue){
@@ -138,6 +155,31 @@
         
     }
     getNoticeValue();
+
+
+// Mark: 3秒自动跳转
+   var s;
+   function countDown(){
+        var objTime = document.getElementById("time");//获得time的对象
+        var time = objTime.innerText;//获得time的值
+        time = time-1;
+        objTime.innerText = time;//把新time赋给objTime里面
+        if(time == 0){
+          //3s过后跳转到哪里去
+          var rCookie = GetCookie('R')||'';
+          if(rCookie){
+              var referUrl = decodeURIComponent(rCookie);
+              window.location.href = referUrl;
+          }else{
+              window.location.href = 'http://www.ftchinese.com';
+          }
+          window.clear(s);//清空s，防止再次调用a()。即防止time减为负数
+        }
+    }
+
+  function time(){
+    s = window.setInterval("countDown()",1000);//每隔一秒自动调用a()
+  }
 
 </script>
 
