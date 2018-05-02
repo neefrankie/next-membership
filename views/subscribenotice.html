@@ -48,13 +48,10 @@
     var eventAction = '';
     var paraArr = parseUrlSearch();
     if (paraArr && paraArr.length>0){
-        // for(let j=0;j<paraArr.length;j++){
-            var arr = paraArr[0].split('=');
-            eventAction = arr[1] ;
-        // }
+          var arr = paraArr[0].split('=');
+          eventAction = arr[1] ;
     }
 
-    // console.log('eventAction:'+eventAction);
     var SELabel = GetCookie('SELabel')||'';
     ga('send','event','Web Privileges', 'Buy Success:'+eventAction, SELabel);
 
@@ -69,13 +66,8 @@
         
     }
 
-
-
-
 </script>
 
-<link inline rel="stylesheet" type="text/css" href="styles/base.css">
-<link inline rel="stylesheet" type="text/css" href="styles/header.css">
 <link inline rel="stylesheet" type="text/css" href="styles/status.css">
 
 
@@ -96,16 +88,11 @@
     </DIV>
   </HEADER>
 
-  <div class = "notice-container">
+  <div class = "notice-container">  
+    <div class="hint-word"><span class="hint-img"></span><span class="hint-content" id="hint-content">恭喜您，订阅成功！</span></div>
     <div class="hint-word hint-time"><span class="time" id="time">5</span>秒跳转</div>
-    <div class="hint-word"><span class="hint-img"></span><span class="hint-content" id="hint-content"></span></div>
     <div  class="return-btn"><button onclick="returnTo()">返回</button></div>
   </div>
-
-
-
-
-
 
 <script>
     var today = new Date();
@@ -130,32 +117,6 @@
 </script>
 
 <script>
-    // Mark: 获取Notice值
-    function getNoticeValue(){
-        var noticeValue = '';
-        var paraArr = parseUrlSearch();
-        if (paraArr && paraArr.length>0){
-          var arr = '';
-            if (!!paraArr[1]){
-               arr = paraArr[1].split('=');
-               if(arr[1]){
-                 noticeValue = arr[1];
-               }else{
-                 noticeValue = '请求中';
-               }
-               
-            }else{
-              noticeValue = '请求中';
-            }
-        }
-        var hintContent = document.querySelector('.hint-content');
-        if(noticeValue){
-            hintContent.innerHTML = noticeValue;
-        }
-        
-    }
-    getNoticeValue();
-
 
 // Mark: 3秒自动跳转
    var s;

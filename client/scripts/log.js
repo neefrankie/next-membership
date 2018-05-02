@@ -132,3 +132,30 @@ function DeleteCookie (name) {
 //     -webkit-transition: max-height 0.25s ease,border-top 0.75s ease;
 //     transition: max-height 0.25s ease,border-top 0.75s ease;
 //     border-top: 1px solid transparent;
+
+
+    // Mark: 获取Notice值
+    // function getNoticeValue(){
+    //     var noticeValue = '';
+    //     var paraArr = parseUrlSearch();
+    //     if (paraArr && paraArr.length>0){
+    //       var arr = '';
+    //         if (!!paraArr[1]){
+    //            arr = paraArr[1].split('=');
+    //            if(arr[1]){
+    //              noticeValue = arr[1];
+    //            }else{
+    //              noticeValue = '请求中';
+    //            }
+               
+    //         }else{
+    //           noticeValue = '请求中';
+    //         }
+    //     }
+    //     var hintContent = document.querySelector('.hint-content');
+    //     if(noticeValue){
+    //         hintContent.innerHTML = noticeValue;
+    //     }
+        
+    // }
+    // getNoticeValue();

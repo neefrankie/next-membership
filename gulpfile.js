@@ -161,30 +161,58 @@ gulp.task('jshint', function () {
 });
 
 
+// gulp.task('scripts', async () => {
+//   async function rollupJs() {
+//     try {
+//       const bundle = await rollup({
+//         input:'client/scripts/main.js',
+//         plugins:[
+//           babel({
+//             exclude:'node_modules/**'
+//           }),
+//           nodeResolve({
+//             jsnext:true,
+//           })
+//         ]
+//       }) ;
+//       await bundle.write({//返回promise，以便下一步then()
+//           file: '.tmp/scripts/main.js',
+//           format: 'iife',
+//           sourcemap: true
+//       });
+//     }catch (err) {
+//       console.log(err);
+//     };
+//   } 
+//   rollupJs()
+//   browserSync.reload();
+// });
+
+
 gulp.task('scripts', async () => {
-  async function rollupJs() {
-    try {
-      const bundle = await rollup({
-        input:'client/scripts/main.js',
-        plugins:[
-          babel({
-            exclude:'node_modules/**'
-          }),
-          nodeResolve({
-            jsnext:true,
-          })
-        ]
-      }) ;
-      await bundle.write({//返回promise，以便下一步then()
-          file: '.tmp/scripts/main.js',
-          format: 'iife',
-          sourcemap: true
-      });
-    }catch (err) {
-      console.log(err);
-    };
-  } 
-  rollupJs()
+  const origami = await fs.readAsync('views/data/path-detail.json','json');
+  const demos = origami.demos;
+  async function rollupOneJs(demo) {
+    const bundle = await rollup({
+      input:`client/scripts/${demo.js}`,
+      plugins:[
+        babel({//这里需要配置文件.babelrc
+          exclude:'node_modules/**'
+        }),
+        nodeResolve({
+          jsnext:true,
+        })
+      ]
+    });
+
+    await bundle.write({//返回promise，以便下一步then()
+        file: `.tmp/scripts/${demo.js}`,
+        format: 'iife',
+        sourcemap: true
+    });
+  }
+  //console.log(demos);
+  await demos.forEach(rollupOneJs);
   browserSync.reload();
 });
 
