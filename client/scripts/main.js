@@ -6,6 +6,7 @@ import {EventObject,GetCookie,DeleteCookie,isWeiXin,parseUrlSearch,isEmptyObj} f
 let dataObj = {};
 let isStandard = false;
 let isPremium = false;
+let upgradePrice = '';
 
 const setCookieVal = () => {
     // Mark:check ccode
@@ -28,6 +29,7 @@ var openPayment = function(event){
 
     var attribute = this.getAttribute('id');
     var childNodes = this.parentNode.children;
+    console.log(childNodes);
     price = childNodes[2].value;
     var parentsNode = this.parentNode.parentNode.children;
     memberType = parentsNode[0].innerHTML;
@@ -39,6 +41,7 @@ var openPayment = function(event){
         if(attribute==='standard-btn'){
             return;
         }
+        price = upgradePrice;
     }
 
     if(isWeiXin()){
@@ -190,16 +193,16 @@ function updateUI(dataObj){
         isStandard = true;
         standardBtn.innerText = '已订阅';
         premiumBtn.innerText = '现在升级';
+        upgradePrice = '¥'+dataObj.v+'.00/年';
+        premiumPrice.innerHTML = upgradePrice;
+        
         // EventObject.addHandler(standardBtn,"click",function(){return false;});
         EventObject.addHandler(premiumBtn,"click",openPayment);
         
     }else if (dataObj.standard === 1 && dataObj.premium === 1){
         isPremium = true;
-        console.log('已订阅');
         standardBtn.innerText = '已订阅';
         premiumBtn.innerText = '已订阅';
-        // EventObject.addHandler(standardBtn,"click",function(){return false;});
-        // EventObject.addHandler(premiumBtn,"click",function(){return false;});
     }else{  
         isStandard = false;
         isPremium = false;
