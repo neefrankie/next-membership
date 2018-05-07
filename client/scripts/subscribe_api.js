@@ -52,8 +52,10 @@ function isWeiXin() {
     }
 }
 
+
 function parseUrlSearch(){
     var para = location.search.substring(1);
+    para = decodeURIComponent(para);
     var paraArr = para.split('&');
     return paraArr;
 }

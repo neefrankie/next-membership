@@ -340,3 +340,27 @@ clickTabForm();
 
 
 
+
+function hasUtmCampaign(){
+    if(window.location.search.indexOf('utm_campaign')>=0){
+        
+        var campaign = '';
+        var paraArr = parseUrlSearch();
+        if (paraArr && paraArr.length>0){
+              for(let j=0;j<paraArr.length;j++){
+                if(paraArr[j].indexOf('utm_campaign')>=0){
+                        var arr = paraArr[j].split('=');
+                        campaign = arr[1];
+                        document.cookie = 'campaign_code = ' + campaign;
+                }
+
+              }
+        }
+
+
+    }
+
+}
+
+hasUtmCampaign();
+
