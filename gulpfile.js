@@ -67,6 +67,7 @@ gulp.task('build-page', () => {
     
     const name = demo.name;
     const template = demo.template;
+    const dataPath = demo.data;
     // dataPath不为空loadJsonFile读取不会报错，否则会报错,并且报错后环境为development，可以把页面数据集中在一个json文件中
       return loadJsonFile(dataPath)
       .then(data => {
@@ -76,7 +77,7 @@ gulp.task('build-page', () => {
             products: data.index,
             env
           });
-        }else if (name ==='subscription'){
+        }else if (name ==='subscriptionTest'||name ==='question'||name ==='subscription'){
           return render(template, {
             products: data.index,
             tabContents1: data.tabContent1,
@@ -84,20 +85,10 @@ gulp.task('build-page', () => {
             tabContents3: data.tabContent3,
             env
           });
-        }else if (name ==='subscriptionTest'){
+        }else if (name ==='app-center'){
           return render(template, {
-            products: data.index,
-            tabContents1: data.tabContent1,
-            tabContents2: data.tabContent2,
-            tabContents3: data.tabContent3,
-            env
-          });
-        }else if (name ==='question'){
-          return render(template, {
-            products: data.index,
-            tabContents1: data.tabContent1,
-            tabContents2: data.tabContent2,
-            tabContents3: data.tabContent3,
+            titles: data.title,
+            datas: data.data,
             env
           });
         }else{

@@ -48,6 +48,12 @@
             "data": "views/data/data.json",
             "template": "subscribenotice.html",
             "js":"notice.js"
+        },
+        {
+            "name": "appcenter",
+            "data": "views/data/app-center.json",
+            "template": "appcenter.html",
+            "js":"appcenter.js"
         }
  
        
