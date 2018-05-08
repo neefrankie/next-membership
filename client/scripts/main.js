@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
 
-import {EventObject,GetCookie,DeleteCookie,isWeiXin,parseUrlSearch,isEmptyObj} from './subscribe_api.js';
+import {EventObject,GetCookie,SetCookie,DeleteCookie,isWeiXin,parseUrlSearch,isEmptyObj} from './subscribe_api.js';
 
 let dataObj = {};
 let isStandard = false;
@@ -351,7 +351,8 @@ function hasUtmCampaign(){
                 if(paraArr[j].indexOf('utm_campaign')>=0){
                         var arr = paraArr[j].split('=');
                         campaign = arr[1];
-                        document.cookie = 'campaign_code = ' + campaign;
+                        SetCookie('campaign_code',campaign,86400,null,null,false)
+                        // document.cookie = 'campaign_code = ' + campaign;
                 }
 
               }
