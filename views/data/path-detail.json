@@ -53,7 +53,7 @@
             "name": "appcenter",
             "data": "views/data/app-center.json",
             "template": "appcenter.html",
-            "js":"appcenter.js"
+            "js":"app_center.js"
         }
  
        

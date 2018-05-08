@@ -42,6 +42,19 @@ const DeleteCookie = (name) => {
     exp.setTime (exp.getTime() - 1);
     document.cookie = name + '=' + cval + '; expires=' + exp.toGMTString();
 };
+const SetCookie = (name, value , sec , path , domain) => {
+    var argv = SetCookie.arguments,
+        argc = SetCookie.arguments.length,
+        expires = new Date(),
+        secure = (argc > 5) ? argv[5] : false;
+    path = (argc > 3) ? argv[3] : null;
+    domain = (argc > 4) ? argv[4] : null;
+   if(sec === null || sec === '') {sec = 600 * (24 * 60 * 60 * 1000);}
+    else {sec = 1000*sec;}
+    expires.setTime (expires.getTime() + sec);
+    document.cookie = name + '=' + escape (value) +((expires === null) ? '' : ('; expires=' + expires.toGMTString())) +((path === null) ? '/' : ('; path=' + path)) +((domain === null) ? '' : ('; domain=' + domain)) +((secure === true) ? '; secure' : '');  
+}
+
 
 function isWeiXin() {
     var ua = window.navigator.userAgent.toLowerCase();

@@ -41,7 +41,7 @@ gulp.task('build-page', () => {
   
   const destDir = '.tmp';
   const pathDetail = loadJsonFile('views/data/path-detail.json');
-  const dataPath = 'views/data/data.json';
+  // const dataPath = 'views/data/data.json';
   // detail返回promise
   return pathDetail.then(data => {
     const demos = data.demos;
