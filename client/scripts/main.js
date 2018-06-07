@@ -8,13 +8,45 @@ let isStandard = false;
 let isPremium = false;
 let upgradePrice = '';
 
+
+function parseUrlSearch1(){
+    var para = location.search;
+    if(para){
+        para = para.substring(1);
+        para = decodeURIComponent(para);
+        var paraArr = para.split('&');
+        return paraArr;
+    }
+    return undefined;
+}
+
+
+function getUrlParams(key){
+    var value = '';
+    var paraArr = parseUrlSearch1();
+    if (paraArr && paraArr.length>0){
+        var arr = [];
+        for(var i=0,len=paraArr.length; i<len; i++){
+            if(paraArr[i].indexOf(key)>-1){
+                arr = paraArr[i].split('=');
+                if(arr.length>1){
+                    value = arr[1];
+                }
+            }
+        }
+        return value;
+    }
+    return value;
+}
+
+
 const setCookieVal = () => {
     // Mark:check ccode
     var para = location.search.substring(1);
     var pattern = /ccode/g;
     if(pattern.test(para)){
-        document.cookie = 'ccode = ' + paraArr[0] ;
-        // SetCookie('ccode', paraArr[0] , false , null , null)
+        var ccodeValue = getUrlParams('ccode');
+        document.cookie = 'ccode = ' + ccodeValue ;
     }
 };
 setCookieVal();
