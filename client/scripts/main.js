@@ -61,7 +61,6 @@ var openPayment = function(event){
 
     var attribute = this.getAttribute('id');
     var childNodes = this.parentNode.children;
-    console.log(childNodes);
     price = childNodes[2].value;
     var parentsNode = this.parentNode.parentNode.children;
     memberType = parentsNode[0].innerHTML;
@@ -111,7 +110,15 @@ var openPayment = function(event){
 
     var SELabel = GetCookie('SELabel');
     var eventAction = 'Buy: ' + newAttribute;
-    ga('send','event','Web Privileges', eventAction, SELabel);
+
+    let cPara = isFromIos();
+    if(cPara){
+        ga('send','event',cPara, eventAction, SELabel);
+        console.log('isFromIos:'+SELabel);
+    }else{
+        console.log('isFromWeb');
+        ga('send','event','Web Privileges', eventAction, SELabel);
+    }
 
 };
 
@@ -166,7 +173,14 @@ var toPayAction = function(event){
 
     var SELabel = GetCookie('SELabel');
     var eventAction = 'Buy way: ' + payWay;
-    ga('send','event','Web Privileges', eventAction, SELabel);
+
+    let cPara = isFromIos();
+    if(cPara){
+        ga('send','event',cPara, eventAction, SELabel);
+    }else{
+        ga('send','event','Web Privileges', eventAction, SELabel);
+    }
+    
 
     // paymentPage.innerHTML = '';
     memberType = '';
@@ -397,3 +411,27 @@ function hasUtmCampaign(){
 
 hasUtmCampaign();
 
+function isFromIos(){
+    let c = getUrlParams('c');
+    if (!!c){
+        return c;
+    }else{
+        return undefined;
+    }
+}
+
+/**
+ * // Mark: ios track section
+ * cPara:来自ios设备
+ * lPara:跟踪来源信息
+ */
+
+function iosTrack(){
+    let cPara = isFromIos();
+    let lPara = getUrlParams('l');
+    if(cPara){    
+        var SELabel = SetCookie('SELabel',lPara,86400,null,null,false);
+        ga('send','event',cPara, 'display', lPara);
+    }
+}
+iosTrack();
