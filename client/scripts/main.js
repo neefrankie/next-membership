@@ -46,7 +46,8 @@ const setCookieVal = () => {
     var pattern = /ccode/g;
     if(pattern.test(para)){
         var ccodeValue = getUrlParams('ccode');
-        document.cookie = 'ccode = ' + ccodeValue ;
+        // document.cookie = 'ccode = ' + ccodeValue ;
+        var SELabel = SetCookie('ccode',ccodeValue,'',null,'.ftacademy.cn',false);
     }
 };
 setCookieVal();
@@ -420,18 +421,53 @@ function isFromIos(){
     }
 }
 
+function elabelToIos(){
+    let lPara = getUrlParams('l');
+    let elabel = '';
+    if(lPara){
+        elabel = lPara;
+    }else{
+        elabel = 'no l value';
+    } 
+    return elabel;
+}
+
+function hasLpara(){
+    let l = getUrlParams('l');
+    if (!!l){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 /**
  * // Mark: ios track section
- * cPara:来自ios设备
+ * cPara:判断来自ios设备
  * lPara:跟踪来源信息
+ * 既在ios设备上打开，又在网页上打开，会出现2个cookie，怎么区分？
+ * 当关闭时，重新进入，所以可以让cookie关闭浏览器即失效
+ * 出现现象：当出现.ftacademy.cn  和 www.ftacademy.cn时，会读取www.ftacademy.cn的值。当直接在前端js文件中设置cookie，domian是包含www(子域)
+ * 
+ * 发现，在php和js文件设置cookie，默认expire时间不一样
+ * 
+ * 如果没有l，也设置SetCookie
+ * 
+ * 支付成功，用什么来判断是否来自于ios
  */
 
 function iosTrack(){
     let cPara = isFromIos();
     let lPara = getUrlParams('l');
-    if(cPara){    
-        var SELabel = SetCookie('SELabel',lPara,86400,null,null,false);
-        ga('send','event',cPara, 'display', lPara);
+    let elabel = '';
+    if(cPara){   
+        if(lPara){
+            elabel = lPara;      
+        }else{
+            elabel = 'no l value';
+        } 
+        var SELabel = SetCookie('SELabel',elabel,86400,null,'.ftacademy.cn',false);
+        ga('send','event',cPara, 'display', elabel);
     }
 }
 iosTrack();
