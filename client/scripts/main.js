@@ -458,13 +458,13 @@ function hasLpara(){
 
 function iosTrack(){
     let cPara = isFromIos();
-    let lPara = getUrlParams('l');
-    let elabel = '';
+    let lPara = getUrlParams('l'); 
     if(cPara){   
+        let elabel = cPara+'/IOSCL/';
         if(lPara){
-            elabel = lPara;      
+            elabel += lPara;      
         }else{
-            elabel = 'no l value';
+            elabel += 'no l value';
         } 
         var SELabel = SetCookie('SELabel',elabel,86400,null,'.ftacademy.cn',false);
         ga('send','event',cPara, 'display', elabel);

@@ -53,8 +53,14 @@
     }
 
     var SELabel = GetCookie('SELabel')||'';
-    ga('send','event','Web Privileges', 'Buy Success:'+eventAction, SELabel);
 
+    if(SELabel.indexOf('/IOSCL/')>-1){
+        var cPara = SELabel.split('/IOSCL/');
+        ga('send','event',cPara[0], 'Buy Success:'+eventAction, SELabel);
+    }else{
+        ga('send','event','Web Privileges', 'Buy Success:'+eventAction, SELabel);
+    }
+    
     function returnTo(){
         var rCookie = GetCookie('R')||'';
         if(rCookie){
