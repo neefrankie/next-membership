@@ -114,10 +114,14 @@ var openPayment = function(event){
 
     let cPara = isFromIos();
     if(cPara){
-        ga('send','event',cPara, eventAction, SELabel);
-        console.log('isFromIos:'+SELabel);
+        if(SELabel.indexOf('/IOSCL/')>-1){
+            let clParaArr = SELabel.split('/IOSCL/');
+            ga('send','event',cPara, eventAction, clParaArr[1]); 
+        }
+        // ga('send','event',cPara, eventAction, SELabel);
+        // console.log('isFromIos:'+SELabel);
     }else{
-        console.log('isFromWeb');
+        // console.log('isFromWeb');
         ga('send','event','Web Privileges', eventAction, SELabel);
     }
 
@@ -177,11 +181,15 @@ var toPayAction = function(event){
 
     let cPara = isFromIos();
     if(cPara){
-        ga('send','event',cPara, eventAction, SELabel);
+        if(SELabel.indexOf('/IOSCL/')>-1){
+            let clParaArr = SELabel.split('/IOSCL/');
+            ga('send','event',cPara, eventAction, clParaArr[1]); 
+        }     
     }else{
         ga('send','event','Web Privileges', eventAction, SELabel);
     }
     
+
 
     // paymentPage.innerHTML = '';
     memberType = '';
@@ -460,13 +468,16 @@ function iosTrack(){
     let cPara = isFromIos();
     let lPara = getUrlParams('l'); 
     if(cPara){   
-        let elabel = cPara+'/IOSCL/';
+        let elabel = '';
+        let eLabelCookie = cPara+'/IOSCL/';
         if(lPara){
-            elabel += lPara;      
+            eLabelCookie += lPara;
+            elabel = lPara;
         }else{
-            elabel += 'no l value';
+            eLabelCookie += 'no l value';
+            elabel = 'no l value';
         } 
-        var SELabel = SetCookie('SELabel',elabel,86400,null,'.ftacademy.cn',false);
+        var SELabel = SetCookie('SELabel',eLabelCookie,86400,null,'.ftacademy.cn',false);
         ga('send','event',cPara, 'display', elabel);
     }
 }

@@ -55,8 +55,8 @@
     var SELabel = GetCookie('SELabel')||'';
 
     if(SELabel.indexOf('/IOSCL/')>-1){
-        var cPara = SELabel.split('/IOSCL/');
-        ga('send','event',cPara[0], 'Buy Success:'+eventAction, SELabel);
+        var clParaArr = SELabel.split('/IOSCL/');
+        ga('send','event',clParaArr[0], 'Buy Success:'+eventAction, clParaArr[1]);
     }else{
         ga('send','event','Web Privileges', 'Buy Success:'+eventAction, SELabel);
     }
