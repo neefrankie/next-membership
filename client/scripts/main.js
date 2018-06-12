@@ -477,7 +477,7 @@ function iosTrack(){
             eLabelCookie += 'no l value';
             elabel = 'no l value';
         } 
-        var SELabel = SetCookie('SELabel',eLabelCookie,86400,null,'.ftacademy.cn',false);
+        SetCookie('SELabel',eLabelCookie,86400,null,'.ftacademy.cn',false);
         ga('send','event',cPara, 'display', elabel);
     }
 }
