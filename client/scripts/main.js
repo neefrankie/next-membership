@@ -179,6 +179,7 @@ var toPayAction = function(event){
     var SELabel = GetCookie('SELabel');
     var eventAction = 'Buy way: ' + payWay;
 
+
     let cPara = isFromIos();
     if(cPara){
         if(SELabel.indexOf('/IOSCL/')>-1){
@@ -189,12 +190,9 @@ var toPayAction = function(event){
         ga('send','event','Web Privileges', eventAction, SELabel);
     }
     
-    
-    // let ccodePara = getUrlParams('ccode');
-    // if(ccodePara){
+    // else if(getUrlParams('ccode')){
     //     ga('send','event','Web Privileges', eventAction, SELabel);
     // }
-
     // paymentPage.innerHTML = '';
     memberType = '';
     payWay = '';
@@ -493,7 +491,7 @@ function ccodeTrack(){
     if(ccodePara){
         var fromUrl = 'From:'+ccodePara + '/' + document.referrer;
         SetCookie('SELabel',ccodePara,86400,null,'.ftacademy.cn',false);
-        ga('send','event','Web Privileges', 'Display', );
+        ga('send','event','Web Privileges', 'Display', fromUrl);
     }
 }
 
