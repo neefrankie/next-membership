@@ -189,7 +189,11 @@ var toPayAction = function(event){
         ga('send','event','Web Privileges', eventAction, SELabel);
     }
     
-
+    
+    // let ccodePara = getUrlParams('ccode');
+    // if(ccodePara){
+    //     ga('send','event','Web Privileges', eventAction, SELabel);
+    // }
 
     // paymentPage.innerHTML = '';
     memberType = '';
@@ -482,3 +486,15 @@ function iosTrack(){
     }
 }
 iosTrack();
+
+
+function ccodeTrack(){
+    let ccodePara = getUrlParams('ccode');
+    if(ccodePara){
+        var fromUrl = 'From:'+ccodePara + '/' + document.referrer;
+        SetCookie('SELabel',ccodePara,86400,null,'.ftacademy.cn',false);
+        ga('send','event','Web Privileges', 'Display', );
+    }
+}
+
+ccodeTrack();
