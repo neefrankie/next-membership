@@ -29,11 +29,12 @@ function getUrlParams(key){
         for(var i=0,len=paraArr.length; i<len; i++){
             if(paraArr[i].indexOf(key)>-1){
                 arr = paraArr[i].split('=');
-                if(arr.length>1){
+                if(arr.length>1 && arr[0]===key){
                     value = arr[1];
                 }
             }
         }
+        
         return value;
     }
     return value;
@@ -118,10 +119,9 @@ var openPayment = function(event){
             let clParaArr = SELabel.split('/IOSCL/');
             ga('send','event',cPara, eventAction, clParaArr[1]); 
         }
-        // ga('send','event',cPara, eventAction, SELabel);
         // console.log('isFromIos:'+SELabel);
     }else{
-        // console.log('isFromWeb');
+        console.log('isFromWeb');
         ga('send','event','Web Privileges', eventAction, SELabel);
     }
 
@@ -170,17 +170,13 @@ var toPayAction = function(event){
     }else if (memberType==='标准会员' && payWay==='wxpay') {
         window.open('http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=2','_blank');   
     }
-    // 没有r跳回到首页，有r跳到r指定的链接；有alert
-    
-    // var rCookie = GetCookie('R');
-    // var referUrl = decodeURIComponent(rCookie);
-    
 
     var SELabel = GetCookie('SELabel');
     var eventAction = 'Buy way: ' + payWay;
 
 
     let cPara = isFromIos();
+    
     if(cPara){
         if(SELabel.indexOf('/IOSCL/')>-1){
             let clParaArr = SELabel.split('/IOSCL/');
@@ -190,10 +186,7 @@ var toPayAction = function(event){
         ga('send','event','Web Privileges', eventAction, SELabel);
     }
     
-    // else if(getUrlParams('ccode')){
-    //     ga('send','event','Web Privileges', eventAction, SELabel);
-    // }
-    // paymentPage.innerHTML = '';
+
     memberType = '';
     payWay = '';
     
@@ -469,7 +462,9 @@ function hasLpara(){
 function iosTrack(){
     let cPara = isFromIos();
     let lPara = getUrlParams('l'); 
-    if(cPara){   
+    
+    if(cPara){  
+        
         let elabel = '';
         let eLabelCookie = cPara+'/IOSCL/';
         if(lPara){
@@ -490,7 +485,7 @@ function ccodeTrack(){
     let ccodePara = getUrlParams('ccode');
     if(ccodePara){
         var fromUrl = 'From:'+ccodePara + '/' + document.referrer;
-        SetCookie('SELabel',ccodePara,86400,null,'.ftacademy.cn',false);
+        SetCookie('SELabel',fromUrl,86400,null,'.ftacademy.cn',false);
         ga('send','event','Web Privileges', 'Display', fromUrl);
     }
 }
