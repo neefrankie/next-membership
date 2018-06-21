@@ -254,10 +254,23 @@ function updateUI(dataObj){
     if(lPara || sponsorCookie){
         standardPrice.innerHTML = '¥169.00/年';
         premiumPrice.innerHTML = '¥1699.00/年';
-        EventObject.addHandler(standardBtn,"click",openPayment);
-        EventObject.addHandler(premiumBtn,"click",openPayment);
-        isStandard = false;
-        isPremium = false;
+        if ((dataObj.standard === 1 && dataObj.premium === 0)){
+            isStandard = true;
+            standardBtn.innerText = '已订阅';
+            premiumBtn.innerText = '现在升级';
+            EventObject.addHandler(premiumBtn,"click",openPayment);
+        }else if (dataObj.standard === 1 && dataObj.premium === 1){
+            isPremium = true;
+            standardBtn.innerText = '已订阅';
+            premiumBtn.innerText = '已订阅';
+        }else{  
+            isStandard = false;
+            isPremium = false;
+            standardBtn.innerText = '立即订阅';
+            premiumBtn.innerText = '立即订阅';   
+            EventObject.addHandler(standardBtn,"click",openPayment);
+            EventObject.addHandler(premiumBtn,"click",openPayment);
+        }
     }else{
         if ((dataObj.standard === 1 && dataObj.premium === 0)){
             isStandard = true;
@@ -265,8 +278,7 @@ function updateUI(dataObj){
             premiumBtn.innerText = '现在升级';
             upgradePrice = '¥'+dataObj.v+'.00/年';
             premiumPrice.innerHTML = upgradePrice;
-            
-            // EventObject.addHandler(standardBtn,"click",function(){return false;});
+
             EventObject.addHandler(premiumBtn,"click",openPayment);
             
         }else if (dataObj.standard === 1 && dataObj.premium === 1){
