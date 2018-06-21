@@ -310,24 +310,27 @@ window.onunload = function closeWindow(){
 
 
 if (window.location.hostname === 'localhost' || window.location.hostname.indexOf('192.168') === 0 || window.location.hostname.indexOf('10.113') === 0 || window.location.hostname.indexOf('127.0') === 0) {
-        var paraArr = parseUrlSearch();//(2) ["premium=0", "standard=1"]
-        for(let j=0;j<paraArr.length;j++){
-            var arr = paraArr[j].split('=');
-            dataObj[arr[0]]=Number(arr[1]);
-        }
-        updateUI(dataObj);
-        // var xhrpw1 = new XMLHttpRequest();
-        // xhrpw1.open('get','http://localhost:3000/scripts/paywall.json');
-        // xhrpw1.onload = function() {
-        //     console.log('test paywall'+xhrpw1.status);
-        //     if (xhrpw1.status==200){               
-        //         var data = xhrpw1.responseText;
-        //         dataObj = JSON.parse(data);
-        //         updateUI(dataObj);
-        //     } 
-        // };
-        // xhrpw1.send(null);
+        // var paraArr = parseUrlSearch();//(2) ["premium=0", "standard=1"]
+        // for(let j=0;j<paraArr.length;j++){
+        //     var arr = paraArr[j].split('=');
+        //     dataObj[arr[0]]=Number(arr[1]);
+        // }
+        // updateUI(dataObj);
+        var xhrpw1 = new XMLHttpRequest();
+        xhrpw1.open('get','api/paywall.json');
+        xhrpw1.onload = function() {
+            console.log('test paywall'+xhrpw1.status);
+            if (xhrpw1.status==200){               
+                var data = xhrpw1.responseText;
+                dataObj = JSON.parse(data);
+                updateUI(dataObj);
+            } 
+        };
+        xhrpw1.send(null);
 
+        if (isEmptyObj(dataObj)){
+            updateUI(dataObj);
+        }
 }else{
     postUE('/index.php/jsapi/paywall');
     if (isEmptyObj(dataObj)){

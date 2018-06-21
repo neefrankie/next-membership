@@ -143,13 +143,7 @@ gulp.task('styles', function styles() {
 });
 
 
-gulp.task('jshint', function () {
-  // return gulp.src('client/main.js')
-  return gulp.src('client/scripts/**/*.js')
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.jshint.reporter('fail'));
-});
+
 
 
 // gulp.task('scripts', async () => {
@@ -218,6 +212,11 @@ gulp.task('comCss', () => {
     .pipe(gulp.dest('.tmp/styles/'));
 });
 
+gulp.task('api', () => {
+  return gulp.src(['client/api/*.json'])
+    .pipe(gulp.dest('.tmp/api/'));
+});
+
 
 gulp.task('clean', () => {
   return del(['.tmp/**','.dest/**']);
@@ -231,7 +230,8 @@ gulp.task('jshint', function () {
 });
 
 
-gulp.task('serve', gulp.parallel('build-page', 'styles', 'scripts', () => {
+
+gulp.task('serve', gulp.parallel('build-page', 'styles', 'scripts', 'api',() => {
   browserSync.init({
     server: {
       baseDir: ['.tmp'],
