@@ -166,15 +166,11 @@
 			"answers": ["1. 在iOS APP内，您可以点击底部导航栏“我的FT” - 顶部“账户”一栏，登录FT中文网。","2. 在安卓APP内，您可以点击右下角“设置”-“登录”。","3. 在电脑网页端，您可以点击网页右上角的“登录”。","4. 在移动网页端，您可以打开FT中文网（ftchinese.com），点击左上角的图标，在弹出的左侧边栏中，点击“登录”。"]
 		},
 		{
-			"question": "我可以修改注册邮箱吗？ ",
-			"answers": ["您可以在网页端打开网页http://user.ftchinese.com/setting，修改您的注册邮箱。"]
-		},
-		{
 			"question": "如何更新我的订单信息？",
 			"answers": ["如果您是iOS用户，可以在电脑上打开网页https://support.apple.com/zh-cn/HT202039，登录您的Apple ID，根据您使用的设备，依照苹果官方流程查看您的订单信息。"]
 		},
 		{
-			"question": "在个人信息里，为什么我不能修改“国家”信息？ ",
+			"question": "我可以修改居住地吗？",
 			"answers": ["FT中文网账户支持修改您的“居住地”信息，在网页端打开网页http://user.ftchinese.com/setting即可完成。"]
 		},
 		{

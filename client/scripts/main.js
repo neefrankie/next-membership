@@ -512,6 +512,6 @@ function ccodeTrack(){
 
 ccodeTrack();
 
-function updatePrice(){
-    let lPara = getUrlParams('from'); 
-}
+// function getPrice(){
+     
+// }
