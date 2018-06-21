@@ -18,11 +18,8 @@
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
   ga('create', 'UA-1608715-1', 'auto');
   ga('require', 'displayfeatures');
-  try {
-    ga('send', 'pageview',window.location.href);
-  }catch(err){
-  
-  }
+
+  ga('require', 'ecommerce');
  
   </script>
 <!-- End Google Analytics -->
@@ -60,27 +57,38 @@
     }else{
         ga('send','event','Web Privileges', 'Buy Success:'+eventAction, SELabel);
     }
-    
-    function returnTo(){
-        var rCookie = GetCookie('R')||'';
-        if(rCookie){
-            var referUrl = decodeURIComponent(rCookie);
-            window.open(referUrl,'_self');
-        }else{
-            window.open('http://www.ftchinese.com/','_self');
-        }
-        
-    }
+    // TODO:get actual price
+    var price = '';
+    price = (eventAction === 'Premium') ? '1998' : '199';
+    var randomVal = Math.round(Math.random()*899)+100;
+    ga('ecommerce:addTransaction', {
+    'id': randomVal,                     // Transaction ID. Required.
+    'affiliation': SELabel,   // Affiliation or store name.
+    'revenue': price,               // Grand Total.
+    'shipping': '0',                  // Shipping.
+    'tax': '0' ,
+    'currency': 'RMB'                     // Tax.
+    });
 
+    ga('ecommerce:addItem', {
+    'id': randomVal,                     // Transaction ID. Required.
+    'name': eventAction,    // Product name. Required.
+    'sku': eventAction,                 // SKU/code.
+    'category': 'Subscription',         // Category or variation.
+    'price': price,                 // Unit price.
+    'quantity': '1'                   // Quantity.
+    });
+
+    ga('ecommerce:send');
+    
 </script>
 
 <link inline rel="stylesheet" type="text/css" href="styles/status.css">
 
 
-
 </head>
 
-<body onload="time()">
+<body onload="time()" id="bodyId">
 
   <HEADER class="header-container">
     <DIV class="header-inner">
@@ -97,7 +105,7 @@
   <div class = "notice-container">  
     <div class="hint-word"><span class="hint-img"></span><span class="hint-content" id="hint-content">恭喜您，订阅成功！</span></div>
     <div class="hint-word hint-time"><span class="time" id="time">5</span>秒跳转</div>
-    <div  class="return-btn"><button onclick="returnTo()">返回</button></div>
+    <div  class="return-btn"><button  id="returnTo">返回</button></div>
   </div>
 
 <script>
@@ -121,6 +129,7 @@
     }
 
 </script>
+
 
 <script>
 
@@ -148,7 +157,21 @@
     s = window.setInterval("countDown()",1000);//每隔一秒自动调用a()
   }
 
-</script>
+  function returnTo(){
+    var rCookie = GetCookie('R')||'';
+    if(rCookie){
+        var referUrl = decodeURIComponent(rCookie);
+        window.open(referUrl,'_self');
+    }else{
+        window.open('http://www.ftchinese.com/','_self');
+    }
+    
+}
 
+var returnTo = document.getElementById("returnTo");
+returnTo.onclick=function(){ 
+    returnTo();
+}
+</script>
 </body>
 </html>
