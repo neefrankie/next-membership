@@ -215,14 +215,14 @@ var closePayment = function(event){
 
 let isReqSuccess = false;
 let i = 0;
-const postUE = () => {
+const postUE = (url) => {
     if(!isReqSuccess && i<3){
         let cookieVal = {
             uCookieVal : GetCookie('U'),
             eCookieVal : GetCookie('E')
         }
         let xhrpw = new XMLHttpRequest();
-        xhrpw.open('post','/index.php/jsapi/paywall');
+        xhrpw.open('post',url);
         xhrpw.onload = function() {
             if (xhrpw.status==200){               
                 var data = xhrpw.responseText;
@@ -316,8 +316,20 @@ if (window.location.hostname === 'localhost' || window.location.hostname.indexOf
             dataObj[arr[0]]=Number(arr[1]);
         }
         updateUI(dataObj);
+        // var xhrpw1 = new XMLHttpRequest();
+        // xhrpw1.open('get','http://localhost:3000/scripts/paywall.json');
+        // xhrpw1.onload = function() {
+        //     console.log('test paywall'+xhrpw1.status);
+        //     if (xhrpw1.status==200){               
+        //         var data = xhrpw1.responseText;
+        //         dataObj = JSON.parse(data);
+        //         updateUI(dataObj);
+        //     } 
+        // };
+        // xhrpw1.send(null);
+
 }else{
-    postUE();
+    postUE('/index.php/jsapi/paywall');
     if (isEmptyObj(dataObj)){
         updateUI(dataObj);
     }
