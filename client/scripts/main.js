@@ -7,7 +7,8 @@ let dataObj = {};
 let isStandard = false;
 let isPremium = false;
 let upgradePrice = '';
-
+let standardPriceValue = '';
+let premiumPriceValue = '';
 
 function parseUrlSearch1(){
     var para = location.search;
@@ -252,12 +253,16 @@ function updateUI(dataObj){
     let lPara = getUrlParams('from'); 
     let sponsorCookie = GetCookie('sponsor');
     if(lPara || sponsorCookie){
+
+        upgradePrice  = '¥1699.00/年';
         standardPrice.innerHTML = '¥169.00/年';
         premiumPrice.innerHTML = '¥1699.00/年';
         if ((dataObj.standard === 1 && dataObj.premium === 0)){
             isStandard = true;
             standardBtn.innerText = '已订阅';
             premiumBtn.innerText = '现在升级';
+            // upgradePrice = '¥'+dataObj.v+'.00/年';
+            // premiumPrice.innerHTML = upgradePrice;
             EventObject.addHandler(premiumBtn,"click",openPayment);
         }else if (dataObj.standard === 1 && dataObj.premium === 1){
             isPremium = true;
@@ -278,7 +283,6 @@ function updateUI(dataObj){
             premiumBtn.innerText = '现在升级';
             upgradePrice = '¥'+dataObj.v+'.00/年';
             premiumPrice.innerHTML = upgradePrice;
-
             EventObject.addHandler(premiumBtn,"click",openPayment);
             
         }else if (dataObj.standard === 1 && dataObj.premium === 1){
@@ -311,7 +315,6 @@ if (window.location.hostname === 'localhost' || window.location.hostname.indexOf
             var arr = paraArr[j].split('=');
             dataObj[arr[0]]=Number(arr[1]);
         }
-        // postUE();
         updateUI(dataObj);
 }else{
     postUE();
