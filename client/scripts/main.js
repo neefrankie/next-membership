@@ -77,6 +77,16 @@ var openPayment = function(event){
         price = upgradePrice;
     }
 
+    let lPara = getUrlParams('from'); 
+    let sponsorCookie = GetCookie('sponsor');
+    if(lPara || sponsorCookie){
+        if(attribute==='standard-btn'){
+            price = '¥169.00/年';
+        }else if(attribute==='premium-btn'){
+            price = '¥1699.00/年';
+        }
+    }
+
     if(isWeiXin()){
         if(attribute==='standard-btn'){
             window.location='http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=2';
@@ -235,33 +245,43 @@ const postUE = () => {
 var premiumBtn = document.getElementById('premium-btn');
 var standardBtn = document.getElementById('standard-btn');
 var premiumPrice = document.getElementById('premium_price');
-
+var standardPrice = document.getElementById('standard_price');
 
 function updateUI(dataObj){
 
-    if ((dataObj.standard === 1 && dataObj.premium === 0)){
-        isStandard = true;
-        standardBtn.innerText = '已订阅';
-        premiumBtn.innerText = '现在升级';
-        upgradePrice = '¥'+dataObj.v+'.00/年';
-        premiumPrice.innerHTML = upgradePrice;
-        
-        // EventObject.addHandler(standardBtn,"click",function(){return false;});
-        EventObject.addHandler(premiumBtn,"click",openPayment);
-        
-    }else if (dataObj.standard === 1 && dataObj.premium === 1){
-        isPremium = true;
-        standardBtn.innerText = '已订阅';
-        premiumBtn.innerText = '已订阅';
-    }else{  
-        isStandard = false;
-        isPremium = false;
-        standardBtn.innerText = '立即订阅';
-        premiumBtn.innerText = '立即订阅';   
+    let lPara = getUrlParams('from'); 
+    let sponsorCookie = GetCookie('sponsor');
+    if(lPara || sponsorCookie){
+        standardPrice.innerHTML = '¥169.00/年';
+        premiumPrice.innerHTML = '¥1699.00/年';
         EventObject.addHandler(standardBtn,"click",openPayment);
         EventObject.addHandler(premiumBtn,"click",openPayment);
-    }
-        
+        isStandard = false;
+        isPremium = false;
+    }else{
+        if ((dataObj.standard === 1 && dataObj.premium === 0)){
+            isStandard = true;
+            standardBtn.innerText = '已订阅';
+            premiumBtn.innerText = '现在升级';
+            upgradePrice = '¥'+dataObj.v+'.00/年';
+            premiumPrice.innerHTML = upgradePrice;
+            
+            // EventObject.addHandler(standardBtn,"click",function(){return false;});
+            EventObject.addHandler(premiumBtn,"click",openPayment);
+            
+        }else if (dataObj.standard === 1 && dataObj.premium === 1){
+            isPremium = true;
+            standardBtn.innerText = '已订阅';
+            premiumBtn.innerText = '已订阅';
+        }else{  
+            isStandard = false;
+            isPremium = false;
+            standardBtn.innerText = '立即订阅';
+            premiumBtn.innerText = '立即订阅';   
+            EventObject.addHandler(standardBtn,"click",openPayment);
+            EventObject.addHandler(premiumBtn,"click",openPayment);
+        }
+    }   
 }
 
 window.onunload = function closeWindow(){
@@ -491,3 +511,7 @@ function ccodeTrack(){
 }
 
 ccodeTrack();
+
+function updatePrice(){
+    let lPara = getUrlParams('from'); 
+}
