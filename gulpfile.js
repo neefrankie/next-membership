@@ -72,23 +72,12 @@ gulp.task('build-page', () => {
       return loadJsonFile(dataPath)
       .then(data => {
         
-        if (name ==='index'){
-          return render(template, {
-            products: data.index,
-            env
-          });
-        }else if (name ==='subscriptionTest'||name ==='question'||name ==='subscription'){
+        if (name ==='subscriptionTest'||name ==='question'||name ==='subscription'){
           return render(template, {
             products: data.index,
             tabContents1: data.tabContent1,
             tabContents2: data.tabContent2,
             tabContents3: data.tabContent3,
-            env
-          });
-        }else if (name ==='app-center'){
-          return render(template, {
-            titles: data.title,
-            datas: data.data,
             env
           });
         }else{

@@ -8,18 +8,6 @@
             "js":"main.js"
         },
         {
-            "name": "index",
-            "data": "views/data/data.json",
-            "template": "index.html",
-            "js":"main.js"
-        },
-        {
-            "name": "question",
-            "data": "views/data/data.json",
-            "template": "question.html",
-            "js":"main.js"
-        },
-        {
             "name": "subscriptionTest",
             "data": "views/data/data.json",
             "template": "subscriptionTest.html",
