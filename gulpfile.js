@@ -74,6 +74,7 @@ gulp.task('build-page', () => {
         
         if (name ==='subscriptionTest'||name ==='subscription'){
           return render(template, {
+            guide:data.guide,
             products: data.index,
             tabContents1: data.tabContent1,
             tabContents2: data.tabContent2,

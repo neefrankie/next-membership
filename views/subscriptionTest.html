@@ -34,14 +34,13 @@
 
 <body>
   {% include "partials/header.html" %}
-  <div class = "container">
-
+ <div class = "container">
 
   <div class="welcome-guide width-cls">
     <div class="show-image"></div>
     <div class="words">
-      <div class="first"><strong>FT中文网会员订阅服务，欢迎您！</strong></div>
-      <div class="second">希望全球视野的FT中文网，能够带您站在高海拔的地方俯瞰世界，引发您的思考，从不同的角度看到不一样的事物，见他人之未见！</div>
+      <div class="first"><strong>{{guide.first}}</strong></div>
+      <div class="second">{{guide.second}}</div>
     </div>
     <div class="clear-class"></div>
   </div>
@@ -49,8 +48,7 @@
 
 
 
-<div id="payment-page">
-</div>
+<div id="payment-page"></div>
 
 <div id="site-content" class="o-member-container">
   <div class="o-member__heading">
@@ -61,23 +59,16 @@
     
     <div class="o-member o-member__standard" >
       <div class="o-member_content" >
-        <h2 class="o-member__title">标准会员</h2>
+        <h2 class="o-member__title">{{products[0].title}}</h2>
         <div class="o-member__border"></div>
         <ul class="o-member__benefits">
-          
-          <li>精选深度分析</li>
-          
-          <li>中英双语内容</li>
-
-          <li>金融英语速读训练</li>
-          
-          <li>英语原声电台</li>
-
-          <li>无限浏览7日前所有历史文章（近8万篇）</li>
+          {% for benefit in products[0].benefits %}
+             <li> {{benefit}}</li>
+          {% endfor %}
         </ul> 
         <div class="o-member__subscribe">
-          <button  class="openSub" id="standard-btn">立即订阅</button>
-          <p id="standard_price"> ¥198.00/年</p>
+          <button  class="openSub" id="standard-btn">{{products[0].openBtn}}</button>
+          <p id="standard_price"> {{products[0].price}}</p>
           
           <input type="text" value="¥198.00/年" hidden id="regular-member">
         </div>     
@@ -86,22 +77,18 @@
     
     <div class="o-member o-member__premium" >
       <div class="o-member_content" >
-        <h2 class="o-member__title">高端会员</h2>
+        <h2 class="o-member__title">{{products[1].title}}</h2>
         <div class="o-member__border"></div>
         <ul class="o-member__benefits">
-          
-          <li>享受“标准会员”所有权益</li>
-          
-          <li>编辑精选，总编/各版块主编每周五为您推荐本周必读资讯，分享他们的思考与观点</li>
-          
-          <li>FT中文网2018年度论坛门票2张，价值3999元/张 （不含差旅与食宿）</li>
-          
-          
+          {% for benefit in products[1].benefits %}
+             <li> {{benefit}}</li>
+          {% endfor %}
+ 
         </ul> 
         <div class="o-member__subscribe">
           
-          <button class="openSub" id="premium-btn">立即订阅</button>
-          <p id="premium_price">¥1,998.00/年</p>
+          <button class="openSub" id="premium-btn">{{products[1].openBtn}}</button>
+          <p id="premium_price">{{products[1].price}}</p>
           <input type="text" value="¥1,998.00/年" hidden>
         </div>  
       </div>  
