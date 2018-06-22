@@ -72,7 +72,7 @@ gulp.task('build-page', () => {
       return loadJsonFile(dataPath)
       .then(data => {
         
-        if (name ==='subscriptionTest'||name ==='question'||name ==='subscription'){
+        if (name ==='subscriptionTest'||name ==='subscription'){
           return render(template, {
             products: data.index,
             tabContents1: data.tabContent1,
@@ -136,13 +136,13 @@ gulp.task('styles', function styles() {
 
 
 gulp.task('scripts', async () => {
-  const origami = await fs.readAsync('views/data/path-detail.json','json');
-  const demos = origami.demos;
+  const details = await fs.readAsync('views/data/path-detail.json','json');
+  const demos = details.demos;
   async function rollupOneJs(demo) {
     const bundle = await rollup({
       input:`client/scripts/${demo.js}`,
       plugins:[
-        babel({//这里需要配置文件.babelrc
+        babel({
           exclude:'node_modules/**'
         }),
         nodeResolve({
@@ -151,7 +151,7 @@ gulp.task('scripts', async () => {
       ]
     });
 
-    await bundle.write({//返回promise，以便下一步then()
+    await bundle.write({
         file: `.tmp/scripts/${demo.js}`,
         format: 'iife',
         sourcemap: true
