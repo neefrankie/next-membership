@@ -1,4 +1,4 @@
-
+/*esversion: 6 */
 // import {testIm,testExport} from '../api/event1.js';
 // testIm();
 // testExport();
@@ -48,7 +48,7 @@ const SetCookie = (name, value , sec , path , domain, secure) => {
     else {sec = 1000*sec;}
     expires.setTime (expires.getTime() + sec);
     document.cookie = name + '=' + escape (value) +((expires === null) ? '' : ('; expires=' + expires.toGMTString())) +((path === null) ? '/' : ('; path=' + path)) +((domain === null) ? '' : ('; domain=' + domain)) +((secure === true) ? '; secure' : '');  
-}
+};
 
 
 function isWeiXin() {
@@ -85,4 +85,4 @@ export {
     isWeiXin,
     parseUrlSearch,
     isEmptyObj
-}
+};

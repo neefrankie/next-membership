@@ -1,5 +1,5 @@
 /*jshint esversion: 6 */
-  /*jshint esversion: 6 */
+  /*esversion: 6 */
     function GetCookie(name){
         var start = document.cookie.indexOf(name+'='),
             len = start+name.length+1,
@@ -8,7 +8,7 @@
         if (start === -1) {return null;}
         if (end === -1) {end = document.cookie.length; }
         return decodeURIComponent(document.cookie.substring(len,end));
-    };
+    }
 
     function parseUrlSearch(){
         var para = location.search.substring(1);
@@ -88,7 +88,7 @@ function countDown(){
 var bodyId = document.getElementById("bodyId");
 bodyId.onload=function(){ 
   time();
-}
+};
 
 
 function returnTo(){
@@ -105,4 +105,4 @@ function returnTo(){
 var returnTo = document.getElementById("returnTo");
 returnTo.onclick=function(){ 
     returnTo();
-}
+};

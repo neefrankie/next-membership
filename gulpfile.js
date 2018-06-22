@@ -88,7 +88,7 @@ gulp.task('build-page', () => {
         
       })
       .then(html => {  
-        // 此处是development  
+
         if (process.env.NODE_ENV === 'production') {
           return inline(html, {
             compress: true,
@@ -183,12 +183,12 @@ gulp.task('clean', () => {
   return del(['.tmp/**','.dest/**']);
 });
 
-gulp.task('jshint', function () {
-  return gulp.src('client/scripts/**/*.js')
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.jshint.reporter('fail'));
-});
+// gulp.task('jshint', function () {
+//   return gulp.src('client/scripts/**/*.js')
+//     .pipe($.jshint())
+//     .pipe($.jshint.reporter('jshint-stylish'))
+//     .pipe($.jshint.reporter('fail'));
+// });
 
 
 
@@ -219,38 +219,19 @@ gulp.task('serve', gulp.parallel('build-page', 'styles', 'scripts', 'api',() => 
 
 gulp.task('build', gulp.series('prod','clean','styles', 'scripts', 'build-page','comJs','comCss', 'dev'));
 
-const destDir = 'dev_www/frontend/tpl/next/html';
 
-
-gulp.task('copy:prod', () => {
-  const src = path.resolve(__dirname, '.tmp/index.html');
-  const dest = path.resolve(__dirname, `../${destDir}`);
-  console.log(`Copy index.html to ${dest}`);
-  return gulp.src(src)
-    .pipe($.rename('membership.html'))
-    .pipe(gulp.dest(dest));  
-});
-
-
-gulp.task('deploy', gulp.series('build', 'copy:prod'));
-
-
-
-gulp.task('copy', () => {
+gulp.task('copyHtml', () => {
   const dest = 'ftac';
-  return gulp.src(['.tmp/subscription.html'])
+  return gulp.src(['.tmp/*.html'])
     .pipe(gulp.dest(`../${dest}`))
 });
 
-gulp.task('copy1', () => {
-  const dest = 'ftac/codeigniter/application/views';
-  return gulp.src(['.tmp/subscription.html'])
-    .pipe(gulp.dest(`../${dest}`))
-});
+gulp.task('copy', gulp.series(
+  'clean',
+  'build', 
+  gulp.parallel(
+    'copyHtml'
+  )
+));
 
-gulp.task('copyT', () => {
-  const dest = 'ftac';
-  return gulp.src(['.tmp/subscriptionTest.html'])
-    .pipe(gulp.dest(`../${dest}`))
-});
 

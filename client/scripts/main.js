@@ -1,5 +1,5 @@
 /*jshint esversion: 6 */
-
+/*esversion: 6 */
 
 import {EventObject,GetCookie,SetCookie,DeleteCookie,isWeiXin,parseUrlSearch,isEmptyObj} from './subscribe_api.js';
 
@@ -109,7 +109,7 @@ var openPayment = function(event){
     var winheight = window.innerHeight;
     var paymentBox = document.getElementById('payment-box');
     var eleHeight = paymentBox.offsetHeight;
-    var top = (winheight - eleHeight)/2
+    var top = (winheight - eleHeight)/2;
     paymentBox.style.top = top + "px";
 
     // var rCookie = GetCookie('R');
@@ -205,7 +205,7 @@ var toPayAction = function(event){
 // 打开微信
 var openWXCode = function(){
     var paymentBox = document.getElementById('payment-box');
-    var wxImg = '<div id="wxImg"></div><div class="wxScanHint">微信扫码支付</div>'
+    var wxImg = '<div id="wxImg"></div><div class="wxScanHint">微信扫码支付</div>';
     paymentBox.innerHTML = wxImg;
 }; 
 
@@ -220,7 +220,7 @@ const postUE = (url) => {
         let cookieVal = {
             uCookieVal : GetCookie('U'),
             eCookieVal : GetCookie('E')
-        }
+        };
         let xhrpw = new XMLHttpRequest();
         xhrpw.open('post',url);
         xhrpw.onload = function() {
@@ -240,7 +240,7 @@ const postUE = (url) => {
         xhrpw.send(JSON.stringify(cookieVal));
     }
 
-}
+};
 
 
 var premiumBtn = document.getElementById('premium-btn');
@@ -304,7 +304,7 @@ window.onunload = function closeWindow(){
     DeleteCookie('U');
     DeleteCookie('E');
     DeleteCookie('R');
-}
+};
 
 
 
@@ -415,7 +415,7 @@ function clickTab(){
     }
 }
 
-clickTab()
+clickTab();
 
 function clickTabForm(){
 
@@ -451,7 +451,7 @@ function hasUtmCampaign(){
                 if(paraArr[j].indexOf('utm_campaign')>=0){
                         var arr = paraArr[j].split('=');
                         campaign = arr[1];
-                        SetCookie('campaign_code',campaign,86400,null,null,false)
+                        SetCookie('campaign_code',campaign,86400,null,null,false);
                         // document.cookie = 'campaign_code = ' + campaign;
                 }
 
