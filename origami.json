@@ -49,18 +49,6 @@
             "js":"main.js"
         },
         {
-            "name": "subscribesuccess",
-            "data": "views/data/data.json",
-            "template": "subscribesuccess.html",
-            "js":"main.js"
-        },
-        {
-            "name": "subscribefail",
-            "data": "views/data/data.json",
-            "template": "subscribefail.html",
-            "js":"main.js"
-        },
-        {
             "name": "subscribenotice",
             "data": "views/data/data.json",
             "template": "subscribenotice.html",

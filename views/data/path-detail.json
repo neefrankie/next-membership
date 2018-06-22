@@ -30,30 +30,12 @@
             "data": "views/data/data.json",
             "template": "editorchoice.html",
             "js":"main.js"
-        },
-        {
-            "name": "subscribesuccess",
-            "data": "views/data/data.json",
-            "template": "subscribesuccess.html",
-            "js":"main.js"
-        },
-        {
-            "name": "subscribefail",
-            "data": "views/data/data.json",
-            "template": "subscribefail.html",
-            "js":"track.js"
-        },
+        },  
         {
             "name": "subscribenotice",
             "data": "views/data/data.json",
             "template": "subscribenotice.html",
             "js":"notice.js"
-        },
-        {
-            "name": "appcenter",
-            "data": "views/data/app-center.json",
-            "template": "appcenter.html",
-            "js":"app_center.js"
         }
  
        
