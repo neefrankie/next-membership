@@ -41,7 +41,6 @@ gulp.task('build-page', () => {
   
   const destDir = '.tmp';
   const pathDetail = loadJsonFile('views/data/path-detail.json');
-  // const dataPath = 'views/data/data.json';
   // detail返回promise
   return pathDetail.then(data => {
     const demos = data.demos;
@@ -51,7 +50,7 @@ gulp.task('build-page', () => {
     }))
   })
   .then(() => {
-    console.log('inline--'+process.env.NODE_ENV)
+      console.log('inline--'+process.env.NODE_ENV)
       browserSync.reload('*.html');
       // return Promise.resolve();
     })
