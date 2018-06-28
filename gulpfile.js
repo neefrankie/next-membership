@@ -219,6 +219,11 @@ gulp.task('serve', gulp.parallel('build-page', 'styles', 'scripts', 'api',() => 
 
 gulp.task('build', gulp.series('prod','clean','styles', 'scripts', 'build-page','comJs','comCss', 'dev'));
 
+gulp.task('copyTest', () => {
+  const dest = 'ftac';
+  return gulp.src(['.tmp/subscriptionTest.html'])
+    .pipe(gulp.dest(`../${dest}`))
+});
 
 gulp.task('copyHtml', () => {
   const dest = 'ftac';
