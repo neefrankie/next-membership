@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 /*esversion: 6 */
 
-import {EventObject,GetCookie,SetCookie,DeleteCookie,isWeiXin,parseUrlSearch,getUrlParams,isEmptyObj} from './subscribe_api.js';
+import {EventObject,GetCookie,SetCookie,DeleteCookie,isWeiXin,parseUrlSearch,getUrlParams,isEmptyObj,getDeviceType} from './subscribe_api.js';
 
 let dataObj = {};
 let isStandard = false;
@@ -46,9 +46,9 @@ var openPayment = function(event){
         price = upgradePrice;
     }
 
-    let lPara = getUrlParams('from'); 
+    let fPara = getUrlParams('from'); 
     let sponsorCookie = GetCookie('sponsor');
-    if(lPara === 'ft_discount' || sponsorCookie){
+    if(fPara === 'ft_discount' || sponsorCookie){
         if(attribute==='standard-btn'){
             price = '¥169.00/年';
         }else if(attribute==='premium-btn'){
@@ -106,18 +106,7 @@ var openPayment = function(event){
 
 };
 
-function getDeviceType() {
-    var uaString = navigator.userAgent || navigator.vendor || '';
-    var deviceType = 'PC';
-    if (/iPad/i.test(uaString)) {
-        deviceType = 'iPad';
-    } else if (/OS [0-9]+\_/i.test(uaString) && (/iPhone/i.test(uaString) || /iPod/i.test(uaString))) {
-        deviceType = 'iPhone';
-    } else if (/Android|micromessenger/i.test(uaString) ) {
-        deviceType = 'android';
-    }
-    return deviceType;
-}
+
 
 function isMobile(){
     let deviceType = getDeviceType();
@@ -150,8 +139,8 @@ var toPayAction = function(event){
         window.open('http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=2','_blank');   
     }
 
-    var SELabel = GetCookie('SELabel');
-    var eventAction = 'Buy way: ' + payWay;
+    let SELabel = GetCookie('SELabel');
+    let eventAction = 'Buy way: ' + payWay;
 
 
     let cPara = isFromIos();
@@ -211,16 +200,16 @@ const postUE = (url) => {
 };
 
 
-var premiumBtn = document.getElementById('premium-btn');
-var standardBtn = document.getElementById('standard-btn');
-var premiumPrice = document.getElementById('premium_price');
-var standardPrice = document.getElementById('standard_price');
+let premiumBtn = document.getElementById('premium-btn');
+let standardBtn = document.getElementById('standard-btn');
+let premiumPrice = document.getElementById('premium_price');
+let standardPrice = document.getElementById('standard_price');
 
 function updateUI(dataObj){
 
-    let lPara = getUrlParams('from'); 
+    let fPara = getUrlParams('from'); 
     let sponsorCookie = GetCookie('sponsor');
-    if(lPara==='ft_discount' || sponsorCookie){
+    if(fPara === 'ft_discount' || sponsorCookie){
 
         upgradePrice  = '¥1699.00/年';
         standardPrice.innerHTML = '¥169.00/年';

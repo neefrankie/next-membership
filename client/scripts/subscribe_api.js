@@ -101,6 +101,19 @@ function isEmptyObj(dataObj){
      }
 }
 
+function getDeviceType() {
+    var uaString = navigator.userAgent || navigator.vendor || '';
+    var deviceType = 'PC';
+    if (/iPad/i.test(uaString)) {
+        deviceType = 'iPad';
+    } else if (/OS [0-9]+\_/i.test(uaString) && (/iPhone/i.test(uaString) || /iPod/i.test(uaString))) {
+        deviceType = 'iPhone';
+    } else if (/Android|micromessenger/i.test(uaString) ) {
+        deviceType = 'android';
+    }
+    return deviceType;
+}
+
 export {
     EventObject,
     GetCookie,
@@ -109,5 +122,6 @@ export {
     isWeiXin,
     parseUrlSearch,
     getUrlParams,
-    isEmptyObj
+    isEmptyObj,
+    getDeviceType
 };
