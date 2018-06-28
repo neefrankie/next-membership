@@ -48,7 +48,7 @@ var openPayment = function(event){
 
     let lPara = getUrlParams('from'); 
     let sponsorCookie = GetCookie('sponsor');
-    if(lPara || sponsorCookie){
+    if(lPara === 'ft_discount' || sponsorCookie){
         if(attribute==='standard-btn'){
             price = '¥169.00/年';
         }else if(attribute==='premium-btn'){
@@ -220,7 +220,7 @@ function updateUI(dataObj){
 
     let lPara = getUrlParams('from'); 
     let sponsorCookie = GetCookie('sponsor');
-    if(lPara || sponsorCookie){
+    if(lPara==='ft_discount' || sponsorCookie){
 
         upgradePrice  = '¥1699.00/年';
         standardPrice.innerHTML = '¥169.00/年';
