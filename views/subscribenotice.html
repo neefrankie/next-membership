@@ -61,8 +61,9 @@
     var price = '';
     price = (eventAction === 'Premium') ? '1998' : '199';
     var randomVal = Math.round(Math.random()*899)+100;
+    var tradeNo = GetCookie('trade_no')||randomVal;
     ga('ecommerce:addTransaction', {
-    'id': randomVal,                     // Transaction ID. Required.
+    'id': tradeNo,                     // Transaction ID. Required.
     'affiliation': SELabel,   // Affiliation or store name.
     'revenue': price,               // Grand Total.
     'shipping': '0',                  // Shipping.
@@ -71,7 +72,7 @@
     });
 
     ga('ecommerce:addItem', {
-    'id': randomVal,                     // Transaction ID. Required.
+    'id': tradeNo,                     // Transaction ID. Required.
     'name': eventAction,    // Product name. Required.
     'sku': eventAction,                 // SKU/code.
     'category': 'Subscription',         // Category or variation.
