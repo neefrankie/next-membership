@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 /*esversion: 6 */
 
-import {EventObject,GetCookie,SetCookie,DeleteCookie,isWeiXin,parseUrlSearch,isEmptyObj} from './subscribe_api.js';
+import {EventObject,GetCookie,SetCookie,DeleteCookie,isWeiXin,parseUrlSearch,getUrlParams,isEmptyObj} from './subscribe_api.js';
 
 let dataObj = {};
 let isStandard = false;
@@ -10,37 +10,6 @@ let upgradePrice = '';
 let standardPriceValue = '';
 let premiumPriceValue = '';
 
-function parseUrlSearch1(){
-    var para = location.search;
-    if(para){
-        para = para.substring(1);
-        para = decodeURIComponent(para);
-        var paraArr = para.split('&');
-        return paraArr;
-    }
-    return undefined;
-}
-
-
-function getUrlParams(key){
-    var value = '';
-    var paraArr = parseUrlSearch1();
-    if (paraArr && paraArr.length>0){
-        var arr = [];
-        for(var i=0,len=paraArr.length; i<len; i++){
-            if(paraArr[i].indexOf(key)>-1){
-                arr = paraArr[i].split('=');
-                if(arr.length>1 && arr[0]===key){
-                    value = arr[1];
-                }
-            }
-        }
-        
-        return value;
-    }
-    return value;
-}
-
 
 const setCookieVal = () => {
     // Mark:check ccode
@@ -48,7 +17,6 @@ const setCookieVal = () => {
     var pattern = /ccode/g;
     if(pattern.test(para)){
         var ccodeValue = getUrlParams('ccode');
-        // document.cookie = 'ccode = ' + ccodeValue ;
         var SELabel = SetCookie('ccode',ccodeValue,'',null,'.ftacademy.cn',false);
     }
 };
@@ -310,12 +278,6 @@ window.onunload = function closeWindow(){
 
 
 if (window.location.hostname === 'localhost' || window.location.hostname.indexOf('192.168') === 0 || window.location.hostname.indexOf('10.113') === 0 || window.location.hostname.indexOf('127.0') === 0) {
-        // var paraArr = parseUrlSearch();//(2) ["premium=0", "standard=1"]
-        // for(let j=0;j<paraArr.length;j++){
-        //     var arr = paraArr[j].split('=');
-        //     dataObj[arr[0]]=Number(arr[1]);
-        // }
-        // updateUI(dataObj);
         var xhrpw1 = new XMLHttpRequest();
         xhrpw1.open('get','api/paywall.json');
         xhrpw1.onload = function() {
