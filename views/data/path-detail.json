@@ -18,6 +18,12 @@
             "data": "views/data/data.json",
             "template": "subscribenotice.html",
             "js":"notice.js"
+        },
+        {
+            "name": "binding",
+            "data": "views/data/data.json",
+            "template": "binding.html",
+            "js":"exchange.js"
         }
  
        

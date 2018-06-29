@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html class="no-js core" data-next-app="front-page">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>兑换中心 - FT中文网</title>
+  <meta http-equiv="Content-Language" content="zh-CN"/>
+  <meta content="兑换中心" name="description"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="apple-touch-icon-precomposed" href="http://static.ftchinese.com/img/ipad_icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- MARK: Important: Need to add Google Analytics load events manually -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m);a.onload=function(){if(typeof clearEvents==='function'){clearEvents()}}
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-1608715-1', 'auto');
+  try {
+    ga('send', 'pageview',window.location.href);
+  }catch(err){
+  
+  }
+ 
+  </script>
+<!-- End Google Analytics -->
+
+
+  <link inline rel="stylesheet" type="text/css" href="styles/exchange.css">
+  
+</head>
+
+<body>
+   <HEADER class="header-container">
+    <DIV class="header-inner">
+      <DIV class="header-title">兑换中心</DIV>
+      <DIV class="header-side header-left" style="display: none;">
+        <DIV class="header-brand">
+          <FIGURE class="loading" data-url="http://static.ftchinese.com/images/masthead36.png"></FIGURE>
+        </DIV>
+      </DIV>
+
+    </DIV>
+  </HEADER>
+<form  method="post">
+<div>
+ <div class = "exchange-container">
+    <div class = "exchange">
+      <span>兑换码：</span> 
+      <input type="text" value="" name="exchange" id="exchange">
+    </div>
+    <input type="text"  name="token" id="token" hidden>
+
+   <div class="service-select-btn">
+		<button class="conform" type="submit">确定</button>
+	</div>
+</div>
+</div>
+</form>
+
+<script inline src="scripts/exchange.js"></script>
+
+<script>
+    var today = new Date();
+    var y = today.getFullYear();
+    var m = zeroFix(today.getMonth() + 1);
+    var d = zeroFix(today.getDate());
+
+    function zeroFix(n) {
+        return (n < 10) ? '0' + n : n;
+    }
+
+    if (window.gAutoStart === undefined) {
+        (function(d, s, u, j, x) {
+            j = d.createElement(s),
+                x = d.getElementsByTagName(s)[0];
+            j.async = true;
+            j.src = u;
+            x.parentNode.insertBefore(j, x)
+        })(document, 'script', 'http://static.ftchinese.com/js/log.js?' + y + m + d);
+    }
+
+</script>
+
+
+</body>
+</html>

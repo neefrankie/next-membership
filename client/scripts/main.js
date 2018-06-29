@@ -109,7 +109,7 @@ var openPayment = function(event){
 };
 
 var openExchange = function(event){
-    window.open('http://www.ftchinese.com/','_self');
+    window.open('https://user.ftchinese.com/?offerId=992374d8e2e24f17bebc50a6e57becd6&platform=8','_self');
 }
 
 function isMobile(){

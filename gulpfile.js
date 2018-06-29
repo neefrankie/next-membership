@@ -225,9 +225,9 @@ gulp.task('copyTest', () => {
     .pipe(gulp.dest(`../${dest}`))
 });
 
-gulp.task('copyHtml', () => {
+gulp.task('copySub', () => {
   const dest = 'ftac';
-  return gulp.src(['.tmp/*.html'])
+  return gulp.src(['.tmp/subscr*.html'])
     .pipe(gulp.dest(`../${dest}`))
 });
 
@@ -235,8 +235,14 @@ gulp.task('copy', gulp.series(
   'clean',
   'build', 
   gulp.parallel(
-    'copyHtml'
+    'copySub'
   )
 ));
 
+
+gulp.task('copyBinding',gulp.series('clean','build', () => {
+  const dest = 'dev_www/frontend/tpl/user/setting';
+  return gulp.src(['.tmp/binding.html'])
+    .pipe(gulp.dest(`../${dest}`))
+}));
 

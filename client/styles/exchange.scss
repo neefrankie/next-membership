@@ -1,0 +1,44 @@
+@import "base.scss";
+@import "header.scss";
+@import "footer.scss";
+
+.service-select-btn{
+	text-align: center;
+	background-color: #fff1e5;
+	width: 100%;
+}
+.service-select-btn button{
+	padding: 10px 20px;
+	background-color: #0d7680;
+	color: #514f4e;
+	font-size: 14px;
+	width: 200px;
+	line-height: 60%;
+	height: 60%;
+}
+.service-select-btn  .conform{
+	margin-left: 15px;
+	color: black;
+	border: 0px;
+	color: white;
+}
+.service-select-btn  .cancel{
+	background-color: #e9ded0;
+	margin-right: 15px;
+	border: 0px;
+}
+
+.exchange-container{
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 20%;
+    .exchange{
+        text-align: center;
+        margin: 20px;
+    }
+    input{
+        height: 25px;
+        width: 150px;
+    }
+}
+   
