@@ -43,12 +43,12 @@
 
     </DIV>
   </HEADER>
-<form  method="post">
+
 <div>
  <div class = "exchange-container">
     <div class = "exchange">
       <span>兑换码：</span> 
-      <input type="text" value="" name="exchange" id="exchange">
+      <input type="text" value="" name="exchange">
     </div>
     <input type="text"  name="token" id="token" hidden>
 
@@ -57,31 +57,10 @@
 	</div>
 </div>
 </div>
-</form>
+
 
 <script inline src="scripts/exchange.js"></script>
 
-<script>
-    var today = new Date();
-    var y = today.getFullYear();
-    var m = zeroFix(today.getMonth() + 1);
-    var d = zeroFix(today.getDate());
-
-    function zeroFix(n) {
-        return (n < 10) ? '0' + n : n;
-    }
-
-    if (window.gAutoStart === undefined) {
-        (function(d, s, u, j, x) {
-            j = d.createElement(s),
-                x = d.getElementsByTagName(s)[0];
-            j.async = true;
-            j.src = u;
-            x.parentNode.insertBefore(j, x)
-        })(document, 'script', 'http://static.ftchinese.com/js/log.js?' + y + m + d);
-    }
-
-</script>
 
 
 </body>
