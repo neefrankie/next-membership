@@ -28,13 +28,17 @@ EventObject.addHandler(conform,"click", function(){
             xhrpw.onload = function() {
                 if (xhrpw.status === 200) {
                     var data = xhrpw.responseText;
-                    // var dataObj = JSON.parse(data);
-                    console.log(data)
-                    // if(!dataObj.errcode){
-                    //     window.open('/','_self');
-                    // }else{
-                    //     alert('请正确输入兑换码！');
-                    // }
+                    if(JSON.parse(data)){
+                        var dataObj = JSON.parse(data);
+                        if(!dataObj.errcode){
+                            alert('兑换成功！');
+                            window.open('/','_self');
+                        }else{
+                            alert('请正确输入兑换码!!!');
+                        }
+                    }else{
+                        alert('请正确输入兑换码！');
+                    }
                 } else {
                     alert('请正确输入兑换码！！');
                 }
