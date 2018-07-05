@@ -30,9 +30,11 @@ EventObject.addHandler(conform,"click", function(){
                     var data = xhrpw.responseText;
                     if(JSON.parse(data)){
                         var dataObj = JSON.parse(data);
-                        if(!dataObj.errcode){
+                        if(dataObj.errcode===0){
                             alert('兑换成功！');
                             window.open('/','_self');
+                        }else if(dataObj.errcode===100){
+                            alert(dataObj.errmsg);
                         }else{
                             alert('请正确输入兑换码!!!');
                         }
