@@ -19,6 +19,10 @@ const setCookieVal = () => {
         var ccodeValue = getUrlParams('ccode');
         var SELabel = SetCookie('ccode',ccodeValue,'',null,'.ftacademy.cn',false);
     }
+    if(/utm_code/g.test(para)){
+        var utmccodeValue = getUrlParams('utm_code');
+        var SELabel = SetCookie('utm_code',utmccodeValue,'',null,'.ftacademy.cn',false);
+    }
 };
 setCookieVal();
 
@@ -506,16 +510,15 @@ iosTrack();
 
 
 function ccodeTrack(){
-    let ccodePara = getUrlParams('ccode');
+    let ccodePara = getUrlParams('ccode') || getUrlParams('utm_code');
+    // let refer = document.referrer;
+    // let referArr = refer.split('/');
+    // let last = referArr[referArr.length-1];
     if(ccodePara){
-        var fromUrl = 'From:'+ccodePara + '/' + document.referrer;
+        var fromUrl = 'From:'+ccodePara  ;
         SetCookie('SELabel',fromUrl,86400,null,'.ftacademy.cn',false);
         ga('send','event','Web Privileges', 'Display', fromUrl);
     }
 }
 
 ccodeTrack();
-
-// function getPrice(){
-     
-// }
