@@ -21,7 +21,7 @@ const setCookieVal = () => {
     }
     if(/utm_code/g.test(para)){
         var utmccodeValue = getUrlParams('utm_code');
-        var SELabel = SetCookie('utm_code',utmccodeValue,'',null,'.ftacademy.cn',false);
+        var SELabel = SetCookie('ccode',utmccodeValue,'',null,'.ftacademy.cn',false);
     }
 };
 setCookieVal();
