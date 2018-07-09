@@ -1,9 +1,5 @@
-/*esversion: 6 */
-// import {testIm,testExport} from '../api/event1.js';
-// testIm();
-// testExport();
 
-// import testIm from '../api/event.js';
+
 
 
 var EventObject = {

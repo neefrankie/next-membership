@@ -131,31 +131,30 @@ gulp.task('styles', function styles() {
     .pipe(browserSync.stream());
 });
 
-
-
-
-
 gulp.task('scripts', async () => {
   const details = await fs.readAsync('views/data/path-detail.json','json');
   const demos = details.demos;
   async function rollupOneJs(demo) {
-    const bundle = await rollup({
-      input:`client/scripts/${demo.js}`,
-      plugins:[
-        babel({
-          exclude:'node_modules/**'
-        }),
-        nodeResolve({
-          jsnext:true,
-        })
-      ]
-    });
-
-    await bundle.write({
+    try {  
+      const bundle = await rollup({
+        input:`client/scripts/${demo.js}`,
+        plugins:[
+          babel({
+            exclude:'node_modules/**'
+          }),
+          nodeResolve({
+            jsnext:true,
+          })
+        ]
+      });
+      await bundle.write({
         file: `.tmp/scripts/${demo.js}`,
         format: 'iife',
         sourcemap: true
-    });
+      });
+    } catch (error) {
+      console.log('error'+error);
+    }
   }
 
   await demos.forEach(rollupOneJs);

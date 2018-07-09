@@ -29,7 +29,7 @@
     "babel-register": "^6.5.2",
     "browser-sync": "^2.18.8",
     "del": "^2.2.2",
-    "fs-jetpack": "^0.13.1",
+    "fs-jetpack": "^1.2.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-changed": "^2.0.0",
     "gulp-cssnano": "^2.1.2",

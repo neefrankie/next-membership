@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 /*esversion: 6 */
 
-import {EventObject,GetCookie,SetCookie,DeleteCookie,isWeiXin,parseUrlSearch,getUrlParams,isEmptyObj,getDeviceType} from './subscribe_api.js';
+import {EventObject,GetCookie,SetCookie,DeleteCookie,isWeiXin,parseUrlSearch,getUrlParams,isEmptyObj,getDeviceType} from './subscribe_api';
 
 let dataObj = {};
 let isStandard = false;
