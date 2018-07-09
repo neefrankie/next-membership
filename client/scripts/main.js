@@ -503,7 +503,7 @@ function iosTrack(){
             elabel = 'no l value';
         } 
         SetCookie('SELabel',eLabelCookie,86400,null,'.ftacademy.cn',false);
-        ga('send','event',cPara, 'display', elabel);
+        ga('send','event',cPara, 'Display', elabel);
     }
 }
 iosTrack();
@@ -517,7 +517,7 @@ function ccodeTrack(){
     if(ccodePara){
         var fromUrl = 'From:'+ccodePara  ;
         SetCookie('SELabel',fromUrl,86400,null,'.ftacademy.cn',false);
-        ga('send','event','Web Privileges', 'Display', fromUrl);
+        ga('send','event','Web Privileges', 'Tap', fromUrl);
     }
 }
 
