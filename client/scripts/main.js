@@ -566,6 +566,14 @@ function fromUpdate(){
         } 
         paymentPage.style.display = 'block';  
     }
+
+    // Mark:如果没有R cookie，则在此页面设置，成功页面获取带有tap的cookie
+    let rCookie = GetCookie('R')||'';
+    let referrer = document.referrer;
+    if(!rCookie && referrer){        
+        let newReferrer = referrer+'&tapPara='+tapPara;
+        SetCookie('R',newReferrer,'',null,'.ftacademy.cn',false);
+    }
 }
 
 if (isEmptyObj(dataObj)){
@@ -583,3 +591,6 @@ function getMemberTypeFromUpdate(){
         }  
     }
 }
+
+
+

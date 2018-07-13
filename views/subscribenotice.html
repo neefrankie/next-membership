@@ -146,7 +146,12 @@
           var rCookie = GetCookie('R')||'';
           if(rCookie){
               var referUrl = decodeURIComponent(rCookie);
-              window.location.href = referUrl;
+              if(referUrl.indexOf('tapPara')>-1){
+                window.location.href = referUrl+'&buy=success';
+              }else{
+                window.location.href = referUrl;
+              }
+              
           }else{
               window.location.href = 'http://www.ftchinese.com';
           }
