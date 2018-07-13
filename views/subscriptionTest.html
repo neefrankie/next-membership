@@ -1,131 +1,147 @@
 <!DOCTYPE html>
 <html class="no-js core" data-next-app="front-page">
+
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>会员订阅 - FT中文网</title>
-  <meta http-equiv="Content-Language" content="zh-CN"/>
-  <meta content="会员订阅" name="description"/>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>会员订阅 - FT中文网</title>
+  <meta http-equiv="Content-Language" content="zh-CN" />
+  <meta content="会员订阅" name="description" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <link rel="apple-touch-icon-precomposed" href="http://static.ftchinese.com/img/ipad_icon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- MARK: Important: Need to add Google Analytics load events manually -->
+  <!-- MARK: Important: Need to add Google Analytics load events manually -->
   <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m);a.onload=function(){if(typeof clearEvents==='function'){clearEvents()}}
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-1608715-1', 'auto');
-  ga('require', 'displayfeatures');
-  try {
-    ga('send', 'pageview',window.location.href);
-  }catch(err){
-  
-  }
- 
+    (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m); a.onload = function () { if (typeof clearEvents === 'function') { clearEvents() } }
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-1608715-1', 'auto');
+    ga('require', 'displayfeatures');
+    try {
+      ga('send', 'pageview', window.location.href);
+    } catch (err) {
+
+    }
   </script>
-<!-- End Google Analytics -->
+  <!-- End Google Analytics -->
 
 
   <link inline rel="stylesheet" type="text/css" href="styles/main.css">
-  
+
 </head>
 
 <body>
   {% include "partials/header.html" %}
- <div class = "container">
+  <div class="container">
 
-  <div class="welcome-guide width-cls">
-    <div class="show-image"></div>
-    <div class="words">
-      <div class="first"><strong>{{guide.first}}</strong></div>
-      <div class="second">{{guide.second}}</div>
+    <div class="welcome-guide width-cls">
+      <div class="show-image"></div>
+      <div class="words">
+        <div class="first"><strong>{{guide.first}}</strong></div>
+        <div class="second">{{guide.second}}</div>
+      </div>
+      <div class="clear-class"></div>
     </div>
-    <div class="clear-class"></div>
-  </div>
-</div>
-
-
-
-<div id="payment-page"></div>
-
-<div id="site-content" class="o-member-container">
-  <div class="o-member__heading">
-    <p>请选择您的订阅方式</p>
   </div>
 
-  <div class="o-member-row" >
-    
-    <div class="o-member o-member__standard" >
-      <div class="o-member_content" >
-        <h2 class="o-member__title">{{products[0].title}}</h2>
-        <div class="o-member__border"></div>
-        <ul class="o-member__benefits">
-          {% for benefit in products[0].benefits %}
-             <li> {{benefit}}</li>
-          {% endfor %}
-        </ul> 
-        <div class="o-member__subscribe">
-          <button  class="openSub" id="standard-btn">{{products[0].openBtn}}</button>
-          <p id="standard_price"> {{products[0].price}}</p>
-          
-          <input type="text" value="¥198.00/年" hidden id="regular-member">
-        </div>     
-      </div>    
-    </div>
-    
-    <div class="o-member o-member__premium" >
-      <div class="o-member_content" >
-        <h2 class="o-member__title">{{products[1].title}}</h2>
-        <div class="o-member__border"></div>
-        <ul class="o-member__benefits">
-          {% for benefit in products[1].benefits %}
-             <li> {{benefit}}</li>
-          {% endfor %}
- 
-        </ul> 
-        <div class="o-member__subscribe">
-          
-          <button class="openSub" id="premium-btn">{{products[1].openBtn}}</button>
-          <p id="premium_price">{{products[1].price}}</p>
-          <input type="text" value="¥1,998.00/年" hidden>
-        </div>  
-      </div>  
 
+
+  <div id="payment-page">
+    <div id="payment-shadow" class="o-overlay-shadow fadeIn"></div>
+    <div id="payment-box" class="rightanswer show o-overlay__arrow-top fadeInRight">
+      <div class="payment-title">欢迎订阅FT会员服务</div>
+      <div class="payment-way">
+        <div class="payment-name"><span>会员类型：</span><span class="payment-type"><strong id="memberType"></strong></span></div>
+        <div class="payment-method"><span>支付方式：</span><label class="mode"><input name="pay" type="radio" value="ali" checked /><span id="pay-ali"></span> </label>
+          <label
+            class="wxpay-mode" style="display:inline-block"><input name="pay" type="radio" value="wxpay" /><span id="pay-wxpay"></span></label>
+        </div>
+      </div>
+      <div class="pay-action"><label>支付金额<label id="price"> </label></label><button class="to-pay" id="to-pay">确定支付</button></div>
     </div>
-    
   </div>
-</div>
 
-{% include "partials/QandA.html" %}
-{% include "partials/footer.html" %}
+  <div id="site-content" class="o-member-container">
+    <div class="o-member__heading">
+      <p>请选择您的订阅方式</p>
+    </div>
 
-<!--第一个tab 内容结束--><!--第一个tab 内容-->
-<script inline src="scripts/main.js"></script>
+    <div class="o-member-row">
 
-<script>
+      <div class="o-member o-member__standard">
+        <div class="o-member_content">
+          <h2 class="o-member__title">{{products[0].title}}</h2>
+          <div class="o-member__border"></div>
+          <ul class="o-member__benefits">
+            {% for benefit in products[0].benefits %}
+            <li> {{benefit}}</li>
+            {% endfor %}
+          </ul>
+          <div class="o-member__subscribe">
+            <button class="openSub" id="standard-btn">{{products[0].openBtn}}</button>
+            <p id="standard_price"> {{products[0].price}}</p>
+
+            <input type="text" value="¥198.00/年" hidden id="regular-member">
+          </div>
+        </div>
+      </div>
+
+      <div class="o-member o-member__premium">
+        <div class="o-member_content">
+          <h2 class="o-member__title">{{products[1].title}}</h2>
+          <div class="o-member__border"></div>
+          <ul class="o-member__benefits">
+            {% for benefit in products[1].benefits %}
+            <li> {{benefit}}</li>
+            {% endfor %}
+
+          </ul>
+          <div class="o-member__subscribe">
+
+            <button class="openSub" id="premium-btn">{{products[1].openBtn}}</button>
+            <p id="premium_price">{{products[1].price}}</p>
+            <input type="text" value="¥1,998.00/年" hidden>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  {% include "partials/QandA.html" %} {% include "partials/footer.html" %}
+
+  <!--第一个tab 内容结束-->
+  <!--第一个tab 内容-->
+  <script inline src="scripts/main.js"></script>
+
+  <script>
     var today = new Date();
     var y = today.getFullYear();
     var m = zeroFix(today.getMonth() + 1);
     var d = zeroFix(today.getDate());
 
     function zeroFix(n) {
-        return (n < 10) ? '0' + n : n;
+      return (n < 10) ? '0' + n : n;
     }
 
     if (window.gAutoStart === undefined) {
-        (function(d, s, u, j, x) {
-            j = d.createElement(s),
-                x = d.getElementsByTagName(s)[0];
-            j.async = true;
-            j.src = u;
-            x.parentNode.insertBefore(j, x)
-        })(document, 'script', 'http://static.ftchinese.com/js/log.js?' + y + m + d);
+      (function (d, s, u, j, x) {
+        j = d.createElement(s),
+          x = d.getElementsByTagName(s)[0];
+        j.async = true;
+        j.src = u;
+        x.parentNode.insertBefore(j, x)
+      })(document, 'script', 'http://static.ftchinese.com/js/log.js?' + y + m + d);
     }
 
-</script>
+  </script>
 
 
 </body>
+
 </html>
