@@ -49,15 +49,13 @@ var openPayment = function(event){
         }
         price = upgradePrice;
     }
-
+    // Mark:打折活动
     let fPara = getUrlParams('from'); 
     let sponsorCookie = GetCookie('sponsor');
     if(fPara === 'ft_discount' || sponsorCookie){
         if(attribute==='standard-btn'){
-            // price = '¥169.00/年';
             price = standardPriceValue;
         }else if(attribute==='premium-btn'){
-            // price = '¥1699.00/年';
             price = upgradePrice;
         }
     }
@@ -86,9 +84,6 @@ var openPayment = function(event){
     var top = (winheight - eleHeight)/2;
     paymentBox.style.top = top + "px";
 
-    // var rCookie = GetCookie('R');
-    // var referUrl = decodeURIComponent(rCookie);
-
     if(attribute==='standard-btn'){
         newAttribute = 'Standard';
     }else if(attribute==='premium-btn'){
@@ -98,6 +93,7 @@ var openPayment = function(event){
     var SELabel = GetCookie('SELabel');
     var eventAction = 'Buy: ' + newAttribute;
 
+ // Mark:ios付费跟踪
     let cPara = isFromIos();
     if(cPara){
         if(SELabel.indexOf('/IOSCL/')>-1){
