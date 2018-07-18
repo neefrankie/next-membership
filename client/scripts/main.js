@@ -300,8 +300,8 @@ function updateUI(dataObj){
     
    // 点击之后跟其它的行为也不一样
     if(fPara === 'ft_exchange'){
-        standardBtnInnerText = '输兑换码';
-        premiumBtnInnerText = '输兑换码';
+        standardBtnInnerText = '输入兑换码';
+        premiumBtnInnerText = '输入兑换码';
         standardPrice.style.display = 'none';  
         premiumPrice.style.display = 'none'; 
     }

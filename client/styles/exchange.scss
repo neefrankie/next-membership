@@ -5,19 +5,21 @@
 .service-select-btn{
 	text-align: center;
 	background-color: #fff1e5;
-	width: 100%;
+	// width: 100%;
+	display: inline-block;
+	.input-wrap{
+		    padding-bottom: 10px;
+	}
 }
 .service-select-btn button{
-	padding: 11px 20px;
 	background-color: #0d7680;
 	color: #514f4e;
 	font-size: 14px;
-	width: 200px;
-	line-height: 60%;
-	height: 60%;
+	width: 210px;
+	line-height: 30px;
+	height: 30px;
 }
 .service-select-btn  .conform{
-	margin-left: 15px;
 	color: black;
 	border: 0px;
 	color: white;
@@ -29,16 +31,68 @@
 }
 
 .exchange-container{
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
-    margin-top: 15%;
+    margin-top: 5%;
     .exchange{
-        text-align: center;
         margin: 20px;
+		span{
+			    vertical-align: top;
+		}
     }
     input{
         height: 30px;
-        width: 180px;
+        width: 210px;
+    }
+	.exchange-hint{
+		margin: 20px;
+		padding-top: 20px;
+		.hint-title{
+			font-size: 20px;
+			font-weight: 500;
+			padding: 10px 0px;
+		}
+	}
+	ul li {
+		// list-style-type:decimal;
+		line-height: 30px;
+	}
+}
+
+.notice-container{
+	display: none;
+	text-align: center;
+	width: 100%;
+	font-size: 1.5em;
+	.hint-word{
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .return-btn{
+        text-align: center;
+        padding: 20px 0px;
+        button{
+            background-color: #26747a;
+            color: white; 
+            letter-spacing: 3px;
+            height: 30px;
+            width: 110px;
+            padding: 0px 20px;
+        }
+    }
+
+    .time{
+        color: #26747a;
+    }
+    .hint-time{
+        font-size: 20px;
+        margin-top: 10px;
     }
 }
+
+
+
+
    

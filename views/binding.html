@@ -46,15 +46,33 @@
 
 <div>
  <div class = "exchange-container">
-    <div class = "exchange">
+    <div class = "exchange" id="exchange">
       <span>兑换码：</span> 
-      <input type="text" value="" name="exchange">
+      <span class="service-select-btn">
+        <div class="input-wrap"><input type="text" value="" name="exchange"></div>
+        <div><button class="conform" type="submit">确定</button></div>
+        <input type="text"  name="token" id="token" hidden>
+      </span>
     </div>
-    <input type="text"  name="token" id="token" hidden>
 
-   <div class="service-select-btn">
-		<button class="conform" type="submit">确定</button>
-	</div>
+   <div class = "notice-container" id="notice">  
+    <div class="hint-word hint-time"><span class="time" id="time">3</span>秒跳转至首页</div>
+    <div  class="return-btn"><button  id="returnTo">返回</button></div>
+  </div>
+    
+
+   
+  <div  class="exchange-hint">
+    <div class="hint-title">兑换提示：</div>
+    <ul>
+      <li>1. 您正在为FT中文网账号：<span id="userName">xxxxxx</span>，绑定付费订阅权益；</li>
+      <li>2. 兑换成功后，您即可使用绑定的账户，享受订阅会员权益；</li>
+      <li>3. 订阅会员年卡权益期限：从兑换成功当日起之后的1年内；</li>
+      <li>4. 如果您遇到问题，请联系客服邮箱subscriber.service@ftchinese.com；</li>
+      <li>5. 本卡最终解释权归FT中文网所有。</li>
+    </ul>
+
+  </div>
 </div>
 </div>
 

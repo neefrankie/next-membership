@@ -1,5 +1,11 @@
 import {EventObject,GetCookie,getUrlParams,isEmptyObj} from './subscribe_api.js';
 
+let userName = GetCookie('USER_NAME');
+let userNameId = document.getElementById('userName');
+if(userName){
+    userNameId.innerHTML = userName;
+}
+
 
 let tokenVal = getUrlParams('token');
 let tokenId = document.getElementById('token');
@@ -7,15 +13,19 @@ tokenId.value = tokenVal;
 
 let conform = document.querySelector('.conform');
 
+let exchange = document.getElementById('exchange');
+let notice = document.getElementById('notice');
+
 EventObject.addHandler(conform,"click", function(){
     let userId = GetCookie('USER_ID') || '';
     let exchange = document.querySelector('[name="exchange"]');
     let exchangeVal = exchange.value;
-    // console.log('exchangeVal'+exchangeVal);
+    let exchangeValNew = exchangeVal.replace(/\s/g,'');
+    console.log(exchangeValNew);
     if(exchangeVal === ''){
         alert('请输入信息！');
-    }else if(exchangeVal.length < 16){
-        alert('请正确输入兑换码！！！');
+    }else if(exchangeValNew.length < 16){
+        alert('您的兑换码有误，请确认后再输入！！！');
     }else{
         if (!!userId){
             var xhrpw = new XMLHttpRequest();
@@ -31,18 +41,22 @@ EventObject.addHandler(conform,"click", function(){
                     if(JSON.parse(data)){
                         var dataObj = JSON.parse(data);
                         if(dataObj.errcode===0){
-                            alert('兑换成功！');
-                            window.open('/','_self');
+                            alert(dataObj.errmsg);
+                            if(exchange){
+                                exchange.style.display = 'none';
+                                notice.style.display = 'block';
+                            }
+                            jump();
                         }else if(dataObj.errcode===100){
                             alert(dataObj.errmsg);
                         }else{
-                            alert('请正确输入兑换码!!!');
+                            alert('您的兑换码有误，请确认后再输入!!!');
                         }
                     }else{
-                        alert('请正确输入兑换码！');
+                        alert('您的兑换码有误，请确认后再输入！');
                     }
                 } else {
-                    alert('请正确输入兑换码！！');
+                    alert('您的兑换码有误，请确认后再输入！！');
                 }
             };     
             xhrpw.send(JSON.stringify(exchangeInfo));
@@ -50,5 +64,42 @@ EventObject.addHandler(conform,"click", function(){
     }
     
 
-});  
+}); 
+
+function jump(){
+    // Mark: 3秒自动跳转
+     let s = window.setInterval(function(){
+        var objTime = document.getElementById("time");//获得time的对象
+        var time = objTime.innerText;//获得time的值
+        time = time-1;
+        objTime.innerText = time;//把新time赋给objTime里面
+        if(time == 0){
+            window.location.href = 'http://www.ftchinese.com';
+            window.clear(s);//清空s，防止再次调用a()。即防止time减为负数
+        }
+     },1000);
+
+
+    var returnTo = document.getElementById("returnTo");
+    returnTo.onclick=function(){ 
+        window.open('http://www.ftchinese.com','_self');
+    } 
+
+}
+
+// test section
+// function test(){
+
+//     let jumpPara = getUrlParams('jump');
+//     console.log('tt'+jumpPara);
+//     if(jumpPara){
+//         console.log('tt');
+//         if(exchange){
+//             exchange.style.display = 'none';
+//             notice.style.display = 'block';
+//         }
+//         jump();
+//     }
+// }
+// test();
 
