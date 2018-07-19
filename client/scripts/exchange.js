@@ -6,6 +6,11 @@ if(userName){
     userNameId.innerHTML = userName;
 }
 
+let userEmail = GetCookie('USER_EMAIL');
+let userEmailId = document.getElementById('userEmail');
+if(userEmail){
+    userEmailId.innerHTML = '('+userEmail+')';
+}
 
 let tokenVal = getUrlParams('token');
 let tokenId = document.getElementById('token');
@@ -13,7 +18,7 @@ tokenId.value = tokenVal;
 
 let conform = document.querySelector('.conform');
 
-let exchange = document.getElementById('exchange');
+let exchangeId = document.getElementById('exchange');
 let notice = document.getElementById('notice');
 
 EventObject.addHandler(conform,"click", function(){
@@ -21,7 +26,7 @@ EventObject.addHandler(conform,"click", function(){
     let exchange = document.querySelector('[name="exchange"]');
     let exchangeVal = exchange.value;
     let exchangeValNew = exchangeVal.replace(/\s/g,'');
-    console.log(exchangeValNew);
+
     if(exchangeVal === ''){
         alert('请输入信息！');
     }else if(exchangeValNew.length < 16){
@@ -42,8 +47,8 @@ EventObject.addHandler(conform,"click", function(){
                         var dataObj = JSON.parse(data);
                         if(dataObj.errcode===0){
                             alert(dataObj.errmsg);
-                            if(exchange){
-                                exchange.style.display = 'none';
+                            if(exchangeId){
+                                exchangeId.style.display = 'none';
                                 notice.style.display = 'block';
                             }
                             jump();
