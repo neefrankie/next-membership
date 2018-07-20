@@ -232,7 +232,8 @@ const postUE = (url) => {
 
 };
 
-
+let headerTitle = document.getElementById('header-title');
+let headingHint = document.getElementById('heading-hint');
 let premiumBtn = document.getElementById('premium-btn');
 let standardBtn = document.getElementById('standard-btn');
 let premiumPrice = document.getElementById('premium_price');
@@ -303,7 +304,10 @@ function updateUI(dataObj){
         standardBtnInnerText = '输入兑换码';
         premiumBtnInnerText = '输入兑换码';
         standardPrice.style.display = 'none';  
-        premiumPrice.style.display = 'none'; 
+        premiumPrice.style.display = 'none';
+        headingHint.innerHTML =  '请选择您的兑换权益';
+        headerTitle.innerHTML = '兑换中心';
+        document.title = '兑换中心 - FT中文网';
     }
 
     standardBtn.innerText = standardBtnInnerText;
