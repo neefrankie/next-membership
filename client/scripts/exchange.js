@@ -30,7 +30,7 @@ EventObject.addHandler(conform,"click", function(){
     if(exchangeVal === ''){
         alert('请输入信息！');
     }else if(exchangeValNew.length < 16){
-        alert('您的兑换码有误，请确认后再输入！！！');
+        alert('您的兑换码有误，请确认后再输入！');
     }else{
         if (!!userId){
             var xhrpw = new XMLHttpRequest();
@@ -55,13 +55,13 @@ EventObject.addHandler(conform,"click", function(){
                         }else if(dataObj.errcode===100){
                             alert(dataObj.errmsg);
                         }else{
-                            alert('您的兑换码有误，请确认后再输入!!!');
+                            alert('您的兑换码有误，请确认后再输入!');
                         }
                     }else{
-                        alert('您的兑换码有误，请确认后再输入！');
+                        alert('FT中文网服务器没有返回数据！');
                     }
                 } else {
-                    alert('您的兑换码有误，请确认后再输入！！');
+                    alert('FT中文网服务器未能正常相应！');
                 }
             };     
             xhrpw.send(JSON.stringify(exchangeInfo));
