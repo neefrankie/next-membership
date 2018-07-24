@@ -253,7 +253,7 @@ gulp.task('serve', gulp.series('build-page','styles', 'scripts','api', () => {
   );
 }));
 
-gulp.task('build', gulp.series('prod','clean','styles', 'scripts','comCss', 'comJs','build-page', 'dev'));
+gulp.task('build', gulp.series('prod','clean', 'scripts', 'comJs','styles','build-page', 'dev'));
 
 gulp.task('copyTest', () => {
   const dest = 'ftac';
