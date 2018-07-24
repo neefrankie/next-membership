@@ -3,6 +3,8 @@
 
 import {EventObject,GetCookie,SetCookie,DeleteCookie,isWeiXin,parseUrlSearch,getUrlParams,isEmptyObj,getDeviceType} from './subscribe_api';
 
+import {productImpression,addPromotion,onPromoClick} from './track';
+
 const standardType = '标准会员';
 const premiumType = '高端会员';
 
@@ -125,6 +127,8 @@ var openPayment = function(event){
         console.log('isFromWeb');
         ga('send','event','Web Privileges', eventAction, SELabel);
     }
+
+    onPromoClick(SELabel,SELabel,newAttribute);
 
 };
 
@@ -597,5 +601,12 @@ function getMemberTypeFromUpdate(){
     }
 }
 
-
-
+/**
+ * Mark:加强版电子商务跟踪
+ */
+function trackEC(){
+    let SELabel = GetCookie('SELabel')||'Other';
+    productImpression()
+    addPromotion(SELabel,SELabel);
+}
+trackEC();

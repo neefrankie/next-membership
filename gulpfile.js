@@ -171,7 +171,7 @@ gulp.task('scripts', async () => {
 
 
    async function rollupJs(js){
-     console.log(js);
+    //  console.log(js);
     try {  
       const bundle = await rollup({
         input:`client/scripts/${js}`,
@@ -253,7 +253,7 @@ gulp.task('serve', gulp.series('build-page','styles', 'scripts','api', () => {
   );
 }));
 
-gulp.task('build', gulp.series('prod','clean','styles', 'scripts', 'comJs','build-page', 'dev'));
+gulp.task('build', gulp.series('prod','clean','styles', 'scripts','comCss', 'comJs','build-page', 'dev'));
 
 gulp.task('copyTest', () => {
   const dest = 'ftac';
