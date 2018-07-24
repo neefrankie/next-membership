@@ -5,25 +5,25 @@
             "name": "subscription",
             "data": "views/data/data.json",
             "template": "subscription.html",
-            "js":"main.js"
+            "js":["main.js"]
         },
         {
             "name": "subscriptionTest",
             "data": "views/data/data.json",
             "template": "subscriptionTest.html",
-            "js":"main.js"
+            "js":["main.js"]
         },
         {
             "name": "subscribenotice",
             "data": "views/data/data.json",
             "template": "subscribenotice.html",
-            "js":"notice.js"
+            "js":["notice.js"]
         },
         {
             "name": "binding",
             "data": "views/data/data.json",
             "template": "binding.html",
-            "js":"exchange.js"
+            "js":["exchange.js"]
         }
  
        

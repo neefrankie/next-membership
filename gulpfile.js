@@ -131,13 +131,50 @@ gulp.task('styles', function styles() {
     .pipe(browserSync.stream());
 });
 
+// gulp.task('scripts', async () => {
+//   const details = await fs.readAsync('views/data/path-detail.json','json');
+//   const demos = details.demos;
+//   async function rollupOneJs(demo) {
+//     try {  
+//       const bundle = await rollup({
+//         input:`client/scripts/${demo.js}`,
+//         plugins:[
+//           babel({
+//             exclude:'node_modules/**'
+//           }),
+//           nodeResolve({
+//             jsnext:true,
+//           })
+//         ]
+//       });
+//       await bundle.write({
+//         file: `.tmp/scripts/${demo.js}`,
+//         format: 'iife',
+//         sourcemap: true
+//       });
+//     } catch (error) {
+//       console.log('error'+error);
+//     }
+//   }
+
+//   await demos.forEach(rollupOneJs);
+//   browserSync.reload();
+// });
+
 gulp.task('scripts', async () => {
   const details = await fs.readAsync('views/data/path-detail.json','json');
   const demos = details.demos;
   async function rollupOneJs(demo) {
+    var js = demo.js;
+    await js.forEach(rollupJs);  //一定要用await，不然不会按照顺序运行
+  }
+
+
+   async function rollupJs(js){
+     console.log(js);
     try {  
       const bundle = await rollup({
-        input:`client/scripts/${demo.js}`,
+        input:`client/scripts/${js}`,
         plugins:[
           babel({
             exclude:'node_modules/**'
@@ -148,7 +185,7 @@ gulp.task('scripts', async () => {
         ]
       });
       await bundle.write({
-        file: `.tmp/scripts/${demo.js}`,
+        file: `.tmp/scripts/${js}`,
         format: 'iife',
         sourcemap: true
       });
@@ -190,8 +227,8 @@ gulp.task('clean', () => {
 // });
 
 
-
-gulp.task('serve', gulp.parallel('build-page', 'styles', 'scripts', 'api',() => {
+gulp.task('serve', gulp.series('build-page','styles', 'scripts','api', () => {
+// gulp.task('serve', gulp.parallel('build-page', 'styles', 'scripts', 'api',() => {
   browserSync.init({
     server: {
       baseDir: ['.tmp'],
