@@ -25,11 +25,29 @@ function productImpression(id,name){
     'position': 2
     });
 
+    addProduct();
     ga('send', 'pageview');  // Send product impressions with initial pageview.
 
 }
 
+function addProduct(){
+    ga('ec:addProduct', {     // Provide product details in a productFieldObject.
+    'id': 'Standard',                   // Product ID (string).
+    'name': 'Standard', // Product name (string).
+    'category': listName,            // Product category (string).
+    'brand': 'FTC',                // Product brand (string).
+    'position': 1                    // Product position (number).
+    });
+    ga('ec:addProduct', {     // Provide product details in a productFieldObject.
+    'id': 'Premium',                   // Product ID (string).
+    'name': 'Premium', // Product name (string).
+    'category': listName,            // Product category (string).
+    'brand': 'FTC',                // Product brand (string).
+    'position': 2                    // Product position (number).
+    });
 
+    ga('ec:setAction', 'detail');
+}
 
 
 // 出来订阅页面，可以addPromotion，放入订阅页面
