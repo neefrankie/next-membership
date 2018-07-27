@@ -544,7 +544,7 @@ iosTrack();
 
 // Mark:url参数中带有ccode和utm_code，设置cookie，因为这是从活动中直接链接过来的，所以在此页面设置来源。暂时不使用document.referrer
 function ccodeTrack(){
-    let ccodePara = getUrlParams('ccode') || getUrlParams('utm_code');
+    let ccodePara = getUrlParams('ccode') || getUrlParams('utm_code') || getUrlParams('utm_campaign') || getUrlParams('campaign_code') ;
     if(ccodePara){
         var fromUrl = 'From:'+ccodePara  ;
         SetCookie('SELabel',fromUrl,86400,null,'.ftacademy.cn',false);
