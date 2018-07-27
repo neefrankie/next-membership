@@ -9,12 +9,18 @@ if (paraArr && paraArr.length>0){
         eventAction = arr[1] ;
 }
 
-var SELabel = GetCookie('SELabel')||'';
-
-if(SELabel.indexOf('/IOSCL/')>-1){
+var SELabel = GetCookie('SELabel') || '';
+if(SELabel.indexOf('/IOSCL/')>-1) {
     var clParaArr = SELabel.split('/IOSCL/');
     ga('send','event',clParaArr[0], 'Buy Success:'+eventAction, clParaArr[1]);
-}else{
+} else {
+    var ccode = SELabel.replace(/From:/g,'').replace(/\/.*$/g,'');
+    if (SELabel.indexOf('From:') === 0 && ccode !== '') {
+        ga('set', 'AllowAnchor', true);
+        ga('set', 'campaignName', ccode);
+        ga('set', 'campaignSource', 'marketing');
+        ga('set', 'campaignMedium', 'campaign');
+    }
     ga('send','event','Web Privileges', 'Buy Success:'+eventAction, SELabel);
 }
 // TODO:get actual price
