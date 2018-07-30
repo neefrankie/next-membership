@@ -3,7 +3,7 @@
 
 import {EventObject,GetCookie,SetCookie,DeleteCookie,isWeiXin,parseUrlSearch,getUrlParams,isEmptyObj,getDeviceType} from './subscribe_api';
 
-import {productImpression,addPromotion,onPromoClick} from './track';
+import {productImpression,addPromotion,onPromoClick,onProductClick} from './track';
 
 const standardType = '标准会员';
 const premiumType = '高端会员';
@@ -63,7 +63,7 @@ function selectPayWay(memberType){
 }
 
 var openPayment = function(event){
-
+    var position = '';
     var attribute = this.getAttribute('id');
     var childNodes = this.parentNode.children;
     price = childNodes[2].value;
@@ -108,8 +108,10 @@ var openPayment = function(event){
 
     if(attribute==='standard-btn'){
         newAttribute = 'Standard';
+        position = 1;
     }else if(attribute==='premium-btn'){
         newAttribute = 'Premium';
+        position = 2;
     }
 
     var SELabel = GetCookie('SELabel');
@@ -129,6 +131,7 @@ var openPayment = function(event){
     }
 
     onPromoClick(SELabel,SELabel,newAttribute);
+    onProductClick(newAttribute,position);
 
 };
 

@@ -120,5 +120,6 @@ export {
     productImpression,
     addPromotion,
     onPromoClick,
-    addTransaction
+    addTransaction,
+    onProductClick
 };
