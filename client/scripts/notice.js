@@ -100,7 +100,7 @@ window.onload = function(){
 }
 
 // 放入交易成功页面
-let affiliation = 'web IAP:' + SELabel;
+let affiliation =  SELabel;
 addTransaction(tradeNo, eventAction, price, affiliation);
     
    

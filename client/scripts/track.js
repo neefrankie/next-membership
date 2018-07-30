@@ -60,6 +60,23 @@ function addPromotion(id,name){
     });
 }
 
+function onProductClick(name,position) {
+  ga('ec:addProduct', {
+    'id': name,
+    'name': name,
+    'category': listName,
+    'brand': 'FTC',
+    'position': position
+  });
+  ga('ec:setAction', 'click', {list: listName});
+
+  // Send click with an event, then send user to product page.
+//   ga('send', 'event', 'UX', 'click', 'Results', {
+//     hitCallback: function() {
+//       document.location = '/product_details?id=P12345';
+//     }
+//   });
+}
 
 
 // 当点击立即订阅时，调用此
