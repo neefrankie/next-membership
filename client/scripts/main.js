@@ -466,7 +466,7 @@ function hasUtmCampaign(){
                 if(paraArr[j].indexOf('utm_campaign')>=0){
                         var arr = paraArr[j].split('=');
                         campaign = arr[1];
-                        SetCookie('campaign_code',campaign,86400,null,null,false);
+                        SetCookie('ccode',campaign,86400,null,null,false);
                         // document.cookie = 'campaign_code = ' + campaign;
                 }
 
