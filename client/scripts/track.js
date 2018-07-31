@@ -56,7 +56,7 @@ function addPromotion(id,name){
     'id': id,             // Promotion ID. Required (string).
     'name': name,          // Promotion name (string).
     'creative': category,   // Creative (string).
-    'position': ''      // Position  (string).
+    'position': 'web side'      // Position  (string).
     });
 }
 
@@ -80,23 +80,23 @@ function onProductClick(name,position) {
 
 
 // 当点击立即订阅时，调用此
-function onPromoClick(id,name,clickName) {
+function onPromoClick(id,name) {
   ga('ec:addPromo', {
     'id': id,
     'name': name,
     'creative': category,
-    'position': ''
+    'position': 'web side'
   });
 
   // Send the promo_click action with an event.
   ga('ec:setAction', 'promo_click');
-  ga('send', 'event', 'Internal Promotions', 'click', clickName);
+  ga('send', 'event', 'Internal Promotions', 'click', name);
 }
 
 function addTransaction(tradeId, name, price, affiliation){
     ga('set', 'currencyCode', 'CNY'); // Set tracker currency to Euros.
     ga('ec:addProduct', {
-    'id': tradeId,
+    'id': name,
     'name': name,
     'category': category,
     'brand': 'FTC',

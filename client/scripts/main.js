@@ -130,7 +130,7 @@ var openPayment = function(event){
         ga('send','event','Web Privileges', eventAction, SELabel);
     }
 
-    onPromoClick(SELabel,SELabel,newAttribute);
+    onPromoClick(SELabel,newAttribute);
     onProductClick(newAttribute,position);
 
 };
