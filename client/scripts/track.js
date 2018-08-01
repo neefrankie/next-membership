@@ -1,5 +1,5 @@
 
-let listName = 'membership';
+let listName = 'webMembership';
 let category = 'membership';
 
 
@@ -110,7 +110,8 @@ function addTransaction(tradeId, name, price, affiliation){
     'affiliation': affiliation,
     'revenue': price,
     'tax': 0,
-    'shipping': 0
+    'shipping': 0,
+    'list': listName
     });
 
     ga('send', 'pageview');     // Send transaction data with initial pageview.
