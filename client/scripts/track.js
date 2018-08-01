@@ -70,12 +70,7 @@ function onProductClick(name,position) {
   });
   ga('ec:setAction', 'click', {list: listName});
   ga('send', 'event', 'UX', 'click', 'Results');
-  // Send click with an event, then send user to product page.
-//   ga('send', 'event', 'UX', 'click', 'Results', {
-//     hitCallback: function() {
-//       document.location = '/product_details?id=P12345';
-//     }
-//   });
+
 }
 
 

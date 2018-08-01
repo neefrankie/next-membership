@@ -9,7 +9,7 @@ if (paraArr && paraArr.length>0){
         eventAction = arr[1] ;
 }
 
-var SELabel = GetCookie('SELabel') || '';
+var SELabel = GetCookie('SELabel') || 'other from web';
 if(SELabel.indexOf('/IOSCL/')>-1) {
     var clParaArr = SELabel.split('/IOSCL/');
     ga('send','event',clParaArr[0], 'Buy Success:'+eventAction, clParaArr[1]);
