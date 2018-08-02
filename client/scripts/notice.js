@@ -50,6 +50,17 @@ let tradeNo = GetCookie('trade_no')||randomVal;
 
 // ga('ecommerce:send');
 
+function getClientIdPar(clientId,url){
+    var clientIdPar = '';
+    var connector = (url.indexOf('?') > 0) ? '&' : '?';
+    if(clientId){
+        clientIdPar = connector+'clientId=' + clientId;
+    }else{
+        clientIdPar = '';
+    }
+    return clientIdPar;
+}  
+
 // 5秒自动跳转
 function jump(){
     // Mark: 5秒自动跳转
@@ -60,17 +71,30 @@ function jump(){
         objTime.innerText = time;//把新time赋给objTime里面
         if(time == 0){
             var rCookie = GetCookie('R')||'';
-            if(rCookie){
-                var referUrl = decodeURIComponent(rCookie);
-                if(referUrl.indexOf('tapPara')>-1){
-                    window.location.href = referUrl+'&buy=success';
-                }else{
-                    window.location.href = referUrl;
-                }
+            var jumpUrl = '';
+            // 当跳转的时候获取客户端 ID
+            ga(function(tracker) {
+                var clientId = tracker.get('clientId');
+                var clientIdPar = '';
+                if(rCookie){
+                    var referUrl = decodeURIComponent(rCookie);
+                    clientIdPar = getClientIdPar(clientId,referUrl);
+                    if(referUrl.indexOf('tapPara')>-1){
+                        jumpUrl = referUrl+'&buy=success'+clientIdPar;
+                    }else{
+                        jumpUrl = referUrl+clientIdPar;
+                    }
                 
-            }else{
-                window.location.href = 'http://www.ftchinese.com';
-            }
+                }else{
+                    var defaultJumpUrl = 'http://www.ftchinese.com';
+                    clientIdPar = getClientIdPar(clientId,defaultJumpUrl);
+                    jumpUrl = defaultJumpUrl+clientIdPar;
+                }
+
+                window.location.href = jumpUrl;
+            }); 
+
+            
             window.clear(s);//清空s，防止再次调用a()。即防止time减为负数
         }
      },1000);
@@ -78,15 +102,22 @@ function jump(){
 }
 
 function returnTo(){
-    console.log('nn');
+    var jumpUrl = '';
     var rCookie = GetCookie('R')||'';
-    if(rCookie){
-        var referUrl = decodeURIComponent(rCookie);
-        window.open(referUrl,'_self');
-    }else{
-        window.open('http://www.ftchinese.com/','_self');
-    }
-    
+    ga(function(tracker) {
+        var clientId = tracker.get('clientId');
+        var clientIdPar = '';
+        if(rCookie){
+            var referUrl = decodeURIComponent(rCookie);
+            clientIdPar = getClientIdPar(clientId,referUrl);
+            jumpUrl = referUrl+clientIdPar;
+        }else{
+            jumpUrl = 'http://www.ftchinese.com';
+            clientIdPar = getClientIdPar(clientId,jumpUrl);
+            jumpUrl = jumpUrl+clientIdPar;
+        }
+        window.open(jumpUrl,'_self');
+    });
 }
 
 let returnToId = document.getElementById("returnTo");
@@ -104,5 +135,5 @@ let affiliation =  SELabel;
 addTransaction(tradeNo, eventAction, price, affiliation);
     
    
-   
+
 

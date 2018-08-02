@@ -164,6 +164,7 @@ const toPayAction = function(event){
     
     var newmemberType = (memberType===premiumType) ? 'Premium' : 'Standard';
 
+
     //满足2个条件：1.支付方式  2.会员类型
     if (memberType===premiumType && payWay==='ali') {
         window.open('http://www.ftacademy.cn/index.php/pay?offerId=8d5e7e72f12067991186cdf3cb7d5d9d&platform=1','_self');

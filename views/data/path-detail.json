@@ -5,7 +5,7 @@
             "name": "subscription",
             "data": "views/data/data.json",
             "template": "subscription.html",
-            "js":["main.js"]
+            "js":["main.js","key.js"]
         },
         {
             "name": "subscriptionTest",
