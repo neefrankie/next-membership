@@ -130,7 +130,7 @@ var openPayment = function(event){
         ga('send','event','Web Privileges', eventAction, SELabel);
     }
 
-    onPromoClick(SELabel,newAttribute);
+
     onProductClick(newAttribute,position);
 
 };
@@ -610,7 +610,6 @@ function getMemberTypeFromUpdate(){
  */
 function trackEC(){
     let SELabel = GetCookie('SELabel')||'Other';
-    productImpression()
-    addPromotion(SELabel,SELabel);
+    productImpression();
 }
 trackEC();
