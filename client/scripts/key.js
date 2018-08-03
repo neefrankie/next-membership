@@ -36,6 +36,11 @@ ga('require', 'ec');
 try{
     ga('set', 'AllowAnchor', true);
     var ccode = getUrlParams('ccode') || getUrlParams('utm_code') || getUrlParams('utm_campaign') || getUrlParams('campaign_code') || GetCookie('ccode') || '';
+    var seLabel = GetCookie('SELabel') || '';
+    seLabel = seLabel.replace(/From:/g,'').replace(/\/.*$/g,'');
+    if (seLabel !== '') {
+        ccode = seLabel;
+    }
     if (ccode!=='' && window.location.href.indexOf('utm_campaign')<0) {
         var usource='marketing';
         var umedium='campaign';
