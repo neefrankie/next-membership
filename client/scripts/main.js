@@ -613,3 +613,8 @@ function trackEC(){
     productImpression();
 }
 trackEC();
+
+ga(function(tracker) {
+    var clientId = tracker.get('clientId');
+    console.log('clientId'+clientId);
+});               
