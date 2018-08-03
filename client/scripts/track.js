@@ -105,8 +105,7 @@ function addTransaction(tradeId, name, price, affiliation){
     'affiliation': affiliation,
     'revenue': price,
     'tax': 0,
-    'shipping': 0,
-    'list': listName
+    'shipping': 0
     });
 
     ga('send', 'pageview');     // Send transaction data with initial pageview.
