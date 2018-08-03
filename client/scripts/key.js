@@ -28,10 +28,22 @@ if (gaMore.hasValue) {
 
 ga('require', 'displayfeatures');
 ga('require', 'ec');
+
+// MARK: - Track Campaign Code on Google Analytics
+try{
+    ga('set', 'AllowAnchor', true);
+    var ccode = getUrlParams('ccode') || getUrlParams('utm_code') || getUrlParams('utm_campaign') || getUrlParams('campaign_code') || GetCookie('ccode') || '';
+    if (ccode!=='' && window.location.href.indexOf('utm_campaign')<0) {
+        var usource='marketing';
+        var umedium='campaign';
+        ga('set', 'campaignName', ccode);
+        ga('set', 'campaignSource', usource);
+        ga('set', 'campaignMedium', umedium);
+    }
+}catch(ignore){}
+
 try {
     ga('send', 'pageview', window.location.href);
-} catch (err) {
-
-}
+} catch (err) {}
 
 
