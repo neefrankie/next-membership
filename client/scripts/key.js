@@ -10,6 +10,9 @@ var userIdForGA = GetCookie('U') || GetCookie('USER_ID') || '';
 var clientId;
 try {
     clientId = getUrlParams('clientId')|| GetCookie('clientId') || '';
+    var url = window.location.href.replace(/&clientId=.*/g, '')
+    var stateObj = { foo: "bar" };
+    history.replaceState(stateObj, "page 3", url);
 } catch(ignore) {}
 var gaMore = {hasValue: false};
 if (userIdForGA !== null) {

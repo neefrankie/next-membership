@@ -552,7 +552,7 @@ function ccodeTrack(){
     if(ccodePara){
         var fromUrl = 'From:'+ccodePara  ;
         SetCookie('SELabel',fromUrl,86400,null,'.ftacademy.cn',false);
-        // ga('send','event','Web Privileges', 'Tap', fromUrl);
+        ga('send','event','Web Privileges', 'Tap', fromUrl, {'nonInteraction':1});
     }
 }
 
@@ -613,3 +613,8 @@ function trackEC(){
     productImpression();
 }
 trackEC();
+
+ga(function(tracker) {
+    var clientId = tracker.get('clientId');
+    console.log('clientId'+clientId);
+});               
