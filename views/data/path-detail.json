@@ -24,6 +24,12 @@
             "data": "views/data/data.json",
             "template": "binding.html",
             "js":["exchange.js"]
+        },
+        {
+            "name": "gameagreement",
+            "data": "views/data/data.json",
+            "template": "gameagreement.html",
+            "js":[]
         }
  
        
