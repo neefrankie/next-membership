@@ -25,6 +25,23 @@
  
   </script>
 <!-- End Google Analytics -->
+ <script>
+    function GetCookie(name){
+      var start = document.cookie.indexOf(name+'='),
+          len = start+name.length+1,
+          end = document.cookie.indexOf(';',len);
+      if ((!start) && (name !== document.cookie.substring(0,name.length))) {return null;}
+      if (start === -1) {return null;}
+      if (end === -1) {end = document.cookie.length; }
+      return decodeURIComponent(document.cookie.substring(len,end));
+  };
+  if(GetCookie('agreeToSyb')){
+    // window.location.href = 'http://www.shiyibao.com/h5/105468/share';
+    document.title = '试译宝';
+    window.open('http://www.shiyibao.com/h5/105468/share','_self');
+  }
+
+</script>
 
 
   <link inline rel="stylesheet" type="text/css" href="styles/gameagreement.css">
@@ -165,6 +182,24 @@
   <button class="agree" id="agree"><a href="http://www.shiyibao.com/h5/105468/share">同意</a></button>
 </div>
 
+<script>
 
+    function SetCookie(name, value , sec , path , domain, secure){
+      var expires = new Date();
+      if(sec === null || sec === '') {sec = 600 * (24 * 60 * 60 * 1000);}
+        else {sec = 1000*sec;}
+        expires.setTime (expires.getTime() + sec);
+        document.cookie = name + '=' + escape (value) +((expires === null) ? '' : ('; expires=' + expires.toGMTString())) +((path === null) ? '/' : ('; path=' + path)) +((domain === null) ? '' : ('; domain=' + domain)) +((secure === true) ? '; secure' : '');  
+    };
+
+    var agree = document.getElementById('agree');
+    agree.onclick = function(){  
+      var time = 86400000000;
+      SetCookie('agreeToSyb',1,time,null,null,'');
+    }
+
+
+
+</script>
 </body>
 </html>

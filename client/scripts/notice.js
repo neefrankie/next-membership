@@ -28,27 +28,8 @@ var price = '';
 price = (eventAction === 'Premium') ? '1998' : '198';
 
 let randomVal = Math.round(Math.random()*89999)+10000;
-// var randomVal = Math.round(Math.random()*899)+100;
+
 let tradeNo = GetCookie('trade_no')||randomVal;
-// ga('ecommerce:addTransaction', {
-// 'id': tradeNo,                     // Transaction ID. Required.
-// 'affiliation': SELabel,   // Affiliation or store name.
-// 'revenue': price,               // Grand Total.
-// 'shipping': '0',                  // Shipping.
-// 'tax': '0' ,
-// 'currency': 'CNY'                     // Tax.
-// });
-
-// ga('ecommerce:addItem', {
-// 'id': tradeNo,                     // Transaction ID. Required.
-// 'name': eventAction,    // Product name. Required.
-// 'sku': eventAction,                 // SKU/code.
-// 'category': 'Subscription',         // Category or variation.
-// 'price': price,                 // Unit price.
-// 'quantity': '1'                   // Quantity.
-// });
-
-// ga('ecommerce:send');
 
 function getClientIdPar(clientId,url){
     var clientIdPar = '';
