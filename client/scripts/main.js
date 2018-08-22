@@ -5,6 +5,7 @@ import {EventObject,GetCookie,SetCookie,DeleteCookie,isWeiXin,parseUrlSearch,get
 
 import {productImpression,addPromotion,onPromoClick,onProductClick} from './track';
 
+
 const standardType = '标准会员';
 const premiumType = '高端会员';
 
@@ -12,9 +13,13 @@ let dataObj = {};
 let isStandard = false;
 let isPremium = false;
 let upgradePrice = '';
-let standardPriceValue = '';
-let premiumPriceValue = '';
-
+let standardPriceValue = '¥198.00/年';
+let premiumPriceValue = '¥1,998.00/年';
+let currentMilliseconds = new Date().getTime();
+if(currentMilliseconds>=1535644800000 && currentMilliseconds<=1535731200000){
+    standardPriceValue = '¥98.00/年';
+    premiumPriceValue = '¥998.00/年';
+}
 
 const setCookieVal = () => {
     // Mark:check ccode
@@ -88,6 +93,12 @@ var openPayment = function(event){
         }else if(attribute==='premium-btn'){
             price = upgradePrice;
         }
+    }else{
+        if(attribute==='standard-btn'){
+            price = standardPriceValue;
+        }else if(attribute==='premium-btn'){
+            price = premiumPriceValue;
+        } 
     }
 
     if(isWeiXin()){
@@ -303,7 +314,11 @@ function updateUI(dataObj){
     }else{
         if ((dataObj.standard === 1 && dataObj.premium === 0)){    
             upgradePrice = '¥'+dataObj.v+'.00/年';
+            standardPrice.innerHTML = standardPriceValue;
             premiumPrice.innerHTML = upgradePrice;
+        }else{
+            standardPrice.innerHTML = standardPriceValue;
+            premiumPrice.innerHTML = premiumPriceValue;
         }
     }
     
