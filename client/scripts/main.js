@@ -5,6 +5,7 @@ import {EventObject,GetCookie,SetCookie,DeleteCookie,isWeiXin,parseUrlSearch,get
 
 import {productImpression,addPromotion,onPromoClick,onProductClick} from './track';
 
+var secondGuide = document.querySelector('.second');
 
 const standardType = '标准会员';
 const premiumType = '高端会员';
@@ -19,7 +20,11 @@ let currentMilliseconds = new Date().getTime();
 if(currentMilliseconds>=1535644800000 && currentMilliseconds<=1535731200000){
     standardPriceValue = '¥98.00/年';
     premiumPriceValue = '¥998.00/年';
+    secondGuide.innerHTML = 'need to update';
 }
+
+
+
 
 const setCookieVal = () => {
     // Mark:check ccode
