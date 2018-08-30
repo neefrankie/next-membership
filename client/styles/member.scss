@@ -3,6 +3,10 @@ $text-highlight: #f2e0d0;
 $text-background: #26747a;
 
 @mixin subscription-XL {
+ .attention{
+    font-size: 12px;
+ }
+
 .width-cls{
    width:80%;
 }
@@ -23,7 +27,7 @@ $text-background: #26747a;
 
     .o-member{
       width:40%;
-      height:520px;
+      height:450px;
       float:left;
     }
     .o-member__premium{
@@ -52,6 +56,9 @@ $text-background: #26747a;
   }
 }
 @mixin subscription-L {
+ .attention{
+    font-size: 12px;
+ }
 .width-cls{
    width:80%;
 }
@@ -76,7 +83,7 @@ $text-background: #26747a;
     width:70%;
     .o-member{
       width:45%;
-      height:550px;
+      height:500px;
       float:left;
       // margin:0 2.5%;
     }
@@ -105,6 +112,10 @@ $text-background: #26747a;
   }
 }
 @mixin subscription-M {
+  .attention{
+    font-size: 10px;
+  }
+
   .width-cls{
    width:80%;
   }
@@ -126,7 +137,7 @@ $text-background: #26747a;
     width:80%;
     .o-member{
       width:45%;
-      height:610px;
+      height:480px;
       float:left;
       // margin:0 2.5%;
     }
@@ -154,6 +165,9 @@ $text-background: #26747a;
   }
 }
 @mixin subscription-S {
+  .attention{
+    font-size: 10px;
+  }
   .width-cls {
     width: 100%;
     text-align: center; 
@@ -166,15 +180,17 @@ $text-background: #26747a;
     }
     .show-image {
       margin-top: 10px;
-      height: 127px;
-      width: 250px;
+      // height: 127px;
+      height: 180px;
+      // width: 250px;
+      width: 100%;
     }
   }
   .o-member-container{
     width:80%;
     .o-member{
       width:100%;
-      height:650px;
+      height:450px;
       margin:2.5% 0;
     }
   }
@@ -197,6 +213,16 @@ $text-background: #26747a;
   }
 }
 @mixin subscription-SM {
+  .attention{
+    font-size: 10px;
+  }
+  .welcome-guide {
+    .show-image {
+      margin-top: 10px;
+      height: 160px;
+      width: 100%;
+    }
+  }
   #payment-box { 
     top:120px;
     right:5%;
@@ -326,7 +352,7 @@ $text-background: #26747a;
 
 .container{
    background-color:$text-highlight;
-   padding-top: 10px;
+  //  padding-top: 10px;
 }
 
 .welcome-guide { 
@@ -520,3 +546,22 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
     font-size: 20px;
     padding: 10px;
 }
+.attention-container{
+  background-color: #f2e0d0;
+}
+
+
+  .attention{
+      display: none;
+      padding-top:0px;
+      font-style: italic;
+      padding:10px 0px;
+      color:#666;
+      li{
+        margin-bottom: 3px; 
+      }
+      .title{
+        margin-top: 10px;
+        margin-bottom: 3px;
+      }
+  }
