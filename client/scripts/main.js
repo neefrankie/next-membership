@@ -30,9 +30,11 @@ if((currentMilliseconds>=1535644800000 && currentMilliseconds<=1535731200000)||(
     document.title = 'FT中文网付费订阅5折大促，全年最低价，仅此1天 - 13周年庆';
     
     firstGuide.innerHTML = 'FT中文网13周年庆，会员订阅5折大促';
-    secondGuide.innerHTML = '付费订阅全年最低价，仅此一天，截止到8月31日24时！ 希望全球视野的FT中文网，能够带您站在高海拔的地方俯瞰世界，引发你的思考，从不同的角度看到不一样的事物，见他人之未见！';
+    secondGuide.innerHTML = '付费订阅全年最低价，仅此一天，截止到8月31日24时！希望全球视野的FT中文网，能够带您站在高海拔的地方俯瞰世界，引发你的思考，从不同的角度看到不一样的事物，见他人之未见！';
     firstGuide.style.display = 'none';
     showImage.style.backgroundImage = "url(http://www.ftacademy.cn/5discount.jpg)";
+    showImage.style.marginTop= '20px';
+    
     attention.style.display='block';
     words.style.paddingTop = '0px';
 }
@@ -651,5 +653,4 @@ trackEC();
 
 ga(function(tracker) {
     var clientId = tracker.get('clientId');
-    console.log('clientId'+clientId);
 });               
