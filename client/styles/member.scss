@@ -2,264 +2,7 @@ $text-color: white;
 $text-highlight: #f2e0d0;
 $text-background: #26747a;
 
-@mixin subscription-XL {
- .attention{
-    font-size: 12px;
- }
 
-.width-cls{
-   width:80%;
-}
-.welcome-guide {
-  padding: 0 60px 0px 90px;
-  .words{
-    width: 60%;
-    padding-top: 30px;
-  }
-  .show-image {
-    float:right;
-    height: 214px;
-    width: 380px;
-  }
-}
-.o-member-container{
-    width:70%;
-
-    .o-member{
-      width:40%;
-      height:450px;
-      float:left;
-    }
-    .o-member__premium{
-      margin: 0 9% 0 1%;
-    }
-    .o-member__standard{
-       margin: 0 1% 0% 9%;
-    }
-  }
-  #payment-box { 
-    top:90px;
-    right:35%;
-    width: 30%;
-    .payment-method{
-      .wxpay-mode{
-        margin-left: -20px;
-      }
-      #pay-ali,#pay-wxpay{
-        width:100px;
-        height:20px;
-      }
-      img{
-        margin: 0 10px;
-      }
-    }
-  }
-}
-@mixin subscription-L {
- .attention{
-    font-size: 12px;
- }
-.width-cls{
-   width:80%;
-}
-.welcome-guide {
-  padding: 0 60px 0px 90px;
-  .words{
-    width: 60%;
-    padding-top: 30px;
-  }
-  .show-image {
-    float:right;
-    height: 214px;
-    width: 380px;
-    #pay-ali,#pay-wxpay{
-      width:100px;
-      height:20px;
-    }
-
-  }
-}
-.o-member-container{
-    width:70%;
-    .o-member{
-      width:45%;
-      height:500px;
-      float:left;
-      // margin:0 2.5%;
-    }
-    .o-member__standard{
-       margin: 0 1% 0% 4%;
-    }
-    .o-member__premium{
-      margin: 0 4% 0 1%;
-    }
-  }
-  #payment-box { 
-    top:200px;
-    right:30%;
-    width: 40%;
-    .payment-method{
-
-      #pay-ali,#pay-wxpay{
-        width:100px;
-        height:20px;
-      }
-      img{
-        margin: 0 10px;
-      }
-
-    }
-  }
-}
-@mixin subscription-M {
-  .attention{
-    font-size: 10px;
-  }
-
-  .width-cls{
-   width:80%;
-  }
-  .welcome-guide {
-    padding: 0 20px;
-    .words{
-      font-size:10px; 
-      width: 60%;
-      padding-top: 10px;
-    }
-    .show-image {
-      padding-top: 10px;
-      height: 107px;
-      width: 190px;
-      float:right;
-    }
-  }
-  .o-member-container{
-    width:80%;
-    .o-member{
-      width:45%;
-      height:480px;
-      float:left;
-      // margin:0 2.5%;
-    }
-    .o-member__standard{
-       margin: 0 1% 0% 4%;
-    }
-    .o-member__premium{
-      margin: 0 4% 0 1%;
-    }
-
-  }
-  #payment-box { 
-    top:180px;
-    right:27%;
-    width: 46%;
-    .payment-method{
-      #pay-ali,#pay-wxpay{
-        width:70px;
-        height:15px;
-      }
-      img{
-        margin: 0 10px;
-      }
-    }
-  }
-}
-@mixin subscription-S {
-  .attention{
-    font-size: 10px;
-  }
-  .width-cls {
-    width: 100%;
-    text-align: center; 
-  }
-  .welcome-guide {
-    padding: 0 30px;
-    .words{
-      font-size:14px; 
-      padding: 0px 0px 10px;
-    }
-    .show-image {
-      margin-top: 10px;
-      // height: 127px;
-      height: 180px;
-      // width: 250px;
-      width: 100%;
-    }
-  }
-  .o-member-container{
-    width:80%;
-    .o-member{
-      width:100%;
-      height:450px;
-      margin:2.5% 0;
-    }
-  }
-  #payment-box { 
-    top:120px;
-    right:10%;
-    width: 80%;
-    .payment-method{
-      .wxpay-mode{
-        margin-left: -20px;
-      }
-      #pay-ali,#pay-wxpay{
-        width:60px;
-        height:12px;
-      }
-      img{
-        margin: 0 10px;
-      }
-    }
-  }
-}
-@mixin subscription-SM {
-  .attention{
-    font-size: 10px;
-  }
-  .welcome-guide {
-    .show-image {
-      margin-top: 10px;
-      height: 160px;
-      width: 100%;
-    }
-  }
-  #payment-box { 
-    top:120px;
-    right:5%;
-    width: 90%;
-    .payment-method{
-      .wxpay-mode{
-        margin-left: -20px;
-      }
-      #pay-ali,#pay-wxpay{
-        width:45px;
-        height:9px;
-      }
-      img{
-        margin: 0 5px;
-      }
-    }
-
-  }
-}
-
-//XL related styles
-@media only screen and (min-width: 1221px) {
-  @include subscription-XL;
-}
-//L: large screen devices like pc and iPad landscape
-@media only screen and (max-width: 1220px) and (min-width: 981px) {
-  @include subscription-L;
-}
-@media only screen and (max-width: 980px) and (min-width: 691px) {
-  @include subscription-M;
-}
-@media only screen and (max-width: 690px) {
-  @include subscription-S;
-}
-@media only screen and (max-width: 350px) {
-  @include subscription-SM;
-}
 .centerClass{
   text-align:center;
 }
@@ -535,6 +278,267 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
   height: 200px;
   width: 100%;
   background-position: center;
+}
+
+
+@mixin subscription-XL {
+ .attention{
+    font-size: 12px;
+ }
+
+.width-cls{
+   width:80%;
+}
+.welcome-guide {
+  padding: 0 60px 0px 90px;
+  .words{
+    width: 60%;
+    padding-top: 30px;
+  }
+  .show-image {
+    float:right;
+    height: 214px;
+    width: 380px;
+  }
+}
+.o-member-container{
+    width:70%;
+
+    .o-member{
+      width:40%;
+      height:450px;
+      float:left;
+    }
+    .o-member__premium{
+      margin: 0 9% 0 1%;
+    }
+    .o-member__standard{
+       margin: 0 1% 0% 9%;
+    }
+  }
+  #payment-box { 
+    top:90px;
+    right:35%;
+    width: 30%;
+    .payment-method{
+      .wxpay-mode{
+        margin-left: -20px;
+      }
+      #pay-ali,#pay-wxpay{
+        width:100px;
+        height:20px;
+      }
+      img{
+        margin: 0 10px;
+      }
+    }
+  }
+}
+@mixin subscription-L {
+ .attention{
+    font-size: 12px;
+ }
+.width-cls{
+   width:80%;
+}
+.welcome-guide {
+  padding: 0 60px 0px 90px;
+  .words{
+    width: 60%;
+    padding-top: 30px;
+  }
+  .show-image {
+    float:right;
+    height: 214px;
+    width: 380px;
+    #pay-ali,#pay-wxpay{
+      width:100px;
+      height:20px;
+    }
+
+  }
+}
+.o-member-container{
+    width:70%;
+    .o-member{
+      width:45%;
+      height:500px;
+      float:left;
+      // margin:0 2.5%;
+    }
+    .o-member__standard{
+       margin: 0 1% 0% 4%;
+    }
+    .o-member__premium{
+      margin: 0 4% 0 1%;
+    }
+  }
+  #payment-box { 
+    top:200px;
+    right:30%;
+    width: 40%;
+    .payment-method{
+
+      #pay-ali,#pay-wxpay{
+        width:100px;
+        height:20px;
+      }
+      img{
+        margin: 0 10px;
+      }
+
+    }
+  }
+}
+@mixin subscription-M {
+  .attention{
+    font-size: 10px;
+  }
+
+  .width-cls{
+   width:80%;
+  }
+  .welcome-guide {
+    padding: 0 20px;
+    .words{
+      font-size:10px; 
+      width: 60%;
+      padding-top: 10px;
+    }
+    .show-image {
+      padding-top: 10px;
+      height: 107px;
+      width: 190px;
+      float:right;
+    }
+  }
+  .o-member-container{
+    width:80%;
+    .o-member{
+      width:45%;
+      height:480px;
+      float:left;
+      // margin:0 2.5%;
+    }
+    .o-member__standard{
+       margin: 0 1% 0% 4%;
+    }
+    .o-member__premium{
+      margin: 0 4% 0 1%;
+    }
+
+  }
+  #payment-box { 
+    top:180px;
+    right:27%;
+    width: 46%;
+    .payment-method{
+      #pay-ali,#pay-wxpay{
+        width:70px;
+        height:15px;
+      }
+      img{
+        margin: 0 10px;
+      }
+    }
+  }
+}
+
+
+@mixin subscription-S {
+  .attention{
+    font-size: 10px;
+  }
+  .width-cls {
+    width: 100%;
+    text-align: center; 
+  }
+  .welcome-guide {
+    padding: 0 30px;
+    .words{
+      font-size:14px; 
+      padding: 0px 0px 10px;
+    }
+    .show-image {
+      margin-top: 10px;
+      height: 180px;
+      width: 100%;
+    }
+  }
+  .o-member-container{
+    width:80%;
+    .o-member{
+      width:100%;
+      margin:2.5% 0;
+      .o-member__subscribe{
+          position: static;
+          margin: 0 auto;
+      }
+    } 
+  }
+  #payment-box { 
+    top:120px;
+    right:10%;
+    width: 80%;
+    .payment-method{
+      .wxpay-mode{
+        margin-left: -20px;
+      }
+      #pay-ali,#pay-wxpay{
+        width:60px;
+        height:12px;
+      }
+      img{
+        margin: 0 10px;
+      }
+    }
+  }
+}
+@mixin subscription-SM {
+  .welcome-guide {
+    .show-image {
+      margin-top: 10px;
+      height: 160px;
+      width: 100%;
+    }
+  }
+
+  #payment-box { 
+    top:120px;
+    right:5%;
+    width: 90%;
+    .payment-method{
+      .wxpay-mode{
+        margin-left: -20px;
+      }
+      #pay-ali,#pay-wxpay{
+        width:45px;
+        height:9px;
+      }
+      img{
+        margin: 0 5px;
+      }
+    }
+
+  }
+}
+
+//XL related styles
+@media only screen and (min-width: 1221px) {
+  @include subscription-XL;
+}
+//L: large screen devices like pc and iPad landscape
+@media only screen and (max-width: 1220px) and (min-width: 981px) {
+  @include subscription-L;
+}
+@media only screen and (max-width: 980px) and (min-width: 691px) {
+  @include subscription-M;
+}
+@media only screen and (max-width: 690px) {
+  @include subscription-S;
+}
+@media only screen and (max-width: 350px) {
+  @include subscription-SM;
 }
 
 .wxScanHint{
