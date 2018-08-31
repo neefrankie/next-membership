@@ -71,7 +71,7 @@ gulp.task('build-page', () => {
       return loadJsonFile(dataPath)
       .then(data => {
         
-        if (name ==='subscriptionTest'||name ==='subscription'){
+        if (name ==='subscriptionTest'||name ==='subscription'||name ==='QandA'){
           return render(template, {
             guide:data.guide,
             products: data.index,
@@ -107,6 +107,64 @@ gulp.task('build-page', () => {
   
 });
 
+gulp.task('compile-html', () => {
+  
+  const destDir = 'views/compiledHtml';
+  const pathDetail = loadJsonFile('views/data/path-detail.json');
+  return pathDetail.then(data => {
+    const demos = data.demos;
+    return Promise.all(demos.map((demo) => {
+      return renderPerView(demo);
+    }))
+  })
+  .then(() => {
+      browserSync.reload('*.html');
+    })
+    .catch(err => {
+      console.log(err);
+  });
+  async function renderPerView(demo){
+    const env = {
+      isProduction: process.env.NODE_ENV === 'production'
+    }; 
+    const name = demo.name;
+    const template = demo.template;
+    const dataPath = demo.data;
+      return loadJsonFile(dataPath)
+      .then(data => {
+        if (name ==='QandA'){
+          return render(template, {
+            guide:data.guide,
+            products: data.index,
+            tabContents1: data.tabContent1,
+            tabContents2: data.tabContent2,
+            tabContents3: data.tabContent3,
+            env
+          });
+        }else{
+          return render(template, {
+            env
+          });
+        }
+        
+      })
+      .then(html => {  
+
+        if (process.env.NODE_ENV === 'production') {
+          return inline(html, {
+            compress: true,
+            rootpath: path.resolve(process.cwd(), destDir)
+          });
+        }    
+        return html;
+        })
+        .then(html => {
+          const destFile = path.resolve(destDir, `${name}.html`);
+          return fs.writeAsync(destFile, html);
+      })
+  }
+  
+});
 
 gulp.task('styles', function styles() {
   const DEST = '.tmp/styles';

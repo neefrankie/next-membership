@@ -21,3 +21,9 @@ views/data/path-detail.json ：保存页面引入文件路劲
 
 ## 碰到的问题
 1. 使用$.cssnano()，会使得css中http://www.ftacademy.cn/subscription.jpg 链接的www去掉，所以需要注意，最好用相对路劲
+
+
+## 生成使用nunjuncks处理后的html文件
+`注意：此任务是方便其它地方通过bower install 引入，bower update更新`。
+
+gulp compile-html 
