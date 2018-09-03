@@ -22,24 +22,7 @@ let isPremium = false;
 let upgradePrice = '';
 let standardPriceValue = '¥198.00/年';
 let premiumPriceValue = '¥1,998.00/年';
-// let currentMilliseconds = new Date().getTime();  
-// var fiveDiscount = getUrlParams('from');
 
-// if((currentMilliseconds>=1535644800000 && currentMilliseconds<=1535731200000)||(fiveDiscount=='ft_birthday')){
-//     standardPriceValue = '¥98.00/年';
-//     premiumPriceValue = '¥998.00/年';
-
-//     document.title = 'FT中文网付费订阅5折大促，全年最低价，仅此1天 - 13周年庆';
-    
-//     firstGuide.innerHTML = 'FT中文网13周年庆，会员订阅5折大促';
-//     secondGuide.innerHTML = '付费订阅全年最低价，仅此一天，截止到8月31日24时！希望全球视野的FT中文网，能够带您站在高海拔的地方俯瞰世界，引发你的思考，从不同的角度看到不一样的事物，见他人之未见！';
-//     firstGuide.style.display = 'none';
-//     showImage.style.backgroundImage = "url(http://www.ftacademy.cn/5discount.jpg)";
-//     showImage.style.marginTop= '20px';
-    
-//     attention.style.display='block';
-//     words.style.paddingTop = '0px';
-// }
 
 
 
@@ -99,7 +82,7 @@ var openPayment = function(event){
     var parentsNode = this.parentNode.parentNode.children;
     memberType = parentsNode[0].innerHTML;
     var newAttribute = '';
-    console.log(':'+memberType);
+
     if (isPremium){
         return;
     }else if(isStandard){
@@ -161,7 +144,7 @@ var openPayment = function(event){
         }
         // console.log('isFromIos:'+SELabel);
     }else{
-        console.log('isFromWeb');
+        // console.log('isFromWeb');
         ga('send','event','Web Privileges', eventAction, SELabel);
     }
 
@@ -190,7 +173,7 @@ let pays = document.getElementsByName('pay');
 
 const toPayAction = function(event){
     getMemberTypeFromUpdate();
-    console.log(memberType);
+
     for(let j = 0; j < pays.length; j++){
         if(pays[j].checked){
             payWay = pays[j].value;
@@ -516,7 +499,7 @@ function fromUpdate(){
             if (!isEmptyObj(dataObj) && (dataObj.standard === 1 && dataObj.premium === 0)){
                 upgradePrice = upgradePrice;
             }else{
-                // console.log('upgradePrice:'+upgradePrice);
+
                 upgradePrice = premiumPriceValue;
             }
             relevantDataInPayment(premiumType,upgradePrice);
