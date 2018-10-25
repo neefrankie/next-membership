@@ -39,16 +39,12 @@ $text-background: #26747a;
       }
   }
 
-  .o-member{
-
+  .o-member {
     box-sizing: border-box;
-
     background-color:white;
     padding:10px;
     position: relative;
 
-
-    
     .o-member__title{
       text-align: center;
       margin: 30px 0px 15px;
@@ -302,18 +298,15 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
   }
 }
 .o-member-container{
-    width:70%;
-
+    max-width: 1024px;
+    .o-member-outer {
+      float: left;
+      width: 33.3333333333%;
+    }
     .o-member{
-      width:40%;
       height:450px;
-      float:left;
-    }
-    .o-member__premium{
-      margin: 0 9% 0 1%;
-    }
-    .o-member__standard{
-       margin: 0 1% 0% 9%;
+      max-width: 320px;
+      margin: auto;
     }
   }
   #payment-box { 
@@ -359,18 +352,14 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
   }
 }
 .o-member-container{
-    width:70%;
+    .o-member-outer {
+      float: left;
+      width: 33.3333333333%;
+    }
     .o-member{
-      width:45%;
-      height:500px;
-      float:left;
-      // margin:0 2.5%;
-    }
-    .o-member__standard{
-       margin: 0 1% 0% 4%;
-    }
-    .o-member__premium{
-      margin: 0 4% 0 1%;
+      height:450px;
+      max-width: 300px;
+      margin: auto;
     }
   }
   #payment-box { 
@@ -413,18 +402,13 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
     }
   }
   .o-member-container{
-    width:80%;
+    .o-member-outer {
+      float: none;
+    }
     .o-member{
-      width:45%;
-      height:480px;
-      float:left;
-      // margin:0 2.5%;
-    }
-    .o-member__standard{
-       margin: 0 1% 0% 4%;
-    }
-    .o-member__premium{
-      margin: 0 4% 0 1%;
+      height:450px;
+      max-width: 450px;
+      margin: 0 auto 30px auto;
     }
 
   }
@@ -466,15 +450,18 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
     }
   }
   .o-member-container{
-    width:80%;
+    .o-member-outer {
+      float: none;
+      padding: 0 15px;
+    }
     .o-member{
-      width:100%;
-      margin:2.5% 0;
+      max-width: 450px;
+      margin: 0 auto 30px auto;
       .o-member__subscribe{
           position: static;
           margin: 0 auto;
       }
-    } 
+    }
   }
   #payment-box { 
     top:120px;
