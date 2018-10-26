@@ -71,7 +71,7 @@ gulp.task('build-page', () => {
       return loadJsonFile(dataPath)
       .then(data => {
         
-        if (name ==='subscriptionTest'||name ==='subscription'||name ==='QandA'){
+        if (['QandA','subscriptionTest','subscription','subscribenotice'].indexOf(name) >= 0){
           return render(template, {
             guide:data.guide,
             products: data.index,
@@ -316,6 +316,8 @@ gulp.task('build', gulp.series('prod','clean', 'scripts', 'comJs','styles','buil
 // MARK: - Test new features without publishing to users
 gulp.task('copyTest', () => {
   const dest = 'ftac';
+  gulp.src(['.tmp/subscribenotice.html'])
+    .pipe(gulp.dest(`../${dest}`))
   return gulp.src(['.tmp/subscriptionTest.html'])
     .pipe(gulp.dest(`../${dest}`))
 });

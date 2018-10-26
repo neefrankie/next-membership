@@ -39,22 +39,59 @@
 
 <body  id="bodyId">
 
-  <HEADER class="header-container">
-    <DIV class="header-inner">
-      <DIV class="header-title">FT中文网</DIV>
-      <DIV class="header-side header-left" style="display: none;">
-        <DIV class="header-brand">
-          <FIGURE class="loading" data-url="http://static.ftchinese.com/images/masthead36.png"></FIGURE>
-        </DIV>
-      </DIV>
+  <header class="header-container">
+    <div class="header-inner">
+      <div class="header-title">会员订阅</div>
+      <div class="header-side header-left" style="display: none;">
+        <div class="header-brand">
+          <figure class="loading" data-url="http://static.ftchinese.com/images/masthead36.png"></figure>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    </DIV>
-  </HEADER>
+  <div class="payment-info-container">
+    <div class="payment-info-inner notice-container">
+      <div class="hint-word"><span class="hint-img"></span><span class="hint-content" id="hint-content">恭喜您订阅成功！</span></div>
+      <div  class="return-btn" id="returnTo"><button>返回</button></div>
+    </div>
+  </div>
 
-  <div class = "notice-container">  
-    <div class="hint-word"><span class="hint-img"></span><span class="hint-content" id="hint-content">恭喜您，订阅成功！</span></div>
-    <div class="hint-word hint-time"><span class="time" id="time">5</span>秒跳转</div>
-    <div  class="return-btn" id="returnTo"><button>返回</button></div>
+  <div class="payment-info-container">
+    <div class="payment-info-inner">
+      <div>交易单号：<span id="order-number"></span></div>
+      <div>已支付金额：<span id="payment-amount"></span>元</div>
+      <div>会员类型：<span id="member-type-name"></span></div>
+    </div>
+  </div>
+
+  <div class="payment-info-container">
+    <div class="payment-info-inner product-benefits-container">
+      {% for product in products %}
+        <div class="product-container {{product.type.replace(' ', '')}}">
+          <div class="product-title">{{product.title}}权益：</div>
+          <ul>
+            {% for benefit in product.benefits %}
+            <li> {{benefit}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="payment-info-container">
+    <div class="payment-info-inner">
+      <div>有效期至：<span id="expire-date">18501972480</span></div>
+      <div>客服电话/微信：<a href="tel: 18501972480">18501972480</a></div>
+      <div><a href="subscription.html#faq">常见问题请点击此处</a></div>
+    </div>
+  </div>
+
+  <div class="payment-info-container">
+    <div class="payment-info-inner">
+      <div>在各大应用市场下载“FT中文网App”，或在电脑上访问<a href="http://www.ftchinese.com/">www.ftchinese.com</a>，登录后，即可解锁付费资讯。</div>
+    </div>
   </div>
 
 <script>

@@ -133,15 +133,18 @@ var openPayment = function(event){
         paymentBox.style.top = top + "px";
     }
 
-    if(attribute==='standard-btn'){
+    if (attribute === 'standard-btn'){
         newAttribute = 'Standard';
         position = 1;
-    }else if(attribute==='premium-btn'){
+    } else if (attribute === 'standard-btn-monthly') {
+        newAttribute = 'StandardMonthly';
+        position = 2
+    } else if (attribute === 'premium-btn'){
         newAttribute = 'Premium';
-        position = 2;
+        position = 3;
     }
 
-    var SELabel = GetCookie('SELabel');
+    var SELabel = GetCookie('SELabel') || 'Direct';
     var eventAction = 'Buy: ' + newAttribute;
 
  // Mark:ios付费跟踪
@@ -521,8 +524,8 @@ ccodeTrack();
 // Mark：从升级高端会员进入，url中带有tap参数，当购买成功之后跳转来源并附加上参数buy=success
 // 第一次打开执行这里，当再次点击的时候，memberType为空
 function fromUpdate(){
-    let tapPara = getUrlParams('tap');
-    if(tapPara){    
+    let tapPara = getUrlParams('tap') || '';
+    if(tapPara !== ''){
         if(tapPara==='standard'){
             relevantDataInPayment(standardType,'¥198.00/年');
         }else if(tapPara==='premium'){
@@ -541,8 +544,9 @@ function fromUpdate(){
     let rCookie = GetCookie('R')||'';
     let referrer = document.referrer;
 
-    if((!rCookie||tapPara) && referrer){        
-        let newReferrer = referrer+'&tapPara='+tapPara;
+    if(rCookie === '' && referrer && tapPara !== ''){
+        const connector = (referrer.indexOf('?') >= 0) ? '&' : '?';
+        let newReferrer = referrer + connector + 'tapPara='+tapPara;
         SetCookie('R',newReferrer,'',null,'.ftacademy.cn',false);
     }
 }
@@ -550,7 +554,6 @@ function fromUpdate(){
 if (isEmptyObj(dataObj)){
     fromUpdate();
 }
-
 
 function getMemberTypeFromUpdate(){
     let tapPara = getUrlParams('tap');

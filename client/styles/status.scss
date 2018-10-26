@@ -1,49 +1,92 @@
-    @import "base.scss";
-    @import "header.scss";
+@import "base.scss";
+@import "header.scss";
 
-    .notice-container{
-        text-align: center;
-        position: absolute;
-        top: 40%;
-        width: 100%;
-        font-size: 1.5em;
-    }
+.notice-container{
+    text-align: center;
+    // position: absolute;
+    // top: 40%;
+    padding-top: 15px;
+    width: 100%;
+    font-size: 1.5em;
+    background-color: #f2e0d3;
+}
 
 
 
-    .hint-word{
-        text-align: center;
-        display: flex;
-        justify-content: center;
-    }
-    .hint-img{
-        width: 40px;
+.hint-word{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.hint-content {
+    color: #26747a;
+}
+.hint-img{
+    width: 40px;
+    //height: 30px;
+    display: inline-block;
+    line-height: 200%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="#26747a"><path d="M760 380.4l-61.6-61.6-263.2 263.1-109.6-109.5L264 534l171.2 171.2L760 380.4z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: left 50%;
+}
+
+.return-btn{
+    text-align: center;
+    padding: 15px 0px;
+    button{
+        background-color: #26747a;
+        color: white; 
+        letter-spacing: 3px;
         height: 30px;
-        display: inline-block;
-        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M760 380.4l-61.6-61.6-263.2 263.1-109.6-109.5L264 534l171.2 171.2L760 380.4z"/></svg>');
-
-        background-repeat: no-repeat;
-        background-position: left top;
+        width: 110px;
+        padding: 0px 20px;
     }
+}
 
-    .return-btn{
-        text-align: center;
-        padding: 30px 0px;
-        button{
-            background-color: #26747a;
-            color: white; 
-            letter-spacing: 3px;
-            height: 30px;
-            width: 110px;
-            padding: 0px 20px;
+.payment-info-container {
+    div {
+        line-height: 200%;
+        color: #505050;
+    }
+}
+
+.payment-info-inner {
+    padding: 15px;
+    margin: auto;
+    max-width: 600px;
+}
+
+.product-benefits-container {
+    background-color: white;
+    li {
+        background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:tick?tint=26747a&format=svg&source=ftchinese);
+        background-repeat: no-repeat;
+        background-position: left 50%;
+        background-size: 1.5em;
+        padding-left: 1.5em;
+        margin: 0.5em 1em;
+    }
+}
+.product-title {
+    font-weight: bold;
+    color: #333;
+}
+.product-container {
+    display: none;
+    &.Standard {
+        .Standard & {
+            display: block;
         }
     }
-
-    .time{
-        color: #26747a;
+    &.StandardMonthly {
+        .StandardMonthly & {
+            display: block;
+        }
     }
-    .hint-time{
-        font-size: 20px;
-        margin-top: 10px;
+    &.Premium {
+        .Premium & {
+            display: block;
+        }
     }
-
+}

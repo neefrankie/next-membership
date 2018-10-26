@@ -8,7 +8,7 @@
 	{
 		"title": "年度标准会员",
 		"price": "¥198.00/年",
-		"type": "standard",
+		"type": "Standard",
 		"openBtn": "立即订阅",
 		"benefits": [
 			"专享订阅内容每日仅需0.5元",
@@ -22,7 +22,7 @@
 	{
 		"title": "月度标准会员",
 		"price": "¥28.00/月",
-		"type": "standard",
+		"type": "Standard Monthly",
 		"openBtn": "立即订阅",
 		"benefits": [
 			"专享订阅内容每日仅需0.9元",
@@ -36,7 +36,7 @@
 	{
 		"title": "高端会员",
 		"price": "¥1,998.00/年",
-		"type": "premium",
+		"type": "Premium",
 		"openBtn": "立即订阅",
 		"benefits": [
 			"专享订阅内容每日仅需5.5元",
