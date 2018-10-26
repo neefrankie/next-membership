@@ -62,7 +62,7 @@
     li {
         background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:tick?tint=26747a&format=svg&source=ftchinese);
         background-repeat: no-repeat;
-        background-position: left 50%;
+        background-position: left 5px;
         background-size: 1.5em;
         padding-left: 1.5em;
         margin: 0.5em 1em;
@@ -88,5 +88,8 @@
         .Premium & {
             display: block;
         }
+    }
+    .note {
+        padding-left: 21px;
     }
 }

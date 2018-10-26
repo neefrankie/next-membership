@@ -100,8 +100,8 @@ function jump() {
             var months = date.getMonth() + 1;
             var days = date.getDate();
             var exprireDateFinal = years + '年' + months + '月' + days + '日';
+            expireEle.innerHTML = exprireDateFinal;
         }
-        expireEle.innerHTML = exprireDateFinal;
     }
 
     //http://www.ftacademy.cn/subscribenotice.html?notice=Successful%20Payment!&memberType=Standard%20Monthly&trade=FT0100411540551472&price=0.01&expire=1543161600&platfrom=alipay
