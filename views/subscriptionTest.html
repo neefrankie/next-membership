@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>会员订阅 - FT中文网</title>
+  <title>英国《金融时报》中文网付费订阅双11促销，仅此24小时！</title>
   <meta http-equiv="Content-Language" content="zh-CN" />
   <meta content="会员订阅" name="description" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -24,29 +24,30 @@
   <div class="container">
 
     <div class="welcome-guide width-cls">
-      <div class="show-image"></div>
+      <div class="show-image" style="background-image: url(http://i.ftimg.net/picture/3/000081753_piclink.jpg)"></div>
       <div class="words">
         <div class="first"><strong class="firstStrong">{{guide.first}}</strong></div>
         <div class="second">{{guide.second}}</div>
 
-        <div class="attention">
+        <div class="attention mobile-only">
           <div class="title">注意事项：</div>
           <ul>
-            <li><strong>1.本次促销价格仅针对个人新订户，暂不支持老用户续订；</strong></li>
-            <li>2.安卓用户请先从我们官网<a href='http://app.ftchinese.com/androidmobile.html'>http://app.ftchinese.com/androidmobile.html</a>或各大应用市场更新App；</li>
-            <li>3.本次促销，通过App Store内购付款用户，下一年度续订仍为原价；</li>
-            <li>4.付费订阅为虚拟内容服务，一经订阅成功概不退款，请谨慎购买；</li>
-            <li>5.联系客服：<a href="mailto:subscriber.service@ftchinese.com">subscriber.service@ftchinese.com</a>；电话/微信： 18501972480；</li>
-            <li>6.本次活动的最终解释权归FT中文网所有。</li>
+            <li><strong>1.促销时间：2018年11月11日0-24点（北京时间）</strong></li>
+            <li><strong>2.付费订阅为虚拟内容服务，一经订阅成功概不退款，请谨慎购买</strong></li>
+            <li>3.促销价格仅针对个人新订户，暂不支持老用户续订，升级和企业订户团购</li>
+            <li>4.通过App Store内购付款用户，自动续订仍为原价</li>
+            <li>5.促销仅针对年度标准会员订阅与高端会员订阅，月度会员订阅不参加</li>
+            <li>6.付费成功后，请下载“FT中文网 App”或在电脑上访问网页，登录后即可解锁</li>
+            <li>7.会员有效期是自订阅成功之日起365天</li>
+            <li>8.联系客服：subscriber.service@ftchinese.com 电话/微信：18501972480</li>
+            <li>9.本次活动的最终解释权归FT中文网所有</li>
           </ul>
         </div>
-        
-      </div>
 
+      </div>
       <div class="clear-class"></div>
     </div>
   </div>
-
 
 
   <div id="payment-page">
@@ -90,8 +91,30 @@
             </ul>
             <div class="o-member__subscribe">
               <button class="openSub" id="standard-btn">{{products[0].openBtn}}</button>
-              <p id="standard_price"> {{products[0].price}}</p>
-              <input type="text" value="¥198.00/年" hidden id="regular-member">
+              <p id="standard_price"><div class="highlight">{{products[0].price}}</div> <strike>{{products[0].oldPrice}}</strike></p>
+              <input type="text" value="{{products[0].price}}" hidden id="regular-member">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="o-member-outer">
+        <div class="o-member o-member__premium">
+          <div class="o-member_content">
+            <h2 class="o-member__title">{{products[2].title}}</h2>
+            <div class="o-member__border"></div>
+            <ul class="o-member__benefits">
+              {% for benefit in products[2].benefits %}
+              <li> {{benefit}}</li>
+              {% endfor %}
+            </ul>
+            <p style="padding: 0.5em 1em 0em 1.5em;">注：所有活动门票不可折算现金、不能转让、不含差旅与食宿</p>
+            <div class="o-member__subscribe">
+
+              <button class="openSub" id="premium-btn">{{products[2].openBtn}}</button>
+              <p id="premium_price"><div class="highlight">{{products[2].price}}</div><strike>{{products[2].oldPrice}}</strike></p>
+              <input type="text" value="{{products[2].price}}" hidden>
             </div>
           </div>
         </div>
@@ -110,37 +133,38 @@
             </ul>
             <div class="o-member__subscribe">
               <button class="openSub" id="standard-btn-monthly">{{products[1].openBtn}}</button>
-              <p id="standard_price_monthly"> {{products[1].price}}</p>
-              <input type="text" value="¥28.00/年" hidden id="regular-member">
+              <p id="standard_price_monthly"><div class="normal-text">{{products[1].price}}</div><span class="undertone">相当于¥336/年</span></p>
+              <input type="text" value="{{products[1].price}}" hidden id="regular-member">
             </div>
           </div>
         </div>
       </div>
 
-      <div class="o-member-outer">
-        <div class="o-member o-member__premium">
-          <div class="o-member_content">
-            <h2 class="o-member__title">{{products[2].title}}</h2>
-            <div class="o-member__border"></div>
-            <ul class="o-member__benefits">
-              {% for benefit in products[2].benefits %}
-              <li> {{benefit}}</li>
-              {% endfor %}
-            </ul>
-
-            <p style="padding: 0.5em 1em 0em 1.5em;">注：所有活动门票不可折算现金、不能转让、不含差旅与食宿</p>
-            <div class="o-member__subscribe">
-
-              <button class="openSub" id="premium-btn">{{products[2].openBtn}}</button>
-              <p id="premium_price">{{products[2].price}}</p>
-              <input type="text" value="¥1,998.00/年" hidden>
-            </div>
-          </div>
-        </div>
-      </div>
 
     </div>
   </div>
+
+
+
+  <div class="container mobile-hide">
+    <div class="welcome-guide">
+      <div class="attention">
+        <div class="title">注意事项：</div>
+        <ul>
+          <li><strong>1.促销时间：2018年11月11日0-24点（北京时间）</strong></li>
+          <li><strong>2.付费订阅为虚拟内容服务，一经订阅成功概不退款，请谨慎购买</strong></li>
+          <li>3.促销价格仅针对个人新订户，暂不支持老用户续订，升级和企业订户团购</li>
+          <li>4.通过App Store内购付款用户，自动续订仍为原价</li>
+          <li>5.促销仅针对年度标准会员订阅与高端会员订阅，月度会员订阅不参加</li>
+          <li>6.付费成功后，请下载“FT中文网 App”或在电脑上访问网页，登录后即可解锁</li>
+          <li>7.会员有效期是自订阅成功之日起365天</li>
+          <li>8.联系客服：subscriber.service@ftchinese.com 电话/微信： 18501972480</li>
+          <li>9.本次活动的最终解释权归FT中文网所有</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
 
   {% include "partials/QandA.html" %} {% include "partials/footer.html" %}
 

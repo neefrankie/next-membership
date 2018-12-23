@@ -25,7 +25,6 @@ $text-background: #26747a;
 .o-member-container{
   // width:60%;
   padding-bottom: 30px;
-  
   margin:0 auto;
   .o-member__heading{
       padding: 10px 0;
@@ -71,7 +70,7 @@ $text-background: #26747a;
     .o-member__subscribe{
       position: absolute;
       bottom: 30px;
-      width: 50%;
+      //width: 50%;
       left: 25%;
       text-align: center;
       button{
@@ -88,6 +87,19 @@ $text-background: #26747a;
   }
 }
 
+.highlight {
+  color: #9e2f50;
+  font-weight: bold;
+  text-align: center;
+}
+.normal-text {
+  text-align: center;
+}
+.undertone {
+  color: #505050;
+  font-size: 0.9em;
+  font-style: italic;
+}
 
 .container{
    background-color:$text-highlight;
@@ -276,6 +288,17 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
   background-position: center;
 }
 
+.mobile-only {
+  display: none;
+}
+.mobile-hide {
+  .welcome-guide {
+    width: 80%;
+  }
+  .attention {
+    font-size: 1em;
+  }
+}
 
 @mixin subscription-XL {
  .attention{
@@ -383,7 +406,6 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
   .attention{
     font-size: 10px;
   }
-
   .width-cls{
    width:80%;
   }
@@ -430,6 +452,14 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
 
 
 @mixin subscription-S {
+
+  .mobile-only {
+    display: block;
+  }
+  .mobile-hide {
+    display: none;
+  }
+
   .attention{
     font-size: 10px;
   }
@@ -539,7 +569,7 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAcCAMA
 
 
   .attention{
-      display: none;
+      //display: none;
       padding-top:0px;
       font-style: italic;
       padding:10px 0px;

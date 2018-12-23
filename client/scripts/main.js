@@ -21,9 +21,9 @@ let dataObj = {};
 let isStandard = false;
 let isPremium = false;
 let upgradePrice = '';
-let standardPriceValueMonthly = '¥28.00/年';
-let standardPriceValue = '¥198.00/年';
-let premiumPriceValue = '¥1,998.00/年';
+let standardPriceValueMonthly = '¥28/月';
+let standardPriceValue = '¥198/年';
+let premiumPriceValue = '¥1,998/年';
 
 
 
@@ -65,6 +65,7 @@ function relevantDataInPayment(memberType,price){
     let memberTypeId = document.getElementById('memberType');
     let priceId = document.getElementById('price');
     memberTypeId.innerHTML = memberType;
+    console.log (price);
     priceId.innerHTML = price;
 }
 
@@ -90,9 +91,9 @@ var openPayment = function(event){
     memberType = parentsNode[0].innerHTML;
     var newAttribute = '';
 
-    if (isPremium){
+    if (isPremium) {
         return;
-    }else if(isStandard){
+    } else if(isStandard) {
         if(attribute==='standard-btn'){
             return;
         }
@@ -107,7 +108,7 @@ var openPayment = function(event){
         }else if(attribute==='premium-btn'){
             price = upgradePrice;
         }
-    }else{
+    } else {
         if(attribute==='standard-btn'){
             price = standardPriceValue;
         }else if(attribute==='standard-btn-monthly'){
@@ -122,7 +123,7 @@ var openPayment = function(event){
     }else{    
         relevantDataInPayment(memberType,price);
         paymentPage.style.display = 'block'; 
-    } 
+    }
 
     // 使支付窗口除于页面正中央
     var winheight = window.innerHeight;
@@ -305,7 +306,7 @@ function updateUI(dataObj){
     let premiumPriceInnerText = '';
   
 
-    if ((dataObj.standard === 1 && dataObj.premium === 0)){
+    if ((dataObj.standard === 1 && dataObj.premium === 0)) {
         isStandard = true;
         standardBtnInnerText = '已订阅';
         premiumBtnInnerText = '现在升级';
@@ -316,47 +317,46 @@ function updateUI(dataObj){
         }else{
             EventObject.addHandler(premiumBtn,"click",openPayment);
         }
-        
-    }else if (dataObj.standard === 1 && dataObj.premium === 1){
+    } else if (dataObj.standard === 1 && dataObj.premium === 1) {
         isPremium = true;
         standardBtnInnerText = '已订阅';
         premiumBtnInnerText = '已订阅';
-    }else{  
+    } else {  
         isStandard = false;
         isPremium = false;
         standardBtnInnerText = '立即订阅';
         premiumBtnInnerText = '立即订阅';   
-        if(fPara === 'ft_exchange'){
+        if (fPara === 'ft_exchange') {
             EventObject.addHandler(standardBtnMonthly,"click",openExchange);
             EventObject.addHandler(standardBtn,"click",openExchange);
             EventObject.addHandler(premiumBtn,"click",openExchange);
-        }else{
+        } else {
             EventObject.addHandler(standardBtnMonthly,"click",openPayment);
             EventObject.addHandler(standardBtn,"click",openPayment);
             EventObject.addHandler(premiumBtn,"click",openPayment);
         }
-        
     }
 
 
-
-    // Mark:不写在dataObj条件下，是因为默认得显示169
-    if(fPara === 'ft_discount' || sponsorCookie){
+    // Mark:不写在dataObj条件下，是因为默认得显示168
+    // MARK: dataObj format: {paywall: 1, premium: 0, standard: 0}
+    if(fPara === 'ft_discount' || sponsorCookie) {
+        // MARK: When there's from=ft_discount in the url
         if ((dataObj.standard === 1 && dataObj.premium === 0)){
-            upgradePrice = '¥'+dataObj.v+'.00/年';
-            standardPriceValue = '¥169.00/年';
-        }else{
-            upgradePrice  = '¥1699.00/年';
-            standardPriceValue = '¥169.00/年';
+            upgradePrice = '¥'+dataObj.v+'/年';
+            standardPriceValue = '¥198/年';
+        } else {
+            upgradePrice  = '¥1698/年';
+            standardPriceValue = '¥168/年';
         }
         standardPrice.innerHTML = standardPriceValue;
         premiumPrice.innerHTML = upgradePrice;
-    }else{
-        if ((dataObj.standard === 1 && dataObj.premium === 0)){    
-            upgradePrice = '¥'+dataObj.v+'.00/年';
+    } else {
+        if ((dataObj.standard === 1 && dataObj.premium === 0)){
+            upgradePrice = '¥'+dataObj.v+'/年';
             standardPrice.innerHTML = standardPriceValue;
             premiumPrice.innerHTML = upgradePrice;
-        }else{
+        } else {
             standardPrice.innerHTML = standardPriceValue;
             premiumPrice.innerHTML = premiumPriceValue;
         }
@@ -387,21 +387,20 @@ window.onunload = function closeWindow(){
 
 
 if (window.location.hostname === 'localhost' || window.location.hostname.indexOf('192.168') === 0 || window.location.hostname.indexOf('10.113') === 0 || window.location.hostname.indexOf('127.0') === 0) {
-        var xhrpw1 = new XMLHttpRequest();
-        xhrpw1.open('get','api/paywall.json');
-        xhrpw1.onload = function() {
-            if (xhrpw1.status==200){               
-                var data = xhrpw1.responseText;
-                dataObj = JSON.parse(data);
-                updateUI(dataObj);
-                fromUpdate();
-            } 
-        };
-        xhrpw1.send(null);
-
-        if (isEmptyObj(dataObj)){
+    var xhrpw1 = new XMLHttpRequest();
+    xhrpw1.open('get','api/paywall.json');
+    xhrpw1.onload = function() {
+        if (xhrpw1.status==200){               
+            var data = xhrpw1.responseText;
+            dataObj = JSON.parse(data);
             updateUI(dataObj);
-        }
+            fromUpdate();
+        } 
+    };
+    xhrpw1.send(null);
+    if (isEmptyObj(dataObj)){
+        updateUI(dataObj);
+    }
 }else{
     postUE('/index.php/jsapi/paywall');
     if (isEmptyObj(dataObj)){
