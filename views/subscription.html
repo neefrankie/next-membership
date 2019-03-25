@@ -76,8 +76,8 @@
               {% endfor %}
             </ul>
             <div class="o-member__subscribe">
-              <button class="openSub" id="standard-btn">{{products[0].openBtn}}</button>
-              <p id="standard_price"> {{products[0].price}}</p>
+              <a data-key="{{products[0].key}}"><button class="openSub" id="standard-btn">{{products[0].openBtn}}</button></a>
+              <p id="standard_price">{{products[0].price}}</p>
               <input type="text" value="¥198.00/年" hidden id="regular-member">
             </div>
           </div>
@@ -98,7 +98,7 @@
             <p style="padding: 0.5em 1em 0em 1.5em;">注：所有活动门票不可折算现金、不能转让、不含差旅与食宿</p>
             <div class="o-member__subscribe">
 
-              <button class="openSub" id="premium-btn">{{products[2].openBtn}}</button>
+              <a data-key="{{products[2].key}}"><button class="openSub" id="premium-btn">{{products[2].openBtn}}</button></a>
               <p id="premium_price">{{products[2].price}}</p>
               <input type="text" value="¥1,998.00/年" hidden>
             </div>
@@ -118,8 +118,8 @@
               {% endfor %}
             </ul>
             <div class="o-member__subscribe">
-              <button class="openSub" id="standard-btn-monthly">{{products[1].openBtn}}</button>
-              <p id="standard_price_monthly"> {{products[1].price}}</p>
+              <a data-key="{{products[0].key}}"><button class="openSub" id="standard-btn-monthly">{{products[1].openBtn}}</button></a>
+              <p id="standard_price_monthly">{{products[1].price}}</p>
               <input type="text" value="¥28.00/月" hidden id="regular-member">
             </div>
           </div>

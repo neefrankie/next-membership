@@ -71,7 +71,8 @@ $text-background: #26747a;
       position: absolute;
       bottom: 30px;
       //width: 50%;
-      left: 25%;
+      left: 0;
+      right: 0;
       text-align: center;
       button{
         background-color: $text-background;

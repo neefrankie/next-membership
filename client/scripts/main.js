@@ -22,10 +22,10 @@ let isStandard = false;
 let isPremium = false;
 let upgradePrice = '';
 let standardPriceValueMonthly = '¥28/月';
-let standardPriceValue = '¥198/年';
+let standardPriceValue = '¥258/年';
 let premiumPriceValue = '¥1,998/年';
 
-
+var isInApp = (window.location.href.indexOf('webview=ftcapp') >= 0);
 
 
 
@@ -83,6 +83,10 @@ function selectPayWay(memberType){
 }
 
 var openPayment = function(event){
+    if (isInApp) {
+        console.log ('let the native app handle click!');
+        return true;
+    }
     var position = '';
     var attribute = this.getAttribute('id');
     var childNodes = this.parentNode.children;
@@ -375,6 +379,17 @@ function updateUI(dataObj){
 
     standardBtn.innerText = standardBtnInnerText;
     premiumBtn.innerText = premiumBtnInnerText;
+
+    if (isInApp) {
+        //console.log ('need to add the href or send message to native app! ');
+        var buyLinks = document.querySelectorAll('a[data-key]');
+        console.log (buyLinks);
+        for (var buyLink of buyLinks) {
+            var key = buyLink.getAttribute('data-key');
+            var link = 'subscribe://' + key + '/';
+            buyLink.setAttribute('href', link);
+        }
+    }
 }
 
 window.onunload = function closeWindow(){
