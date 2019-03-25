@@ -54,7 +54,7 @@ let price = '';
 let memberType = '';
 
 const closePayment = function(event){
-    paymentPage.style.display = 'none'; 
+    paymentPage.style.display = 'none';
 };
 
 if(paymentShadow){
@@ -89,9 +89,9 @@ var openPayment = function(event){
     }
     var position = '';
     var attribute = this.getAttribute('id');
-    var childNodes = this.parentNode.children;
+    var childNodes = this.parentNode.parentNode.children;
     price = childNodes[2].value;
-    var parentsNode = this.parentNode.parentNode.children;
+    var parentsNode = this.parentNode.parentNode.parentNode.children;
     memberType = parentsNode[0].innerHTML;
     var newAttribute = '';
 
@@ -104,7 +104,7 @@ var openPayment = function(event){
         price = upgradePrice;
     }
     // Mark:打折活动
-    let fPara = getUrlParams('from'); 
+    let fPara = getUrlParams('from');
     let sponsorCookie = GetCookie('sponsor');
     if(fPara === 'ft_discount' || sponsorCookie){
         if(attribute==='standard-btn'){
@@ -119,14 +119,14 @@ var openPayment = function(event){
             price = standardPriceValueMonthly;
         } else if(attribute==='premium-btn'){
             price = premiumPriceValue;
-        } 
+        }
     }
 
     if(isWeiXin()){
         selectPayWay(memberType);
-    }else{    
+    }else{
         relevantDataInPayment(memberType,price);
-        paymentPage.style.display = 'block'; 
+        paymentPage.style.display = 'block';
     }
 
     // 使支付窗口除于页面正中央
@@ -157,7 +157,7 @@ var openPayment = function(event){
     if(cPara){
         if(SELabel.indexOf('/IOSCL/')>-1){
             let clParaArr = SELabel.split('/IOSCL/');
-            ga('send','event',cPara, eventAction, clParaArr[1]); 
+            ga('send','event',cPara, eventAction, clParaArr[1]);
         }
         // console.log('isFromIos:'+SELabel);
     }else{
@@ -197,7 +197,7 @@ const toPayAction = function(event){
             payWay = pays[j].value;
         }
     }
-    
+
 
     var newmemberType = (memberType===premiumType) ? 'Premium' : 'Standard';
 
@@ -210,7 +210,7 @@ const toPayAction = function(event){
     // }else if (memberType===premiumType && payWay==='wxpay') {
     //     window.open('http://www.ftacademy.cn/index.php/pay?offerId=8d5e7e72f12067991186cdf3cb7d5d9d&platform=2','_blank');
     // }else if (memberType===standardType && payWay==='wxpay') {
-    //     window.open('http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=2','_blank');   
+    //     window.open('http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=2','_blank');
     // }
 
     var payWayNumber;
@@ -232,19 +232,19 @@ const toPayAction = function(event){
     let SELabel = GetCookie('SELabel');
     let eventAction = 'Buy way: ' + payWay;
     let cPara = isFromIos();
-    
+
     if(cPara){
         if(SELabel.indexOf('/IOSCL/')>-1){
             let clParaArr = SELabel.split('/IOSCL/');
-            ga('send','event',cPara, eventAction, clParaArr[1]); 
-        }     
+            ga('send','event',cPara, eventAction, clParaArr[1]);
+        }
     }else{
         ga('send','event','Web Privileges', eventAction, SELabel);
     }
-    
+
     memberType = '';
     payWay = '';
-    
+
 };
 
 
@@ -257,7 +257,7 @@ const openWXCode = function(){
     var paymentBox = document.getElementById('payment-box');
     var wxImg = '<div id="wxImg"></div><div class="wxScanHint">微信扫码支付</div>';
     paymentBox.innerHTML = wxImg;
-}; 
+};
 
 
 
@@ -272,7 +272,7 @@ const postUE = (url) => {
         let xhrpw = new XMLHttpRequest();
         xhrpw.open('post',url);
         xhrpw.onload = function() {
-            if (xhrpw.status==200){               
+            if (xhrpw.status==200){
                 var data = xhrpw.responseText;
                 dataObj = JSON.parse(data);
                 isReqSuccess = true;
@@ -282,8 +282,8 @@ const postUE = (url) => {
                 isReqSuccess = false;
                 i++;
                 setTimeout(function() {
-                    postUE(); 
-                }, 500); 
+                    postUE();
+                }, 500);
             }
         };
         xhrpw.send(JSON.stringify(cookieVal));
@@ -301,14 +301,14 @@ let standardPrice = document.getElementById('standard_price');
 let standardPriceMonthly = document.getElementById('standard_price_monthly');
 
 function updateUI(dataObj){
-    let fPara = getUrlParams('from'); 
+    let fPara = getUrlParams('from');
     let sponsorCookie = GetCookie('sponsor');
 
     let standardBtnInnerText = '';
     let premiumBtnInnerText = '';
     let standardPriceInnerText = '';
     let premiumPriceInnerText = '';
-  
+
 
     if ((dataObj.standard === 1 && dataObj.premium === 0)) {
         isStandard = true;
@@ -325,11 +325,11 @@ function updateUI(dataObj){
         isPremium = true;
         standardBtnInnerText = '已订阅';
         premiumBtnInnerText = '已订阅';
-    } else {  
+    } else {
         isStandard = false;
         isPremium = false;
         standardBtnInnerText = '立即订阅';
-        premiumBtnInnerText = '立即订阅';   
+        premiumBtnInnerText = '立即订阅';
         if (fPara === 'ft_exchange') {
             EventObject.addHandler(standardBtnMonthly,"click",openExchange);
             EventObject.addHandler(standardBtn,"click",openExchange);
@@ -365,12 +365,12 @@ function updateUI(dataObj){
             premiumPrice.innerHTML = premiumPriceValue;
         }
     }
-    
+
    // 点击之后跟其它的行为也不一样
     if(fPara === 'ft_exchange'){
         standardBtnInnerText = '输入兑换码';
         premiumBtnInnerText = '输入兑换码';
-        standardPrice.style.display = 'none';  
+        standardPrice.style.display = 'none';
         premiumPrice.style.display = 'none';
         headingHint.innerHTML =  '请选择您的兑换权益';
         headerTitle.innerHTML = '兑换中心';
@@ -385,7 +385,7 @@ function updateUI(dataObj){
         var ccodeValue = getUrlParams('ccode');
         for (var buyLink of buyLinks) {
             var key = buyLink.getAttribute('data-key');
-            // MARK: The process of getting the ft_discount is quite convoluted. I can only get the price from its result. 
+            // MARK: The process of getting the ft_discount is quite convoluted. I can only get the price from its result.
             var priceEle = buyLink.parentNode.querySelector('.data-price');
             var price = '';
             if (priceEle) {
@@ -414,12 +414,12 @@ if (window.location.hostname === 'localhost' || window.location.hostname.indexOf
     var xhrpw1 = new XMLHttpRequest();
     xhrpw1.open('get','api/paywall.json');
     xhrpw1.onload = function() {
-        if (xhrpw1.status==200){               
+        if (xhrpw1.status==200){
             var data = xhrpw1.responseText;
             dataObj = JSON.parse(data);
             updateUI(dataObj);
             fromUpdate();
-        } 
+        }
     };
     xhrpw1.send(null);
     if (isEmptyObj(dataObj)){
@@ -443,7 +443,7 @@ if (window.location.hostname === 'localhost' || window.location.hostname.indexOf
 
 function hasUtmCampaign(){
     if(window.location.search.indexOf('utm_campaign')>=0){
-        
+
         var campaign = '';
         var paraArr = parseUrlSearch();
         if (paraArr && paraArr.length>0){
@@ -481,7 +481,7 @@ function elabelToIos(){
         elabel = lPara;
     }else{
         elabel = 'no l value';
-    } 
+    }
     return elabel;
 }
 
@@ -501,20 +501,20 @@ function hasLpara(){
  * 既在ios设备上打开，又在网页上打开，会出现2个cookie，怎么区分？
  * 当关闭时，重新进入，所以可以让cookie关闭浏览器即失效
  * 出现现象：当出现.ftacademy.cn  和 www.ftacademy.cn时，会读取www.ftacademy.cn的值。当直接在前端js文件中设置cookie，domian是包含www(子域)
- * 
+ *
  * 发现，在php和js文件设置cookie，默认expire时间不一样
- * 
+ *
  * 如果没有l，也设置SetCookie
- * 
+ *
  * 支付成功，用什么来判断是否来自于ios
  */
 
 function iosTrack(){
     let cPara = isFromIos();
-    let lPara = getUrlParams('l'); 
-    
-    if(cPara){  
-        
+    let lPara = getUrlParams('l');
+
+    if(cPara){
+
         let elabel = '';
         let eLabelCookie = cPara+'/IOSCL/';
         if(lPara){
@@ -523,7 +523,7 @@ function iosTrack(){
         }else{
             eLabelCookie += 'no l value';
             elabel = 'no l value';
-        } 
+        }
         SetCookie('SELabel',eLabelCookie,86400,null,'.ftacademy.cn',false);
         ga('send','event',cPara, 'Display', elabel);
     }
@@ -559,8 +559,8 @@ function fromUpdate(){
                 upgradePrice = premiumPriceValue;
             }
             relevantDataInPayment(premiumType,upgradePrice);
-        } 
-        paymentPage.style.display = 'block';  
+        }
+        paymentPage.style.display = 'block';
     }
 
     // Mark:如果没有R cookie，则在此页面设置，成功页面获取带有tap的cookie
@@ -580,12 +580,12 @@ if (isEmptyObj(dataObj)){
 
 function getMemberTypeFromUpdate(){
     let tapPara = getUrlParams('tap');
-    if(tapPara){    
+    if(tapPara){
         if(tapPara==='standard'){
             memberType = standardType;
         }else if(tapPara==='premium'){
             memberType = premiumType;
-        }  
+        }
     }
 }
 
@@ -600,4 +600,4 @@ trackEC();
 
 ga(function(tracker) {
     var clientId = tracker.get('clientId');
-});               
+});
