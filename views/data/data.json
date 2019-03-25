@@ -9,7 +9,7 @@
 		"title": "年度标准会员",
 		"id":"com.ft.ftchinese.mobile.subscription.member",
 		"key": "standard",
-		"price": "¥258.00/年",
+		"price": "¥258/年",
 		"type": "Standard",
 		"openBtn": "立即订阅",
 		"benefits": [
@@ -27,7 +27,7 @@
 		"title": "月度标准会员",
 		"id":"com.ft.ftchinese.mobile.subscription.member.monthly",
 		"key": "standardmonthly",
-		"price": "¥28.00/月",
+		"price": "¥28/月",
 		"type": "Standard Monthly",
 		"openBtn": "立即订阅",
 		"benefits": [
@@ -45,7 +45,7 @@
 		"title": "高端会员",
 		"id":"com.ft.ftchinese.mobile.subscription.vip",
 		"key": "premium",
-		"price": "¥1,998.00/年",
+		"price": "¥1,998/年",
 		"type": "Premium",
 		"openBtn": "立即订阅",
 		"benefits": [

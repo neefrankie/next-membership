@@ -348,10 +348,10 @@ function updateUI(dataObj){
         // MARK: When there's from=ft_discount in the url
         if ((dataObj.standard === 1 && dataObj.premium === 0)){
             upgradePrice = '¥'+dataObj.v+'/年';
-            standardPriceValue = '¥198/年';
+            standardPriceValue = '¥258/年';
         } else {
             upgradePrice  = '¥1698/年';
-            standardPriceValue = '¥168/年';
+            standardPriceValue = '¥218/年';
         }
         standardPrice.innerHTML = standardPriceValue;
         premiumPrice.innerHTML = upgradePrice;
@@ -381,12 +381,16 @@ function updateUI(dataObj){
     premiumBtn.innerText = premiumBtnInnerText;
 
     if (isInApp) {
-        //console.log ('need to add the href or send message to native app! ');
         var buyLinks = document.querySelectorAll('a[data-key]');
-        console.log (buyLinks);
         for (var buyLink of buyLinks) {
             var key = buyLink.getAttribute('data-key');
-            var link = 'subscribe://' + key + '/';
+            // MARK: The process of getting the ft_discount is quite convoluted. I can only get the price from its result. 
+            var priceEle = buyLink.parentNode.querySelector('.data-price');
+            var price = '';
+            if (priceEle) {
+                price = priceEle.innerHTML.replace(/\.00.*$/g, '').replace(/\D/g,'');
+            }
+            var link = 'subscribe://' + key + '/' + price;
             buyLink.setAttribute('href', link);
         }
     }
