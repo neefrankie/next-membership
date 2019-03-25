@@ -382,6 +382,7 @@ function updateUI(dataObj){
 
     if (isInApp) {
         var buyLinks = document.querySelectorAll('a[data-key]');
+        var ccodeValue = getUrlParams('ccode');
         for (var buyLink of buyLinks) {
             var key = buyLink.getAttribute('data-key');
             // MARK: The process of getting the ft_discount is quite convoluted. I can only get the price from its result. 
@@ -390,7 +391,11 @@ function updateUI(dataObj){
             if (priceEle) {
                 price = priceEle.innerHTML.replace(/\.00.*$/g, '').replace(/\D/g,'');
             }
-            var link = 'subscribe://' + key + '/' + price;
+            var ccodePara = '';
+            if (ccodeValue && ccodeValue !== '') {
+                ccodePara = '?ccode=' + ccodeValue;
+            }
+            var link = 'subscribe://' + key + '/' + price + ccodePara;
             buyLink.setAttribute('href', link);
         }
     }
