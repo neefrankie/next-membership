@@ -222,6 +222,7 @@ const toPayAction = function(event){
         payWayNumber = '2';
         payWayOpen = '_blank';
     }
+    !memberType ? memberType = document.getElementById('memberType').innerHTML : '';
     var offerId = (memberType === premiumType) ? '8d5e7e72f12067991186cdf3cb7d5d9d' : 'eb6d8ae6f20283755b339c0dc273988b';
     var offerType = (memberType === standardMonthType) ? '&offerType=monthly' : '';
     if (payWayNumber) {
