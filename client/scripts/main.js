@@ -305,6 +305,7 @@ function updateUI(dataObj){
     let fPara = getUrlParams('from');
     let sponsorCookie = GetCookie('sponsor');
 
+    let standardBtnMonthlyInnerText = '';
     let standardBtnInnerText = '';
     let premiumBtnInnerText = '';
     let standardPriceInnerText = '';
@@ -313,6 +314,7 @@ function updateUI(dataObj){
 
     if ((dataObj.standard === 1 && dataObj.premium === 0)) {
         isStandard = true;
+        standardBtnMonthlyInnerText = '已订阅';
         standardBtnInnerText = '已订阅';
         premiumBtnInnerText = '现在升级';
         if(fPara === 'ft_exchange'){
@@ -324,11 +326,13 @@ function updateUI(dataObj){
         }
     } else if (dataObj.standard === 1 && dataObj.premium === 1) {
         isPremium = true;
+        standardBtnMonthlyInnerText = '已订阅';
         standardBtnInnerText = '已订阅';
         premiumBtnInnerText = '已订阅';
     } else {
         isStandard = false;
         isPremium = false;
+        standardBtnMonthlyInnerText = '立即订阅';
         standardBtnInnerText = '立即订阅';
         premiumBtnInnerText = '立即订阅';
         if (fPara === 'ft_exchange') {
@@ -369,8 +373,10 @@ function updateUI(dataObj){
 
    // 点击之后跟其它的行为也不一样
     if(fPara === 'ft_exchange'){
+        standardBtnMonthlyInnerText = '输入兑换码';
         standardBtnInnerText = '输入兑换码';
         premiumBtnInnerText = '输入兑换码';
+        standardPrice.style.display = 'none';
         standardPrice.style.display = 'none';
         premiumPrice.style.display = 'none';
         headingHint.innerHTML =  '请选择您的兑换权益';
@@ -378,6 +384,7 @@ function updateUI(dataObj){
         document.title = '兑换中心 - FT中文网';
     }
 
+    standardBtnMonthly.innerText = standardBtnMonthlyInnerText;
     standardBtn.innerText = standardBtnInnerText;
     premiumBtn.innerText = premiumBtnInnerText;
 
