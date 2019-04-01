@@ -308,6 +308,7 @@ function updateUI(dataObj){
     let standardBtnMonthlyInnerText = '';
     let standardBtnInnerText = '';
     let premiumBtnInnerText = '';
+    let standardPriceMonthlyInnerText = '';
     let standardPriceInnerText = '';
     let premiumPriceInnerText = '';
 
@@ -376,7 +377,7 @@ function updateUI(dataObj){
         standardBtnMonthlyInnerText = '输入兑换码';
         standardBtnInnerText = '输入兑换码';
         premiumBtnInnerText = '输入兑换码';
-        standardPrice.style.display = 'none';
+        standardPriceMonthly.style.display = 'none';
         standardPrice.style.display = 'none';
         premiumPrice.style.display = 'none';
         headingHint.innerHTML =  '请选择您的兑换权益';
