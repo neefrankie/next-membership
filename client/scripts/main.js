@@ -106,7 +106,7 @@ var openPayment = function(event){
     // Mark:打折活动
     let fPara = getUrlParams('from');
     let sponsorCookie = GetCookie('sponsor');
-    if(fPara === 'ft_discount' || sponsorCookie){
+    if(fPara === 'ft_discount' || fPara === 'ft_renewal' || sponsorCookie){
         if(attribute==='standard-btn'){
             price = standardPriceValue;
         }else if(attribute==='premium-btn'){
@@ -350,7 +350,18 @@ function updateUI(dataObj){
 
     // Mark:不写在dataObj条件下，是因为默认得显示168
     // MARK: dataObj format: {paywall: 1, premium: 0, standard: 0}
-    if(fPara === 'ft_discount' || sponsorCookie) {
+    if(fPara === 'ft_renewal') {
+        // MARK: When there's from=ft_discount in the url
+        if ((dataObj.standard === 1 && dataObj.premium === 0)){
+            upgradePrice = '¥'+dataObj.v+'/年';
+            standardPriceValue = '¥198/年';
+        } else {
+            upgradePrice  = '¥1498/年';
+            standardPriceValue = '¥198/年';
+        }
+        standardPrice.innerHTML = standardPriceValue;
+        premiumPrice.innerHTML = upgradePrice;
+    } else if(fPara === 'ft_discount' || sponsorCookie) {
         // MARK: When there's from=ft_discount in the url
         if ((dataObj.standard === 1 && dataObj.premium === 0)){
             upgradePrice = '¥'+dataObj.v+'/年';
