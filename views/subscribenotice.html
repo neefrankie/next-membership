@@ -1,124 +1,114 @@
 <!DOCTYPE html>
 <html class="no-js core" data-next-app="front-page">
 <head>
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>订阅成功 - FT中文网</title>
-  <meta http-equiv="Content-Language" content="zh-CN"/>
-  <meta content="订阅成功" name="description"/>
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  <link rel="apple-touch-icon-precomposed" href="http://static.ftchinese.com/img/ipad_icon.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<!-- MARK: Important: Need to add Google Analytics load events manually -->
-  <script>
-  // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  //   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  //   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m);a.onload=function(){if(typeof clearEvents==='function'){clearEvents()}}
-  // })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  
-// ga('create', 'UA-1608715-1', 'auto');
-  // ga('require', 'displayfeatures');
-  // ga('require', 'ec');
-
-  // try {
-  //     ga('send', 'pageview', window.location.href);
-  // } catch (err) {
-
-  // }
-  </script>
-<!-- End Google Analytics -->
+    <meta http-equiv="Content-Language" content="zh-CN"/>
+    <meta content="订阅成功" name="description"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="apple-touch-icon-precomposed" href="https://dhgxl8qk9zgzr.cloudfront.net/img/ipad_icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <script inline src="scripts/key.js"></script>
 
-
 <link inline rel="stylesheet" type="text/css" href="styles/status.css">
-
 
 </head>
 
-<body  id="bodyId">
+<body id="bodyId">
 
-  <header class="header-container">
+<header class="header-container">
     <div class="header-inner">
-      <div class="header-title">会员订阅</div>
-      <div class="header-side header-left" style="display: none;">
-        <div class="header-brand">
-          <figure class="loading" data-url="http://static.ftchinese.com/images/masthead36.png"></figure>
+        <div class="header-title">会员订阅</div>
+        <div class="header-side header-left" style="display: none;">
+            <div class="header-brand">
+                <figure class="loading" data-url="https://dhgxl8qk9zgzr.cloudfront.net/images/masthead36.png"></figure>
+            </div>
         </div>
-      </div>
     </div>
-  </header>
+</header>
 
-  <div class="payment-info-container">
+<div class="payment-info-container">
     <div class="payment-info-inner notice-container">
-      <div class="hint-word"><span class="hint-img"></span><span class="hint-content" id="hint-content">恭喜您订阅成功！</span></div>
-      <div  class="return-btn" id="returnTo"><button>返回</button></div>
+        <div class="hint-word"><span class="hint-img"></span><span class="hint-content" id="hint-content">恭喜您订阅成功！</span></div>
+        <div class="return-btn" id="returnTo"><button>返回</button></div>
     </div>
-  </div>
+</div>
 
-  <div class="payment-info-container">
+<div class="payment-info-container">
     <div class="payment-info-inner">
-      <div>交易单号：<span id="order-number"></span></div>
-      <div>已支付金额：<span id="payment-amount"></span>元</div>
-      <div>会员类型：<span id="member-type-name"></span></div>
+        <div>交易单号：<span id="order-number"></span></div>
+        <div>已支付金额：<span id="payment-amount"></span>元</div>
+        <div>会员类型：<span id="member-type-name"></span></div>
+        <div>有效期至：<span id="expire-date">-</span></div>
     </div>
-  </div>
+</div>
 
-  <div class="payment-info-container">
-    <div class="payment-info-inner product-benefits-container">
-      {% for product in products %}
-        <div class="product-container {{product.type.replace(' ', '')}}">
-          <div class="product-title">{{product.title}}权益：</div>
-          <ul>
-            {% for benefit in product.benefits %}
-            <li> {{benefit}}</li>
-            {% endfor %}
-          </ul>
-          <div class="note">{{product.note}}</div>
+<div class="payment-info-container">
+    <div class="payment-info-inner">
+        <div class="product-title">如何行使订阅权限</div>
+        <div>
+            ——iPhone或iPad，请到苹果的App Store搜索并下载“FT中文网”App；<br>
+            <!--
+            ——安卓手机，请下载并安装付费会员专用的FT中文网安卓应用；<br>
+            -->
+            ——安卓手机，请到华为应用市场搜索并下载“FT中文网”App，或联系我们的客服以获取最新版安卓安装程序；<br>
+            ——您也可以在电脑上访问付费会员专用网址：<a id="vip_url" href="http://www.chineseft.com/">www.chineseft.com</a>。使用您购买订阅时登录FT中文网的帐号在电脑端登录后，即可解锁付费资讯。<br>
+            ——客服电话/微信：<a href="tel: 18501972480">18501972480</a><br><br>
         </div>
-      {% endfor %}
+        <div><a href="subscription.html#faq">常见问题请点击此处</a></div>
     </div>
-  </div>
+</div>
 
-  <div class="payment-info-container">
-    <div class="payment-info-inner">
-      <div>有效期至：<span id="expire-date">18501972480</span></div>
-      <div>客服电话/微信：<a href="tel: 18501972480">18501972480</a></div>
-      <div><a href="subscription.html#faq">常见问题请点击此处</a></div>
+<div class="payment-info-container">
+    <div class="payment-info-inner product-benefits-container">{% for product in products %}
+        <div class="product-container {{product.type.replace(' ', '')}}">
+            <div class="product-title">{{product.title}}权益：</div>
+            <ul>{% for benefit in product.benefits %}
+                <li> {{benefit}}</li>{% endfor %}
+            </ul>
+            <div class="note">{{product.note}}</div>
+        </div>{% endfor %}
     </div>
-  </div>
-
-  <div class="payment-info-container">
-    <div class="payment-info-inner">
-      <div class="product-title">在其他设备上使用您的订阅权限</div>
-      <div>在各大应用市场下载“FT中文网App”，或在电脑上访问<a href="http://www.ftchinese.com/">www.ftchinese.com</a>，登录后，即可解锁付费资讯。</div>
-    </div>
-  </div>
+</div>
 
 <script>
-    var today = new Date();
-    var y = today.getFullYear();
-    var m = zeroFix(today.getMonth() + 1);
-    var d = zeroFix(today.getDate());
+var today = new Date();
+var y = today.getFullYear();
+var m = zeroFix(today.getMonth() + 1);
+var d = zeroFix(today.getDate());
 
-    function zeroFix(n) {
-        return (n < 10) ? '0' + n : n;
-    }
+function zeroFix(n) {
+    return (n < 10) ? '0' + n : n;
+}
 
-    if (window.gAutoStart === undefined) {
-        (function(d, s, u, j, x) {
-            j = d.createElement(s),
-                x = d.getElementsByTagName(s)[0];
-            j.async = true;
-            j.src = u;
-            x.parentNode.insertBefore(j, x)
-        })(document, 'script', 'http://static.ftchinese.com/js/log.js?' + y + m + d);
-    }
-
+if (window.gAutoStart === undefined) {
+    (function(d, s, u, j, x) {
+        j = d.createElement(s),
+            x = d.getElementsByTagName(s)[0];
+        j.async = true;
+        j.src = u;
+        x.parentNode.insertBefore(j, x)
+    })(document, 'script', 'https://dhgxl8qk9zgzr.cloudfront.net/js/log.js?' + y + m + d);
+}
 </script>
 
-
 <script inline src="scripts/notice.js"></script>
+
+<script>
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var time = year + "-" + month + "-" + day;
+    setTimeout(function(){
+        if (time >= '2020-8-18' && time < '2020-9-3') {
+            window.location = 'https://www.chineseft.com/m/corp/preview.html?pageid=subscriptioninfoconfirm&to=all';
+        }
+    }, 10000);
+</script>
+
 </body>
 </html>
