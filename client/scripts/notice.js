@@ -59,7 +59,6 @@ function paravalue(theurl, thep) {
     return thev;
 }
 
-
 function addClientIdPar(clientId,url){
     var clientIdPar = '';
     var connector = (url.indexOf('?') > 0) ? '&' : '?';
@@ -144,10 +143,6 @@ function jump() {
      */
 }
 
-
-
-
-
 function returnTo() {
     var jumpUrl = '';
     var rCookie = GetCookie('R');
@@ -157,7 +152,7 @@ function returnTo() {
         if(rCookie){
             jumpUrl = decodeURIComponent(rCookie);
         }else{
-            jumpUrl = 'http://www.ftchinese.com';
+            jumpUrl = "http://user.chineseft.com/?uide=" + paravalue(window.location.href,"uide");
         }
         jumpUrl = addClientIdPar(clientId, jumpUrl);
         // MARK: Fix the problem brought by ealier bugs which are not related to this page
@@ -179,7 +174,6 @@ window.onload = function(){
 // 放入交易成功页面
 let affiliation =  SELabel;
 addTransaction(tradeNo, eventAction, price, affiliation);
-    
-   
 
-
+document.getElementById('vip_url').href='http://user.chineseft.com/?uide=' + paravalue(window.location.href,"uide");
+console.log(paravalue(window.location.href, "uide"));
