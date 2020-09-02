@@ -1,51 +1,57 @@
-
-
-
-
 var EventObject = {
-    addHandler:function(element,type,handler){
-        if (element.addEventListener){
-            element.addEventListener(type,handler,false);
-        }else if (element.attachEvent){
-            element.attachEvent("on"+type,handler);
-        }else{
-            element["on"+type] = handler;
+    addHandler: function(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent("on" + type, handler);
+        } else {
+            element["on" + type] = handler;
         }
     },
-    removeHandler:function(element,type,handler){
-        if (element.removeEventListener){
-            element.removeEventListener(type,handler,false);
-        }else if (element.attachEvent){
-            element.detachEvent("on"+type,handler);
-        }else{
-            element["on"+type] = null;
+    removeHandler: function(element, type, handler) {
+        if (element.removeEventListener) {
+            element.removeEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.detachEvent("on" + type, handler);
+        } else {
+            element["on" + type] = null;
         }
     }
 };
 
 const GetCookie = (name) => {
-    var start = document.cookie.indexOf(name+'='),
-        len = start+name.length+1,
-        end = document.cookie.indexOf(';',len);
-    if ((!start) && (name !== document.cookie.substring(0,name.length))) {return null;}
-    if (start === -1) {return null;}
-    if (end === -1) {end = document.cookie.length; }
-    return decodeURIComponent(document.cookie.substring(len,end));
+    var start = document.cookie.indexOf(name + '='),
+        len = start + name.length + 1,
+        end = document.cookie.indexOf(';', len);
+    if ((!start) && (name !== document.cookie.substring(0, name.length))) {
+        return null;
+    }
+    if (start === -1) {
+        return null;
+    }
+    if (end === -1) {
+        end = document.cookie.length;
+    }
+    return decodeURIComponent(document.cookie.substring(len, end));
 };
 
 const DeleteCookie = (name) => {
-    var exp = new Date(),cval = GetCookie1 (name);
-    exp.setTime (exp.getTime() - 1);
+    var exp = new Date(),
+        cval = GetCookie1(name);
+    exp.setTime(exp.getTime() - 1);
     document.cookie = name + '=' + cval + '; expires=' + exp.toGMTString();
 };
-const SetCookie = (name, value , sec , path , domain, secure) => {
-   var expires = new Date();
-   if(sec === null || sec === '') {sec = 600 * (24 * 60 * 60 * 1000);}
-    else {sec = 1000*sec;}
-    expires.setTime (expires.getTime() + sec);
-    document.cookie = name + '=' + escape (value) +((expires === null) ? '' : ('; expires=' + expires.toGMTString())) +((path === null) ? '/' : ('; path=' + path)) +((domain === null) ? '' : ('; domain=' + domain)) +((secure === true) ? '; secure' : '');  
-};
 
+const SetCookie = (name, value, sec, path, domain, secure) => {
+    var expires = new Date();
+    if (sec === null || sec === '') {
+        sec = 600 * (24 * 60 * 60 * 1000);
+    } else {
+        sec = 1000 * sec;
+    }
+    expires.setTime(expires.getTime() + sec);
+    document.cookie = name + '=' + escape(value) + ((expires === null) ? '' : ('; expires=' + expires.toGMTString())) + ((path === null) ? '/' : ('; path=' + path)) + ((domain === null) ? '' : ('; domain=' + domain)) + ((secure === true) ? '; secure' : '');
+};
 
 function isWeiXin() {
     var ua = window.navigator.userAgent.toLowerCase();
@@ -56,11 +62,9 @@ function isWeiXin() {
     }
 }
 
-
-
-function parseUrlSearch(){
+function parseUrlSearch() {
     var para = location.search;
-    if(para){
+    if (para) {
         para = para.substring(1);
         para = decodeURIComponent(para);
         var paraArr = para.split('&');
@@ -69,32 +73,32 @@ function parseUrlSearch(){
     return undefined;
 }
 
-function getUrlParams(key){
+function getUrlParams(key) {
     var value = '';
     var paraArr = parseUrlSearch();
-    if (paraArr && paraArr.length>0){
+    if (paraArr && paraArr.length > 0) {
         var arr = [];
-        for(var i=0,len=paraArr.length; i<len; i++){
-            if(paraArr[i].indexOf(key)>-1){
+        for (var i = 0, len = paraArr.length; i < len; i++) {
+            if (paraArr[i].indexOf(key) > -1) {
                 arr = paraArr[i].split('=');
-                if(arr.length>1 && arr[0]===key){
+                if (arr.length > 1 && arr[0] === key) {
                     value = arr[1];
                 }
             }
         }
-        
+
         return value;
     }
     return value;
 }
 
-function isEmptyObj(dataObj){
-     var arr = Object.keys(dataObj);    
-     if (arr.length > 0){
+function isEmptyObj(dataObj) {
+    var arr = Object.keys(dataObj);
+    if (arr.length > 0) {
         return false;
-     }else{
+    } else {
         return true;
-     }
+    }
 }
 
 function getDeviceType() {
@@ -104,7 +108,7 @@ function getDeviceType() {
         deviceType = 'iPad';
     } else if (/OS [0-9]+\_/i.test(uaString) && (/iPhone/i.test(uaString) || /iPod/i.test(uaString))) {
         deviceType = 'iPhone';
-    } else if (/Android|micromessenger/i.test(uaString) ) {
+    } else if (/Android|micromessenger/i.test(uaString)) {
         deviceType = 'android';
     }
     return deviceType;

@@ -1,11 +1,25 @@
 /*jshint esversion: 6 */
 /*esversion: 6 */
+import {
+    EventObject,
+    GetCookie,
+    SetCookie,
+    DeleteCookie,
+    isWeiXin,
+    parseUrlSearch,
+    getUrlParams,
+    isEmptyObj,
+    getDeviceType
+} from './subscribe_api';
 
-import {EventObject,GetCookie,SetCookie,DeleteCookie,isWeiXin,parseUrlSearch,getUrlParams,isEmptyObj,getDeviceType} from './subscribe_api';
+import {
+    productImpression,
+    addPromotion,
+    onPromoClick,
+    onProductClick
+} from './track';
 
-import {productImpression,addPromotion,onPromoClick,onProductClick} from './track';
-
-import  './qAnda';
+import './qAnda';
 
 var firstGuide = document.querySelector('.firstStrong');
 var attention = document.querySelector('.attention');
@@ -23,24 +37,28 @@ let isPremium = false;
 let upgradePrice = '';
 let standardPriceValueMonthly = '¥28/月';
 let standardPriceValue = '¥258/年';
-let premiumPriceValue = '¥1,998/年';
+let premiumPriceValue = '¥1998/年';
+
+let standardPriceValue85 = '¥218/年';
+let premiumPriceValue85 = '¥1698/年';
+let standardPriceValue75 = '¥198/年';
+let premiumPriceValue75 = '¥1498/年';
+let standardPriceValue50 = '¥128/年';
+let premiumPriceValue50 = '¥998/年';
 
 var isInApp = (window.location.href.indexOf('webview=ftcapp') >= 0);
-
-
-
 
 const setCookieVal = () => {
     // Mark:check ccode
     var para = location.search.substring(1);
     var pattern = /ccode/g;
-    if(pattern.test(para)){
+    if (pattern.test(para)) {
         var ccodeValue = getUrlParams('ccode');
-        var SELabel = SetCookie('ccode',ccodeValue,'',null,'.ftacademy.cn',false);
+        var SELabel = SetCookie('ccode', ccodeValue, '', null, '.ftacademy.cn', false);
     }
-    if(/utm_code/g.test(para)){
+    if (/utm_code/g.test(para)) {
         var utmccodeValue = getUrlParams('utm_code');
-        var SELabel = SetCookie('ccode',utmccodeValue,'',null,'.ftacademy.cn',false);
+        var SELabel = SetCookie('ccode', utmccodeValue, '', null, '.ftacademy.cn', false);
     }
 };
 setCookieVal();
@@ -53,38 +71,38 @@ let paymentPage = document.getElementById('payment-page');
 let price = '';
 let memberType = '';
 
-const closePayment = function(event){
+const closePayment = function(event) {
     paymentPage.style.display = 'none';
 };
 
-if(paymentShadow){
-    EventObject.addHandler(paymentShadow,"click",closePayment);
+if (paymentShadow) {
+    EventObject.addHandler(paymentShadow, "click", closePayment);
 }
 
-function relevantDataInPayment(memberType,price){
+function relevantDataInPayment(memberType, price) {
     let memberTypeId = document.getElementById('memberType');
     let priceId = document.getElementById('price');
     memberTypeId.innerHTML = memberType;
-    console.log (price);
+    console.log(price);
     priceId.innerHTML = price;
 }
 
-function selectPayWay(memberType){
+function selectPayWay(memberType) {
     // offerType == 'monthly';
     // console.log (memberType);
     // return;
-    if (memberType===standardType) {
-        window.location='http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=2';
-    } else if(memberType===standardMonthType) {
-        window.location='http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=2&offerType=monthly';
-    } else if(memberType===premiumType) {
-        window.location='http://www.ftacademy.cn/index.php/pay?offerId=8d5e7e72f12067991186cdf3cb7d5d9d&platform=2';
+    if (memberType === standardType) {
+        window.location = 'http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=2';
+    } else if (memberType === standardMonthType) {
+        window.location = 'http://www.ftacademy.cn/index.php/pay?offerId=eb6d8ae6f20283755b339c0dc273988b&platform=2&offerType=monthly';
+    } else if (memberType === premiumType) {
+        window.location = 'http://www.ftacademy.cn/index.php/pay?offerId=8d5e7e72f12067991186cdf3cb7d5d9d&platform=2';
     }
 }
 
-var openPayment = function(event){
+var openPayment = function(event) {
     if (isInApp) {
-        console.log ('let the native app handle click!');
+        console.log('let the native app handle click!');
         return true;
     }
     var position = '';
@@ -97,8 +115,8 @@ var openPayment = function(event){
 
     if (isPremium) {
         return;
-    } else if(isStandard) {
-        if(attribute==='standard-btn'){
+    } else if (isStandard) {
+        if (attribute === 'standard-btn') {
             return;
         }
         price = upgradePrice;
@@ -106,45 +124,45 @@ var openPayment = function(event){
     // Mark:打折活动
     let fPara = getUrlParams('from');
     let sponsorCookie = GetCookie('sponsor');
-    if(fPara === 'ft_discount' || fPara === 'ft_renewal' || sponsorCookie){
-        if(attribute==='standard-btn'){
+    if (fPara === 'ft_discount' || fPara === 'ft_renewal' || fPara === 'ft_win_back' || fPara === 'ft_big_sale' || sponsorCookie) {
+        if (attribute === 'standard-btn') {
             price = standardPriceValue;
-        }else if(attribute==='premium-btn'){
+        } else if (attribute === 'premium-btn') {
             price = upgradePrice;
         }
     } else {
-        if(attribute==='standard-btn'){
+        if (attribute === 'standard-btn') {
             price = standardPriceValue;
-        }else if(attribute==='standard-btn-monthly'){
+        } else if (attribute === 'standard-btn-monthly') {
             price = standardPriceValueMonthly;
-        } else if(attribute==='premium-btn'){
+        } else if (attribute === 'premium-btn') {
             price = premiumPriceValue;
         }
     }
 
-    if(isWeiXin()){
+    if (isWeiXin()) {
         selectPayWay(memberType);
-    }else{
-        relevantDataInPayment(memberType,price);
+    } else {
+        relevantDataInPayment(memberType, price);
         paymentPage.style.display = 'block';
     }
 
     // 使支付窗口除于页面正中央
     var winheight = window.innerHeight;
     var paymentBox = document.getElementById('payment-box');
-    if(paymentBox){
+    if (paymentBox) {
         var eleHeight = paymentBox.offsetHeight;
-        var top = (winheight - eleHeight)/2;
+        var top = (winheight - eleHeight) / 2;
         paymentBox.style.top = top + "px";
     }
 
-    if (attribute === 'standard-btn'){
+    if (attribute === 'standard-btn') {
         newAttribute = 'Standard';
         position = 1;
     } else if (attribute === 'standard-btn-monthly') {
         newAttribute = 'StandardMonthly';
         position = 2
-    } else if (attribute === 'premium-btn'){
+    } else if (attribute === 'premium-btn') {
         newAttribute = 'Premium';
         position = 3;
     }
@@ -152,35 +170,33 @@ var openPayment = function(event){
     var SELabel = GetCookie('SELabel') || 'Direct';
     var eventAction = 'Buy: ' + newAttribute;
 
- // Mark:ios付费跟踪
+    // Mark:ios付费跟踪
     let cPara = isFromIos();
-    if(cPara){
-        if(SELabel.indexOf('/IOSCL/')>-1){
+    if (cPara) {
+        if (SELabel.indexOf('/IOSCL/') > -1) {
             let clParaArr = SELabel.split('/IOSCL/');
-            ga('send','event',cPara, eventAction, clParaArr[1]);
+            ga('send', 'event', cPara, eventAction, clParaArr[1]);
         }
         // console.log('isFromIos:'+SELabel);
-    }else{
+    } else {
         // console.log('isFromWeb');
-        ga('send','event','Web Privileges', eventAction, SELabel);
+        ga('send', 'event', 'Web Privileges', eventAction, SELabel);
     }
 
 
-    onProductClick(newAttribute,position);
+    onProductClick(newAttribute, position);
 
 };
 
-
-
-const openExchange = function(event){
-    window.open('https://user.ftchinese.com/?offerId=992374d8e2e24f17bebc50a6e57becd6&platform=8','_self');
+const openExchange = function(event) {
+    window.open('https://user.chineseft.com/?offerId=992374d8e2e24f17bebc50a6e57becd6&platform=8', '_self');
 }
 
-function isMobile(){
+function isMobile() {
     let deviceType = getDeviceType();
-    if (deviceType=='PC'){
+    if (deviceType == 'PC') {
         return false;
-    }else{
+    } else {
         return true;
     }
 }
@@ -188,18 +204,18 @@ function isMobile(){
 let payWay = '';
 let pays = document.getElementsByName('pay');
 
-const toPayAction = function(event){
+const toPayAction = function(event) {
     getMemberTypeFromUpdate();
 
 
-    for(let j = 0; j < pays.length; j++){
-        if(pays[j].checked){
+    for (let j = 0; j < pays.length; j++) {
+        if (pays[j].checked) {
             payWay = pays[j].value;
         }
     }
 
 
-    var newmemberType = (memberType===premiumType) ? 'Premium' : 'Standard';
+    var newmemberType = (memberType === premiumType) ? 'Premium' : 'Standard';
 
 
     //满足2个条件：1.支付方式  2.会员类型
@@ -221,26 +237,25 @@ const toPayAction = function(event){
     } else if (payWay === 'wxpay') {
         payWayNumber = '2';
         payWayOpen = '_blank';
-    }
-    !memberType ? memberType = document.getElementById('memberType').innerHTML : '';
+    }!memberType ? memberType = document.getElementById('memberType').innerHTML : '';
     var offerId = (memberType === premiumType) ? '8d5e7e72f12067991186cdf3cb7d5d9d' : 'eb6d8ae6f20283755b339c0dc273988b';
     var offerType = (memberType === standardMonthType) ? '&offerType=monthly' : '';
     if (payWayNumber) {
-        const link = 'http://www.ftacademy.cn/index.php/pay?offerId='+offerId+'&platform=' + payWayNumber + offerType;
-        console.log (link);
+        const link = 'http://www.ftacademy.cn/index.php/pay?offerId=' + offerId + '&platform=' + payWayNumber + offerType;
+        console.log(link);
         window.open(link, payWayOpen);
     }
     let SELabel = GetCookie('SELabel');
     let eventAction = 'Buy way: ' + payWay;
     let cPara = isFromIos();
 
-    if(cPara){
-        if(SELabel.indexOf('/IOSCL/')>-1){
+    if (cPara) {
+        if (SELabel.indexOf('/IOSCL/') > -1) {
             let clParaArr = SELabel.split('/IOSCL/');
-            ga('send','event',cPara, eventAction, clParaArr[1]);
+            ga('send', 'event', cPara, eventAction, clParaArr[1]);
         }
-    }else{
-        ga('send','event','Web Privileges', eventAction, SELabel);
+    } else {
+        ga('send', 'event', 'Web Privileges', eventAction, SELabel);
     }
 
     memberType = '';
@@ -248,32 +263,29 @@ const toPayAction = function(event){
 
 };
 
-
-if(toPay){
-    EventObject.addHandler(toPay,"click",toPayAction);
+if (toPay) {
+    EventObject.addHandler(toPay, "click", toPayAction);
 }
 
 // 打开微信
-const openWXCode = function(){
+const openWXCode = function() {
     var paymentBox = document.getElementById('payment-box');
     var wxImg = '<div id="wxImg"></div><div class="wxScanHint">微信扫码支付</div>';
     paymentBox.innerHTML = wxImg;
 };
 
-
-
 let isReqSuccess = false;
 let i = 0;
 const postUE = (url) => {
-    if(!isReqSuccess && i<3){
+    if (!isReqSuccess && i < 3) {
         let cookieVal = {
-            uCookieVal : GetCookie('U'),
-            eCookieVal : GetCookie('E')
+            uCookieVal: GetCookie('U'),
+            eCookieVal: GetCookie('E')
         };
         let xhrpw = new XMLHttpRequest();
-        xhrpw.open('post',url);
+        xhrpw.open('post', url);
         xhrpw.onload = function() {
-            if (xhrpw.status==200){
+            if (xhrpw.status == 200) {
                 var data = xhrpw.responseText;
                 dataObj = JSON.parse(data);
                 isReqSuccess = true;
@@ -301,7 +313,7 @@ let premiumPrice = document.getElementById('premium_price');
 let standardPrice = document.getElementById('standard_price');
 let standardPriceMonthly = document.getElementById('standard_price_monthly');
 
-function updateUI(dataObj){
+function updateUI(dataObj) {
     let fPara = getUrlParams('from');
     let sponsorCookie = GetCookie('sponsor');
 
@@ -318,12 +330,12 @@ function updateUI(dataObj){
         standardBtnMonthlyInnerText = '已订阅';
         standardBtnInnerText = '已订阅';
         premiumBtnInnerText = '现在升级';
-        if(fPara === 'ft_exchange'){
-            EventObject.addHandler(standardBtnMonthly,"click",openExchange);
-            EventObject.addHandler(standardBtn,"click",openExchange);
-            EventObject.addHandler(premiumBtn,"click",openExchange);
-        }else{
-            EventObject.addHandler(premiumBtn,"click",openPayment);
+        if (fPara === 'ft_exchange') {
+            EventObject.addHandler(standardBtnMonthly, "click", openExchange);
+            EventObject.addHandler(standardBtn, "click", openExchange);
+            EventObject.addHandler(premiumBtn, "click", openExchange);
+        } else {
+            EventObject.addHandler(premiumBtn, "click", openPayment);
         }
     } else if (dataObj.standard === 1 && dataObj.premium === 1) {
         isPremium = true;
@@ -337,61 +349,74 @@ function updateUI(dataObj){
         standardBtnInnerText = '立即订阅';
         premiumBtnInnerText = '立即订阅';
         if (fPara === 'ft_exchange') {
-            EventObject.addHandler(standardBtnMonthly,"click",openExchange);
-            EventObject.addHandler(standardBtn,"click",openExchange);
-            EventObject.addHandler(premiumBtn,"click",openExchange);
+            EventObject.addHandler(standardBtnMonthly, "click", openExchange);
+            EventObject.addHandler(standardBtn, "click", openExchange);
+            EventObject.addHandler(premiumBtn, "click", openExchange);
         } else {
-            EventObject.addHandler(standardBtnMonthly,"click",openPayment);
-            EventObject.addHandler(standardBtn,"click",openPayment);
-            EventObject.addHandler(premiumBtn,"click",openPayment);
+            EventObject.addHandler(standardBtnMonthly, "click", openPayment);
+            EventObject.addHandler(standardBtn, "click", openPayment);
+            EventObject.addHandler(premiumBtn, "click", openPayment);
         }
     }
 
 
-    // Mark:不写在dataObj条件下，是因为默认得显示168
+    // Mark:不写在dataObj条件下，是因为显示默认价格
     // MARK: dataObj format: {paywall: 1, premium: 0, standard: 0}
-    if(fPara === 'ft_renewal') {
-        // MARK: When there's from=ft_discount in the url
-        if ((dataObj.standard === 1 && dataObj.premium === 0)){
-            upgradePrice = '¥'+dataObj.v+'/年';
-            standardPriceValue = '¥198/年';
+    if (typeof(PriceDesc) == 'undefined'){
+        PriceDesc = '';
+    }
+    if (fPara === 'ft_renewal') {
+        // MARK: When there's from=ft_renewal in the url
+        if ((dataObj.standard === 1 && dataObj.premium === 0)) {
+            upgradePrice = '¥' + dataObj.v + '/年';
+            standardPriceValue = standardPriceValue75;
         } else {
-            upgradePrice  = '¥1498/年';
-            standardPriceValue = '¥198/年';
+            upgradePrice = premiumPriceValue75;
+            standardPriceValue = standardPriceValue75;
         }
-        standardPrice.innerHTML = standardPriceValue;
-        premiumPrice.innerHTML = upgradePrice;
-    } else if(fPara === 'ft_discount' || sponsorCookie) {
+        standardPrice.innerHTML = standardPriceValue + PriceDesc;
+        premiumPrice.innerHTML = upgradePrice + PriceDesc;
+    } else if (fPara === 'ft_discount' || sponsorCookie) {
         // MARK: When there's from=ft_discount in the url
-        if ((dataObj.standard === 1 && dataObj.premium === 0)){
-            upgradePrice = '¥'+dataObj.v+'/年';
-            standardPriceValue = '¥258/年';
+        if ((dataObj.standard === 1 && dataObj.premium === 0)) {
+            upgradePrice = '¥' + dataObj.v + '/年';
+            standardPriceValue = standardPriceValue85;
         } else {
-            upgradePrice  = '¥1698/年';
-            standardPriceValue = '¥218/年';
+            upgradePrice = premiumPriceValue85;
+            standardPriceValue = standardPriceValue85;
         }
-        standardPrice.innerHTML = standardPriceValue;
-        premiumPrice.innerHTML = upgradePrice;
+        standardPrice.innerHTML = standardPriceValue + PriceDesc;
+        premiumPrice.innerHTML = upgradePrice + PriceDesc;
+    } else if (fPara === 'ft_win_back' || fPara === 'ft_big_sale') {
+        if ((dataObj.standard === 1 && dataObj.premium === 0)) {
+            upgradePrice = '¥' + dataObj.v + '/年';
+            standardPriceValue = standardPriceValue50;
+        } else {
+            upgradePrice = premiumPriceValue50;
+            standardPriceValue = standardPriceValue50;
+        }
+        standardPrice.innerHTML = standardPriceValue + PriceDesc;
+        premiumPrice.innerHTML = upgradePrice + PriceDesc;
     } else {
-        if ((dataObj.standard === 1 && dataObj.premium === 0)){
-            upgradePrice = '¥'+dataObj.v+'/年';
-            standardPrice.innerHTML = standardPriceValue;
-            premiumPrice.innerHTML = upgradePrice;
+        if ((dataObj.standard === 1 && dataObj.premium === 0)) {
+            upgradePrice = '¥' + dataObj.v + '/年';
+            standardPrice.innerHTML = standardPriceValue + PriceDesc;
+            premiumPrice.innerHTML = upgradePrice + PriceDesc;
         } else {
-            standardPrice.innerHTML = standardPriceValue;
-            premiumPrice.innerHTML = premiumPriceValue;
+            standardPrice.innerHTML = standardPriceValue + PriceDesc;
+            premiumPrice.innerHTML = premiumPriceValue + PriceDesc;
         }
     }
 
-   // 点击之后跟其它的行为也不一样
-    if(fPara === 'ft_exchange'){
+    // 点击之后跟其它的行为也不一样
+    if (fPara === 'ft_exchange') {
         standardBtnMonthlyInnerText = '输入兑换码';
         standardBtnInnerText = '输入兑换码';
         premiumBtnInnerText = '输入兑换码';
         standardPriceMonthly.style.display = 'none';
         standardPrice.style.display = 'none';
         premiumPrice.style.display = 'none';
-        headingHint.innerHTML =  '请选择您的兑换权益';
+        headingHint.innerHTML = '请选择您的兑换权益';
         headerTitle.innerHTML = '兑换中心';
         document.title = '兑换中心 - FT中文网';
     }
@@ -409,7 +434,7 @@ function updateUI(dataObj){
             var priceEle = buyLink.parentNode.querySelector('.data-price');
             var price = '';
             if (priceEle) {
-                price = priceEle.innerHTML.replace(/\.00.*$/g, '').replace(/\D/g,'');
+                price = priceEle.innerHTML.replace(/\.00.*$/g, '').replace(/\D/g, '');
             }
             var ccodePara = '';
             if (ccodeValue && ccodeValue !== '') {
@@ -421,20 +446,17 @@ function updateUI(dataObj){
     }
 }
 
-window.onunload = function closeWindow(){
+window.onunload = function closeWindow() {
     DeleteCookie('U');
     DeleteCookie('E');
     DeleteCookie('R');
 };
 
-
-
-
 if (window.location.hostname === 'localhost' || window.location.hostname.indexOf('192.168') === 0 || window.location.hostname.indexOf('10.113') === 0 || window.location.hostname.indexOf('127.0') === 0) {
     var xhrpw1 = new XMLHttpRequest();
-    xhrpw1.open('get','api/paywall.json');
+    xhrpw1.open('get', 'api/paywall.json');
     xhrpw1.onload = function() {
-        if (xhrpw1.status==200){
+        if (xhrpw1.status == 200) {
             var data = xhrpw1.responseText;
             dataObj = JSON.parse(data);
             updateUI(dataObj);
@@ -442,40 +464,31 @@ if (window.location.hostname === 'localhost' || window.location.hostname.indexOf
         }
     };
     xhrpw1.send(null);
-    if (isEmptyObj(dataObj)){
+    if (isEmptyObj(dataObj)) {
         updateUI(dataObj);
     }
-}else{
+} else {
     postUE('/index.php/jsapi/paywall');
-    if (isEmptyObj(dataObj)){
+    if (isEmptyObj(dataObj)) {
         updateUI(dataObj);
     }
 }
 
-
-
-
-
-
-
-
-
-
-function hasUtmCampaign(){
-    if(window.location.search.indexOf('utm_campaign')>=0){
+function hasUtmCampaign() {
+    if (window.location.search.indexOf('utm_campaign') >= 0) {
 
         var campaign = '';
         var paraArr = parseUrlSearch();
-        if (paraArr && paraArr.length>0){
-              for(let j=0;j<paraArr.length;j++){
-                if(paraArr[j].indexOf('utm_campaign')>=0){
-                        var arr = paraArr[j].split('=');
-                        campaign = arr[1];
-                        SetCookie('ccode',campaign,86400,null,null,false);
-                        // document.cookie = 'campaign_code = ' + campaign;
+        if (paraArr && paraArr.length > 0) {
+            for (let j = 0; j < paraArr.length; j++) {
+                if (paraArr[j].indexOf('utm_campaign') >= 0) {
+                    var arr = paraArr[j].split('=');
+                    campaign = arr[1];
+                    SetCookie('ccode', campaign, 86400, null, null, false);
+                    // document.cookie = 'campaign_code = ' + campaign;
                 }
 
-              }
+            }
         }
 
 
@@ -485,31 +498,31 @@ function hasUtmCampaign(){
 
 hasUtmCampaign();
 
-function isFromIos(){
+function isFromIos() {
     let c = getUrlParams('c');
-    if (!!c){
+    if (!!c) {
         return c;
-    }else{
+    } else {
         return undefined;
     }
 }
 
-function elabelToIos(){
+function elabelToIos() {
     let lPara = getUrlParams('l');
     let elabel = '';
-    if(lPara){
+    if (lPara) {
         elabel = lPara;
-    }else{
+    } else {
         elabel = 'no l value';
     }
     return elabel;
 }
 
-function hasLpara(){
+function hasLpara() {
     let l = getUrlParams('l');
-    if (!!l){
+    if (!!l) {
         return true;
-    }else{
+    } else {
         return false;
     }
 }
@@ -529,81 +542,80 @@ function hasLpara(){
  * 支付成功，用什么来判断是否来自于ios
  */
 
-function iosTrack(){
+function iosTrack() {
     let cPara = isFromIos();
     let lPara = getUrlParams('l');
 
-    if(cPara){
+    if (cPara) {
 
         let elabel = '';
-        let eLabelCookie = cPara+'/IOSCL/';
-        if(lPara){
+        let eLabelCookie = cPara + '/IOSCL/';
+        if (lPara) {
             eLabelCookie += lPara;
             elabel = lPara;
-        }else{
+        } else {
             eLabelCookie += 'no l value';
             elabel = 'no l value';
         }
-        SetCookie('SELabel',eLabelCookie,86400,null,'.ftacademy.cn',false);
-        ga('send','event',cPara, 'Display', elabel);
+        SetCookie('SELabel', eLabelCookie, 86400, null, '.ftacademy.cn', false);
+        ga('send', 'event', cPara, 'Display', elabel);
     }
 }
 iosTrack();
 
 // Mark:url参数中带有ccode和utm_code，设置cookie，因为这是从活动中直接链接过来的，所以在此页面设置来源。暂时不使用document.referrer
-function ccodeTrack(){
+function ccodeTrack() {
     let ccodePara = getUrlParams('ccode') || getUrlParams('utm_code') || getUrlParams('utm_campaign') || getUrlParams('campaign_code');
-    if(ccodePara){
-        var fromUrl = 'From:'+ccodePara  ;
-        SetCookie('SELabel',fromUrl,86400,null,'.ftacademy.cn',false);
-        ga('send','event','Web Privileges', 'Tap', fromUrl, {'nonInteraction':1});
+    if (ccodePara) {
+        var fromUrl = 'From:' + ccodePara;
+        SetCookie('SELabel', fromUrl, 86400, null, '.ftacademy.cn', false);
+        ga('send', 'event', 'Web Privileges', 'Tap', fromUrl, {
+            'nonInteraction': 1
+        });
     }
 }
 
 ccodeTrack();
 
-
-
 // Mark：从升级高端会员进入，url中带有tap参数，当购买成功之后跳转来源并附加上参数buy=success
 // 第一次打开执行这里，当再次点击的时候，memberType为空
-function fromUpdate(){
+function fromUpdate() {
     let tapPara = getUrlParams('tap') || '';
-    if(tapPara !== ''){
-        if(tapPara==='standard'){
-            relevantDataInPayment(standardType,'¥198.00/年');
-        }else if(tapPara==='premium'){
-            if (!isEmptyObj(dataObj) && (dataObj.standard === 1 && dataObj.premium === 0)){
+    if (tapPara !== '') {
+        if (tapPara === 'standard') {
+            relevantDataInPayment(standardType, standardPriceValue50);
+        } else if (tapPara === 'premium') {
+            if (!isEmptyObj(dataObj) && (dataObj.standard === 1 && dataObj.premium === 0)) {
                 upgradePrice = upgradePrice;
-            }else{
-
-                upgradePrice = premiumPriceValue;
+            } else {
+                upgradePrice = premiumPriceValue50;
             }
-            relevantDataInPayment(premiumType,upgradePrice);
+            relevantDataInPayment(premiumType, upgradePrice);
         }
         paymentPage.style.display = 'block';
     }
 
     // Mark:如果没有R cookie，则在此页面设置，成功页面获取带有tap的cookie
-    let rCookie = GetCookie('R')||'';
+    let rCookie = GetCookie('R') || '';
     let referrer = document.referrer;
 
-    if(rCookie === '' && referrer && tapPara !== ''){
+    if (rCookie === '' && referrer && tapPara !== '') {
         const connector = (referrer.indexOf('?') >= 0) ? '&' : '?';
-        let newReferrer = referrer + connector + 'tapPara='+tapPara;
-        SetCookie('R',newReferrer,'',null,'.ftacademy.cn',false);
+        let newReferrer = referrer + connector + 'tapPara=' + tapPara;
+        SetCookie('R', newReferrer, '', null, '.ftacademy.cn', false);
     }
 }
 
-if (isEmptyObj(dataObj)){
+if (isEmptyObj(dataObj)) {
     fromUpdate();
 }
 
-function getMemberTypeFromUpdate(){
+function getMemberTypeFromUpdate() {
     let tapPara = getUrlParams('tap');
-    if(tapPara){
-        if(tapPara==='standard'){
+    if (tapPara) {
+        if (tapPara === 'standard') {
             memberType = standardType;
-        }else if(tapPara==='premium'){
+        } else if (tapPara === 'premium') {
             memberType = premiumType;
         }
     }
@@ -612,8 +624,8 @@ function getMemberTypeFromUpdate(){
 /**
  * Mark:加强版电子商务跟踪
  */
-function trackEC(){
-    let SELabel = GetCookie('SELabel')||'Other';
+function trackEC() {
+    let SELabel = GetCookie('SELabel') || 'Other';
     productImpression();
 }
 trackEC();

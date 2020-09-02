@@ -8,10 +8,20 @@
   <meta http-equiv="Content-Language" content="zh-CN" />
   <meta content="会员订阅" name="description" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  <link rel="apple-touch-icon-precomposed" href="http://static.ftchinese.com/img/ipad_icon.png" />
+  <link rel="apple-touch-icon-precomposed" href="./get.php/u=http://static.ftacademy.cn/img/ipad_icon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="http://static.ftchinese.com/img/ipad_icon.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="./get.php/u=http://static.ftacademy.cn/img/ipad_icon.png" sizes="32x32">
 
+  <script>
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var ymd = year + "-" + month + "-" + day;
+    if (ymd >= '2020-8-18' && ymd <= '2020-9-2' && (window.location.href.search("ft_big_sale") < 0 && window.location.href.search("ft_win_back") < 0)) {
+        window.location = 'https://www.ftacademy.cn/subscription.html?from=ft_win_back';
+    }
+  </script>
 
   <script inline src="scripts/key.js"></script>
 
@@ -47,7 +57,7 @@
             class="wxpay-mode" style="display:inline-block"><input name="pay" type="radio" value="wxpay" /><span id="pay-wxpay"></span></label>
         </div>
       </div>
-      <div class="pay-action"><label>支付金额<label id="price"> </label></label><button class="to-pay" id="to-pay">确定支付</button></div>
+      <div class="pay-action"><label>支付金额 <label id="price"></label></label><button class="to-pay" id="to-pay">确定支付</button></div>
     </div>
   </div>
 
@@ -72,13 +82,16 @@
             <div class="o-member__border"></div>
             <ul class="o-member__benefits">
               {% for benefit in products[0].benefits %}
-              <li> {{benefit}}</li>
-              {% endfor %}
+                {% if loop.index == 1 %}
+                <li id="benefits_standard"> {{benefit}}</li>
+                {% else %}
+                <li> {{benefit}}</li>
+                {% endif %}{% endfor %}
             </ul>
             <div class="o-member__subscribe">
               <a data-key="{{products[0].key}}"><button class="openSub" id="standard-btn">{{products[0].openBtn}}</button></a>
               <p class="data-price" id="standard_price">{{products[0].price}}</p>
-              <input type="text" value="¥258.00/年" hidden id="regular-member">
+              <input type="text" value="¥258/年" hidden id="regular-member">
             </div>
           </div>
         </div>
@@ -91,14 +104,17 @@
             <div class="o-member__border"></div>
             <ul class="o-member__benefits">
               {% for benefit in products[2].benefits %}
-              <li> {{benefit}}</li>
-              {% endfor %}
+                {% if loop.index == 1 %}
+                <li id="benefits_premium"> {{benefit}}</li>
+                {% else %}
+                <li> {{benefit}}</li>
+                {% endif %}{% endfor %}
             </ul>
             <p style="padding: 0.5em 1em 0em 1.5em;">注：所有活动门票不可折算现金、不能转让、不含差旅与食宿</p>
             <div class="o-member__subscribe">
               <a data-key="{{products[2].key}}"><button class="openSub" id="premium-btn">{{products[2].openBtn}}</button></a>
               <p class="data-price" id="premium_price">{{products[2].price}}</p>
-              <input type="text" value="¥1,998.00/年" hidden>
+              <input type="text" value="¥1998/年" hidden>
             </div>
           </div>
         </div>
@@ -122,6 +138,16 @@
           </div>
         </div>
       </div>
+
+    <script>
+        if (ymd >= '2020-8-18' && ymd <= '2020-9-2' && (window.location.href.search("ft_big_sale") > 0 || window.location.href.search("ft_win_back") > 0)) {
+            document.getElementById("benefits_standard").innerHTML = "至9月2日24时五折周年庆价，专享权益每日仅需0.35元";
+            document.getElementById("benefits_premium").innerHTML = "至9月2日24时五折周年庆价，专享权益每日仅需2.75元";
+            var PriceDesc = '（FT中文网 十五周年）';
+        } else {
+            var PriceDesc = '';
+        }
+    </script>
 
     </div>
   </div>
@@ -149,11 +175,9 @@
         j.async = true;
         j.src = u;
         x.parentNode.insertBefore(j, x)
-      })(document, 'script', 'http://static.ftchinese.com/js/log.js?' + y + m + d);
+      })(document, 'script', './get.php?u=http://static.ftacademy.cn/js/log.js?' + y + m + d);
     }
-
   </script>
-
 
 </body>
 
