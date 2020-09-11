@@ -13,13 +13,14 @@
   <link rel="icon" type="image/png" href="./get.php/u=http://static.ftacademy.cn/img/ipad_icon.png" sizes="32x32">
 
   <script>
-    var date = new Date();
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    var ymd = year + "-" + month + "-" + day;
-    if (ymd >= '2020-8-18' && ymd <= '2020-9-2' && (window.location.href.search("ft_big_sale") < 0 && window.location.href.search("ft_win_back") < 0)) {
-        window.location = 'https://www.ftacademy.cn/subscription.html?from=ft_win_back';
+    var today = new Date();
+    var startDate=new Date('2020-08-18'.replace(/-/g, "\/"));
+    var endDate=new Date('2020-09-03'.replace(/-/g, "\/"));
+    if (today.getTime() >= startDate.getTime() && today.getTime() < endDate.getTime() && (window.location.href.search("ft_big_sale") < 0 && window.location.href.search("ft_win_back") < 0)) {
+        //window.location = 'https://www.ftacademy.cn/subscription.html?from=ft_win_back';
+        console.log('FT_WIN_BACK');
+    } else {
+        console.log('FT_SUBSCRIPTION');
     }
   </script>
 
@@ -140,10 +141,11 @@
       </div>
 
     <script>
-        if (ymd >= '2020-8-18' && ymd <= '2020-9-2' && (window.location.href.search("ft_big_sale") > 0 || window.location.href.search("ft_win_back") > 0)) {
-            document.getElementById("benefits_standard").innerHTML = "至9月2日24时五折周年庆价，专享权益每日仅需0.35元";
-            document.getElementById("benefits_premium").innerHTML = "至9月2日24时五折周年庆价，专享权益每日仅需2.75元";
-            var PriceDesc = '（FT中文网 十五周年）';
+        if (today.getTime() >= startDate.getTime() && today.getTime() < endDate.getTime() && (window.location.href.search("ft_big_sale") > 0 || window.location.href.search("ft_win_back") > 0)) {
+            //document.getElementById("benefits_standard").innerHTML = "至9月2日24时五折周年庆价，专享权益每日仅需0.35元";
+            //document.getElementById("benefits_premium").innerHTML = "至9月2日24时五折周年庆价，专享权益每日仅需2.75元";
+            //var PriceDesc = '（FT中文网 十五周年）';
+            var PriceDesc = '';
         } else {
             var PriceDesc = '';
         }
@@ -159,7 +161,6 @@
   <script inline src="scripts/main.js"></script>
 
   <script>
-    var today = new Date();
     var y = today.getFullYear();
     var m = zeroFix(today.getMonth() + 1);
     var d = zeroFix(today.getDate());

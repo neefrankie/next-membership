@@ -98,15 +98,12 @@ if (window.gAutoStart === undefined) {
 <script inline src="scripts/notice.js"></script>
 
 <script>
-    var date = new Date();
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    var time = year + "-" + month + "-" + day;
+    var startDate=new Date('2020-08-18'.replace(/-/g, "\/"));
+    var endDate=new Date('2020-09-03'.replace(/-/g, "\/"));
     setTimeout(function(){
-        if (time >= '2020-8-18' && time < '2020-9-3') {
+        //if (today.getTime() >= startDate.getTime() && today.getTime() < endDate.getTime()) {
             window.location = 'https://www.chineseft.com/m/corp/preview.html?pageid=subscriptioninfoconfirm&to=all';
-        }
+        //}
     }, 10000);
 </script>
 
