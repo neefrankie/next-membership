@@ -581,14 +581,33 @@ ccodeTrack();
 // 第一次打开执行这里，当再次点击的时候，memberType为空
 function fromUpdate() {
     let tapPara = getUrlParams('tap') || '';
+    let fPara = getUrlParams('from') || '';
     if (tapPara !== '') {
         if (tapPara === 'standard') {
-            relevantDataInPayment(standardType, standardPriceValue50);
+            if (fPara === 'ft_win_back' || fPara === 'ft_big_sale') {
+                standardPriceValue = standardPriceValue50;
+            } else if (fPara === 'ft_renewal') {
+                standardPriceValue = standardPriceValue75;
+            } else if (fPara === 'ft_discount') {
+                standardPriceValue = standardPriceValue85;
+            } else {
+                true;
+            }
+            relevantDataInPayment(standardType, standardPriceValue);
         } else if (tapPara === 'premium') {
             if (!isEmptyObj(dataObj) && (dataObj.standard === 1 && dataObj.premium === 0)) {
                 upgradePrice = upgradePrice;
             } else {
-                upgradePrice = premiumPriceValue50;
+                if (fPara === 'ft_win_back' || fPara === 'ft_big_sale') {
+                    premiumPriceValue = premiumPriceValue50;
+                } else if (fPara === 'ft_renewal') {
+                    premiumPriceValue = premiumPriceValue75;
+                } else if (fPara === 'ft_discount') {
+                    premiumPriceValue = premiumPriceValue85;
+                } else {
+                    true;
+                }
+                upgradePrice = premiumPriceValue;
             }
             relevantDataInPayment(premiumType, upgradePrice);
         }
