@@ -154,13 +154,15 @@
     </div>
   </div>
 
-  {% include "partials/QandA.html" %} {% include "partials/footer.html" %}
+  {% include "partials/QandA.html" %}
+  {% include "partials/footer.html" %}
 
   <!--第一个tab 内容结束-->
   <!--第一个tab 内容-->
   <script inline src="scripts/main.js"></script>
 
   <script>
+    var today = new Date();
     var y = today.getFullYear();
     var m = zeroFix(today.getMonth() + 1);
     var d = zeroFix(today.getDate());

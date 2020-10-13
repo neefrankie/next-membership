@@ -36,9 +36,9 @@ gulp.task('dev', () => {
  * 读出数据之后接着循环，再return出promise对象，其实resolve就是promise对象
    读出对象，把对象render到页面中，渲染并读出需要模板、路径名、渲染页面中的data
    如果css和js文件不一样，继续在json中添加元素
- */ 
+ */
 gulp.task('build-page', () => {
-  
+
   const destDir = '.tmp';
   const pathDetail = loadJsonFile('views/data/path-detail.json');
   // detail返回promise
@@ -58,20 +58,20 @@ gulp.task('build-page', () => {
       console.log(err);
     });
 
- 
+
   async function renderPerView(demo){
     const env = {
       isProduction: process.env.NODE_ENV === 'production'
     };
-    
+
     const name = demo.name;
     const template = demo.template;
     const dataPath = demo.data;
     // dataPath不为空loadJsonFile读取不会报错，否则会报错,并且报错后环境为development，可以把页面数据集中在一个json文件中
       return loadJsonFile(dataPath)
       .then(data => {
-        
-        if (['QandA','subscriptionTest','subscription','subscribenotice'].indexOf(name) >= 0){
+
+        if (['QandA','subscriptionTest','subscription','subscribenotice','product'].indexOf(name) >= 0){
           return render(template, {
             guide:data.guide,
             products: data.index,
@@ -85,16 +85,16 @@ gulp.task('build-page', () => {
             env
           });
         }
-        
+
       })
-      .then(html => {  
+      .then(html => {
 
         if (process.env.NODE_ENV === 'production') {
           return inline(html, {
             compress: true,
             rootpath: path.resolve(process.cwd(), '.tmp')
           });
-        }    
+        }
         return html;
         })
         .then(html => {
@@ -104,11 +104,11 @@ gulp.task('build-page', () => {
 
 
   }
-  
+
 });
 
 gulp.task('compile-html', () => {
-  
+
   const destDir = 'views/compiledHtml';
   const pathDetail = loadJsonFile('views/data/path-detail.json');
   return pathDetail.then(data => {
@@ -126,7 +126,7 @@ gulp.task('compile-html', () => {
   async function renderPerView(demo){
     const env = {
       isProduction: process.env.NODE_ENV === 'production'
-    }; 
+    };
     const name = demo.name;
     const template = demo.template;
     const dataPath = demo.data;
@@ -146,16 +146,16 @@ gulp.task('compile-html', () => {
             env
           });
         }
-        
+
       })
-      .then(html => {  
+      .then(html => {
 
         if (process.env.NODE_ENV === 'production') {
           return inline(html, {
             compress: true,
             rootpath: path.resolve(process.cwd(), destDir)
           });
-        }    
+        }
         return html;
         })
         .then(html => {
@@ -163,7 +163,7 @@ gulp.task('compile-html', () => {
           return fs.writeAsync(destFile, html);
       })
   }
-  
+
 });
 
 gulp.task('styles', function styles() {
@@ -193,7 +193,7 @@ gulp.task('styles', function styles() {
 //   const details = await fs.readAsync('views/data/path-detail.json','json');
 //   const demos = details.demos;
 //   async function rollupOneJs(demo) {
-//     try {  
+//     try {
 //       const bundle = await rollup({
 //         input:`client/scripts/${demo.js}`,
 //         plugins:[
@@ -230,7 +230,7 @@ gulp.task('scripts', async () => {
 
    async function rollupJs(js){
     //  console.log(js);
-    try {  
+    try {
       const bundle = await rollup({
         input:`client/scripts/${js}`,
         plugins:[
@@ -298,7 +298,7 @@ gulp.task('serve', gulp.series('build-page','styles', 'scripts','api', () => {
     }
   });
 
-  gulp.watch(['views/*.{html,json}'], 
+  gulp.watch(['views/*.{html,json}'],
     gulp.parallel('build-page')
   );
 
@@ -330,7 +330,7 @@ gulp.task('copySub', () => {
 
 gulp.task('copy', gulp.series(
   'clean',
-  'build', 
+  'build',
   gulp.parallel(
     'copySub'
   )
