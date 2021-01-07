@@ -20,6 +20,17 @@
         color: #BBB;
         font-size: 0.8em;
       }
+      .o-member-container .o-member-outer {
+          <?php
+          if (3 == count($product)) {
+              echo 'width:33%;';
+          } elseif (2 == count($product)) {
+              echo 'width:50%;';
+          } elseif (1 == count($product)) {
+              echo 'width:100%;';
+          }
+          ?>
+      }
   </style>
 </head>
 

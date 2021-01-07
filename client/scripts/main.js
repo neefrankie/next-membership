@@ -34,6 +34,8 @@ const premiumType = '高端会员';
 let dataObj = {};
 let isStandard = false;
 let isPremium = false;
+
+// ----- Prices displayed on the website.
 let upgradePrice = '';
 let standardPriceValueMonthly = '¥28/月';
 let standardPriceValue = '¥258/年';
@@ -45,6 +47,7 @@ let standardPriceValue75 = '¥198/年';
 let premiumPriceValue75 = '¥1498/年';
 let standardPriceValue50 = '¥128/年';
 let premiumPriceValue50 = '¥998/年';
+// ----- Prices displayed on the website.
 
 var isInApp = (window.location.href.indexOf('webview=ftcapp') >= 0);
 
@@ -113,6 +116,10 @@ var openPayment = function(event) {
     memberType = parentsNode[0].innerHTML;
     var newAttribute = '';
 
+    var today = new Date();
+    var startDate=new Date('2020-11-09 12:00:00'.replace(/-/g, "\/"));
+    var endDate=new Date('2020-11-11  23:59:59'.replace(/-/g, "\/"));
+
     if (isPremium) {
         return;
     } else if (isStandard) {
@@ -121,22 +128,36 @@ var openPayment = function(event) {
         }
         price = upgradePrice;
     }
-    // Mark:打折活动
+
     let fPara = getUrlParams('from');
     let sponsorCookie = GetCookie('sponsor');
     if (fPara === 'ft_discount' || fPara === 'ft_renewal' || fPara === 'ft_win_back' || fPara === 'ft_big_sale' || sponsorCookie) {
+        // ----- Price of pop-up window after clicking button. [With Parameters]
+        // Button Pop-up [With Parameters] [FINAL]
         if (attribute === 'standard-btn') {
-            price = standardPriceValue;
+            price = standardPriceValue; // ##[Button] [Standard] [With Parameters]
         } else if (attribute === 'premium-btn') {
-            price = upgradePrice;
+            price = upgradePrice; // ##[Button] [Premium] [With Parameters]
+        } else if (attribute === 'standard-btn-monthly') {
+            price = standardPriceValueMonthly; // ##[Button] [Standard Monthly] [With Parameters]
         }
     } else {
+        // ----- Price of pop-up window after clicking button. [No Parameters]
+        // Button Pop-up [No Parameters] [FINAL]
         if (attribute === 'standard-btn') {
-            price = standardPriceValue;
-        } else if (attribute === 'standard-btn-monthly') {
-            price = standardPriceValueMonthly;
+            if (today.getTime() >= startDate.getTime() && today.getTime() < endDate.getTime()) {
+                price = standardPriceValue85; // ##[Button] [Standard] [No Parameters] [Time Limit]
+            } else {
+                price = standardPriceValue; // ##[Button] [Standard] [No Parameters]
+            }
         } else if (attribute === 'premium-btn') {
-            price = premiumPriceValue;
+            if (today.getTime() >= startDate.getTime() && today.getTime() < endDate.getTime()) {
+                price = premiumPriceValue85; // ##[Button] [Premium] [No Parameters] [Time Limit]
+            } else {
+                price = premiumPriceValue; // ##[Button] [Premium] [No Parameters]
+            }
+        } else if (attribute === 'standard-btn-monthly') {
+            price = standardPriceValueMonthly; // ##[Button] [Standard Monthly] [No Parameters]
         }
     }
 
@@ -320,9 +341,11 @@ function updateUI(dataObj) {
     let standardBtnMonthlyInnerText = '';
     let standardBtnInnerText = '';
     let premiumBtnInnerText = '';
+    /*
     let standardPriceMonthlyInnerText = '';
     let standardPriceInnerText = '';
     let premiumPriceInnerText = '';
+    */
 
 
     if ((dataObj.standard === 1 && dataObj.premium === 0)) {
@@ -359,6 +382,10 @@ function updateUI(dataObj) {
         }
     }
 
+    var today = new Date();
+    var startDate=new Date('2020-11-09 12:00:00'.replace(/-/g, "\/"));
+    var endDate=new Date('2020-11-11  23:59:59'.replace(/-/g, "\/"));
+
 
     // Mark:不写在dataObj条件下，是因为显示默认价格
     // MARK: dataObj format: {paywall: 1, premium: 0, standard: 0}
@@ -369,10 +396,10 @@ function updateUI(dataObj) {
         // MARK: When there's from=ft_renewal in the url
         if ((dataObj.standard === 1 && dataObj.premium === 0)) {
             upgradePrice = '¥' + dataObj.v + '/年';
-            standardPriceValue = standardPriceValue75;
+            standardPriceValue = standardPriceValue75; // ##[Renewal][Standard][dataObj]
         } else {
-            upgradePrice = premiumPriceValue75;
-            standardPriceValue = standardPriceValue75;
+            upgradePrice = premiumPriceValue75; // ##[Renewal][Premium]
+            standardPriceValue = standardPriceValue75; // ##[Renewal][Standard]
         }
         standardPrice.innerHTML = standardPriceValue + PriceDesc;
         premiumPrice.innerHTML = upgradePrice + PriceDesc;
@@ -380,20 +407,36 @@ function updateUI(dataObj) {
         // MARK: When there's from=ft_discount in the url
         if ((dataObj.standard === 1 && dataObj.premium === 0)) {
             upgradePrice = '¥' + dataObj.v + '/年';
-            standardPriceValue = standardPriceValue85;
+            standardPriceValue = standardPriceValue85; // ##[Discount][Standard][dataObj]
         } else {
-            upgradePrice = premiumPriceValue85;
-            standardPriceValue = standardPriceValue85;
+            upgradePrice = premiumPriceValue85; // ##[Discount][Premium] -> Webpage [FINAL]
+            standardPriceValue = standardPriceValue85; // ##[Discount][standard] -> Webpage [FINAL] || -> Button Pop-up
         }
         standardPrice.innerHTML = standardPriceValue + PriceDesc;
         premiumPrice.innerHTML = upgradePrice + PriceDesc;
     } else if (fPara === 'ft_win_back' || fPara === 'ft_big_sale') {
         if ((dataObj.standard === 1 && dataObj.premium === 0)) {
             upgradePrice = '¥' + dataObj.v + '/年';
-            standardPriceValue = standardPriceValue50;
+            //standardPriceValue = standardPriceValue50;
+            standardPriceValue = standardPriceValue85; // ##[Win Back][Standard][dataObj]
         } else {
-            upgradePrice = premiumPriceValue50;
-            standardPriceValue = standardPriceValue50;
+            //upgradePrice = premiumPriceValue50;
+            //standardPriceValue = standardPriceValue50;
+            upgradePrice = premiumPriceValue85; // ##[Win Back][Premium]
+            standardPriceValue = standardPriceValue85; // ##[Win Back][standard]
+        }
+        standardPrice.innerHTML = standardPriceValue + PriceDesc;
+        premiumPrice.innerHTML = upgradePrice + PriceDesc;
+    } else if (today.getTime() >= startDate.getTime() && today.getTime() < endDate.getTime()) {
+        if ((dataObj.standard === 1 && dataObj.premium === 0)) {
+            upgradePrice = '¥' + dataObj.v + '/年';
+            //standardPriceValue = standardPriceValue50;
+            standardPriceValue = standardPriceValue85; // ##[Time Limit][Standard][dataObj]
+        } else {
+            //upgradePrice = premiumPriceValue50;
+            //standardPriceValue = standardPriceValue50;
+            upgradePrice = premiumPriceValue85; // ##[Time Limit][Premium][dataObj]
+            standardPriceValue = standardPriceValue85; // ##[Time Limit][Standard][dataObj]
         }
         standardPrice.innerHTML = standardPriceValue + PriceDesc;
         premiumPrice.innerHTML = upgradePrice + PriceDesc;
@@ -407,6 +450,7 @@ function updateUI(dataObj) {
             premiumPrice.innerHTML = premiumPriceValue + PriceDesc;
         }
     }
+    standardPriceMonthly.innerHTML = standardPriceValueMonthly;
 
     // 点击之后跟其它的行为也不一样
     if (fPara === 'ft_exchange') {
@@ -580,34 +624,46 @@ ccodeTrack();
 // Mark：从升级高端会员进入，url中带有tap参数，当购买成功之后跳转来源并附加上参数buy=success
 // 第一次打开执行这里，当再次点击的时候，memberType为空
 function fromUpdate() {
+    var today = new Date();
+    var startDate=new Date('2020-11-09 12:00:00'.replace(/-/g, "\/"));
+    var endDate=new Date('2020-11-11  23:59:59'.replace(/-/g, "\/"));
+
     let tapPara = getUrlParams('tap') || '';
     let fPara = getUrlParams('from') || '';
     if (tapPara !== '') {
+        // Tap Pop-up
         if (tapPara === 'standard') {
             if (fPara === 'ft_win_back' || fPara === 'ft_big_sale') {
-                standardPriceValue = standardPriceValue50;
+                //standardPriceValue = standardPriceValue50;
+                standardPriceValue = standardPriceValue85; // ##[Tap] [Standard] [Win Back]
             } else if (fPara === 'ft_renewal') {
-                standardPriceValue = standardPriceValue75;
+                standardPriceValue = standardPriceValue75; // ##[Tap] [Standard] [Renewal]
             } else if (fPara === 'ft_discount') {
-                standardPriceValue = standardPriceValue85;
+                standardPriceValue = standardPriceValue85; // ##[Tap] [Standard] [Discount]
+            } else if (today.getTime() >= startDate.getTime() && today.getTime() < endDate.getTime()) {
+                standardPriceValue = standardPriceValue85; // ##[Tap] [Standard] [Time Limit]
             } else {
                 true;
             }
-            relevantDataInPayment(standardType, standardPriceValue);
+            standardPrice = standardPriceValue; // ##[Tap] Standard -- Pop-up [FINAL]
+            relevantDataInPayment(standardType, standardPrice);
         } else if (tapPara === 'premium') {
             if (!isEmptyObj(dataObj) && (dataObj.standard === 1 && dataObj.premium === 0)) {
-                upgradePrice = upgradePrice;
+                upgradePrice = upgradePrice; // ##[Tap] [Premium] [Upgrade]
             } else {
                 if (fPara === 'ft_win_back' || fPara === 'ft_big_sale') {
-                    premiumPriceValue = premiumPriceValue50;
+                    //premiumPriceValue = premiumPriceValue50;
+                    premiumPriceValue = premiumPriceValue85; // ##[Tap] [Premium] [Win Back]
                 } else if (fPara === 'ft_renewal') {
-                    premiumPriceValue = premiumPriceValue75;
+                    premiumPriceValue = premiumPriceValue75; // ##[Tap] [Premium] [Renewal]
                 } else if (fPara === 'ft_discount') {
-                    premiumPriceValue = premiumPriceValue85;
+                    premiumPriceValue = premiumPriceValue85; // ##[Tap] [Premium] [Discount]
+                } else if (today.getTime() >= startDate.getTime() && today.getTime() < endDate.getTime()) {
+                    premiumPriceValue = premiumPriceValue85; // ##[Tap] [Premium] [Time Limit]
                 } else {
                     true;
                 }
-                upgradePrice = premiumPriceValue;
+                upgradePrice = premiumPriceValue; // ##[Tap] Premium -- Pop-up [FINAL]
             }
             relevantDataInPayment(premiumType, upgradePrice);
         }

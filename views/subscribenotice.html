@@ -33,7 +33,10 @@
 <div class="payment-info-container">
     <div class="payment-info-inner notice-container">
         <div class="hint-word"><span class="hint-img"></span><span class="hint-content" id="hint-content">恭喜您订阅成功！</span></div>
+        <!--
         <div class="return-btn" id="returnTo"><button>返回</button></div>
+        -->
+        <div class="return-btn" id="infoConfirm"><button>确认信息</button></div>
     </div>
 </div>
 
@@ -41,8 +44,8 @@
     <div class="payment-info-inner">
         <div>交易单号：<span id="order-number"></span></div>
         <div>已支付金额：<span id="payment-amount"></span>元</div>
-        <div>会员类型：<span id="member-type-name"></span></div>
-        <div>有效期至：<span id="expire-date">-</span></div>
+        <div style="display:none">会员类型：<span id="member-type-name"></span></div>
+        <div style="display:none">有效期至：<span id="expire-date">-</span></div>
     </div>
 </div>
 
@@ -96,16 +99,6 @@ if (window.gAutoStart === undefined) {
 </script>
 
 <script inline src="scripts/notice.js"></script>
-
-<script>
-    var startDate=new Date('2020-08-18'.replace(/-/g, "\/"));
-    var endDate=new Date('2020-09-03'.replace(/-/g, "\/"));
-    setTimeout(function(){
-        //if (today.getTime() >= startDate.getTime() && today.getTime() < endDate.getTime()) {
-            window.location = 'https://www.chineseft.com/m/corp/preview.html?pageid=subscriptioninfoconfirm&to=all';
-        //}
-    }, 10000);
-</script>
 
 </body>
 </html>

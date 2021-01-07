@@ -1,7 +1,14 @@
 /*jshint esversion: 6 */
-import {EventObject,GetCookie,SetCookie,parseUrlSearch} from './subscribe_api';
-import {addTransaction} from './track';
-   
+import {
+    EventObject,
+    GetCookie,
+    SetCookie,
+    parseUrlSearch
+} from './subscribe_api';
+import {
+    addTransaction
+} from './track';
+
 // var eventAction = '';
 // var paraArr = parseUrlSearch();
 // if (paraArr && paraArr.length>0){
@@ -22,9 +29,11 @@ if (memberType === 'Standard') {
 }
 
 var SELabel = GetCookie('SELabel') || 'other from web';
-if(SELabel.indexOf('/IOSCL/')>-1) {
+if (SELabel.indexOf('/IOSCL/') > -1) {
     var clParaArr = SELabel.split('/IOSCL/');
-    ga('send','event',clParaArr[0], 'Buy Success:'+eventAction, clParaArr[1], {'nonInteraction':1});
+    ga('send', 'event', clParaArr[0], 'Buy Success:' + eventAction, clParaArr[1], {
+        'nonInteraction': 1
+    });
 } else {
     // var ccode = SELabel.replace(/From:/g,'').replace(/\/.*$/g,'');
     // if (SELabel.indexOf('From:') === 0 && ccode !== '') {
@@ -33,7 +42,9 @@ if(SELabel.indexOf('/IOSCL/')>-1) {
     //     ga('set', 'campaignSource', 'marketing');
     //     ga('set', 'campaignMedium', 'campaign');
     // }
-    ga('send','event','Web Privileges', 'Buy Success:'+eventAction, SELabel, {'nonInteraction':1});
+    ga('send', 'event', 'Web Privileges', 'Buy Success:' + eventAction, SELabel, {
+        'nonInteraction': 1
+    });
 }
 
 // MARK: get actual price from url parameter
@@ -42,29 +53,29 @@ if (price === '') {
     price = (eventAction === 'Premium') ? '1998' : '198';
 }
 
-let randomVal = Math.round(Math.random()*89999)+10000;
+let randomVal = Math.round(Math.random() * 89999) + 10000;
 
-let tradeNo = GetCookie('trade_no')||randomVal;
+let tradeNo = GetCookie('trade_no') || randomVal;
 
 
 function paravalue(theurl, thep) {
-    var k,thev;
-    if (theurl.indexOf(thep + '=')>1) {
-        k=theurl.indexOf(thep + '=') + thep.length + 1;
-        thev=theurl.substring(k,theurl.length);
-        thev=thev.replace(/[\&\#].*/g,'');
+    var k, thev;
+    if (theurl.indexOf(thep + '=') > 1) {
+        k = theurl.indexOf(thep + '=') + thep.length + 1;
+        thev = theurl.substring(k, theurl.length);
+        thev = thev.replace(/[\&\#].*/g, '');
     } else {
-        thev='';
+        thev = '';
     }
     return thev;
 }
 
-function addClientIdPar(clientId,url){
+function addClientIdPar(clientId, url) {
     var clientIdPar = '';
     var connector = (url.indexOf('?') > 0) ? '&' : '?';
-    if(clientId && clientId !== ''){
-        clientIdPar = connector+'clientId=' + clientId;
-    }else{
+    if (clientId && clientId !== '') {
+        clientIdPar = connector + 'clientId=' + clientId;
+    } else {
         clientIdPar = '';
     }
     return url + clientIdPar;
@@ -94,7 +105,7 @@ function jump() {
     if (expireEle) {
         var expireDateString = paravalue(window.location.href, 'expire');
         if (expireDateString !== '') {
-            var date = new Date(expireDateString*1000);
+            var date = new Date(expireDateString * 1000);
             var years = date.getFullYear();
             var months = date.getMonth() + 1;
             var days = date.getDate();
@@ -106,7 +117,7 @@ function jump() {
     //http://www.ftacademy.cn/subscribenotice.html?notice=Successful%20Payment!&memberType=Standard%20Monthly&trade=FT0100411540551472&price=0.01&expire=1543161600&platfrom=alipay
 
 
-    // MARK: - no need to jump as the success page has important information. 
+    // MARK: - no need to jump as the success page has important information.
 
     /*
     let s = window.setInterval(function(){
@@ -136,7 +147,7 @@ function jump() {
                 }
                 jumpUrl = addClientIdPar(clientId, jumpUrl);
                 window.location.href = jumpUrl;
-            }); 
+            });
             window.clear(s);//清空s，防止再次调用a()。即防止time减为负数
         }
      },1000);
@@ -149,31 +160,74 @@ function returnTo() {
     ga(function(tracker) {
         var clientId = tracker.get('clientId');
         var clientIdPar = '';
-        if(rCookie){
+        if (rCookie) {
             jumpUrl = decodeURIComponent(rCookie);
-        }else{
-            jumpUrl = "http://user.chineseft.com/?uide=" + paravalue(window.location.href,"uide");
+        } else {
+            jumpUrl = "http://user.chineseft.com/?uide=" + paravalue(window.location.href, "uide");
         }
         jumpUrl = addClientIdPar(clientId, jumpUrl);
         // MARK: Fix the problem brought by ealier bugs which are not related to this page
         jumpUrl = jumpUrl.replace(/(&)(.*)(\?)/g, '$3$2$1');
-        window.open(jumpUrl,'_self');
+        window.open(jumpUrl, '_self');
     });
 }
 
+// 【返回】按钮
 let returnToId = document.getElementById("returnTo");
+if (returnToId) {
+    EventObject.addHandler(returnToId, "click", function() {
+        returnTo();
+    });
+}
 
-EventObject.addHandler(returnToId,"click",function(){ 
-    returnTo();
-});
+function getCookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (document.cookie.match(reg)) {
+        arr = document.cookie.match(reg);
+        return unescape(arr[2]);
+    } else {
+        return null;
+    }
+}
 
-window.onload = function(){
+// 【确认信息】按钮
+let membership;
+memberType = paravalue(window.location.href, 'memberType');
+if (memberType === 'Standard') {
+    membership = 'standard';
+} else if (memberType === 'Premium') {
+    membership = 'premium';
+} else if (memberType === 'Standard Monthly') {
+    membership = 'standardmonthly';
+} else {
+    membership = '';
+}
+
+let action;
+if (getCookie('action') === 'buy') {
+    action = 'buy';
+} else if (getCookie('action') === 'renew') {
+    action = 'renew';
+} else if (getCookie('action') === 'winback') {
+    action = 'winback';
+} else {
+    action = '';
+}
+
+let infoConfirmId = document.getElementById("infoConfirm");
+if (infoConfirmId) {
+    EventObject.addHandler(infoConfirmId, "click", function() {
+        window.location = 'https://www.chineseft.com/m/corp/preview.html?pageid=subscriptioninfoconfirm&membership=' + membership + '&action=' + action;
+    });
+}
+
+window.onload = function() {
     jump();
 }
 
 // 放入交易成功页面
-let affiliation =  SELabel;
+let affiliation = SELabel;
 addTransaction(tradeNo, eventAction, price, affiliation);
 
-document.getElementById('vip_url').href='http://user.chineseft.com/?uide=' + paravalue(window.location.href,"uide");
+document.getElementById('vip_url').href = 'http://user.chineseft.com/?uide=' + paravalue(window.location.href, "uide");
 console.log(paravalue(window.location.href, "uide"));
