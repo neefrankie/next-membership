@@ -19,7 +19,7 @@ import {
     onProductClick
 } from './track';
 
-import './qAnda';
+import './QandA';
 
 var firstGuide = document.querySelector('.firstStrong');
 var attention = document.querySelector('.attention');
@@ -37,16 +37,31 @@ let isPremium = false;
 
 // ----- Prices displayed on the website.
 let upgradePrice = '';
-let standardPriceValueMonthly = '¥28/月';
-let standardPriceValue = '¥258/年';
-let premiumPriceValue = '¥1998/年';
+var today = new Date();
+var switchtTime = new Date('2021-2-18 00:00:00');
+if (today.getTime() >= switchtTime.getTime()) {
+    var standardPriceValueMonthly = '¥35/月';
+    var standardPriceValue = '¥298/年';
+    var premiumPriceValue = '¥1998/年';
 
-let standardPriceValue85 = '¥218/年';
-let premiumPriceValue85 = '¥1698/年';
-let standardPriceValue75 = '¥198/年';
-let premiumPriceValue75 = '¥1498/年';
-let standardPriceValue50 = '¥128/年';
-let premiumPriceValue50 = '¥998/年';
+    var standardPriceValue85 = '¥258/年';
+    var premiumPriceValue85 = '¥1698/年';
+    var standardPriceValue75 = '¥218/年';
+    var premiumPriceValue75 = '¥1498/年';
+    var standardPriceValue50 = '¥148/年';
+    var premiumPriceValue50 = '¥998/年';
+} else {
+    var standardPriceValueMonthly = '¥28/月';
+    var standardPriceValue = '¥258/年';
+    var premiumPriceValue = '¥1998/年';
+
+    var standardPriceValue85 = '¥218/年';
+    var premiumPriceValue85 = '¥1698/年';
+    var standardPriceValue75 = '¥198/年';
+    var premiumPriceValue75 = '¥1498/年';
+    var standardPriceValue50 = '¥128/年';
+    var premiumPriceValue50 = '¥998/年';
+}
 // ----- Prices displayed on the website.
 
 var isInApp = (window.location.href.indexOf('webview=ftcapp') >= 0);
@@ -117,8 +132,8 @@ var openPayment = function(event) {
     var newAttribute = '';
 
     var today = new Date();
-    var startDate=new Date('2020-11-09 12:00:00'.replace(/-/g, "\/"));
-    var endDate=new Date('2020-11-11  23:59:59'.replace(/-/g, "\/"));
+    var startDate = new Date('2021-2-1 12:00:00');
+    var endDate = new Date('2021-2-7 23:59:59');
 
     if (isPremium) {
         return;
@@ -383,9 +398,8 @@ function updateUI(dataObj) {
     }
 
     var today = new Date();
-    var startDate=new Date('2020-11-09 12:00:00'.replace(/-/g, "\/"));
-    var endDate=new Date('2020-11-11  23:59:59'.replace(/-/g, "\/"));
-
+    var startDate = new Date('2021-2-1 12:00:00');
+    var endDate = new Date('2021-2-7 23:59:59');
 
     // Mark:不写在dataObj条件下，是因为显示默认价格
     // MARK: dataObj format: {paywall: 1, premium: 0, standard: 0}
@@ -625,8 +639,8 @@ ccodeTrack();
 // 第一次打开执行这里，当再次点击的时候，memberType为空
 function fromUpdate() {
     var today = new Date();
-    var startDate=new Date('2020-11-09 12:00:00'.replace(/-/g, "\/"));
-    var endDate=new Date('2020-11-11  23:59:59'.replace(/-/g, "\/"));
+    var startDate = new Date('2020-11-09 12:00:00');
+    var endDate = new Date('2020-11-11 23:59:59');
 
     let tapPara = getUrlParams('tap') || '';
     let fPara = getUrlParams('from') || '';

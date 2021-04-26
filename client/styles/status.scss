@@ -36,11 +36,11 @@
     padding: 15px 0px;
     button{
         background-color: #26747a;
-        color: white; 
+        color: white;
         letter-spacing: 3px;
         height: 30px;
-        width: 110px;
-        padding: 0px 20px;
+        width: 150px;
+        padding: 0px 15px;
     }
 }
 
@@ -78,7 +78,7 @@
     font-size: 1.1em;
 }
 .product-container {
-    display: none;
+    //display: none;
     &.Standard {
         .Standard & {
             display: block;
